@@ -1,0 +1,32 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_archive.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_VIEW_NO_NEWS -->
+<div class="notice">no news yet</div>
+<!-- END B_VIEW_NO_NEWS -->
+
+<!-- BEGIN B_VIEW_NEWS -->
+<table class="largebox" cellspacing="0">
+<tr><th>{I_HEADING}</th></tr>
+<tr>
+	<td>
+	<div class="timestamp">[{I_USERNAME} - {I_SUBMITTED}]</div>
+	{I_BODY}
+<!-- BEGIN B_COMMENTS_LINK -->
+	<div align="right">[<a href="?sid={I_ID_SEASON}&mod=news&act=view_comments&opt={I_ID_NEWS}">comments ({I_NUM_COMMENTS})</a>]</div>
+<!-- END B_COMMENTS_LINK -->
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_NEWS -->

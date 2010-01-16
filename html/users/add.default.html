@@ -1,0 +1,80 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: add.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_ADD_ACCOUNT -->
+<table class="largebox" cellspacing="0">
+<tr><th>Create Account</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="users" type="hidden"/>
+		<input name="act" value="insert" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Username:</td>
+			<td><input class="text" name="username" value="{I_USERNAME}" type="text" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input class="text" name="password" value="{I_PASSWORD}" type="password" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Retype Password:</td>
+			<td><input class="text" name="password_retyped" value="{I_PASSWORD_RETYPED}" type="password" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><input class="text" name="email" value="{I_EMAIL}" type="text" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>IRC-Channel:</td>
+			<td><input class="text" name="irc_channel" value="{I_IRC_CHANNEL}" type="text" size="20"/></td>
+			<td class="help">Add Network in case it differs from QuakeNet</td>
+		</tr>
+		<tr>
+			<td>Country:</td>
+			<td>
+			<select name="id_country" size="1">
+				<option value=""></option>
+<!-- BEGIN B_ADD_COUNTRY -->
+				<option value="{I_ID_COUNTRY}">{I_COUNTRY}</option>
+<!-- END B_ADD_COUNTRY -->
+			</select>
+			</td>
+			<td class="help">Select the country you are playing from</td>
+		</tr>
+		<tr>
+			<td>Notify:</td>
+			<td><input type="checkbox" name="notify" value="1" checked="checked"/></td>
+			<td class="help">For notification per mail, when you have a match</td>
+		</tr>
+<!-- BEGIN B_SIGNUP -->
+		<tr>
+			<td>Signup:</td>
+			<td><input type="checkbox" name="signup" value="1" checked="checked"/></td>
+			<td class="help">Uncheck it if you just want to register, but not participate in the tournament</td>
+		</tr>
+<!-- END B_SIGNUP -->
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+			<td>&nbsp;</td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_ACCOUNT -->

@@ -1,0 +1,147 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: edit.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_EDIT --><tr><td>This match is not editable, because there are already affected matches of the next round being played</td></tr><!-- END B_WARNING_EDIT -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_EDIT_REPORT -->
+<table class="largebox" cellspacing="0">
+<tr><th>Match Report</th></tr>
+<tr>
+	<td>
+	<div align="center"><b>{I_PLAYER1} vs {I_PLAYER2}</b></div>
+	<form action="" method="post" enctype="multipart/form-data">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="matches" type="hidden"/>
+		<input name="act" value="update" type="hidden"/>
+		<input name="opt" value="{I_OPT}" type="hidden"/>
+
+		<div align="center">
+		<table class="form" cellspacing="0">
+<!-- BEGIN B_NOT_PLAYED -->
+		<tr>
+			<td>
+			<fieldset><legend><b>Not played</b></legend>
+			<table cellspacing="0">
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+				<select name="not_played" size="1">
+					<option value=""></option>
+<!-- BEGIN B_OPTION_WO1_SELECTED -->
+					<option value="wo1" selected="selected">W.O. for {I_PLAYER1}</option>
+<!-- END B_OPTION_WO1_SELECTED -->
+<!-- BEGIN B_OPTION_WO1_UNSELECTED -->
+					<option value="wo1">W.O. for {I_PLAYER1}</option>
+<!-- END B_OPTION_WO1_UNSELECTED -->
+<!-- BEGIN B_OPTION_WO2_SELECTED -->
+					<option value="wo2" selected="selected">W.O. for {I_PLAYER2}</option>
+<!-- END B_OPTION_WO2_SELECTED -->
+<!-- BEGIN B_OPTION_WO2_UNSELECTED -->
+					<option value="wo2">W.O. for {I_PLAYER2}</option>
+<!-- END B_OPTION_WO2_UNSELECTED -->
+<!-- BEGIN B_OPTION_BOTH_OUT_SELECTED -->
+					<option value="both_out" selected="selected">Both Players are out</option>
+<!-- END B_OPTION_BOTH_OUT_SELECTED -->
+<!-- BEGIN B_OPTION_BOTH_OUT_UNSELECTED -->
+					<option value="both_out">Both Players are out</option>
+<!-- END B_OPTION_BOTH_OUT_UNSELECTED -->
+<!-- BEGIN B_OPTION_BYE_SELECTED -->
+					<option value="bye" selected="selected">Bye</option>
+<!-- END B_OPTION_BYE_SELECTED -->
+<!-- BEGIN B_OPTION_BYE_UNSELECTED -->
+					<option value="bye">Bye</option>
+<!-- END B_OPTION_BYE_UNSELECTED -->
+				</select>
+				</td>
+			</tr>
+			<tr><td>Comment:</td><td><textarea name="comment_admin" cols="80" rows="10">{I_COMMENT_ADMIN}</textarea></td></tr>
+			</table>
+			</fieldset>
+			</td>
+		</tr>
+		<tr><td><input class="submit" type="submit" value=" Submit "/></td></tr>
+		<tr><td><br/></td></tr>
+<!-- END B_NOT_PLAYED -->
+
+<!-- BEGIN B_MAP -->
+		<tr>
+			<td>
+			<fieldset><legend><b>Map {I_NUM_MAP}</b></legend>
+			<table cellspacing="0">
+			<tr>
+				<td>Map:</td>
+				<td>
+				<select name="id_map{I_NUM_MAP}" size="1">
+					<option value=""></option>
+<!-- BEGIN B_OPTION_MAP_SELECTED -->
+					<option value="{I_ID_MAP}" selected="selected">{I_MAP}</option>
+<!-- END B_OPTION_MAP_SELECTED -->
+<!-- BEGIN B_OPTION_MAP_UNSELECTED -->
+					<option value="{I_ID_MAP}">{I_MAP}</option>
+<!-- END B_OPTION_MAP_UNSELECTED -->
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Score:</td>
+				<td>
+				<table cellspacing="0">
+				<tr>
+					<td>{I_PLAYER1}</td>
+					<td><input class="text" name="score_m{I_NUM_MAP}_p1" value="{I_SCORE_P1}" type="text" size="5"/></td>
+				</tr>
+				<tr>
+					<td>{I_PLAYER2}</td>
+					<td><input class="text" name="score_m{I_NUM_MAP}_p2" value="{I_SCORE_P2}" type="text" size="5"/></td>
+				</tr>
+				</table>
+				</td>
+			</tr>
+<!-- BEGIN B_SCREENSHOT -->
+			<tr><td>&nbsp;</td><td><a href="#" onclick="javascript:newWindow( '{I_SCREENSHOT}' );"><img src="{I_SCREENSHOT_THUMB}" border="0" width="320"/><a/></td></tr>
+<!-- END B_SCREENSHOT -->
+			<tr><td>Screenshot:</td><td><input class="text" name="screenshot_m{I_NUM_MAP}" type="file"/></td></tr>
+			<tr><td>Comment admin:</td><td><textarea name="comment_m{I_NUM_MAP}_admin" cols="80" rows="10">{I_COMMENT_ADMIN}</textarea></td></tr>
+			<tr><td>Comment {I_PLAYER1}:</td><td><textarea name="comment_m{I_NUM_MAP}_p1" cols="80" rows="10">{I_COMMENT_P1}</textarea></td></tr>
+			<tr><td>Comment {I_PLAYER2}:</td><td><textarea name="comment_m{I_NUM_MAP}_p2" cols="80" rows="10">{I_COMMENT_P2}</textarea></td></tr>
+			</table>
+			</fieldset>
+		</tr>
+<!-- END B_MAP -->
+
+<!-- BEGIN B_MATCH -->
+	<tr>
+		<td><div class="notice" align="right">[{I_BRACKET} - Round {I_ROUND} - Match {I_MATCH}]</div></td>
+	</tr>
+<!-- END B_MATCH -->
+
+<!-- BEGIN B_SUBMIT_TIMESTAMP -->
+	<tr>
+		<td><div class="notice" align="right">submitted: {I_SUBMITTED} by {I_SUBMITTER}</div></td>
+	</tr>
+<!-- END B_SUBMIT_TIMESTAMP -->
+
+<!-- BEGIN B_CONFIRM_TIMESTAMP -->
+	<tr>
+		<td><div class="notice" align="right">confirmed: {I_CONFIRMED} by {I_CONFIRMER}</div></td>
+	</tr>
+<!-- END B_CONFIRM_TIMESTAMP -->
+
+		<tr><td><input class="submit" type="submit" value=" Submit "/></td></tr>
+		</table>
+		</div>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_EDIT_REPORT -->

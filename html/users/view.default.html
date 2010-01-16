@@ -1,0 +1,97 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_SHOW_PROFILE -->
+<table class="largebox" cellspacing="0">
+<tr><th>Profile</th></tr>
+<tr><td>[<a href="#" onclick="javascript: history.back();">back</a>]</td></tr>
+<tr>
+	<td>
+	<table cellspacing="0">
+	<tr>
+		<td>Username:</td>
+		<td>{I_USERNAME}</td>
+	</tr>
+<!-- BEGIN B_SHOW_IPS -->
+	<tr>
+		<td>IP:</td>
+		<td>
+		<!-- BEGIN B_SHOW_IP -->{I_IP}<br/><!-- END B_SHOW_IP -->
+		</td>
+	</tr>
+<!-- END B_SHOW_IPS -->
+<!-- BEGIN B_SHOW_EMAIL -->
+	<tr>
+		<td>Email:</td>
+		<td><a href="mailto:{I_EMAIL}">{I_EMAIL}</a></td>
+	</tr>
+<!-- END B_SHOW_EMAIL -->
+	<tr>
+		<td>IRC-Channel:</td>
+		<td>{I_IRC_CHANNEL}</td>
+	</tr>
+	<tr>
+		<td>Country:</td>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/> {I_COUNTRY}</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_SHOW_PROFILE -->
+
+<!-- BEGIN B_OVERVIEW_PLAYED_MATCHES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Played Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_PLAYED_MATCHES -->
+	<div class="notice">no matches played yet</div>
+<!-- END B_NO_PLAYED_MATCHES -->
+<!-- BEGIN B_PLAYED_MATCHES -->
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYED_MATCH -->
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+		<td>{I_OUTCOME}</td>
+	</tr>
+<!-- END B_PLAYED_MATCH -->
+	</table>
+<!-- END B_PLAYED_MATCHES -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_PLAYED_MATCHES -->
+
+<!-- BEGIN B_OVERVIEW_SEASONS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Seasons</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_SEASONS -->
+	<div class="notice">no seasons yet</div>
+<!-- END B_NO_SEASONS -->
+<!-- BEGIN B_SEASONS -->
+	<table cellspacing="0">
+<!-- BEGIN B_SEASON -->
+	<tr id="id_{I_SEASON_COUNTER}" onmouseover="javascript: setClass( 'id_{I_SEASON_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_SEASON_COUNTER}' );">
+		<td>{I_TOURNEY_NAME} {I_SEASON_NAME}:</td>
+		<td>
+<!-- BEGIN B_HEADADMIN_CHECKED -->[Headadmin]<!-- END B_HEADADMIN_CHECKED -->
+<!-- BEGIN B_ADMIN_CHECKED -->[Admin]<!-- END B_ADMIN_CHECKED -->
+<!-- BEGIN B_PLAYER_CHECKED -->[Player]<!-- END B_PLAYER_CHECKED -->
+		</td>
+	</tr>
+<!-- END B_SEASON -->
+	</table>
+<!-- END B_SEASONS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_SEASONS -->

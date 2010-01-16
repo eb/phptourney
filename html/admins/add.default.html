@@ -1,0 +1,56 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: add.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_ADD_ADMIN -->
+<table class="largebox" cellspacing="0">
+<tr><th>Add Admin</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="admins" type="hidden"/>
+		<input name="act" value="insert" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>User:</td>
+			<td>
+			<select name="id_user" size="1">
+				<option value=""></option>
+<!-- BEGIN B_USERNAME -->
+				<option value="{I_ID_USER}">{I_USERNAME} &lt;{I_EMAIL}&gt;</option>
+<!-- END B_USERNAME -->
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Headadmin:</td>
+			<td><input type="checkbox" name="headadmin" value="1"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Add "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Add an existing user as an admin here.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_ADMIN -->

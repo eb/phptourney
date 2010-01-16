@@ -1,0 +1,43 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_VIEW_NO_POLL -->
+<div class="notice">no poll available</div>
+<br/>
+<!-- END B_VIEW_NO_POLL -->
+
+<!-- BEGIN B_VIEW_POLL -->
+<table class="largebox" cellspacing="0">
+<tr><th>Signup Poll</th></tr>
+<tr>
+	<td class="heading">{I_POLL_HEADING}</td>
+</tr>
+<tr>
+	<td>{I_POLL_BODY}</td>
+</tr>
+<tr>
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_CHOICE -->
+	<tr>
+		<td>{I_CHOICE}</td>
+		<td><img src="gfx/poll.gif" border="0" width="{I_WIDTH}" height="15"/></td>
+		<td>{I_VOTES_PERCENT}% ({I_VOTES})</td>
+	</tr>
+<!-- END B_CHOICE -->
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_POLL -->

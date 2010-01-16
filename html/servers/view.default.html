@@ -1,0 +1,51 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<table class="largebox" cellspacing="0">
+<tr><th>Servers</th></tr>
+<!-- BEGIN B_SERVER_MANAGEMENT -->
+<tr>
+	<td>
+	[<a href="?sid={I_ID_SEASON}&mod=servers&act=upload&opt=">upload</a>]
+	[<a href="?sid={I_ID_SEASON}&mod=servers&act=last&opt=">from last season</a>]
+	</td>
+</tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_SERVERLIST -->
+	<div class="notice">no serverlist yet</div>
+<!-- END B_NO_SERVERLIST -->
+<!-- BEGIN B_SERVERLIST -->
+	<a href="data/serverlists/{I_ID_SEASON}" target="_blank">serverlist</a>
+	[<a href="?sid={I_ID_SEASON}&mod=servers&act=remove&opt=">delete</a>]
+<!-- END B_SERVERLIST -->
+	</td>
+</tr>
+<!-- END B_SERVER_MANAGEMENT -->
+<tr>
+	<td>
+<!-- BEGIN B_VIEW_NO_SERVERS -->
+	<div class="notice">no servers yet</div>
+<!-- END B_VIEW_NO_SERVERS -->
+<!-- BEGIN B_VIEW_SERVERS -->
+<!-- BEGIN B_COUNTRY -->
+	<div class="heading">{I_COUNTRY}</div><br/>
+	<table cellspacing="0">
+<!-- BEGIN B_SERVER -->
+	<tr>
+		<td>{I_NAME}:</td>
+		<td>{I_SERVER}</td>
+	</tr>
+<!-- END B_SERVER -->
+	</table>
+	<br/><hr/><br/>
+<!-- END B_COUNTRY -->
+<!-- END B_VIEW_SERVERS -->
+	</td>
+</tr>
+</table>

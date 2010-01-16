@@ -1,0 +1,41 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: activation_login.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_ACTIVATION_LOGIN -->
+<table class="largebox" cellspacing="0">
+<tr><th>Activation Login</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="users" type="hidden"/>
+		<input name="act" value="activate_password" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Username:</td>
+			<td><input class="text" name="username" value="{I_USERNAME}" type="text" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>New Password:</td>
+			<td><input class="text" name="new_password" value="{I_NEW_PASSWORD}" type="password" size="20"/></td>
+			<td class="help">The password that you received per mail</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+			<td>&nbsp;</td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_ACTIVATION_LOGIN -->

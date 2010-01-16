@@ -1,0 +1,27 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: latest_matches.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_LATEST_MATCHES -->
+<table class="smallbox" cellspacing="0">
+<tr><th>Latest Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_LATEST_MATCHES -->
+	<div class="notice">no results yet</div>
+<!-- END B_NO_LATEST_MATCHES -->
+<!-- BEGIN B_LATEST_MATCH -->
+	<a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_PLAYER1} - {I_PLAYER2}</a><br/>
+<!-- END B_LATEST_MATCH -->
+	<br/>
+	<div align="right">
+	[<a href="?sid={I_ID_SEASON}&mod=matches&act=view_all">more</a>]<br/>
+	</div>
+	</td>
+</tr>
+</table>
+<!-- END B_LATEST_MATCHES -->

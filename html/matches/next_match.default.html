@@ -1,0 +1,62 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: next_match.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_VIEW_NEXT_MATCH -->
+<table class="largebox" cellspacing="0">
+<tr><th>Next Match</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_NEXT_MATCH -->
+<div class="notice">no next match scheduled at the moment</div>
+<!-- END B_NO_NEXT_MATCH -->
+<!-- BEGIN B_NEXT_MATCH -->
+	<table cellspacing="0">
+	<tr>
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>
+		<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER1}.gif"/>
+<!-- BEGIN B_MARK_PLAYER1 -->
+		<img src="gfx/mark.png"/>
+<!-- END B_MARK_PLAYER1 -->
+		<a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_PLAYER1}">{I_PLAYER1}</a>
+		-
+		<a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_PLAYER2}">{I_PLAYER2}</a>
+<!-- BEGIN B_MARK_PLAYER2 -->
+		<img src="gfx/mark.png"/>
+<!-- END B_MARK_PLAYER2 -->
+		<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER2}.gif"/>
+		</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=add&opt={I_ID_MATCH}">report</a>]</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+<!-- BEGIN B_DEADLINE -->
+		<span class="notice">Timeframe: {I_DEADLINE_PRE} - {I_DEADLINE_POST}</span>
+<!-- END B_DEADLINE -->
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+	</table>
+<!-- END B_NEXT_MATCH -->
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	The higher seeded player is marked with <img src="gfx/mark.png"/>.<br/>
+	Note the deadline of the match, and report in time.
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_NEXT_MATCH -->

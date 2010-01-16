@@ -1,0 +1,63 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_RESET_SEEDINGS -->
+[<a href="?sid={I_ID_SEASON}&mod=seedings&act=reset">Reset Seedings</a>]<br/><br/>
+<!-- END B_RESET_SEEDINGS -->
+
+<!-- BEGIN B_OVERVIEW_SEEDINGS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Seedings Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_PLAYERS -->
+	<div class="notice">no players yet</div>
+<!-- END B_NO_PLAYERS -->
+<!-- BEGIN B_PLAYERS -->
+	<form action="" method="post">	
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="seedings" type="hidden"/>
+		<input name="act" value="seed" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table cellspacing="0">
+<!-- BEGIN B_PLAYER -->
+		<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' );">
+			<td>{I_PLAYER_COUNTER}:</td>
+			<td>{I_USERNAME}</td>
+			<td>&lt;{I_EMAIL}&gt;</td>
+			<td>{I_SEEDGROUP}</td>
+<!-- BEGIN B_NEW_SEEDGROUP -->
+			<td>=></td>
+			<td><input class="text" name="{I_ID_USER}" value="{I_SEEDGROUP}" type="text" size="5"/></td>
+<!-- END B_NEW_SEEDGROUP -->
+		</tr>
+<!-- END B_PLAYER -->
+		<tr>
+			<td colspan="5">&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+<!-- END B_PLAYERS -->
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Enter the seedgroups for the players here.<br/>
+	The order of players with the same seedgroup gets randomized.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_SEEDINGS -->

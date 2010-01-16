@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- --------------------------------------------------------------------------------
+
+ $Id: index.default.html,v 1.2 2006/05/01 14:55:10 eb Exp $
+
+ Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<head>
+	<title>phpTourney</title>
+	<meta http-equiv="content-type" content="text/html; charset={I_CHARSET}">
+	<link rel="stylesheet" type="text/css" href="{I_CSS}">
+	<script src="dhtml/changeClass.js" type="text/javascript"></script>
+	<script src="dhtml/newWindow.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div align="center">
+
+<table class="mainframe" align="center" width="799" cellspacing="0">
+<tr>
+	<td colspan="2" class="vignette">
+	<form action="">
+		Select Season:
+		<select name="sid" size="1">
+		<option value="">-</option>
+<!-- BEGIN B_SEASON_DROPDOWN -->
+		<option value="{I_ID_SEASON}">{I_SECTION_NAME} {I_SEASON_NAME}</option>
+<!-- END B_SEASON_DROPDOWN -->
+		</select>
+		<input class="submit" type="submit" value=" Go "/>
+	</form>
+	</td>
+</tr>
+
+<tr>
+	<td class="logo">
+<!-- BEGIN B_SIGNUP -->
+	<a href="?sid={I_ID_SEASON}&mod=signups&act=add_login&opt="><img src="gfx/signup.png" border="0"/></a>
+<!-- END B_SIGNUP -->
+	<span class="heading">{I_SEASON_NAME}</span>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<table cellspacing="0">
+	<tr>
+		<!-- side -->
+		<td class="side" width="30">&nbsp;</td>
+
+		<!-- navigation -->
+		<td class="navigation">
+<!-- BEGIN B_ROOT_PANEL -->
+		<table class="smallbox" cellspacing="0">
+		<tr><th>Root</th></tr>
+		<tr>
+			<td>
+			<a href="?sid={I_ID_SEASON}&mod=sections&act=overview&opt=">Sections</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=seasons&act=overview&opt=">Seasons</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=users&act=overview&opt=">Users</a><br/>
+			</td>
+		</tr>
+		</table>
+<!-- END B_ROOT_PANEL -->
+
+<!-- BEGIN B_HEADADMIN_PANEL -->
+		<table class="smallbox" cellspacing="0">
+		<tr><th>Headadmins</th></tr>
+		<tr>
+			<td>
+			<a href="?sid={I_ID_SEASON}&mod=mappool&act=overview&opt=">Map Pool</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=winmaps&act=overview&opt=">Win-Maps</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=signup_poll&act=overview&opt=">Signup-Poll</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=signups&act=overview&opt=">Signups</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=seedings&act=overview&opt=">Seedings</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=tourney_system&act=view&opt=">Tourney System</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=deadlines&act=overview&opt=">Deadlines</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=tourney_status&act=view&opt=">Tourney Status</a><br/>
+			</td>
+		</tr>
+		</table>
+<!-- END B_HEADADMIN_PANEL -->
+
+<!-- BEGIN B_ADMIN_PANEL -->
+		<table class="smallbox" cellspacing="0">
+		<tr><th>Admins</th></tr>
+		<tr>
+			<td>
+			<a href="?sid={I_ID_SEASON}&mod=news&act=view&opt=2">Admin News</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=matches&act=overview&opt=">Matches</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=bans&act=overview&opt=">Bans</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=signup_poll&act=view&opt=">Signup-Poll Results</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=seedings&act=overview&opt=view">Seedings</a><br/>
+			</td>
+		</tr>
+		</table>
+<!-- END B_ADMIN_PANEL -->
+
+<!-- BEGIN B_TOURNAMENT_PANEL -->
+		<table class="smallbox" cellspacing="0">
+		<tr><th>Tournament</th></tr>
+		<tr>
+			<td>
+			<a href="?sid={I_ID_SEASON}&mod=news&act=view&opt=1">News</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=signups&act=view&opt=">Signups</a><br/>
+			<a href="full.php?sid={I_ID_SEASON}&mod=matches&act=view_text&opt=" target="_blank">Text Bracket</a><br/>
+			<a href="full.php?sid={I_ID_SEASON}&mod=matches&act=view_table&opt=wb" target="_blank">Table Bracket (WB)</a><br/>
+			<a href="full.php?sid={I_ID_SEASON}&mod=matches&act=view_table&opt=lb" target="_blank">Table Bracket (LB)</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=rules&act=view&opt=">Rules</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=servers&act=view&opt=">Servers</a><br/>
+			<a href="?sid={I_ID_SEASON}&mod=admins&act=view&opt=">Admins</a><br/>
+			</td>
+		</tr>
+		</table>
+<!-- END B_TOURNAMENT_PANEL -->
+
+{I_LATEST_MATCHES}
+
+{I_USER}
+
+<!-- BEGIN B_NETWORK_PANEL -->
+		<table class="smallbox" cellspacing="0">
+		<tr><th>Network</th></tr>
+		<tr>
+			<td>
+			<a href="?sid=0&mod=news&act=view&opt=1">Network News</a><br/>
+			<a href="?sid=0&mod=statistics&act=view_matches&opt=">Statistics</a><br/>
+			<a href="?sid=0&mod=matches&act=view_total&opt=">Results</a><br/>
+			</td>
+		</tr>
+		</table>
+<!-- END B_NETWORK_PANEL -->
+		</td>
+
+		<!-- content -->
+		<td class="content">
+<!-- BEGIN B_FILE_NOT_FOUND -->
+		<div class="notice">File not found</div>
+<!-- END B_FILE_NOT_FOUND -->
+
+{I_CONTENT}
+   		</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="2" class="vignette">
+	<a href="http://subdevice.org/phpTourney" target="_blank">phpTourney {I_VERSION}</a>
+	&bull;
+	&copy; 2004 A.Beisler
+	</td>
+</tr>
+</table>
+
+</div>
+{I_EXECUTION_TIME}s<br/>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_all.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_VIEW_ALL_MATCHES -->
+<table class="largebox" cellspacing="0">
+<tr><th>All Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_MATCHES -->
+	<div class="notice">no matches available</div>
+<!-- END B_NO_MATCHES -->
+<!-- BEGIN B_MATCHES -->
+	<table cellspacing="0">
+<!-- BEGIN B_MATCH -->
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+	</tr>
+<!-- END B_MATCH -->
+	</table>
+<!-- END B_MATCHES -->
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_ALL_MATCHES -->

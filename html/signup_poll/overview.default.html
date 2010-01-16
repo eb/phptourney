@@ -1,0 +1,41 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_SIGNUP_POLL -->
+<table class="largebox" cellspacing="0">
+<tr><th>Signup-Poll</th></tr>
+<tr>
+	<td>[<a href="?sid={I_ID_SEASON}&mod=signup_poll&act=add&opt=">add</a>]</td>
+</tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_SIGNUP_POLL -->
+	<div class="notice">no signup-poll yet</div>
+<!-- END B_NO_SIGNUP_POLL -->
+<!-- BEGIN B_SIGNUP_POLL -->
+	<table cellspacing="0">
+	<tr id="id_{I_EVENT_COUNTER}" onmouseover="javascript: setClass( 'id_{I_EVENT_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_EVENT_COUNTER}' );">
+		<td>
+		<span class="heading">{I_HEADING}</span><br/>
+		<span class="timestamp">[{I_CHOICES}]</span><br/>
+		</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signup_poll&act=edit&opt=">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signup_poll&act=remove&opt=">delete</a>]</td>
+	</tr>
+	</table>
+<!-- END B_SIGNUP_POLL -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_SIGNUP_POLL -->

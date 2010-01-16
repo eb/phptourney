@@ -1,0 +1,64 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_table.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_NO_BRACKET -->
+<div class="notice">no bracket yet</div>
+<!-- END B_NO_BRACKET -->
+
+<!-- BEGIN B_WINNERS_BRACKET -->
+<table class="table_bracket" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<th class="table_bracket">
+<!-- BEGIN B_WB_DOUBLE_ELIMINATION -->
+	Winners Bracket
+	|
+	<a href="?sid={I_ID_SEASON}&mod=matches&act=view_table&opt=lb">Losers Bracket</a>
+<!-- END B_WB_DOUBLE_ELIMINATION -->
+<!-- BEGIN B_WB_SINGLE_ELIMINATION -->
+	Tourney Tree
+<!-- END B_WB_SINGLE_ELIMINATION -->
+	</th>
+</tr>
+<tr><td><br/></td></tr>
+<tr>
+	<td>
+	<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+	<table class="table_round" border="0" cellspacing="0" cellpadding="0"><tr><!-- BEGIN B_WB_ROUND --><th>&nbsp;</th><th width="80"<!-- BEGIN B_WB_ACTUAL_ROUND --> class="table_actual_round"<!-- END B_WB_ACTUAL_ROUND --> class="table_round"><nobr>Round&nbsp;{I_ROUND}<!-- BEGIN B_WB_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_WB_DEADLINE --></nobr></th><!-- END B_WB_ROUND --><th>&nbsp;</th></tr><tr><td><br/></td></tr><!-- BEGIN B_WB_PLAYER1 --><tr><td colspan="{I_PRE_SPACE}">&nbsp;</td><td class="pl1"><nobr>{I_PLAYER}</nobr></td><td rowspan="{I_V_SPACE}" class="v"><!-- BEGIN B_WB_PLAYED_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="played">vs</span></a><!-- END B_WB_PLAYED_MATCH -->	<!-- BEGIN B_WB_UNPLAYED_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">vs</a><!-- END B_WB_UNPLAYED_MATCH -->
+<!-- BEGIN B_WB_WO_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="wo">vs</span></a><!-- END B_WB_WO_MATCH --><!-- BEGIN B_WB_BYE_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="bye">vs</span></a><!-- END B_WB_BYE_MATCH --><!-- BEGIN B_WB_OUT_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="out">vs</span></a><!-- END B_WB_OUT_MATCH --><!-- BEGIN B_WB_EMPTY_MATCH -->vs<!-- END B_WB_EMPTY_MATCH --></td></tr><!-- END B_WB_PLAYER1 --><!-- BEGIN B_WB_PLAYER2 --><tr><td colspan="{I_PRE_SPACE}">&nbsp;</td><td class="pl2"><nobr>{I_PLAYER}</nobr></td></tr><!-- END B_WB_PLAYER2 -->
+	</table>
+		</td>
+	<tr>
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_WINNERS_BRACKET -->
+
+<!-- BEGIN B_LOSERS_BRACKET -->
+<table class="table_bracket" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<th class="table_bracket">
+	<a href="?sid={I_ID_SEASON}&mod=matches&act=view_table&opt=wb">Winners Bracket</a>
+	|
+	Losers Bracket
+	</th>
+</tr>
+<tr><td><br/></td></tr>
+<tr>
+	<td>
+	<table class="table_round" border="0" cellspacing="0" cellpadding="0">
+	<tr><!-- BEGIN B_LB_ROUND --><th>&nbsp;</th><th width="80"<!-- BEGIN B_LB_ACTUAL_ROUND --> class="table_actual_round"<!-- END B_LB_ACTUAL_ROUND --> class="table_round"><nobr>Round&nbsp;{I_ROUND}<!-- BEGIN B_LB_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_LB_DEADLINE --></nobr></th><!-- END B_LB_ROUND --><th>&nbsp;</th></tr>
+	<tr><td><br/></td></tr>
+<!-- BEGIN B_LB_PLAYER1 --><tr><td colspan="{I_PRE_SPACE}">&nbsp;</td><td class="pl1"><nobr>{I_PLAYER}</nobr></td><td rowspan="{I_V_SPACE}" class="v"><!-- BEGIN B_LB_PLAYED_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="played">vs</span></a><!-- END B_LB_PLAYED_MATCH --><!-- BEGIN B_LB_UNPLAYED_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">vs</a><!-- END B_LB_UNPLAYED_MATCH --><!-- BEGIN B_LB_WO_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="wo">vs</span></a><!-- END B_LB_WO_MATCH --><!-- BEGIN B_LB_BYE_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="bye">vs</span></a><!-- END B_LB_BYE_MATCH --><!-- BEGIN B_LB_OUT_MATCH --><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank"><span class="out">vs</span></a><!-- END B_LB_OUT_MATCH --><!-- BEGIN B_LB_EMPTY_MATCH -->vs<!-- END B_LB_EMPTY_MATCH --></td></tr><!-- END B_LB_PLAYER1 --><!-- BEGIN B_LB_PLAYER2 --><tr><td colspan="{I_PRE_SPACE}">&nbsp;</td><td class="pl2"><nobr>{I_PLAYER}</nobr></td></tr><!-- END B_LB_PLAYER2 -->
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_LOSERS_BRACKET -->

@@ -1,0 +1,61 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<table class="largebox" cellspacing="0">
+<tr><th>Rules</th></tr>
+<!-- BEGIN B_VIEW_NO_RULES -->
+<tr><td><div class="notice">no rules yet</div></td></tr>
+<!-- END B_VIEW_NO_RULES -->
+<!-- BEGIN B_ADD -->
+<tr><td>[<a href="?sid={I_ID_SEASON}&mod=rules&act=add&opt=">add</a>]</td></tr>
+<!-- END B_ADD -->
+<!-- BEGIN B_ADD_EXISTING -->
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="rules" type="hidden"/>
+		<input name="act" value="add_existing" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>From season:</td>
+			<td>
+			<select name="id_season" size="1">
+				<option value=""></option>
+<!-- BEGIN B_ADD_SEASON_RULES -->
+				<option value="{I_ID_SEASON}">{I_SECTION_NAME} {I_SEASON_NAME}</option>
+<!-- END B_ADD_SEASON_RULES -->
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<!-- END B_ADD_EXISTING -->
+<tr>
+	<td>
+<!-- BEGIN B_VIEW_RULES -->
+	<span class="heading">{I_SUBJECT}</span>
+<!-- BEGIN B_EDIT_DELETE -->
+	[<a href="?sid={I_ID_SEASON}&mod=rules&act=edit&opt={I_ID_RULE}">edit</a>]
+	[<a href="?sid={I_ID_SEASON}&mod=rules&act=remove&opt={I_ID_RULE}">delete</a>]
+<!-- END B_EDIT_DELETE -->
+	<br/><br/>
+	{I_BODY}
+	<br/><hr/><br/>
+<!-- END B_VIEW_RULES -->
+	</td>
+</tr>
+</table>

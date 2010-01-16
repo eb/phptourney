@@ -1,0 +1,63 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: add.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_TOURNEY_SYSTEM --><tr><td>First a Tourney System has to be chosen, in order to set up the deadlines</td></tr><!-- END B_WARNING_TOURNEY_SYSTEM -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_BACK_OVERVIEW -->[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=overview&opt=">back</a>]<br/><!-- END B_BACK_OVERVIEW -->
+
+<!-- BEGIN B_ADD_DEADLINE -->
+<table class="largebox" cellspacing="0">
+<tr><th>Add Deadline</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="deadlines" type="hidden"/>
+		<input name="act" value="insert" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Round:</td>
+			<td>
+			<select name="round" size="1">
+				<option value=""></option>
+<!-- BEGIN B_ADD_Q_ROUND -->
+				<option value="q{I_ROUND}"> Q Round {I_ROUND}</option>
+<!-- END B_ADD_Q_ROUND -->
+<!-- BEGIN B_ADD_WB_ROUND -->
+				<option value="wb{I_ROUND}"> WB Round {I_ROUND}</option>
+<!-- END B_ADD_WB_ROUND -->
+<!-- BEGIN B_ADD_LB_ROUND -->
+				<option value="lb{I_ROUND}"> LB Round {I_ROUND}</option>
+<!-- END B_ADD_LB_ROUND -->
+<!-- BEGIN B_ADD_GF_ROUND -->
+				<option value="gf{I_ROUND}"> GF Round {I_ROUND}</option>
+<!-- END B_ADD_GF_ROUND -->
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Deadline:</td>
+			<td><input class="text" name="deadline" value="{I_DEADLINE}" type="text" size="20"/> (yyyy-mm-dd)</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_DEADLINE -->

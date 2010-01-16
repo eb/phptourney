@@ -1,0 +1,43 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_MAPS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Map Pool</th></tr>
+<tr>
+	<td>
+	[<a href="?sid={I_ID_SEASON}&mod=mappool&act=add&opt=">add</a>]
+	[<a href="?sid={I_ID_SEASON}&mod=mappool&act=last&opt=">add from last season</a>]
+	</td>
+</tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_MAPS -->
+	<div class="notice">no maps yet</div>
+<!-- END B_NO_MAPS -->
+<!-- BEGIN B_MAPS -->
+	<table cellspacing="0">
+<!-- BEGIN B_MAP -->
+	<tr id="id_{I_MAP_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MAP_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MAP_COUNTER}' );">
+		<td>{I_MAP}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=mappool&act=edit&opt={I_ID_MAP}">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=mappool&act=remove&opt={I_ID_MAP}">delete</a>]</td>
+	</tr>
+<!-- END B_MAP -->
+	</table>
+<!-- END B_MAPS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_MAPS -->

@@ -1,0 +1,50 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_country.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_OVERVIEW_PLAYERS -->
+<table class="largebox" cellspacing="0">
+<tr><th colspan="2">Players Overview - {I_COUNTRY}</th></tr>
+<tr>
+	<td>[<a href="#" onclick="javascript: history.back();">back</a>]</td>
+</tr>
+<tr>
+<!-- BEGIN B_NO_PLAYERS -->
+	<td colspan="2">
+	<div class="notice">no players signed up yet</div>
+	</td>
+<!-- END B_NO_PLAYERS -->
+<!-- BEGIN B_PLAYERS_COL1 -->
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYER_COL1 -->
+	<tr>
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+	</tr>
+<!-- END B_PLAYER_COL1 -->
+	</table>
+	</td>
+<!-- END B_PLAYERS_COL1 -->
+<!-- BEGIN B_PLAYERS_COL2 -->
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYER_COL2 -->
+	<tr>
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+	</tr>
+<!-- END B_PLAYER_COL2 -->
+	</table>
+	</td>
+<!-- END B_PLAYERS_COL2 -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_PLAYERS -->

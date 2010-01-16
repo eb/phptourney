@@ -1,0 +1,48 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_BRACKET_CREATED --><tr><td>Bracket created successfully</td></tr><!-- END B_MESSAGE_BRACKET_CREATED -->
+<!-- BEGIN B_MESSAGE_TOURNEY_RUNNING --><tr><td>Tourney is running</td></tr><!-- END B_MESSAGE_TOURNEY_RUNNING -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_TOURNEY_FINISHED --><tr><td>Tourney is already finished</td></tr><!-- END B_WARNING_TOURNEY_FINISHED -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_CREATE_BRACKET -->
+[<a href="?sid={I_ID_SEASON}&mod=tourney_status&act=create&opt=">Create Bracket</a>]<br/>
+<table class="largebox" cellspacing="0">
+<tr>
+	<td class="help">Don't forget to seed the players and set up the maps before</td>
+</tr>
+</table>
+<!-- END B_CREATE_BRACKET -->
+
+<!-- BEGIN B_START_TOURNEY -->
+[<a href="?sid={I_ID_SEASON}&mod=tourney_status&act=start&opt=">Start Tourney</a>]<br/>
+<table class="largebox" cellspacing="0">
+<tr>
+	<td class="help">If everything in the bracket looks alright, then start the tourney to send a notification to all players per mail</td>
+</tr>
+</table>
+<!-- END B_START_TOURNEY -->
+
+<!-- BEGIN B_UNDO_BRACKET -->
+[<a href="?sid={I_ID_SEASON}&mod=tourney_status&act=undo&opt=">Undo Bracket</a>]<br/>
+<table class="largebox" cellspacing="0">
+<tr>
+	<td class="help">Only undo the bracket when you made a mistake with the seeding</td>
+</tr>
+</table>
+<!-- END B_UNDO_BRACKET -->

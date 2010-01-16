@@ -1,0 +1,92 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_comments.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_VIEW_NEWS -->
+<table class="largebox" cellspacing="0">
+<tr><th>{I_HEADING}</th></tr>
+<tr>
+	<td>
+	<div class="timestamp">[{I_USERNAME} - {I_SUBMITTED}]</div>
+	{I_BODY}
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_NEWS -->
+
+<!-- BEGIN B_VIEW_COMMENTS -->
+<!-- BEGIN B_VIEW_NO_COMMENTS -->
+<div class="notice">no comments yet</div>
+<br/>
+<!-- END B_VIEW_NO_COMMENTS -->
+<!-- BEGIN B_VIEW_COMMENT -->
+<table class="commentbox" cellspacing="0">
+<tr>
+	<td>
+<!-- BEGIN B_BANS -->
+	[<a href="?sid={I_ID_SEASON}&mod=bans&act=view&opt={I_IP}">ban</a>]
+<!-- END B_BANS -->
+	<span class="timestamp">
+	#{I_COUNTER} <a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> ({I_IP}) {I_SUBMITTED}
+	</span>
+	<br/>
+	{I_BODY}
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_COMMENT -->
+<!-- END B_VIEW_COMMENTS -->
+
+<!-- BEGIN B_ADD_COMMENT -->
+<table class="largebox" cellspacing="0">
+<tr><th>Add Comment</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="news" type="hidden"/>
+		<input name="act" value="insert_comment" type="hidden"/>
+		<input name="opt" value="{I_ID_NEWS}" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Comment:</td>
+			<td><textarea name="body" cols="80" rows="10">{I_BODY}</textarea></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Enter a comment here.<br/>
+	HTML-tags aren't allowed and will be shown as normal text.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_COMMENT -->
+
+<!-- BEGIN B_LOGIN_TO_COMMENT -->
+<table class="largebox" cellspacing="0">
+<tr>
+	<td class="help">
+	You have to be logged in to comment.<br/>
+	If you don't have an account, create one.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_LOGIN_TO_COMMENT -->

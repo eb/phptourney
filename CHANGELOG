@@ -1,0 +1,28 @@
+--------------------------------------------------------------------------------
+  phpTourney Changelog
+  $Id: CHANGELOG,v 1.5 2006/05/01 14:56:00 eb Exp $
+--------------------------------------------------------------------------------
+
+2006-05-01 A.Beisler <eb@subdevice.org>
+	- integrated script execution time in the template
+	- fixed the qualification (previous-match-check didn't work before)
+	* v0.8.8
+
+2006-04-27 A.Beisler <eb@subdevice.org>
+	- fixed the signup-button in index.html to point to the right season
+	- fixed a serverlist issue, when adding the very first serverlist
+	- fixed a rule issue, when adding the very first rules
+	- deleted the test-section from the sql-file
+	* v0.8.7
+
+2006-03-23 A.Beisler <eb@subdevice.org>
+	- writing the very first news didn't work
+	- reporting the very first match didn't work
+	- fixed the mail() function in safe mode (no 5.argument)
+	- added $cfg['mail_reply_to_address'] in the config
+	* v0.8.6
+
+2006-03-15 A.Beisler <eb@subdevice.org>
+	- initial release
+	- not all planned features are implemented yet (e.g. groupgames)
+	* v0.8.5

@@ -1,0 +1,61 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: setup.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_TOURNEY_SYSTEM --><tr><td>First a Tourney System has to be chosen, in order to set up the deadlines</td></tr><!-- END B_WARNING_TOURNEY_SYSTEM -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_BACK_OVERVIEW -->[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=overview&opt=">back</a>]<br/><!-- END B_BACK_OVERVIEW -->
+
+<!-- BEGIN B_SETUP_DEADLINES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Setup Deadlines</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="deadlines" type="hidden"/>
+		<input name="act" value="create" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Startdate:</td>
+			<td><input class="text" name="startdate" value="{I_STARTDATE}" type="text" size="20"/> (yyyy-mm-dd)</td>
+		</tr>
+		<tr>
+			<td>Length of WB round:</td>
+			<td><input class="text" name="wb_round_length" value="{I_WB_ROUND_LENGTH}" type="text" size="5"/> days</td>
+		</tr>
+<!-- BEGIN B_LB -->
+		<tr>
+			<td>Length of LB round:</td>
+			<td><input class="text" name="lb_round_length" value="{I_LB_ROUND_LENGTH}" type="text" size="5"/> days</td>
+		</tr>
+<!-- END B_LB -->
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Enter how long a winners bracket round should last here.<br/>
+	When you have chosen a double elimination system also enter where the half of the winners bracket length is.<br/>
+	For instance you enter 7 days for winners bracket, and 4 days for losers bracket.<br/>
+	The losers bracket rounds will last then alternately 4 and 3 days.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_SETUP_DEADLINES -->

@@ -1,0 +1,122 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_text.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_NO_BRACKET -->
+<div class="notice">no bracket yet</div>
+<!-- END B_NO_BRACKET -->
+
+<!-- BEGIN B_MATCH -->
+		<tr><td><nobr><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">[{I_MATCH_NUMBER}] {I_PLAYER1} vs {I_PLAYER2}</a></nobr></td></tr>
+<!-- END B_MATCH -->
+<!-- BEGIN B_PLAYED_MATCH -->
+		<tr><td><nobr><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">[{I_MATCH_NUMBER}] <span class="played">{I_PLAYER1} vs {I_PLAYER2}</span></a></nobr></td></tr>
+<!-- END B_PLAYED_MATCH -->
+<!-- BEGIN B_WO_MATCH -->
+		<tr><td><nobr><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">[{I_MATCH_NUMBER}] <span class="wo">{I_PLAYER1} vs {I_PLAYER2}</span></a></nobr></td></tr>
+<!-- END B_WO_MATCH -->
+<!-- BEGIN B_BYE_MATCH -->
+		<tr><td><nobr><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">[{I_MATCH_NUMBER}] <span class="bye">{I_PLAYER1} vs {I_PLAYER2}</span></a></nobr></td></tr>
+<!-- END B_BYE_MATCH -->
+<!-- BEGIN B_OUT_MATCH -->
+		<tr><td><nobr><a href="index.php?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}" target="_blank">[{I_MATCH_NUMBER}] <span class="out">{I_PLAYER1} vs {I_PLAYER2}</span></a></nobr></td></tr>
+<!-- END B_OUT_MATCH -->
+<!-- BEGIN B_EMPTY_MATCH -->
+		<tr><td><br/></td></tr>
+<!-- END B_EMPTY_MATCH -->
+
+<!-- BEGIN B_BRACKET -->
+<div align="center">
+<!-- BEGIN B_WB_BRACKET -->
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td>
+	<table class="text_bracket" width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+<!-- BEGIN B_WB_DOUBLE_ELIMINATION -->
+		<th class="text_bracket">Winners&nbsp;Bracket<th>
+<!-- END B_WB_DOUBLE_ELIMINATION -->
+<!-- BEGIN B_WB_SINGLE_ELIMINATION -->
+		<th class="text_bracket">Tourney&nbsp;Tree<th>
+<!-- END B_WB_SINGLE_ELIMINATION -->
+	</tr>
+	<tr>
+		<td width="100%">
+		<table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+<!-- BEGIN B_Q_ROUND -->
+		<td>
+		<table class="text_round" width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr><th<!-- BEGIN B_Q_ACTUAL_ROUND --> class="text_actual_round"<!-- END B_Q_ACTUAL_ROUND --> class="text_round"><nobr>Qualification<!-- BEGIN B_Q_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_Q_DEADLINE --></nobr></th></tr>
+		<tr><td><br/></td></tr>
+		{I_MATCH}
+		<tr><td><br/></td></tr>
+		</table>
+		</td>
+<!-- END B_Q_ROUND -->
+<!-- BEGIN B_WB_ROUND -->
+		<td>
+		<table class="text_round" width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr><th<!-- BEGIN B_WB_ACTUAL_ROUND --> class="text_actual_round"<!-- END B_WB_ACTUAL_ROUND --> class="text_round"><nobr>Round&nbsp;{I_ROUND}<!-- BEGIN B_WB_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_WB_DEADLINE --></nobr></th></tr>
+		<tr><td><br/></td></tr>
+		{I_MATCH}
+		<tr><td><br/></td></tr>
+		</table>
+		</td>
+<!-- END B_WB_ROUND -->
+<!-- BEGIN B_GF_ROUND -->
+		<td>
+		<table class="text_round" width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr><th<!-- BEGIN B_GF_ACTUAL_ROUND --> class="text_actual_round"<!-- END B_GF_ACTUAL_ROUND --> class="text_round"><nobr>Grand&nbsp;Final<!-- BEGIN B_GF_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_GF_DEADLINE --></nobr></th></tr>
+		<tr><td><br/></td></tr>
+		{I_MATCH}
+		<tr><td><br/></td></tr>
+		</table>
+		</td>
+<!-- END B_GF_ROUND -->
+		</tr>
+		</table>
+		</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_WB_BRACKET -->
+
+<!-- BEGIN B_LB_BRACKET -->
+<br/>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td>
+	<table class="text_bracket" border="0" cellspacing="0" cellpadding="0">
+	<tr><th class="text_bracket">Losers&nbsp;Bracket<th></tr>
+	<tr>
+		<td width="100%">
+		<table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+<!-- BEGIN B_LB_ROUND -->
+		<td>
+		<table class="text_round" width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr><th<!-- BEGIN B_LB_ACTUAL_ROUND --> class="text_actual_round"<!-- END B_LB_ACTUAL_ROUND --> class="text_round"><nobr>Round&nbsp;{I_ROUND}<!-- BEGIN B_LB_DEADLINE --><br/><i>[{I_DEADLINE}]</i><!-- END B_LB_DEADLINE --></nobr></th></tr>
+		<tr><td><br/></td></tr>
+		{I_MATCH}
+		<tr><td><br/></td></tr>
+		</table>
+		</td>
+<!-- END B_LB_ROUND -->
+		</tr>
+		</table>
+		</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_LB_BRACKET -->
+</div>
+<!-- END B_BRACKET -->

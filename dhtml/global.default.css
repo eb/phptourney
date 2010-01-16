@@ -1,0 +1,505 @@
+/* ********************************************************************************
+ *
+ * Global CSS classes
+ *
+ * $Id: global.default.css,v 1.2 2006/04/28 19:37:59 eb Exp $
+ *
+ * Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ ******************************************************************************** */
+
+/* ********************************************************************************
+ * structural elements
+ ******************************************************************************** */
+
+body, table, th, td {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	color: #000000;
+	font-family: Helvetica, Verdana;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: top;
+}
+
+body {
+	background-color: #52616e;
+}
+
+body.full {
+	background-image: url(../gfx/default/mfbg.png);
+	background-repeat: repeat;
+}
+
+img {
+	vertical-align: top;
+}
+
+td.bg {
+	background-image: url(../gfx/default/bg.png);
+	background-repeat: repeat;
+}
+
+td.logo {
+	padding: 5px;
+	text-align: right;
+	vertical-align: middle;
+	height: 50px;
+	background-image: url(../gfx/default/logo.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+td.side {
+	background-color: #000000;
+	background-image: url(../gfx/default/side.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+table.mainframe {
+	border-left: 1px #2467d7 solid;
+	border-right: 1px #000000 solid;
+	background-image: url(../gfx/default/mfbg.png);
+	background-repeat: repeat;
+}
+
+td.navigation {
+	height: 300px;
+	border-right: 1px #e7a435 dashed;
+	background-image: url(../gfx/default/sbbg.png);
+	background-repeat: repeat;
+}
+
+td.content {
+	padding: 8px;
+}
+
+td.vignette {
+	background-color: #2467d7;
+	background-image: url(../gfx/default/vignette.png);
+	background-repeat: no-repeat;
+	font-size: 8pt;
+	text-align: right;
+}
+
+table.smallbox {
+	width: 150px;
+}
+
+.smallbox th {
+	font-family: Tahoma;
+	color: #291f0b;
+	color: #cfcfcf;
+	height: 20px;
+	padding: 2px;
+	padding-left: 5px;
+	font-size: 10pt;
+	font-weight: bold;
+	background-image: url(../gfx/default/sbth.png);
+	background-repeat: no-repeat;
+}
+
+.smallbox td {
+	padding: 2px;
+	padding-left: 10px;
+	font-size: 8pt;
+}
+
+table.largebox {
+	width: 599px;
+	margin-bottom: 10px;
+	background-image: url(../gfx/default/lbbg.png);
+	background-repeat: repeat;
+}
+
+.largebox th {
+	font-family: Tahoma;
+	color: 291f0b;
+	height: 25px;
+	padding: 2px;
+	padding-left: 40px;
+	font-size: 13pt;
+	font-weight: bold;
+	background-image: url(../gfx/default/lbth.png);
+	background-repeat: no-repeat;
+}
+
+.largebox td {
+	padding: 5px;
+	font-size: 10pt;
+	line-height: 12pt;
+}
+
+table.commentbox {
+	width: 599px;
+	margin-bottom: 10px;
+	border-left: 3px #000000 solid;
+	background-image: url(../gfx/default/lbbg.png);
+	background-repeat: repeat;
+}
+
+.commentbox td {
+	padding: 5px;
+	font-size: 10pt;
+}
+
+.form td {
+	padding: 1px;
+	font-size: 8pt;
+}
+
+table.warning {
+	margin-bottom: 10px;
+	border: 1px #440000 solid;
+	background-color: #c14343;
+}
+
+.warning td {
+	padding: 2px;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+table.message {
+	margin-bottom: 10px;
+	border: 1px #005522 solid;
+	background-color: #48a560;
+}
+
+.message td {
+	padding: 2px;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.help {
+	border: 1px dashed #6b4e4f;
+	font-style: italic;
+	text-align: center;
+}
+
+/* ********************************************************************************
+ * text elements
+ ******************************************************************************** */
+
+hr {
+	height: 1px;
+	border: 0px;
+	background-color: #000000;
+}
+
+fieldset {
+	border: 1px solid #000000;
+	padding: 10px;
+}
+
+legend {
+	color: #000000;
+}
+
+.notice {
+	font-style: italic;
+}
+
+.timestamp {
+	font-size: 8pt;
+	font-weight: bold;
+}
+
+.heading {
+	color: #000022;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.coloured td {
+	background-color: #a7916d;
+}
+
+.timeframe td {
+	background-color: #442222;
+}
+
+a:link {
+	font-weight: bold;
+	text-decoration: none;
+	color: #1f3e73;
+}
+
+a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: #1f3e73;
+}
+
+a:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #1f3e73;
+}
+
+/* ********************************************************************************
+ * forms
+ ******************************************************************************** */
+
+form {
+	margin: 0px;
+	padding: 1px;
+}
+
+input.text {
+	background: #ddd;
+	border: 1px #38827f solid;
+	padding: 1px;
+	font-family: Helvetica, Verdana;
+	font-size: 10px;
+}
+
+input.submit {
+	background: #ddd;
+	border: 1px #38827f solid;
+	padding: 1px;
+	font-family: Helvetica, Verdana;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+textarea {
+	background: #ddd;
+	border: 1px #38827f solid;
+	padding: 1px;
+	font-family: Helvetica, Verdana;
+	font-size: 10px;
+}
+
+select {
+	background: #ddd;
+	border: 1px #38827f solid;
+	padding: 1px;
+	font-family: Helvetica, Verdana;
+	font-size: 10px;
+}
+
+/* ********************************************************************************
+ * text bracket
+ ******************************************************************************** */
+table.text_bracket {
+	border: 1px #000000 solid;
+	padding: 0px;
+	background-image: url(../gfx/default/sbbg.png);
+	background-repeat: repeat;
+}
+
+th.text_bracket {
+	border: 0px;
+	padding: 2px;
+	background-color: #000000;
+	color: #FFFFFF;
+	font-size: 8pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+.text_bracket td {
+	border: 0px;
+	padding: 2px;
+	font-size: 8pt;
+	text-align: left;
+}
+
+table.text_round {
+	border: 0px;
+	padding: 0px;
+}
+
+th.text_round, th.text_actual_round {
+	border: 1px #000000 solid;
+	padding: 2px;
+	font-size: 8pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+th.text_actual_round {
+	background-color: #AAAAAA;
+}
+
+.text_round td {
+	border: 0px;
+	padding: 0px;
+	padding-right: 2px;
+	padding-left: 2px;
+	text-align: left;
+	line-height: 9pt;
+}
+
+.text_round a:link {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+
+.text_round a:visited {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+
+.text_round a:hover {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: underline;
+	color: #000000;
+}
+
+.text_round .played {
+	font-weight: bold;
+}
+
+.text_round .wo {
+	font-weight: bold;
+	color: #004400;
+}
+
+.text_round .bye {
+	font-weight: bold;
+	color: #004400;
+}
+
+.text_round .out {
+	font-weight: bold;
+	color: #660000;
+}
+
+/* ********************************************************************************
+ * table bracket
+ ******************************************************************************** */
+
+table.table_bracket {
+	border: 1px #000000 solid;
+	padding: 0px;
+	background-image: url(../gfx/default/sbbg.png);
+	background-repeat: repeat;
+}
+
+th.table_bracket {
+	padding: 2px;
+	background-color: #000000;
+	color: #FFFFFF;
+	font-size: 8pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+.table_bracket td {
+	border: 0px;
+	padding: 0px;
+	text-align: center;
+	font-size: 8pt;
+	line-height: 8pt;
+}
+
+table.table_round {
+	border: 0px;
+	padding: 0px;
+}
+
+th.table_round, th.table_actual_round {
+	border: 1px #000000 solid;
+	padding: 2px;
+	font-size: 8pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+th.table_actual_round {
+	background-color: #AAAAAA;
+}
+
+.table_round td {
+	border: 0px;
+	padding: 0px;
+}
+
+td.pl1 {
+	border: 0px;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	background-color: #A9A9A9;
+}
+
+td.pl2 {
+	border: 0px;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	background-color: #939393;
+}
+
+td.v {
+	border: 0px;
+	padding: 0px;
+	background-color: #000000;
+	color: #FFFFFF;
+	vertical-align: middle;
+}
+
+.table_round a:link {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.table_round a:visited {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.table_round a:hover {
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+.table_round .played {
+	font-weight: bold;
+}
+
+.table_round .wo {
+	font-weight: bold;
+	color: #006600;
+}
+
+.table_round .bye {
+	font-weight: bold;
+	color: #006600;
+}
+
+.table_round .out {
+	font-weight: bold;
+	color: #990000;
+}

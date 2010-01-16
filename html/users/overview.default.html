@@ -1,0 +1,37 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_USERS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Accepted Players Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_USERS -->
+	<div class="notice">no users yet</div>
+<!-- END B_NO_USERS -->
+<!-- BEGIN B_USERS -->
+	<table cellspacing="0">
+<!-- BEGIN B_USER -->
+	<tr id="id_{I_USER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_USER_COUNTER}', 'coloured' )" onmouseout="javascript: unsetClass( 'id_{I_USER_COUNTER}' )">
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+		<td>&lt;{I_EMAIL}&gt;</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=users&act=edit&opt={I_ID_USER}">edit</a>]</td>
+	</tr>
+<!-- END B_USER -->
+	</table>
+<!-- END B_USERS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_USERS -->

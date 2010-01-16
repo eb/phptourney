@@ -1,0 +1,140 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: add.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_PREV_MATCHES --><tr><td>The previous matches aren't played yet</td></tr><!-- END B_WARNING_PREV_MATCHES -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_ADD_REPORT -->
+<table class="largebox" cellspacing="0">
+<tr><th>Match Report</th></tr>
+<tr>
+	<td>
+	<div align="center"><b>{I_PLAYER1} vs {I_PLAYER2}</b></div>
+	<form action="" method="post" enctype="multipart/form-data">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="matches" type="hidden"/>
+		<input name="act" value="insert" type="hidden"/>
+		<input name="opt" value="{I_OPT}" type="hidden"/>
+
+		<div align="center">
+		<table class="form" cellspacing="0">
+<!-- BEGIN B_NOT_PLAYED -->
+		<tr>
+			<td>
+			<fieldset><legend><b>Not played</b></legend>
+			<table cellspacing="0">
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+				<select name="not_played" size="1">
+					<option value=""></option>
+					<option value="wo1">W.O. for {I_PLAYER1}</option>
+					<option value="wo2">W.O. for {I_PLAYER2}</option>
+					<option value="both_out">Both Players are out</option>
+					<option value="bye">Bye</option>
+				</select>
+				</td>
+			</tr>
+			<tr><td>Comment:</td><td><textarea name="comment_admin" cols="80" rows="10">{I_COMMENT_ADMIN}</textarea></td></tr>
+			</table>
+			</fieldset>
+			</td>
+		</tr>
+		<tr><td><input class="submit" type="submit" value=" Submit "/></td></tr>
+		<tr><td><br/></td></tr>
+<!-- END B_NOT_PLAYED -->
+
+<!-- BEGIN B_MAP -->
+		<tr>
+			<td>
+			<fieldset><legend><b>Map {I_NUM_MAP}</b></legend>
+			<table cellspacing="0">
+			<tr>
+				<td>Map:</td>
+				<td>
+				<select name="id_map{I_NUM_MAP}" size="1">
+					<option value=""></option>
+<!-- BEGIN B_OPTION_MAP -->
+					<option value="{I_ID_MAP}">{I_MAP}</option>
+<!-- END B_OPTION_MAP -->
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Score:</td>
+				<td>
+				<table cellspacing="0">
+				<tr>
+					<td>{I_PLAYER1}</td>
+					<td><input class="text" name="score_m{I_NUM_MAP}_p1" value="{I_SCORE_P1}" type="text" size="5"/></td>
+				</tr>
+				<tr>
+					<td>{I_PLAYER2}</td>
+					<td><input class="text" name="score_m{I_NUM_MAP}_p2" value="{I_SCORE_P2}" type="text" size="5"/></td>
+				</tr>
+				</table>
+				</td>
+			</tr>
+			<tr><td>Screenshot:</td><td><input class="text" name="screenshot_m{I_NUM_MAP}" type="file"/></td></tr>
+			<tr><td>Comment:</td><td><textarea name="comment_m{I_NUM_MAP}" cols="80" rows="10">{I_COMMENT}</textarea></td></tr>
+			</table>
+			</fieldset>
+		</tr>
+<!-- END B_MAP -->
+
+<!-- BEGIN B_MATCH -->
+	<tr>
+		<td><div class="notice" align="right">[{I_BRACKET} - Round {I_ROUND} - Match {I_MATCH}]</div></td>
+	</tr>
+<!-- END B_MATCH -->
+
+		<tr><td><input class="submit" type="submit" value=" Submit "/></td></tr>
+		</table>
+		</div>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_REPORT -->
+
+<!-- BEGIN B_NO_COMMENT -->
+<div class="notice">no comments to add</div>
+<!-- END B_NO_COMMENT -->
+
+<!-- BEGIN B_ADD_COMMENT -->
+<form action="" method="post">
+	<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+	<input name="mod" value="matches" type="hidden"/>
+	<input name="act" value="insert" type="hidden"/>
+	<input name="opt" value="{I_OPT}" type="hidden"/>
+
+	<div align="center">
+	<table class="form" cellspacing="0">
+	<tr>
+		<td>
+<!-- BEGIN B_COMMENT -->
+		<fieldset><legend><b>Map {I_NUM_MAP}</b></legend>
+		<table cellspacing="0">
+<!-- BEGIN B_SCREENSHOT -->
+		<tr><td>&nbsp;</td><td><img src="{I_SCREENSHOT}"/></td></tr>
+<!-- END B_SCREENSHOT -->
+		<tr><td>comment:</td><td><textarea name="comment_m{I_NUM_MAP}" cols="80" rows="20"></textarea></td></tr>
+		</table>
+		</fieldset>
+<!-- END B_COMMENT -->
+		</td>
+	</tr>
+	<tr><td><input class="submit" type="submit" value=" Submit "/></td></tr>
+	</table>
+</form>
+
+<!-- END B_ADD_COMMENT -->

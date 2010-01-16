@@ -1,0 +1,58 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: start.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_TOURNEY_RUNNING --><tr><td>Tourney is running</td></tr><!-- END B_MESSAGE_TOURNEY_RUNNING -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_BRACKET --><tr><td>First the bracket has to be created, in order to start the Tourney</td></tr><!-- END B_WARNING_BRACKET -->
+<!-- BEGIN B_WARNING_TOURNEY_RUNNING --><tr><td>Tourney is already running</td></tr><!-- END B_WARNING_TOURNEY_RUNNING -->
+<!-- BEGIN B_WARNING_TOURNEY_FINISHED --><tr><td>Tourney is already finished</td></tr><!-- END B_WARNING_TOURNEY_FINISHED -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_BACK_OVERVIEW -->[<a href="?sid={I_ID_SEASON}&mod=tourney_status&act=view&opt=">back</a>]<br/><!-- END B_BACK_OVERVIEW -->
+
+<!-- BEGIN B_MAIL_SUBJECT -->{I_TOURNEY_NAME} {I_SEASON_NAME} Participation<!-- END B_MAIL_SUBJECT -->
+
+<!-- BEGIN B_MAIL_BODY_ACCEPTED -->
+Congratulations!
+
+Your participation to {I_TOURNEY_NAME} {I_SEASON_NAME} is now confirmed.
+The tourney started when this email was sent and you can check out the pages @ {I_URL}
+<!-- BEGIN B_MAIL_FIRST_MATCH -->
+Your first opponent for match [{I_BRACKET}-{I_ROUND}-{I_MATCH}] is {I_OPPONENT} (irc-channel: {I_IRC_CHANNEL}).
+<!-- BEGIN B_MAIL_DEADLINE -->The deadline for the match is {I_DEADLINE}.<!-- END B_MAIL_DEADLINE -->
+<!-- END B_MAIL_FIRST_MATCH -->
+
+Good luck with your matches!
+
+Respectfully,
+
+{I_TOURNEY_NAME} Admin Crew
+<!-- END B_MAIL_BODY_ACCEPTED -->
+
+<!-- BEGIN B_MAIL_BODY_REJECTED -->
+Hello,
+
+We're sorry to tell that you don't get to play in {I_TOURNEY_NAME} {I_SEASON_NAME}.
+We try to take in as much players as we can, but it's not possible that everybody can take place in the tournament.
+
+We still hope that you'll keep an eye on our pages ({I_URL}),
+since the next season might be starting right after {I_SEASON_NAME}
+and being quick you can get the chance to play in it.
+
+Respectfully,
+
+{I_TOURNEY_NAME} Admin Crew
+<!-- END B_MAIL_BODY_REJECTED -->

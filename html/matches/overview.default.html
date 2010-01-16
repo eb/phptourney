@@ -1,0 +1,108 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_REPORTED_MATCHES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Reported Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_REPORTED_MATCHES -->
+	<div class="notice">no reported matches available</div>
+<!-- END B_NO_REPORTED_MATCHES -->
+<!-- BEGIN B_REPORTED_MATCHES -->
+	<table cellspacing="0">
+<!-- BEGIN B_REPORTED_MATCH -->
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+		<td>
+		[<a href="?sid={I_ID_SEASON}&mod=matches&act=edit&opt={I_ID_MATCH}">confirm</a>]
+		[<a href="?sid={I_ID_SEASON}&mod=matches&act=remove&opt={I_ID_MATCH}">delete</a>]</td>
+	</tr>
+<!-- END B_REPORTED_MATCH -->
+<!-- BEGIN B_REPORTED_MATCH_OUT_OF_TIMEFRAME -->
+	<tr class="timeframe" id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'timeframe' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+		<td>
+		[<a href="?sid={I_ID_SEASON}&mod=matches&act=edit&opt={I_ID_MATCH}">confirm</a>]
+		[<a href="?sid={I_ID_SEASON}&mod=matches&act=remove&opt={I_ID_MATCH}">delete</a>]</td>
+		</td>
+	</tr>
+<!-- END B_REPORTED_MATCH_OUT_OF_TIMEFRAME -->
+	</table>
+<!-- END B_REPORTED_MATCHES -->
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Don't confirm matches with a dark background!<br/>
+	They aren't in the proper timeframe yet.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_REPORTED_MATCHES -->
+
+<!-- BEGIN B_OVERVIEW_UNREPORTED_MATCHES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Unreported Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_UNREPORTED_MATCHES -->
+	<div class="notice">no unreported matches available</div>
+<!-- END B_NO_UNREPORTED_MATCHES -->
+<!-- BEGIN B_UNREPORTED_MATCHES -->
+	<table cellspacing="0">
+<!-- BEGIN B_UNREPORTED_MATCH -->
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=add&opt={I_ID_MATCH}">report</a>]</td>
+	</tr>
+<!-- END B_UNREPORTED_MATCH -->
+	</table>
+<!-- END B_UNREPORTED_MATCHES -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_UNREPORTED_MATCHES -->
+
+<!-- BEGIN B_OVERVIEW_CONFIRMED_MATCHES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Confirmed Matches</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_CONFIRMED_MATCHES -->
+	<div class="notice">no confirmed matches available</div>
+<!-- END B_NO_CONFIRMED_MATCHES -->
+<!-- BEGIN B_CONFIRMED_MATCHES -->
+	<table cellspacing="0">
+<!-- BEGIN B_CONFIRMED_MATCH -->
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
+		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=edit&opt={I_ID_MATCH}">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=remove&opt={I_ID_MATCH}">delete</a>]</td>
+<!-- BEGIN B_CROP -->
+		<td>[<a href="full.php?sid={I_ID_SEASON}&mod=crop&act=crop&opt={I_ID_MATCH}" target="_blank">crop</a>]</td>
+<!-- END B_CROP -->
+
+	</tr>
+<!-- END B_CONFIRMED_MATCH -->
+	</table>
+<!-- END B_CONFIRMED_MATCHES -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_CONFIRMED_MATCHES -->

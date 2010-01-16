@@ -1,0 +1,38 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: update.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_MATCH_CONFIRMED --><tr><td>Match successfully confirmed</td></tr><!-- END B_MESSAGE_MATCH_CONFIRMED -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_NO_REPORT --><tr><td>There's nothing to report at the moment</td></tr><!-- END B_WARNING_NO_REPORT -->
+<!-- BEGIN B_WARNING_EDIT --><tr><td>This match is not editable, because there are already affected matches of the next round being played</td></tr><!-- END B_WARNING_EDIT -->
+<!-- BEGIN B_WARNING_REPORT --><tr><td>Report invalid</td></tr><!-- END B_WARNING_REPORT -->
+<!-- BEGIN B_WARNING_MAP --><tr><td>The maps aren't complete</td></tr><!-- END B_WARNING_MAP -->
+<!-- BEGIN B_WARNING_SCREENSHOT --><tr><td>Screenshots are missing</td></tr><!-- END B_WARNING_SCREENSHOT -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_BACK -->[<a href="#" onclick="javascript:history.back();">back</a>]<!-- END B_BACK -->
+
+<!-- BEGIN B_CROP -->[<a href="full.php?sid={I_ID_SEASON}&mod=crop&act=crop&opt={I_ID_MATCH}" target="_blank">crop screenshots</a>]<!-- END B_CROP -->
+
+<!-- BEGIN B_MAIL_SUBJECT -->{I_TOURNEY_NAME} {I_SEASON_NAME} Match Notification<!-- END B_MAIL_SUBJECT -->
+
+<!-- BEGIN B_MAIL_BODY -->
+Hi {I_PLAYER},
+
+your next opponent for match [{I_BRACKET}-{I_ROUND}-{I_MATCH}] is {I_OPPONENT} (irc-channel: {I_IRC_CHANNEL}).
+The URL to our pages is {I_URL}.
+<!-- BEGIN B_MAIL_DEADLINE -->The deadline for the match is {I_DEADLINE}.<!-- END B_MAIL_DEADLINE -->
+<!-- END B_MAIL_BODY -->

@@ -1,0 +1,59 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: insert.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_APPLIED -->
+<tr>
+	<td>
+	You have successfully applied for "{I_TOURNEY_NAME} {I_SEASON_NAME}" participation.<br/>
+	Your application will be evaluated by the {I_TOURNEY_NAME} Administrators.<br/>
+	</td>
+</tr>
+<!-- END B_MESSAGE_APPLIED -->
+<!-- BEGIN B_MESSAGE_APPLIED_WITH_EMAIL -->
+<tr>
+	<td>
+	You have successfully applied for "{I_TOURNEY_NAME} {I_SEASON_NAME}" participation.<br/>
+	An email has been sent to you
+	and your application will be evaluated by the {I_TOURNEY_NAME} Administrators.<br/>
+	You will receive another email, stating whether your participation has been accepted or rejected.<br/>
+	</td>
+</tr>
+<!-- END B_MESSAGE_APPLIED_WITH_EMAIL -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_POLL --><tr><td>You have to give a vote in the poll</td></tr><!-- END B_WARNING_POLL -->
+<!-- BEGIN B_WARNING_POLL_CHOICE --><tr><td>This vote isn't a choice</td></tr><!-- END B_WARNING_POLL_CHOICE -->
+<!-- BEGIN B_WARNING_REJECTED --><tr><td>You are rejected</td></tr><!-- END B_WARNING_REJECTED -->
+<!-- BEGIN B_WARNING_SIGNED_UP --><tr><td>You are already signed up</td></tr><!-- END B_WARNING_SIGNED_UP -->
+<!-- BEGIN B_WARNING_LOGIN --><tr><td>You have to be logged in to sign up</td></tr><!-- END B_WARNING_LOGIN -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_NO_SIGNUP -->
+<div class="notice">signups are closed</div>
+<!-- END B_NO_SIGNUP -->
+
+<!-- BEGIN B_MAIL_SUBJECT -->
+{I_TOURNEY_NAME} {I_SEASON_NAME} Signup
+<!-- END B_MAIL_SUBJECT -->
+
+<!-- BEGIN B_MAIL_BODY -->
+You have successfully applied for "{I_TOURNEY_NAME} {I_SEASON_NAME}" participation.
+
+Your application will be evaluated by the {I_TOURNEY_NAME} Administrators.
+You will receive another email, stating whether your participation has been accepted or rejected.
+
+The URL to our pages is {I_URL}.
+<!-- END B_MAIL_BODY -->
+
+<!-- BEGIN B_BACK -->[<a href="#" onclick="javascript: history.back();">back</a>]<br/><!-- END B_BACK -->

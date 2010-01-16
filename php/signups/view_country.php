@@ -1,0 +1,60 @@
+<?php
+
+################################################################################
+#
+# $Id: view_country.php,v 1.1 2006/03/16 00:05:18 eb Exp $
+#
+# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+#
+################################################################################
+
+// template blocks
+$content_tpl->set_block("F_CONTENT", "B_NO_PLAYERS", "H_NO_PLAYERS");
+$content_tpl->set_block("F_CONTENT", "B_PLAYER_COL1", "H_PLAYER_COL1");
+$content_tpl->set_block("F_CONTENT", "B_PLAYERS_COL1", "H_PLAYERS_COL1");
+$content_tpl->set_block("F_CONTENT", "B_PLAYER_COL2", "H_PLAYER_COL2");
+$content_tpl->set_block("F_CONTENT", "B_PLAYERS_COL2", "H_PLAYERS_COL2");
+$content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYERS", "H_OVERVIEW_PLAYERS");
+
+// countries-query
+$countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$_REQUEST['opt']}");
+$countries_row = dbFetch($countries_ref);
+$content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+
+// users-query
+$users_ref = dbQuery("SELECT U.* " .
+		      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
+		      "WHERE SU.`id_user` = U.`id` AND SU.`id_season` = {$_REQUEST['sid']} AND U.`id_country` = {$_REQUEST['opt']} " .
+		      "AND SU.`usertype_player` = 1 AND SU.`rejected` = 0 ORDER BY SU.`submitted` ASC");
+if (dbNumRows($users_ref) <= 0)
+{
+  $content_tpl->parse("H_NO_PLAYERS", "B_NO_PLAYERS");
+}
+else
+{
+  $player_counter = 0;
+  while ($users_row = dbFetch($users_ref))
+  {
+    $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
+    $content_tpl->set_var("I_ID_USER", $users_row['id']);
+    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $countries_row['abbreviation']);
+    if ($player_counter % 2 == 1)
+    {
+      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->parse("H_PLAYER_COL1", "B_PLAYER_COL1", true);
+    }
+    elseif ($player_counter % 2 == 0)
+    {
+      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->parse("H_PLAYER_COL2", "B_PLAYER_COL2", true);
+    }
+  }
+  $content_tpl->parse("H_PLAYERS_COL1", "B_PLAYERS_COL1");
+  $content_tpl->parse("H_PLAYERS_COL2", "B_PLAYERS_COL2");
+}
+$content_tpl->parse("H_OVERVIEW_PLAYERS", "B_OVERVIEW_PLAYERS");
+$content_tpl->set_var("I_USERNAME", "");
+
+?>

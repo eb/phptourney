@@ -1,0 +1,46 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: add_login.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_REJECTED --><tr><td>You are rejected</td></tr><!-- END B_WARNING_REJECTED -->
+<!-- BEGIN B_WARNING_SIGNED_UP --><tr><td>You are already signed up</td></tr><!-- END B_WARNING_SIGNED_UP -->
+<!-- BEGIN B_WARNING_LOGIN --><tr><td>You have to be logged in to sign up</td></tr><!-- END B_WARNING_LOGIN -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_VIEW_NO_SIGNUP -->
+<div class="notice">signups are closed</div>
+<!-- END B_VIEW_NO_SIGNUP -->
+
+<!-- BEGIN B_VIEW_LOGIN -->
+<table class="largebox" cellspacing="0">
+<tr><th>Signup</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="signups" type="hidden"/>
+		<input name="act" value="add_vote" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Username:</td>
+			<td>{I_USERNAME}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_LOGIN -->

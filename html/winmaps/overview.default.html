@@ -1,0 +1,56 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_WINMAPS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Win-Maps Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_MATCHES -->
+	<div class="notice">no bracket yet</div>
+<!-- END B_NO_MATCHES -->
+<!-- BEGIN B_MATCHES -->
+	<form action="" method="post">	
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="winmaps" type="hidden"/>
+		<input name="act" value="set" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table cellspacing="0">
+<!-- BEGIN B_MATCH -->
+		<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+			<td>{I_BRACKET}-{I_ROUND}-{I_MATCH}:</td>
+			<td>{I_WINMAPS}</td>
+<!-- BEGIN B_NEW_WINMAPS -->
+			<td> => <input class="text" name="{I_ID_MATCH}" value="{I_WINMAPS}" type="text" size="5"/></td>
+<!-- END B_NEW_WINMAPS -->
+		</tr>
+<!-- END B_MATCH -->
+		<tr>
+			<td colspan="4">&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+<!-- END B_MATCHES -->
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Enter the number of winmaps for the matches here.<br/>
+	The tournament has to be started before you can edit the win-maps.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_WINMAPS -->

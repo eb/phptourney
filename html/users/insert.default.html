@@ -1,0 +1,71 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: insert.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_REGISTERED --><tr><td>You have successfully registered</td></tr><!-- END B_MESSAGE_REGISTERED -->
+<!-- BEGIN B_MESSAGE_REGISTERED_WITH_EMAIL -->
+<tr>
+	<td>
+	You have successfully registered.<br/>
+	An email with your username and password has been sent to you.<br/>
+	</td>
+</tr>
+<!-- END B_MESSAGE_REGISTERED_WITH_EMAIL -->
+<!-- BEGIN B_MESSAGE_APPLIED --><tr><td>You have successfully registered and signed up</td></tr><!-- END B_MESSAGE_APPLIED -->
+<!-- BEGIN B_MESSAGE_APPLIED_WITH_EMAIL -->
+<tr>
+	<td>
+	You have successfully registered and signed up.<br/>
+	An email with your username and password has been sent to you.<br/>
+	</td>
+</tr>
+<!-- END B_MESSAGE_APPLIED_WITH_EMAIL -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_UNIQUE_USERNAME --><tr><td>Username is already assigned</td></tr><!-- END B_WARNING_UNIQUE_USERNAME -->
+<!-- BEGIN B_WARNING_USERNAME --><tr><td>Username is a required field</td></tr><!-- END B_WARNING_USERNAME -->
+<!-- BEGIN B_WARNING_USERNAME_INVALID --><tr><td>Username has invalid characters in it</td></tr><!-- END B_WARNING_USERNAME_INVALID -->
+<!-- BEGIN B_WARNING_USERNAME_TOO_LONG --><tr><td>Username is too long</td></tr><!-- END B_WARNING_USERNAME_TOO_LONG -->
+<!-- BEGIN B_WARNING_PASSWORD --><tr><td>Password is a required field</td></tr><!-- END B_WARNING_PASSWORD -->
+<!-- BEGIN B_WARNING_PASSWORD_RETYPED --><tr><td>Passwords don't match</td></tr><!-- END B_WARNING_PASSWORD_RETYPED -->
+<!-- BEGIN B_WARNING_EMAIL --><tr><td>Email isn't valid</td></tr><!-- END B_WARNING_EMAIL -->
+<!-- BEGIN B_WARNING_IRC_CHANNEL --><tr><td>IRC-Channel is a required field</td></tr><!-- END B_WARNING_IRC_CHANNEL -->
+<!-- BEGIN B_WARNING_COUNTRY --><tr><td>Country is a required field</td></tr><!-- END B_WARNING_COUNTRY -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_MAIL_REGISTERED_SUBJECT -->{I_TOURNEY_NAME} Registration<!-- END B_MAIL_REGISTERED_SUBJECT -->
+
+<!-- BEGIN B_MAIL_REGISTERED_BODY -->
+An user account has been created @ {I_URL}.
+
+Username: {I_USERNAME}
+Password: {I_PASSWORD}
+<!-- END B_MAIL_REGISTERED_BODY -->
+
+<!-- BEGIN B_MAIL_APPLIED_SUBJECT -->{I_TOURNEY_NAME} Registration + Signup<!-- END B_MAIL_APPLIED_SUBJECT -->
+
+<!-- BEGIN B_MAIL_APPLIED_BODY -->
+An user account has been created @ {I_URL}.
+
+Username: {I_USERNAME}
+Password: {I_PASSWORD}
+
+You also have successfully applied for "{I_TOURNEY_NAME} {I_SEASON_NAME}" participation.
+
+Your application will be evaluated by the {I_TOURNEY_NAME} Administrators.
+You will receive another email, stating whether your participation has been accepted or rejected.
+
+The URL to our pages is {I_URL}.
+<!-- END B_MAIL_APPLIED_BODY -->
+
+<!-- BEGIN B_BACK -->[<a href="#" onclick="javascript: history.back();">back</a>]<br/><!-- END B_BACK -->

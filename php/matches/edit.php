@@ -1,0 +1,223 @@
+<?php
+
+################################################################################
+#
+# $Id: edit.php,v 1.1 2006/03/16 00:05:18 eb Exp $
+#
+# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
+#
+################################################################################
+
+// template blocks
+$content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
+$content_tpl->set_block("F_CONTENT", "B_WARNING_EDIT", "H_WARNING_EDIT");
+$content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_WO1_SELECTED", "H_OPTION_WO1_SELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_WO1_UNSELECTED", "H_OPTION_WO1_UNSELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_WO2_SELECTED", "H_OPTION_WO2_SELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_WO2_UNSELECTED", "H_OPTION_WO2_UNSELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_BOTH_OUT_SELECTED", "H_OPTION_BOTH_OUT_SELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_BOTH_OUT_UNSELECTED", "H_OPTION_BOTH_OUT_UNSELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_BYE_SELECTED", "H_OPTION_BYE_SELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_BYE_UNSELECTED", "H_OPTION_BYE_UNSELECTED");
+$content_tpl->set_block("F_CONTENT", "B_NOT_PLAYED", "H_NOT_PLAYED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_MAP_SELECTED", "H_OPTION_MAP_SELECTED");
+$content_tpl->set_block("F_CONTENT", "B_OPTION_MAP_UNSELECTED", "H_OPTION_MAP_UNSELECTED");
+$content_tpl->set_block("F_CONTENT", "B_SCREENSHOT", "H_SCREENSHOT");
+$content_tpl->set_block("F_CONTENT", "B_MAP", "H_MAP");
+$content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
+$content_tpl->set_block("F_CONTENT", "B_SUBMIT_TIMESTAMP", "H_SUBMIT_TIMESTAMP");
+$content_tpl->set_block("F_CONTENT", "B_CONFIRM_TIMESTAMP", "H_CONFIRM_TIMESTAMP");
+$content_tpl->set_block("F_CONTENT", "B_EDIT_REPORT", "H_EDIT_REPORT");
+
+if ($user['usertype_admin'])
+{
+  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+  $matches_row = dbFetch($matches_ref);
+  if (isLastMatch($matches_row))
+  {
+    $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_ROUND", $matches_row['round']);
+    $content_tpl->set_var("I_MATCH", $matches_row['match']);
+
+    // players
+    if ($matches_row['id_player1'] != 0)
+    {
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+			   "WHERE `id` = {$matches_row['id_player1']}");
+      $users_row = dbFetch($users_ref);
+      $content_tpl->set_var("I_PLAYER1", $users_row['username']);
+    }
+    else
+    {
+      $content_tpl->set_var("I_PLAYER1", "-");
+    }
+    if ($matches_row['id_player2'] != 0)
+    {
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+			   "WHERE `id` = {$matches_row['id_player2']}");
+      $users_row = dbFetch($users_ref);
+      $content_tpl->set_var("I_PLAYER2", $users_row['username']);
+    }
+    else
+    {
+      $content_tpl->set_var("I_PLAYER2", "-");
+    }
+
+    // not played
+    if ($matches_row['wo'] == $matches_row['id_player1'])
+    {
+      $content_tpl->parse("H_OPTION_WO1_SELECTED", "B_OPTION_WO1_SELECTED");
+    }
+    else
+    {
+      $content_tpl->parse("H_OPTION_WO1_SELECTED", "B_OPTION_WO1_UNSELECTED");
+    }
+    if ($matches_row['wo'] == $matches_row['id_player2'])
+    {
+      $content_tpl->parse("H_OPTION_WO2_SELECTED", "B_OPTION_WO2_SELECTED");
+    }
+    else
+    {
+      $content_tpl->parse("H_OPTION_WO2_SELECTED", "B_OPTION_WO2_UNSELECTED");
+    }
+    if ($matches_row['out'] == 1)
+    {
+      $content_tpl->parse("H_OPTION_BOTH_OUT_SELECTED", "B_OPTION_BOTH_OUT_SELECTED");
+    }
+    else
+    {
+      $content_tpl->parse("H_OPTION_BOTH_OUT_SELECTED", "H_OPTION_BOTH_OUT_UNSELECTED");
+    }
+    if ($matches_row['bye'] == 1)
+    {
+      $content_tpl->parse("H_OPTION_BYE_SELECTED", "B_OPTION_BYE_SELECTED");
+    }
+    else
+    {
+      $content_tpl->parse("H_OPTION_BYE_SELECTED", "B_OPTION_BYE_UNSELECTED");
+    }
+    $content_tpl->set_var("I_COMMENT_ADMIN", $matches_row['comment_admin']);
+    $content_tpl->parse("H_NOT_PLAYED", "B_NOT_PLAYED");
+
+    // maps
+    for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
+    {
+      $content_tpl->set_var("I_NUM_MAP", $i);
+      $content_tpl->set_var("H_SCREENSHOT", "");
+
+      $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
+			  "WHERE `id_match` = {$matches_row['id']} AND `num_map` = $i");
+      if ($maps_row = dbFetch($maps_ref))
+      {
+	// map
+	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
+	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+			       "WHERE `id_season` = {$_REQUEST['sid']} AND `deleted` = 0");
+	while ($mappool_row = dbFetch($mappool_ref))
+	{
+	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
+	  $content_tpl->set_var("I_MAP", $mappool_row['map']);
+	  if ($maps_row['id_map'] == $mappool_row['id'])
+	  {
+	    $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_SELECTED", true);
+	  }
+	  else
+	  {
+	    $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_UNSELECTED", true);
+	  }
+	}
+
+	// score
+	if ($maps_row['score_p1'] == 0 and $maps_row['score_p2'] == 0)
+	{
+	  $maps_row['score_p1'] = "";
+	  $maps_row['score_p2'] = "";
+	}
+	$content_tpl->set_var("I_SCORE_P1", $maps_row['score_p1']);
+	$content_tpl->set_var("I_SCORE_P2", $maps_row['score_p2']);
+
+	// screenshot
+	$sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
+	$sshot = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}.jpg";
+	$sshot_thumb = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}_thumb.jpg";
+	if (file_exists($sshot))
+	{
+	  $content_tpl->set_var("I_SCREENSHOT", $sshot);
+	  $content_tpl->set_var("I_SCREENSHOT_THUMB", $sshot_thumb);
+	  $content_tpl->parse("H_SCREENSHOT", "B_SCREENSHOT");
+	}
+
+	// comments
+	$content_tpl->set_var("I_COMMENT_ADMIN", $maps_row['comment_admin']);
+	$content_tpl->set_var("I_COMMENT_P1", $maps_row['comment_p1']);
+	$content_tpl->set_var("I_COMMENT_P2", $maps_row['comment_p2']);
+      }
+      else
+      {
+	// map
+	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
+	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+			       "WHERE `id_season` = {$_REQUEST['sid']} AND `deleted` = 0");
+	while ($mappool_row = dbFetch($mappool_ref))
+	{
+	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
+	  $content_tpl->set_var("I_MAP", $mappool_row['map']);
+	  $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_UNSELECTED", true);
+	}
+
+	// score
+	$content_tpl->set_var("I_SCORE_P1", "");
+	$content_tpl->set_var("I_SCORE_P2", "");
+
+	// comments
+	$content_tpl->set_var("I_COMMENT_ADMIN", "");
+	$content_tpl->set_var("I_COMMENT_P1", "");
+	$content_tpl->set_var("I_COMMENT_P2", "");
+      }
+      $content_tpl->parse("H_MAP", "B_MAP", true);
+    }
+    $content_tpl->parse("H_MATCH", "B_MATCH");
+
+    // matchkey
+    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_ROUND", $matches_row['round']);
+    $content_tpl->set_var("I_MATCH", $matches_row['match']);
+
+    // submitted
+    if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
+    {
+      $content_tpl->set_var("I_SUBMITTED", $matches_row['submitted']);
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['submitter']}");
+      $users_row = dbFetch($users_ref);
+      $content_tpl->set_var("I_SUBMITTER", $users_row['username']);
+      $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
+    }
+
+    // confirmed
+    if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
+    {
+      $content_tpl->set_var("I_CONFIRMED", $matches_row['confirmed']);
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['confirmer']}");
+      $users_row = dbFetch($users_ref);
+      $content_tpl->set_var("I_CONFIRMER", $users_row['username']);
+      $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");
+    }
+
+    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->parse("H_EDIT_REPORT", "B_EDIT_REPORT");
+  }
+  else
+  {
+    $content_tpl->parse("H_WARNING_EDIT", "B_WARNING_EDIT");
+    $content_tpl->parse("H_WARNING", "B_WARNING");
+  }
+}
+else
+{
+  $content_tpl->parse("H_WARNING_NO_ACCESS", "B_WARNING_NO_ACCESS");
+  $content_tpl->parse("H_WARNING", "B_WARNING");
+}
+
+?>

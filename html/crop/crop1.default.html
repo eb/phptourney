@@ -1,0 +1,36 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: crop1.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_MATCH -->
+<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER1}.gif"/>
+<b>{I_PLAYER1}</b>
+vs
+<b>{I_PLAYER2}</b>
+<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER2}.gif"/>
+<br/><br/>
+<!-- END B_MATCH -->
+
+<!-- BEGIN B_CROP1 -->
+<form action="" method="post">
+	<input type="hidden" name="sid" value="{I_ID_SEASON}"/>
+	<input type="hidden" name="mod" value="crop"/>
+	<input type="hidden" name="act" value="crop2"/>
+	<input type="hidden" name="opt" value="{I_ID_MATCH}"/>
+	<input type="hidden" name="num_map" value="{I_NUM_MAP}"/>
+	<b>{I_MAP_NAME}</b><br/>
+	<input type="image" src="{I_SCREENSHOT}"/>
+	<br/><br/>
+</form>
+<b>Click the top left corner, where you want to crop</b>
+<!-- END B_CROP1 -->

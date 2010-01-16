@@ -1,0 +1,33 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: insert.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_ADMIN_ADDED --><tr><td>Admin successfully added</td></tr><!-- END B_MESSAGE_ADMIN_ADDED -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+<!-- BEGIN B_WARNING_USER --><tr><td>User is a required field</td></tr><!-- END B_WARNING_USER -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_BACK -->[<a href="#" onclick="javascript: history.back();">back</a>]<br/><!-- END B_BACK -->
+<!-- BEGIN B_BACK_OVERVIEW -->[<a href="?sid={I_ID_SEASON}&mod=admins&act=view&opt=">back</a>]<br/><!-- END B_BACK_OVERVIEW -->
+
+<!-- BEGIN B_MAIL_SUBJECT -->{I_TOURNEY_NAME} {I_SEASON_NAME} Admin Message<!-- END B_MAIL_SUBJECT -->
+
+<!-- BEGIN B_MAIL_BODY -->
+You have been added as an admin for "{I_TOURNEY_NAME} {I_SEASON_NAME}".
+Log in @ {I_URL}.
+
+Username: {I_USERNAME}
+Password: {I_PASSWORD}
+<!-- END B_MAIL_BODY -->

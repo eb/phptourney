@@ -1,0 +1,72 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: edit.default.html,v 1.2 2006/04/28 19:37:59 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_EDIT_SECTION -->
+<table class="largebox" cellspacing="0">
+<tr><th>Edit Section</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="sections" type="hidden"/>
+		<input name="act" value="update" type="hidden"/>
+		<input name="opt" value="{I_ID_SECTION}" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Name:</td>
+			<td><input class="text" name="name" value="{I_NAME}" type="text" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Abbreviation:</td>
+			<td><input class="text" name="abbreviation" value="{I_ABBREVIATION}" type="text" size="20"/></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Bot Admin Channels:</td>
+			<td><input class="text" name="admin_irc_channels" value="{I_ADMIN_IRC_CHANNELS}" type="text" size="20"/></td>
+			<td class="help">Channels/Nicknames where the bot posts reported matches (separated by ';')</td>
+		</tr>
+		<tr>
+			<td>Bot Public Channels:</td>
+			<td><input class="text" name="public_irc_channels" value="{I_PUBLIC_IRC_CHANNELS}" type="text" size="20"/></td>
+			<td class="help">Channels/Nicknames where the bot posts confirmed matches and news (separated by ';')</td>
+		</tr>
+		<tr>
+			<td>Bot Host:</td>
+			<td><input class="text" name="bot_host" value="{I_BOT_HOST}" type="text" size="20"/></td>
+			<td class="help">Host of the eggdrop which has the phpTourneyBot-script loaded</td>
+		</tr>
+		<tr>
+			<td>Bot Port:</td>
+			<td><input class="text" name="bot_port" value="{I_BOT_PORT}" type="text" size="20"/></td>
+			<td class="help">Port of the eggdrop where the phpTourneyBot-script listens</td>
+		</tr>
+		<tr>
+			<td>Bot Password:</td>
+			<td><input class="text" name="bot_password" value="{I_BOT_PASSWORD}" type="text" size="20"/></td>
+			<td class="help">phpTourneyBot.tcl password</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+			<td>&nbsp;</td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_EDIT_SECTION -->

@@ -1,0 +1,36 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_BANS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Bans Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_BANS -->
+	<div class="notice">no bans yet</div>
+<!-- END B_NO_BANS -->
+<!-- BEGIN B_BANS -->
+	<table cellspacing="0">
+<!-- BEGIN B_BAN -->
+	<tr id="id_{I_BAN_COUNTER}" onmouseover="javascript: setClass( 'id_{I_BAN_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_BAN_COUNTER}' );">
+		<td>{I_IP}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=bans&act=unban&opt={I_ID_BAN}">unban</a>]</td>
+	</tr>
+<!-- END B_BAN -->
+	</table>
+<!-- END B_BANS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_BANS -->

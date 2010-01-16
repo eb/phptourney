@@ -1,0 +1,69 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_matches.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_LED_RED --><img src="gfx/leds/red.gif" alt="preparation"><!-- END B_LED_RED -->
+<!-- BEGIN B_LED_ORANGE --><img src="gfx/leds/orange.gif" alt="signups"><!-- END B_LED_ORANGE -->
+<!-- BEGIN B_LED_GREEN --><img src="gfx/leds/green.gif" alt="running"><!-- END B_LED_GREEN -->
+<!-- BEGIN B_LED_DONE --><img src="gfx/leds/done.gif" alt="finished"><!-- END B_LED_DONE -->
+
+<!-- BEGIN B_VIEW_STATISTICS -->
+<table class="largebox" cellspacing="0">
+<tr><th colspan="7">Match-Statistics</th></tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><i>Signups</i></td>
+	<td><i>Matches</i></td>
+	<td><i>Played</i></td>
+	<td><i>WOs</i></td>
+	<td><i>Byes</i></td>
+	<td><i>Outs</i></td>
+</tr>
+<tr>
+	<td><b>All Sections</b></td>
+	<td>{I_SIGNUPS}</td>
+	<td>{I_MATCHES}</td>
+	<td>{I_PLAYED}</td>
+	<td>{I_WOS}</td>
+	<td>{I_BYES}</td>
+	<td>{I_OUTS}</td>
+</tr>
+
+<!-- BEGIN B_SECTION_MATCHES -->
+<tr><th colspan="7">{I_SECTION_NAME}</th></tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><i>Signups</i></td>
+	<td><i>Matches</i></td>
+	<td><i>Played</i></td>
+	<td><i>WOs</i></td>
+	<td><i>Byes</i></td>
+	<td><i>Outs</i></td>
+</tr>
+<tr>
+	<td><b>Total</b></td>
+	<td>{I_SIGNUPS}</td>
+	<td>{I_MATCHES}</td>
+	<td>{I_PLAYED}</td>
+	<td>{I_WOS}</td>
+	<td>{I_BYES}</td>
+	<td>{I_OUTS}</td>
+</tr>
+<!-- BEGIN B_SEASON_MATCHES -->
+<tr>
+	<td>{I_LED} <b>{I_SEASON_NAME}</b></td>
+	<td>{I_SIGNUPS}</td>
+	<td>{I_MATCHES}</td>
+	<td>{I_PLAYED}</td>
+	<td>{I_WOS}</td>
+	<td>{I_BYES}</td>
+	<td>{I_OUTS}</td>
+</tr>
+<!-- END B_SEASON_MATCHES -->
+<!-- END B_SECTION_MATCHES -->
+</table>
+<!-- END B_VIEW_STATISTICS -->

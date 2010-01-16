@@ -1,0 +1,52 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: edit.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_EDIT_ADMIN -->
+<table class="largebox" cellspacing="0">
+<tr><th>Edit Admin</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="admins" type="hidden"/>
+		<input name="act" value="update" type="hidden"/>
+		<input name="opt" value="{I_ID_USER}" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Username:</td>
+			<td>{I_USERNAME}</td>
+		</tr>
+<!-- BEGIN B_EDIT_HEADADMIN_UNCHECKED -->
+		<tr>
+			<td>Headadmin:</td>
+			<td><input type="checkbox" name="headadmin" value="1"/></td>
+		</tr>
+<!-- END B_EDIT_HEADADMIN_UNCHECKED -->
+<!-- BEGIN B_EDIT_HEADADMIN_CHECKED -->
+		<tr>
+			<td>Headadmin:</td>
+			<td><input type="checkbox" name="headadmin" value="1" checked="checked"/></td>
+		</tr>
+<!-- END B_EDIT_HEADADMIN_CHECKED -->
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</table>
+<!-- END B_EDIT_ADMIN -->

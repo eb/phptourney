@@ -1,0 +1,50 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OVERVIEW_DEADLINES -->
+<table class="largebox" cellspacing="0">
+<tr><th>Deadlines Overview</th></tr>
+<tr>
+	<td>
+	[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=add&opt=">add</a>]
+	[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=setup&opt=">setup</a>]
+	</td>
+</tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_DEADLINES -->
+	<div class="notice">no deadlines yet</div>
+<!-- END B_NO_DEADLINES -->
+<!-- BEGIN B_DEADLINES -->
+	<table cellspacing="0">
+<!-- BEGIN B_DEADLINE -->
+	<tr id="id_{I_DEADLINE_COUNTER}" onmouseover="javascript: setClass( 'id_{I_DEADLINE_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_DEADLINE_COUNTER}' );">
+		<td>{I_ROUND}</td>
+		<td>-</td>
+		<td>{I_DEADLINE}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=edit&opt={I_ID_DEADLINE}">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=deadlines&act=remove&opt={I_ID_DEADLINE}">delete</a>]</td>
+	</tr>
+<!-- END B_DEADLINE -->
+	</table>
+<!-- END B_DEADLINES -->
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Use 'add' to enter deadlines manually or 'setup' to let the deadlines be created semi-automatically.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_DEADLINES -->

@@ -1,0 +1,76 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_VIEW_NO_SIGNUP -->
+<div class="notice">signups are closed</div>
+<!-- END B_VIEW_NO_SIGNUP -->
+
+<!-- BEGIN B_VIEW_SIGNUP -->
+<a href="?sid={I_ID_SEASON}&mod=signups&act=add_login&opt="><img src="gfx/signup.png" border="0"/></a><br/>
+<!-- END B_VIEW_SIGNUP -->
+
+<br/>
+
+<!-- BEGIN B_OVERVIEW_PLAYERS -->
+<table class="largebox" cellspacing="0">
+<tr><th colspan="2">Players Overview</th></tr>
+<tr>
+<!-- BEGIN B_NO_PLAYERS -->
+	<td colspan="2"><div class="notice">no players signed up yet</div></td>
+<!-- END B_NO_PLAYERS -->
+<!-- BEGIN B_PLAYERS_COL1 -->
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYER_COL1 -->
+	<tr>
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+	</tr>
+<!-- END B_PLAYER_COL1 -->
+	</table>
+	</td>
+<!-- END B_PLAYERS_COL1 -->
+<!-- BEGIN B_PLAYERS_COL2 -->
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYER_COL2 -->
+	<tr>
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+	</tr>
+<!-- END B_PLAYER_COL2 -->
+	</table>
+	</td>
+<!-- END B_PLAYERS_COL2 -->
+	</td>
+</tr>
+</table>
+
+<table class="largebox" cellspacing="0">
+<tr><th>Country Overview</th></tr>
+<tr>
+<!-- BEGIN B_NO_COUNTRIES -->
+	<td><div class="notice">no countries yet</div></td>
+<!-- END B_NO_COUNTRIES -->
+	<td>
+	<table cellspacing="0">
+<!-- BEGIN B_COUNTRY -->
+	<tr>
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td>{I_COUNTRY}:</td>
+		<td>{I_NUMBER_PLAYERS}</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=view_country&opt={I_ID_COUNTRY}">Show Players</a>]</td>
+	</tr>
+<!-- END B_COUNTRY -->
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_PLAYERS -->

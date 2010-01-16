@@ -1,0 +1,49 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: upload.default.html,v 1.2 2006/04/28 19:37:59 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_UPLOAD_SERVERLIST -->
+<table class="largebox" cellspacing="0">
+<tr><th>Upload Serverlist</th></tr>
+<tr>
+	<td>
+	<form action="" method="post" enctype="multipart/form-data">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="servers" type="hidden"/>
+		<input name="act" value="copy" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Serverlist:</td>
+			<td><input class="text" name="serverlist" type="file"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Upload a textfile containing the servers here.<br/>
+	Here's an example:<br/>
+	"123.45.67.89:12345" "Schlachthaus - Duel" "DE"<br/>
+	"123.45.67.89:67890" "Wurstsalon - Duel" "DE"<br/>
+	...<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_UPLOAD_SERVERLIST -->

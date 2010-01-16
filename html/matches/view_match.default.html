@@ -1,0 +1,191 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view_match.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_SCREENSHOT -->
+			<a href="#" onclick="javascript:newWindow( '{I_SCREENSHOT}' );"><img src="{I_SCREENSHOT_THUMB}" border="0" width="320"/></a>
+<!-- END B_SCREENSHOT -->
+
+<!-- BEGIN B_COMMENT_P1 -->
+			<hr/>
+			<div class="notice">comment by {I_PLAYER1}</div>
+			{I_COMMENT}
+<!-- END B_COMMENT_P1 -->
+<!-- BEGIN B_COMMENT_P2 -->
+			<hr/>
+			<div class="notice">comment by {I_PLAYER2}</div>
+			{I_COMMENT}
+<!-- END B_COMMENT_P2 -->
+<!-- BEGIN B_COMMENT_ADMIN -->
+			<hr/>
+			<div class="notice">comment by admin</div>
+			{I_COMMENT}
+<!-- END B_COMMENT_ADMIN -->
+
+<!-- BEGIN B_VIEW_MATCH -->
+<table class="largebox" cellspacing="0">
+<tr><th>View Match</th></tr>
+<tr><td>[<a href="#" onclick="javascript: history.back();">back</a>]</td></tr>
+<tr>
+	<td>
+	<div align="center">
+	<table cellspacing="0">
+<!-- BEGIN B_PLAYERS -->
+	<tr>
+		<td>
+		<div align="center">
+<!-- BEGIN B_PLAYER1 -->
+		<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER1}.gif"/>
+		<a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_PLAYER1}">{I_PLAYER1}</a>
+<!-- END B_PLAYER1 -->
+<!-- BEGIN B_NO_PLAYER1 -->-<!-- END B_NO_PLAYER1 -->
+		vs
+<!-- BEGIN B_PLAYER2 -->
+		<a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_PLAYER2}">{I_PLAYER2}</a>
+		<img src="gfx/flags/{I_COUNTRY_ABBREVIATION_PLAYER2}.gif"/>
+<!-- END B_PLAYER2 -->
+<!-- BEGIN B_NO_PLAYER2 -->-<!-- END B_NO_PLAYER2 -->
+		</div>
+		</td>
+	</tr>
+<!-- END B_PLAYERS -->
+
+<!-- BEGIN B_OUTCOME -->
+	<tr>
+		<td>
+		<div align="center">
+<!-- BEGIN B_RESULT --><b>{I_RESULT}</b><!-- END B_RESULT -->
+<!-- BEGIN B_WO --><b>W.O. for {I_PLAYER}</b><!-- END B_WO -->
+<!-- BEGIN B_BYE --><b>Bye for {I_PLAYER}</b><!-- END B_BYE -->
+<!-- BEGIN B_OUT --><b>Both Players are out</b><!-- END B_OUT -->
+<!-- BEGIN B_NOT_PLAYED --><div class="notice">Not played yet</div><!-- END B_NOT_PLAYED -->
+		{I_COMMENT}
+		</div>
+		</td>
+	</tr>
+<!-- END B_OUTCOME -->
+
+<!-- BEGIN B_MAP -->
+	<tr>
+		<td>
+		<fieldset><legend>Map{I_MAP_NUMBER}: <b>{I_MAP}</b></legend>
+		<table width="458" cellspacing="10">
+		<tr>
+			<td>
+			<div align="center">
+			{I_PLAYER1} <b>{I_SCORE}</b> {I_PLAYER2}<br/><br/>
+			{I_MAP_SCREENSHOT}
+			{I_MAP_COMMENTS}
+			</div>
+			</td>
+		</tr>
+		</table>
+		</fieldset>
+		</td>
+	</tr>
+<!-- END B_MAP -->
+
+<!-- BEGIN B_DEMOS -->
+<tr>
+	<td>
+	<div align="center">
+	<a href="{I_URL}" target="_blank">click here for demos</a>
+	</div>
+	</td>
+</tr>
+<!-- END B_DEMOS -->
+
+<!-- BEGIN B_MATCH -->
+	<tr>
+		<td><div class="notice" align="right">[{I_BRACKET} - Round {I_ROUND} - Match {I_MATCH}]</div></td>
+	</tr>
+<!-- END B_MATCH -->
+
+<!-- BEGIN B_SUBMIT_TIMESTAMP -->
+	<tr>
+		<td><div class="notice" align="right">submitted: {I_SUBMITTED} by {I_SUBMITTER}</div></td>
+	</tr>
+<!-- END B_SUBMIT_TIMESTAMP -->
+
+<!-- BEGIN B_CONFIRM_TIMESTAMP -->
+	<tr>
+		<td><div class="notice" align="right">confirmed: {I_CONFIRMED} by {I_CONFIRMER}</div></td>
+	</tr>
+<!-- END B_CONFIRM_TIMESTAMP -->
+	</table>
+	</div>
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_MATCH -->
+
+<!-- BEGIN B_VIEW_COMMENTS -->
+<!-- BEGIN B_VIEW_NO_COMMENTS -->
+<div class="notice">no comments yet</div>
+<br/>
+<!-- END B_VIEW_NO_COMMENTS -->
+<!-- BEGIN B_VIEW_COMMENT -->
+<table class="commentbox" cellspacing="0">
+<tr>
+	<td>
+<!-- BEGIN B_BANS -->
+	[<a href="?sid={I_ID_SEASON}&mod=bans&act=view&opt={I_IP}">ban</a>]
+<!-- END B_BANS -->
+	<span class="timestamp">
+	#{I_COUNTER} <a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> ({I_IP}) {I_SUBMITTED}
+	</span>
+	<br/>
+	{I_BODY}
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_COMMENT -->
+<!-- END B_VIEW_COMMENTS -->
+
+<!-- BEGIN B_ADD_COMMENT -->
+<table class="largebox" cellspacing="0">
+<tr><th>Add Comment</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="matches" type="hidden"/>
+		<input name="act" value="insert_comment" type="hidden"/>
+		<input name="opt" value="{I_ID_MATCH}" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>Comment:</td>
+			<td><textarea name="body" cols="80" rows="10">{I_BODY}</textarea></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Submit "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Enter a comment here.<br/>
+	HTML-tags aren't allowed and will be shown as normal text.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_ADD_COMMENT -->
+
+<!-- BEGIN B_LOGIN_TO_COMMENT -->
+<table class="largebox" cellspacing="0">
+<tr>
+	<td class="help">
+	You have to be logged in to comment.<br/>
+	If you don't have an account, create one.<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_LOGIN_TO_COMMENT -->

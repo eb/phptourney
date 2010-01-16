@@ -1,0 +1,173 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: overview.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_MESSAGE -->
+<table class="message" cellspacing="0">
+<!-- BEGIN B_MESSAGE_SIGNUPS_OPEN --><tr><td>Signups are open</td></tr><!-- END B_MESSAGE_SIGNUPS_OPEN -->
+</table>
+<!-- END B_MESSAGE -->
+
+<!-- BEGIN B_WARNING -->
+<table class="warning" cellspacing="0">
+<!-- BEGIN B_WARNING_SIGNUPS_CLOSED --><tr><td>Signups are closed</td></tr><!-- END B_WARNING_SIGNUPS_CLOSED -->
+<!-- BEGIN B_WARNING_NO_ACCESS --><tr><td>You have no access here</td></tr><!-- END B_WARNING_NO_ACCESS -->
+</table>
+<!-- END B_WARNING -->
+
+<!-- BEGIN B_OPEN_SIGNUPS -->[<a href="?sid={I_ID_SEASON}&mod=signups&act=open&opt=">Open Signups</a>]<br/><br/><!-- END B_OPEN_SIGNUPS -->
+
+<!-- BEGIN B_CLOSE_SIGNUPS -->[<a href="?sid={I_ID_SEASON}&mod=signups&act=close&opt=">Close Signups</a>]<br/><br/><!-- END B_CLOSE_SIGNUPS -->
+
+<!-- BEGIN B_OVERVIEW_ADD_PLAYER -->
+<table class="largebox" cellspacing="0">
+<tr><th>Add / Invite Player</th></tr>
+<tr>
+	<td>
+	<form action="" method="post">
+		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
+		<input name="mod" value="signups" type="hidden"/>
+		<input name="act" value="insert_user" type="hidden"/>
+		<input name="opt" value="" type="hidden"/>
+
+		<table class="form" cellspacing="0">
+		<tr>
+			<td>User:</td>
+			<td>
+			<select name="id_user" size="1">
+				<option value=""></option>
+<!-- BEGIN B_USERNAME -->
+				<option value="{I_ID_USER}">{I_USERNAME} &lt;{I_EMAIL}&gt;</option>
+<!-- END B_USERNAME -->
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Invite:</td>
+			<td><input type="checkbox" name="invite" value="1"/></td>
+		</td>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input class="submit" type="submit" value=" Add "/></td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+<tr>
+	<td class="help">
+	Add an existing user as a player here.<br/>
+	In case he shall receive an invitation mail, where he then has to press a confirmation link, check the 'Invite' checkbox<br/>
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_ADD_PLAYER -->
+
+<!-- BEGIN B_OVERVIEW_ACCEPTED_PLAYERS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Accepted Players Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_ACCEPTED_PLAYERS -->
+	<div class="notice">no accepted players yet</div>
+<!-- END B_NO_ACCEPTED_PLAYERS -->
+<!-- BEGIN B_ACCEPTED_PLAYERS -->
+	<table cellspacing="0">
+<!-- BEGIN B_ACCEPTED_PLAYER -->
+	<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' )" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' )">
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+		<td>&lt;{I_EMAIL}&gt;</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=reject&opt={I_ID_USER}">reject</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=users&act=edit&opt={I_ID_USER}">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=remove&opt={I_ID_USER}">delete</a>]</td>
+	</tr>
+<!-- END B_ACCEPTED_PLAYER -->
+	</table>
+<!-- END B_ACCEPTED_PLAYERS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_ACCEPTED_PLAYERS -->
+
+<!-- BEGIN B_OVERVIEW_REJECTED_PLAYERS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Rejected Players Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_REJECTED_PLAYERS -->
+	<div class="notice">no rejected players yet</div>
+<!-- END B_NO_REJECTED_PLAYERS -->
+<!-- BEGIN B_REJECTED_PLAYERS -->
+	<table cellspacing="0">
+<!-- BEGIN B_REJECTED_PLAYER -->
+	<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' )" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' )">
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+		<td>&lt;{I_EMAIL}&gt;</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=accept&opt={I_ID_USER}">accept</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=users&act=edit&opt={I_ID_USER}">edit</a>]</td>
+	</tr>
+<!-- END B_REJECTED_PLAYER -->
+	</table>
+<!-- END B_REJECTED_PLAYERS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_REJECTED_PLAYERS -->
+
+<!-- BEGIN B_OVERVIEW_CONFIRMED_INVITATIONS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Confirmed Invitations Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_CONFIRMED_INVITATIONS -->
+	<div class="notice">no confirmed invitations yet</div>
+<!-- END B_NO_CONFIRMED_INVITATIONS -->
+<!-- BEGIN B_CONFIRMED_INVITATIONS -->
+	<table cellspacing="0">
+<!-- BEGIN B_CONFIRMED_INVITATION -->
+	<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' )" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' )">
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+		<td>&lt;{I_EMAIL}&gt;</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=accept&opt={I_ID_USER}">accept</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=users&act=edit&opt={I_ID_USER}">edit</a>]</td>
+	</tr>
+<!-- END B_CONFIRMED_INVITATION -->
+	</table>
+<!-- END B_CONFIRMED_INVITATIONS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_CONFIRMED_INVITATIONS -->
+
+<!-- BEGIN B_OVERVIEW_PENDING_INVITATIONS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Pending Invitations Overview</th></tr>
+<tr>
+	<td>
+<!-- BEGIN B_NO_PENDING_INVITATIONS -->
+	<div class="notice">no pending invitations yet</div>
+<!-- END B_NO_PENDING_INVITATIONS -->
+<!-- BEGIN B_PENDING_INVITATIONS -->
+	<table cellspacing="0">
+<!-- BEGIN B_PENDING_INVITATION -->
+	<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' )" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' )">
+		<td>{I_PLAYER_COUNTER}:</td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+		<td>&lt;{I_EMAIL}&gt;</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=signups&act=confirm&opt={I_ID_USER}">confirm</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=users&act=edit&opt={I_ID_USER}">edit</a>]</td>
+	</tr>
+<!-- END B_PENDING_INVITATION -->
+	</table>
+<!-- END B_PENDING_INVITATIONS -->
+	</td>
+</tr>
+</table>
+<!-- END B_OVERVIEW_PENDING_INVITATIONS -->

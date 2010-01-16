@@ -1,0 +1,45 @@
+<!-- --------------------------------------------------------------------------------
+
+ $Id: view.default.html,v 1.1 2006/03/16 00:05:17 eb Exp $
+
+ Copyright (c) 2004 A.Beisler http://www.subdevice.org/
+
+-------------------------------------------------------------------------------- -->
+
+<!-- BEGIN B_VIEW_ADMINS -->
+<table class="largebox" cellspacing="0">
+<tr><th>Admins</th></tr>
+<!-- BEGIN B_ADD -->
+<tr><td>[<a href="?sid={I_ID_SEASON}&mod=admins&act=add&opt=">add</a>]</td></tr>
+<!-- END B_ADD -->
+<tr>
+	<td>
+<!-- BEGIN B_NO_ADMINS -->
+	<div class="notice">no admins yet</div>
+<!-- END B_NO_ADMINS -->
+	<table cellspacing="0">
+<!-- BEGIN B_VIEW_ADMIN -->
+	<tr id="id_{I_ADMIN_COUNTER}" onmouseover="javascript: setClass( 'id_{I_ADMIN_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_ADMIN_COUNTER}' );">
+		<td><img src="gfx/flags/{I_COUNTRY_ABBREVIATION}.gif"/></td>
+		<td><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a></td>
+<!-- BEGIN B_EMAIL -->
+		<td>&lt;{I_EMAIL}&gt;</td>
+<!-- END B_EMAIL -->
+<!-- BEGIN B_USERTYPE -->
+		<td>
+<!-- BEGIN B_USERTYPE_HEADADMIN -->(Headadmin)<!-- END B_USERTYPE_HEADADMIN -->
+<!-- BEGIN B_USERTYPE_ADMIN -->(Admin)<!-- END B_USERTYPE_ADMIN -->
+		</td>
+<!-- END B_USERTYPE -->
+<!-- BEGIN B_EDIT_DELETE -->
+		<td>[<a href="?sid={I_ID_SEASON}&mod=admins&act=edit&opt={I_ID_USER}">edit</a>]</td>
+		<td>[<a href="?sid={I_ID_SEASON}&mod=admins&act=remove&opt={I_ID_USER}">delete</a>]</td>
+<!-- END B_EDIT_DELETE -->
+		<td>[<a href="?sid={I_ID_SEASON}&mod=admins&act=write&opt={I_ID_USER}">send mail</a>]</td>
+	</tr>
+<!-- END B_VIEW_ADMIN -->
+	</table>
+	</td>
+</tr>
+</table>
+<!-- END B_VIEW_ADMINS -->
