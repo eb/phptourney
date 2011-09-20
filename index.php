@@ -28,6 +28,11 @@ $script_start_time = microtime();
 
 require("inc/inc.php");
 
+header("Expires: Thu, 1 Jan 1970 00:00:00 GMT");
+header("Cache-Control: no-cache");
+header("Pragma: no-cache");
+header("Content-type: text/html");
+
 // template files
 $main_tpl = new Template("html", "remove");
 if (file_exists("html/index.{$_REQUEST['sec']}.html"))
