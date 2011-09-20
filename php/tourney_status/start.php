@@ -83,7 +83,7 @@ if ($user['usertype_headadmin'])
 	    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 				 "WHERE `id` = {$matches_row['id_player2']}");
 	  }
-	  elseif ($matches_row = dbFetch($matches_ref))
+	  elseif ($matches_row = dbFetch($matches_ref2))
 	  {
 	    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 				 "WHERE `id` = {$matches_row['id_player1']}");
