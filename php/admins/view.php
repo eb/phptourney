@@ -52,6 +52,8 @@ else
     $content_tpl->set_var("I_USERNAME", $users_row['username']);
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("H_USERTYPE_HEADADMIN", "");
+    $content_tpl->set_var("H_USERTYPE_ADMIN", "");
 
     if ($season_users_row['usertype_headadmin'])
     {
