@@ -52,12 +52,6 @@ if ($user['usertype_headadmin'])
     // send a mail to all player that signed up
     if ($cfg['mail_enabled'])
     {
-      // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-      $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-      $subject = $content_tpl->get("MAIL_SUBJECT");
-
       $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
 				  "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 				  "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
@@ -65,6 +59,13 @@ if ($user['usertype_headadmin'])
 				  "AND SU.`id_user` = U.`id`");
       while ($season_users_row = dbFetch($season_users_ref))
       {
+        // subject
+        $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+        $content_tpl->set_var("I_SEASON_NAME", $season['name']);
+        $content_tpl->set_var("I_USERNAME", $season_users_row['username']);
+        $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+        $subject = $content_tpl->get("MAIL_SUBJECT");
+
 	$to = $season_users_row['email'];
 
 	// message
