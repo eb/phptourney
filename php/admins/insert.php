@@ -69,7 +69,7 @@ if ($user['usertype_headadmin'])
       $content_tpl->set_var("I_SEASON_NAME", $season['name']);
       $content_tpl->set_var("I_USERNAME", $users_row['username']);
       $content_tpl->set_var("I_PASSWORD", $users_row['password']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "?sec={$section['abbreviation']}");
+      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sec={$section['abbreviation']}");
       $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
       $message = $content_tpl->get("MAIL_BODY");
 

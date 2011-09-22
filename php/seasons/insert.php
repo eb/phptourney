@@ -86,7 +86,7 @@ if ($user['usertype_root'])
       $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
       $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
       $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "?sid={$seasons_row['id']}");
+      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$seasons_row['id']}");
       $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
       $message = $content_tpl->get("MAIL_BODY");
 

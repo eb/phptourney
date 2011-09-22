@@ -66,8 +66,8 @@ if ($user['usertype_headadmin'])
 
 	  // message
 	  $content_tpl->set_var("I_USERNAME", $users_row['username']);
-	  $content_tpl->set_var("I_CONFIRMATION_URL", $cfg['host'] . $cfg['path'] . "?sid={$season['id']}&mod=signups&act=confirm&opt=");
-	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "?sec={$section['abbreviation']}");
+	  $content_tpl->set_var("I_CONFIRMATION_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}&mod=signups&act=confirm&opt=");
+	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sec={$section['abbreviation']}");
 	  $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
 	  $message = $content_tpl->get("MAIL_BODY");
 

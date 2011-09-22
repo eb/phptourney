@@ -464,7 +464,7 @@ function notifyPlayers($new_match, $old_match) {
 	    $content_tpl->set_var("I_BRACKET", $new_match['bracket']);
 	    $content_tpl->set_var("I_ROUND", $new_match['round']);
 	    $content_tpl->set_var("I_MATCH", $new_match['match']);
-	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "?sid={$season['id']}");
+	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 	    $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
 				      "WHERE `id_season` = {$_REQUEST['sid']} " .
 				      "AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
@@ -500,7 +500,7 @@ function notifyPlayers($new_match, $old_match) {
 	    $content_tpl->set_var("I_BRACKET", $new_match['bracket']);
 	    $content_tpl->set_var("I_ROUND", $new_match['round']);
 	    $content_tpl->set_var("I_MATCH", $new_match['match']);
-	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "?sid={$season['id']}");
+	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 	    $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
 				      "WHERE `id_season` = {$_REQUEST['sid']} " .
 				      "AND `round` = '{$new_match['bracket']}{$new_match['round']}'");

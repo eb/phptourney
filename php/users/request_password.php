@@ -42,7 +42,7 @@ if ($users_row = dbFetch($users_ref))
     // message
     $content_tpl->set_var("I_USERNAME", $users_row['username']);
     $content_tpl->set_var("I_NEW_PASSWORD", $new_password);
-    $content_tpl->set_var("I_ACTIVATION_URL", $cfg['host'] . $cfg['path'] . "?mod=users&act=activation_login");
+    $content_tpl->set_var("I_ACTIVATION_URL", $cfg['host'] . $cfg['path'] . "index.php?mod=users&act=activation_login");
     $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
     $message = $content_tpl->get("MAIL_BODY");
 
