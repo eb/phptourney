@@ -109,7 +109,7 @@ if ($user['usertype_headadmin'])
 	  $content_tpl->parse("H_MAIL_FIRST_MATCH", "B_MAIL_FIRST_MATCH");
 	  $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
 	  $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sec={$section['abbreviation']}");
+	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 	  $content_tpl->parse("MAIL_BODY_ACCEPTED", "B_MAIL_BODY_ACCEPTED");
 	  $message = $content_tpl->get("MAIL_BODY_ACCEPTED");
 	}
@@ -118,7 +118,7 @@ if ($user['usertype_headadmin'])
 	  // message rejected
 	  $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
 	  $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sec={$section['abbreviation']}");
+	  $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 	  $content_tpl->parse("MAIL_BODY_REJECTED", "B_MAIL_BODY_REJECTED");
 	  $message = $content_tpl->get("MAIL_BODY_REJECTED");
 	}
