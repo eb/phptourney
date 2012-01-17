@@ -1,28 +1,34 @@
 --------------------------------------------------------------------------------
   phpTourney Changelog
-  $Id: CHANGELOG,v 1.5 2006/05/01 14:56:00 eb Exp $
 --------------------------------------------------------------------------------
 
-2006-05-01 A.Beisler <eb@subdevice.org>
-	- integrated script execution time in the template
-	- fixed the qualification (previous-match-check didn't work before)
-	* v0.8.8
+0.8.9
+  - Removed the execution time and copyright notice from the page
+  - Missing maps in a match report showed wrong screenshots
+  - Notification emails are now only sent if there are 2 players in the next match
+  - Revised the emails (greetings and links)
+  - Fixed the links that contained javascript (didn't work in chrome)
+  - Fixed the admins view (the flags weren't working properly
+  - Fixed a bug in the notification email when the tournament startsi
+    (only half of the players received a correct email)
+  - Turned off caching
+  - No the proper content-type is written
 
-2006-04-27 A.Beisler <eb@subdevice.org>
-	- fixed the signup-button in index.html to point to the right season
-	- fixed a serverlist issue, when adding the very first serverlist
-	- fixed a rule issue, when adding the very first rules
-	- deleted the test-section from the sql-file
-	* v0.8.7
+0.8.8
+  - Integrated script execution time in the template
+  - Fixed the qualification (previous-match-check didn't work before)
 
-2006-03-23 A.Beisler <eb@subdevice.org>
-	- writing the very first news didn't work
-	- reporting the very first match didn't work
-	- fixed the mail() function in safe mode (no 5.argument)
-	- added $cfg['mail_reply_to_address'] in the config
-	* v0.8.6
+0.8.7
+  - Fixed the signup button to point to the correct season
+  - Fixed a serverlist issue, when adding the very first serverlist
+  - Fixed a rule issue, when adding the very first rules
+  - Deleted the test-section from the sql-file
 
-2006-03-15 A.Beisler <eb@subdevice.org>
-	- initial release
-	- not all planned features are implemented yet (e.g. groupgames)
-	* v0.8.5
+0.8.6
+  - Writing the very first news didn't work
+  - Reporting the very first match didn't work
+  - Fixed the mail function in safe mode (no 5th argument)
+  - Added mail_reply_to_address to the config
+
+0.8.5
+  - Initial release
