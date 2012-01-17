@@ -22,9 +22,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ////////////////////////////////////////////////////////////////////////////////
 
-// get script start time
-$script_start_time = microtime();
-
 require("inc/inc.php");
 
 // template files
@@ -97,13 +94,6 @@ else
 }
 $main_tpl->set_var("I_ID_SEASON", $season['id']);
 $main_tpl->set_var("I_SEASON_NAME", $season['name']);
-
-// script execution time
-$script_end_time = microtime();
-list($script_start_msec, $script_start_sec) = explode(" ", $script_start_time);
-list($script_end_msec, $script_end_sec) = explode(" ", $script_end_time);
-$script_execution_time = $script_end_sec - $script_start_sec + $script_end_msec - $script_start_msec;
-$main_tpl->set_var("I_EXECUTION_TIME", $script_execution_time);
 
 $main_tpl->pparse("PAGE", "F_FULL");
 
