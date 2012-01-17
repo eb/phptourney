@@ -159,8 +159,6 @@ if ($matches_row = dbFetch($matches_ref))
       // maps
       ////////////////////////////////////////////////////////////////////////////////
 
-      $content_tpl->set_var("I_MAP_SCREENSHOT", "");
-      $content_tpl->set_var("I_MAP_COMMENTS", "");
       // maps-query
       $maps_ref = dbQuery("SELECT M1.*, M2.`map` " .
 			   "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
@@ -168,6 +166,7 @@ if ($matches_row = dbFetch($matches_ref))
 			   "ORDER BY `num_map` ASC");
       while ($maps_row = dbFetch($maps_ref))
       {
+	$content_tpl->set_var("I_MAP_SCREENSHOT", "");
 	$screenshot = $screenshot_prefix . "-m" . $maps_row['num_map'] . ".jpg";
 	$screenshot_thumb = $screenshot_prefix . "-m" . $maps_row['num_map'] . "_thumb.jpg";
 	if (file_exists($screenshot) and file_exists($screenshot_thumb))

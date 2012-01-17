@@ -445,75 +445,78 @@ function notifyPlayers($new_match, $old_match) {
 	$users_row2 = dbFetch($users_ref2);
 
 	// mail to player1
-	if ($users_row1['notify'] == 1)
+	if ($new_match['id_player1'] > 0 and $new_match['id_player2'] > 0)
 	{
-	  if ($cfg['mail_enabled'])
-	  {
-	    $to = $users_row1['email'];
+		if ($users_row1['notify'] == 1)
+		{
+			if ($cfg['mail_enabled'])
+			{
+				$to = $users_row1['email'];
 
-	    // subject
-	    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-	    $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	    $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-	    $subject = $content_tpl->get("MAIL_SUBJECT");
+				// subject
+				$content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+				$content_tpl->set_var("I_SEASON_NAME", $season['name']);
+				$content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+				$subject = $content_tpl->get("MAIL_SUBJECT");
 
-	    // message
-	    $content_tpl->set_var("I_PLAYER", $users_row1['username']);
-	    $content_tpl->set_var("I_OPPONENT", $users_row2['username']);
-	    $content_tpl->set_var("I_IRC_CHANNEL", $users_row2['irc_channel']);
-	    $content_tpl->set_var("I_BRACKET", $new_match['bracket']);
-	    $content_tpl->set_var("I_ROUND", $new_match['round']);
-	    $content_tpl->set_var("I_MATCH", $new_match['match']);
-	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-	    $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				      "WHERE `id_season` = {$_REQUEST['sid']} " .
-				      "AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
-	    if ($deadlines_row = dbFetch($deadlines_ref))
-	    {
-	      $content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
-	      $content_tpl->parse("H_MAIL_DEADLINE", "B_MAIL_DEADLINE");
-	    }
-	    $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
-	    $message = $content_tpl->get("MAIL_BODY");
+				// message
+				$content_tpl->set_var("I_PLAYER", $users_row1['username']);
+				$content_tpl->set_var("I_OPPONENT", $users_row2['username']);
+				$content_tpl->set_var("I_IRC_CHANNEL", $users_row2['irc_channel']);
+				$content_tpl->set_var("I_BRACKET", $new_match['bracket']);
+				$content_tpl->set_var("I_ROUND", $new_match['round']);
+				$content_tpl->set_var("I_MATCH", $new_match['match']);
+				$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
+				$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+					"WHERE `id_season` = {$_REQUEST['sid']} " .
+					"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
+				if ($deadlines_row = dbFetch($deadlines_ref))
+				{
+					$content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
+					$content_tpl->parse("H_MAIL_DEADLINE", "B_MAIL_DEADLINE");
+				}
+				$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
+				$message = $content_tpl->get("MAIL_BODY");
 
-	    sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path']);
-	  }
-	}
+				sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path']);
+			}
+		}
 
-	// mail to player2
-	if ($users_row2['notify'] == 1)
-	{
-	  if ($cfg['mail_enabled'])
-	  {
-	    $to = $users_row2['email'];
+		// mail to player2
+		if ($users_row2['notify'] == 1)
+		{
+			if ($cfg['mail_enabled'])
+			{
+				$to = $users_row2['email'];
 
-	    // subject
-	    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-	    $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	    $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-	    $subject = $content_tpl->get("MAIL_SUBJECT");
+				// subject
+				$content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+				$content_tpl->set_var("I_SEASON_NAME", $season['name']);
+				$content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+				$subject = $content_tpl->get("MAIL_SUBJECT");
 
-	    // message
-	    $content_tpl->set_var("I_PLAYER", $users_row2['username']);
-	    $content_tpl->set_var("I_OPPONENT", $users_row1['username']);
-	    $content_tpl->set_var("I_IRC_CHANNEL", $users_row1['irc_channel']);
-	    $content_tpl->set_var("I_BRACKET", $new_match['bracket']);
-	    $content_tpl->set_var("I_ROUND", $new_match['round']);
-	    $content_tpl->set_var("I_MATCH", $new_match['match']);
-	    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-	    $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				      "WHERE `id_season` = {$_REQUEST['sid']} " .
-				      "AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
-	    if ($deadlines_row = dbFetch($deadlines_ref))
-	    {
-	      $content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
-	      $content_tpl->parse("H_MAIL_DEADLINE", "B_MAIL_DEADLINE");
-	    }
-	    $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
-	    $message = $content_tpl->get("MAIL_BODY");
+				// message
+				$content_tpl->set_var("I_PLAYER", $users_row2['username']);
+				$content_tpl->set_var("I_OPPONENT", $users_row1['username']);
+				$content_tpl->set_var("I_IRC_CHANNEL", $users_row1['irc_channel']);
+				$content_tpl->set_var("I_BRACKET", $new_match['bracket']);
+				$content_tpl->set_var("I_ROUND", $new_match['round']);
+				$content_tpl->set_var("I_MATCH", $new_match['match']);
+				$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
+				$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+					"WHERE `id_season` = {$_REQUEST['sid']} " .
+					"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
+				if ($deadlines_row = dbFetch($deadlines_ref))
+				{
+					$content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
+					$content_tpl->parse("H_MAIL_DEADLINE", "B_MAIL_DEADLINE");
+				}
+				$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
+				$message = $content_tpl->get("MAIL_BODY");
 
-	    sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path']);
-	  }
+				sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path']);
+			}
+		}
 	}
       }
     }
