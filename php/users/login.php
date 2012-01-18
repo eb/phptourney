@@ -33,9 +33,9 @@ if ($users_row = dbFetch($users_ref))
       // session cookie expiration
       $expire = null;
     }
-    $cookie = serialize(array($users_row['id'], md5($password)));
-    setcookie("{$cfg['path']}" . $cfg['site_abbreviation'] . "data", $cookie, $expire);
-    setUser($cookie);
+    $user_id_md5 = serialize(array($users_row['id'], md5($password)));
+    setcookie("user_id", $user_id_md5, $expire, $cfg['path']);
+    setUser($user_id_md5);
 
     $content_tpl->parse("H_MESSAGE_LOGGED_IN", "B_MESSAGE_LOGGED_IN");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

@@ -13,6 +13,8 @@
     (only half of the players received a correct email)
   - Turned off caching
   - No the proper content-type is written
+  - Fixed the cookie behaviour, so that phpTourney can be installed in pathes that contain a dot
+    (as a side effect every user has to relogin now)
 
 0.8.8
   - Integrated script execution time in the template

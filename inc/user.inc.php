@@ -25,18 +25,18 @@
 unsetUser();
 
 // check user
-if (isset($_COOKIE["{$cfg['path']}" . $cfg['site_abbreviation'] . "data"]))
+if (isset($_COOKIE["user_id"]))
 {
-  setUser($_COOKIE["{$cfg['path']}" . $cfg['site_abbreviation'] . "data"]);
+  setUser($_COOKIE["user_id"]);
 }
 
-function setUser($cookie) {
+function setUser($user_id_md5) {
   global $user;
   global $cfg;
   unsetUser($user);
 
-  $cookie = stripslashes($cookie);
-  list($id_user, $md5_password) = unserialize($cookie);
+  $user_id_md5 = stripslashes($user_id_md5);
+  list($id_user, $md5_password) = unserialize($user_id_md5);
 
   if ($id_user != "")
   {
