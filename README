@@ -1,6 +1,5 @@
 --------------------------------------------------------------------------------
   phpTourney Documentation
-  $Id: README,v 1.3 2006/03/23 11:41:25 eb Exp $
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
@@ -17,10 +16,10 @@
   1. Overview
 --------------------------------------------------------------------------------
 
-  phpTourney is a PHP script collection consisting of a simple user-system,
-  a news-system, a reporting system for matches and of course the tourney logic
+  phpTourney is a PHP script collection consisting of a simple user management,
+  news, match reports and of course the tourney logic
   for single- and double-elimination brackets with or without qualification.
-  It is released under the GPL - Have a look in LICENSE for details.
+  It is released under the terms of the GPL. Have a look at LICENSE for details.
 
 --------------------------------------------------------------------------------
   2. Getting started
@@ -28,27 +27,23 @@
 
   2.1. Requirements
        - Apache Web Server
-         (Tested: 1.3.29, 2.0.?)
-       - PHP (installed as module)
-         (Tested: 4.3.4)
-       - MySQL Database Server
-         (Tested: 4.0.16)
-       - Optional: ImageMagick [for cropping screenshots]
-         (Tested: 5.5.7)
-       - Optional: SMTP Server [for sending mails]
+         (Tested: 2.2.16)
+       - PHP
+         (Tested: 5.3.3-7)
+       - MySQL Server
+         (Tested: 5.1.49-3)
+       - Optional: ImageMagick
+         (Tested: 6.6.0-4)
 
   2.2. Installation
-       - Unpack phpTourney-x.y.z.tar.gz into a directory on your webspace.
+       - Extract the phpTourney archive to a directory on your webserver
        - Make sure that the directories /data/screenshots and /data/serverlists
-         and the file /VERSION are writable for the www-user.
+         and the file /VERSION are writable for the www-user
        - Execute the SQL-script /sql/phptourney.sql (i.e. with phpMyAdmin)
        - Copy the file /inc/config-default.inc.php to /inc/config.inc.php
-         and edit its content to your needs.
-       - Log in with admin/password and create sections and seasons...
+         and edit its content to your needs
+       - Log in with admin/password and create sections and seasons
 
   2.3. Update
-       - When you do an update from a version that only changed in the last digit
-         (i.e. 0.8.5 -> 0.8.6) then you can just unzip it over the old installation.
-       - In case you want to update from a version that changed in the second digit
-         (i.e. 0.8.5 -> 0.9.0) then you should execute the update-procedure by
-         visiting the URL http://yourdomain/path/to/phptourney/data/update0.9.0.php
+       - To do an update just extract the new version over the old installation
+         (don't forget to make backups first)
