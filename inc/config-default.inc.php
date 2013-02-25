@@ -26,6 +26,7 @@ $cfg['mail_return_path'] = "";      // i.e. "user@host"
 $cfg['tourney_name'] = "phpTourney Network";  // name of the site
 $cfg['host'] = "http://";                     // host where this script is installed
 $cfg['path'] = "/";                           // path to the script root
+$cfg['bot_enabled'] = false;                  // enable the eggdrop bot
 $cfg['convert'] = "convert";                  // path to image magick convert
 
 ?>
