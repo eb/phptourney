@@ -8,7 +8,7 @@ $cfg['db_host'] = "localhost";
 $cfg['db_username'] = "root";
 $cfg['db_password'] = "";
 $cfg['db_name'] = "";
-$cfg['db_table_prefix'] = "phpt_";
+$cfg['db_table_prefix'] = "";
 
 ////////////////////////////////////////////////////////////////////////////////
 // mail
