@@ -127,7 +127,7 @@ function addSpacesToLongWords($string)
     {
       $counter = 0;
     }
-    if ($counter == 50)
+    if ($counter == 80)
     {
       $counter = 0;
       $string = substr($string, 0, $i + 1) . " " . substr($string, $i + 1);
