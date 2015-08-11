@@ -19,9 +19,7 @@ $content_tpl->set_block("F_CONTENT", "B_CROP", "H_CROP");
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
 $matches_row = dbFetch($matches_ref);
 
-if ($user['usertype_admin'] or
-    ($matches_row['id_player1'] == $user['uid'] or $matches_row['id_player2'] == $user['uid']) and
-    $matches_row['confirmed'] == "0000-00-00 00:00:00") {
+if ($user['usertype_admin']) {
 
   ////////////////////////////////////////////////////////////////////////////////
   // match
