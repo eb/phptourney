@@ -42,11 +42,33 @@ $countries_row = dbFetch($countries_ref);
 $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $countries_row['abbreviation']);
 $content_tpl->set_var("I_COUNTRY", $countries_row['name']);
 
-if ($user['usertype_admin'] or $user['usertype_player'])
+$is_complete = 0;
+if ($user['usertype_admin'])
+{
+  $is_complete = 1;
+}
+else if ($_REQUEST['opt'] == $user['uid'])
+{
+  $is_complete = 1;
+}
+else if ($user['usertype_player'])
+{
+  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+                         "WHERE `submitted` = '0000-00-00 00:00:00' " .
+                         "AND `id_season` = {$_REQUEST['sid']} " .
+                         "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
+                         "AND (`id_player1` = {$_REQUEST['opt']} OR `id_player2` = {$_REQUEST['opt']})");
+  if (dbNumRows($matches_ref) > 0)
+  {
+    $is_complete = 1;
+  }
+}
+if ($is_complete)
 {
   $content_tpl->set_var("I_EMAIL", $users_row['email']);
   $content_tpl->parse("H_SHOW_EMAIL", "B_SHOW_EMAIL");
 }
+
 if ($user['usertype_admin'])
 {
   // season_users-query
