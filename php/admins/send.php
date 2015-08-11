@@ -59,7 +59,7 @@ if ($cfg['mail_enabled'])
 	$message = $_REQUEST['message'];
 	$reply_to_address = $users_row2['username'] . " <" . $users_row2['email'] . ">";
 
-	sendMail($to, $subject, $message, $cfg['mail_from_address'], $reply_to_address, $cfg['mail_return_path']);
+	sendMail($to, $subject, $message, $cfg['mail_from_address'], $reply_to_address, $cfg['mail_return_path'], $cfg['mail_bcc_address']);
 
 	$content_tpl->parse("H_MESSAGE_MESSAGE_SENT", "B_MESSAGE_MESSAGE_SENT");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
