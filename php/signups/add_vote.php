@@ -9,7 +9,6 @@
 ################################################################################
 
 // template blocks
-$content_tpl->set_block("F_CONTENT", "B_WARNING_REJECTED", "H_WARNING_REJECTED");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNED_UP", "H_WARNING_SIGNED_UP");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_LOGIN", "H_WARNING_LOGIN");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -22,17 +21,6 @@ if ($season['status'] == "signups")
   if ($user['uid'])
   {
     $is_complete = 1;
-
-    // season_users-query
-    $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_season` = {$_REQUEST['sid']} " .
-				 "AND `ip` = '{$_SERVER['REMOTE_ADDR']}' " .
-				 "AND `rejected` = 1");
-    if (dbNumRows($season_users_ref) == 1)
-    {
-      $is_complete = 0;
-      $content_tpl->parse("H_WARNING_REJECTED", "B_WARNING_REJECTED");
-    }
     // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$_REQUEST['sid']} AND `usertype_player` = 1");

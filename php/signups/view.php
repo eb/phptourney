@@ -35,7 +35,6 @@ $users_ref = dbQuery("SELECT U.* " .
 		      "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 		      "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
 		      "AND SU.`usertype_player` = 1 " .
-		      "AND SU.`rejected` = 0 " .
 		      "AND SU.`id_user` = U.`id` " .
 		      "ORDER BY SU.`submitted` ASC");
 if (dbNumRows($users_ref) <= 0)
