@@ -396,7 +396,6 @@ CREATE TABLE `sections` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `abbreviation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `charset` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ISO-8859-1',
   `bot_host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `bot_port` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `bot_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -511,4 +510,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-08 21:09:33
+-- Dump completed on 2015-08-12 17:39:12

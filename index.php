@@ -139,16 +139,6 @@ $main_tpl->set_var("I_USER", execAction());
 $main_tpl->parse("H_NETWORK_PANEL", "B_NETWORK_PANEL");
 
 // parse and print the site
-if ($section_exists)
-{
-  $main_tpl->set_var("I_CHARSET", $section['charset']);
-}
-else
-{
-  $col_sections_ref = dbQuery("DESCRIBE `{$cfg['db_table_prefix']}sections` `charset`");
-  $col_sections_row = dbFetch($col_sections_ref);
-  $main_tpl->set_var("I_CHARSET", $col_sections_row['Default']);
-}
 if (file_exists("dhtml/global.{$_REQUEST['sec']}.css"))
 {
   $main_tpl->set_var("I_CSS", "dhtml/global.{$_REQUEST['sec']}.css");

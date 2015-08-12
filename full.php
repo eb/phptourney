@@ -71,7 +71,6 @@ $_REQUEST['opt'] = "{$_REQUEST['opt']}";
 $main_tpl->set_var("I_CONTENT", execAction());
 
 // parse and print the site
-$main_tpl->set_var("I_CHARSET", $section['charset']);
 if (file_exists("dhtml/global.{$_REQUEST['sec']}.css"))
 {
   $main_tpl->set_var("I_CSS", "dhtml/global.{$_REQUEST['sec']}.css");
