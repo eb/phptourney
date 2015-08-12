@@ -71,18 +71,6 @@ $_REQUEST['opt'] = "{$_REQUEST['opt']}";
 $main_tpl->set_var("I_CONTENT", execAction());
 
 // parse and print the site
-if (file_exists("dhtml/global.{$_REQUEST['sec']}.css"))
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.{$_REQUEST['sec']}.css");
-}
-elseif (file_exists("dhtml/global.css"))
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.css");
-}
-else
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.default.css");
-}
 if ($season['id'] == 0)
 {
   $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);

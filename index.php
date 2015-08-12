@@ -139,18 +139,6 @@ $main_tpl->set_var("I_USER", execAction());
 $main_tpl->parse("H_NETWORK_PANEL", "B_NETWORK_PANEL");
 
 // parse and print the site
-if (file_exists("dhtml/global.{$_REQUEST['sec']}.css"))
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.{$_REQUEST['sec']}.css");
-}
-elseif (file_exists("dhtml/global.css"))
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.css");
-}
-else
-{
-  $main_tpl->set_var("I_CSS", "dhtml/global.default.css");
-}
 if ($season['id'] == 0)
 {
   $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
