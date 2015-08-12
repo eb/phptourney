@@ -418,58 +418,6 @@ LOCK TABLES `sections` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `signup_polls`
---
-
-DROP TABLE IF EXISTS `signup_polls`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signup_polls` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
-  `choices` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `heading` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `signup_polls`
---
-
-LOCK TABLES `signup_polls` WRITE;
-/*!40000 ALTER TABLE `signup_polls` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signup_polls` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `signup_votes`
---
-
-DROP TABLE IF EXISTS `signup_votes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signup_votes` (
-  `id` int(11) NOT NULL DEFAULT '0',
-  `id_poll` int(11) NOT NULL DEFAULT '0',
-  `id_user` int(11) NOT NULL DEFAULT '0',
-  `vote` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `signup_votes`
---
-
-LOCK TABLES `signup_votes` WRITE;
-/*!40000 ALTER TABLE `signup_votes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signup_votes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
@@ -510,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-12 17:39:12
+-- Dump completed on 2015-08-12 19:19:54

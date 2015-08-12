@@ -14,8 +14,6 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNED_UP", "H_WARNING_SIGNED_UP
 $content_tpl->set_block("F_CONTENT", "B_WARNING_LOGIN", "H_WARNING_LOGIN");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_SIGNUP", "H_NO_SIGNUP");
-$content_tpl->set_block("F_CONTENT", "B_ADD_POLL_CHOICE", "H_ADD_POLL_CHOICE");
-$content_tpl->set_block("F_CONTENT", "B_ADD_SIGNUP_POLL", "H_ADD_SIGNUP_POLL");
 $content_tpl->set_block("F_CONTENT", "B_ADD_VOTE", "H_ADD_VOTE");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 
@@ -46,19 +44,6 @@ if ($season['status'] == "signups")
 
     if ($is_complete)
     {
-      // signup poll choices
-      $polls_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}signup_polls` WHERE `id_season` = {$_REQUEST['sid']}");
-      if ($polls_row = dbFetch($polls_ref))
-      {
-	$content_tpl->set_var("I_POLL_HEADING", $polls_row['heading']);
-	$content_tpl->set_var("I_POLL_BODY", nl2br($polls_row['body']));
-	$choices = explode(";", $polls_row['choices']);
-	foreach($choices as $choice) {
-	  $content_tpl->set_var("I_CHOICE", $choice);
-	  $content_tpl->parse("H_ADD_POLL_CHOICE", "B_ADD_POLL_CHOICE", true);
-	}
-	$content_tpl->parse("H_ADD_SIGNUP_POLL", "B_ADD_SIGNUP_POLL");
-      }
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
       $content_tpl->parse("H_ADD_VOTE", "B_ADD_VOTE");
     }

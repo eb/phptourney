@@ -12,8 +12,6 @@
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED", "H_MESSAGE_APPLIED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED_WITH_EMAIL", "H_MESSAGE_APPLIED_WITH_EMAIL");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_POLL", "H_WARNING_POLL");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_POLL_CHOICE", "H_WARNING_POLL_CHOICE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_REJECTED", "H_WARNING_REJECTED");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNED_UP", "H_WARNING_SIGNED_UP");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_LOGIN", "H_WARNING_LOGIN");
@@ -45,33 +43,6 @@ if ($season['status'] == "signups")
     {
       $is_complete = 0;
       $content_tpl->parse("H_WARNING_SIGNED_UP", "B_WARNING_SIGNED_UP");
-    }
-    // polls-query
-    $polls_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}signup_polls` WHERE `id_season` = {$_REQUEST['sid']}");
-    if ($_REQUEST['choice'] == "" and dbNumRows($polls_ref) == 1)
-    {
-      $is_complete = 0;
-      $content_tpl->parse("H_WARNING_POLL", "B_WARNING_POLL");
-    }
-    else
-    {
-      $polls_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}signup_polls` WHERE `id_season` = {$_REQUEST['sid']}");
-      if ($polls_row = dbFetch($polls_ref))
-      {
-	$choices = explode(";", $polls_row['choices']);
-	$is_valid_choice = 0;
-	foreach($choices as $choice) {
-	  if ($_REQUEST['choice'] == $choice)
-	  {
-	    $is_valid_choice = 1;
-	  }
-	}
-	if (!$is_valid_choice)
-	{
-	  $is_complete = 0;
-	  $content_tpl->parse("H_WARNING_POLL_CHOICE", "B_WARNING_POLL_CHOICE");
-	}
-      }
     }
 
     if ($is_complete)
@@ -125,16 +96,6 @@ if ($season['status'] == "signups")
 	$content_tpl->parse("H_MESSAGE_APPLIED", "B_MESSAGE_APPLIED");
       }
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-
-      // polls-query
-      $polls_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}signup_polls` WHERE `id_season` = {$_REQUEST['sid']}");
-      if ($polls_row = dbFetch($polls_ref))
-      {
-	// insert vote
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}signup_votes` " .
-		 "(`id_poll`, `id_user`, `vote`) " .
-		 "VALUES ({$polls_row['id']}, {$user['uid']}, '{$_REQUEST['choice']}')");
-      }
     }
 
     if (!$is_complete)
