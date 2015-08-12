@@ -51,6 +51,28 @@ img {
 	vertical-align: top;
 }
 
+td.header {
+        text-align: right;
+        color: #cfcfcf;
+}
+
+td.footer {
+        text-align: right;
+        color: #cfcfcf;
+}
+
+.footer a:link {
+        color: #cfcfcf;
+}
+
+.footer a:visited {
+        color: #cfcfcf;
+}
+
+.footer a:hover {
+        color: #cfcfcf;
+}
+
 td.bg {
 	background-image: url(../gfx/default/bg.png);
 	background-repeat: repeat;
@@ -89,14 +111,6 @@ td.navigation {
 
 td.content {
 	padding: 8px;
-}
-
-td.vignette {
-	background-color: #2467d7;
-	background-image: url(../gfx/default/vignette.png);
-	background-repeat: no-repeat;
-	font-size: 8pt;
-	text-align: right;
 }
 
 table.smallbox {
