@@ -51,7 +51,7 @@ if ($user['usertype_headadmin'])
       {
 	// send invitation mail
 	$invited = 1;
-	$rejected = 1;
+	$player = 0;
 
 	$to = $users_row['email'];
 
@@ -74,7 +74,7 @@ if ($user['usertype_headadmin'])
       else
       {
 	$invited = 0;
-	$rejected = 0;
+	$player = 1;
 	$content_tpl->parse("H_MESSAGE_PLAYER_ADDED", "B_MESSAGE_PLAYER_ADDED");
       }
 
@@ -83,14 +83,14 @@ if ($user['usertype_headadmin'])
       if ($season_users_row = dbFetch($season_users_ref))
       {
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
-		 "`usertype_player` = 1, `invited` = $invited, `rejected` = $rejected " .
+		 "`usertype_player` = $player, `invited` = $invited " .
 		 "WHERE `id_user` = {$_REQUEST['id_user']} AND `id_season` = {$_REQUEST['sid']}");
       }
       else
       {
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
-		 "(`id_user`, `id_season`, `submitted`, `usertype_player`, `invited`, `rejected`) " .
-		 "VALUES({$_REQUEST['id_user']}, {$_REQUEST['sid']}, NOW(), 1, $invited, $rejected)");
+		 "(`id_user`, `id_season`, `submitted`, `usertype_player`, `invited`) " .
+		 "VALUES({$_REQUEST['id_user']}, {$_REQUEST['sid']}, NOW(), $player, $invited)");
       }
 
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
