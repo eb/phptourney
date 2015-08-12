@@ -25,6 +25,9 @@
 // connect to db
 mysql_pconnect($cfg['db_host'], $cfg['db_username'], $cfg['db_password']);
 
+// set charset
+mysql_set_charset('utf8');
+
 // select the database
 mysql_select_db($cfg['db_name']);
 
