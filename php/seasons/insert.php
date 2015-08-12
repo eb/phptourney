@@ -72,26 +72,23 @@ if ($user['usertype_root'])
 	     "VALUES (NOW(), 1, 1, {$seasons_row['id']}, {$users_row['id']})");
 
     // send a mail to the new headadmin
-    if ($cfg['mail_enabled'])
-    {
-      $to = $users_row['email'];
+    $to = $users_row['email'];
 
-      // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
-      $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-      $subject = $content_tpl->get("MAIL_SUBJECT");
+    // subject
+    $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
+    $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+    $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+    $subject = $content_tpl->get("MAIL_SUBJECT");
 
-      // message
-      $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$seasons_row['id']}");
-      $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
-      $message = $content_tpl->get("MAIL_BODY");
+    // message
+    $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
+    $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$seasons_row['id']}");
+    $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
+    $message = $content_tpl->get("MAIL_BODY");
 
-      sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
-    }
+    sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
 
     $content_tpl->parse("H_MESSAGE_SEASON_ADDED", "B_MESSAGE_SEASON_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

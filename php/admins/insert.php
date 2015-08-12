@@ -52,29 +52,26 @@ if ($user['usertype_headadmin'])
     }
 
     // send a mail to the new admin
-    if ($cfg['mail_enabled'])
-    {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['id_user']}");
-      $users_row = dbFetch($users_ref);
-      $to = $users_row['email'];
+    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['id_user']}");
+    $users_row = dbFetch($users_ref);
+    $to = $users_row['email'];
 
-      // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-      $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-      $subject = $content_tpl->get("MAIL_SUBJECT");
+    // subject
+    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_SEASON_NAME", $season['name']);
+    $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+    $subject = $content_tpl->get("MAIL_SUBJECT");
 
-      // message
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_PASSWORD", $users_row['password']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-      $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
-      $message = $content_tpl->get("MAIL_BODY");
+    // message
+    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_SEASON_NAME", $season['name']);
+    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+    $content_tpl->set_var("I_PASSWORD", $users_row['password']);
+    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
+    $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
+    $message = $content_tpl->get("MAIL_BODY");
 
-      sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
-    }
+    sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
 
     $content_tpl->parse("H_MESSAGE_ADMIN_ADDED", "B_MESSAGE_ADMIN_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

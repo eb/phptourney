@@ -10,7 +10,6 @@
 
 // template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED", "H_MESSAGE_APPLIED");
-$content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED_WITH_EMAIL", "H_MESSAGE_APPLIED_WITH_EMAIL");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_REJECTED", "H_WARNING_REJECTED");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNED_UP", "H_WARNING_SIGNED_UP");
@@ -69,32 +68,23 @@ if ($season['status'] == "signups")
       }
 
       // send a mail to the player that signed up
-      if ($cfg['mail_enabled'])
-      {
-	$to = $users_row['email'];
-
-	// subject
-	$content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-	$content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	$content_tpl->set_var("I_USERNAME", $users_row['username']);
-	$content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
-	$subject = $content_tpl->get("MAIL_SUBJECT");
-
-	// message
-	$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-	$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
-	$message = $content_tpl->get("MAIL_BODY");
-
-	sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
-
-	$content_tpl->parse("H_MESSAGE_APPLIED_WITH_EMAIL", "B_MESSAGE_APPLIED_WITH_EMAIL");
-      }
-      else
-      {
-	$content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-	$content_tpl->set_var("I_SEASON_NAME", $season['name']);
-	$content_tpl->parse("H_MESSAGE_APPLIED", "B_MESSAGE_APPLIED");
-      }
+      $to = $users_row['email'];
+      
+      // subject
+      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+      $content_tpl->set_var("I_SEASON_NAME", $season['name']);
+      $content_tpl->set_var("I_USERNAME", $users_row['username']);
+      $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
+      $subject = $content_tpl->get("MAIL_SUBJECT");
+      
+      // message
+      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
+      $content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
+      $message = $content_tpl->get("MAIL_BODY");
+      
+      sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
+      
+      $content_tpl->parse("H_MESSAGE_APPLIED", "B_MESSAGE_APPLIED");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     }
 

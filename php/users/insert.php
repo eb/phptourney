@@ -10,9 +10,7 @@
 
 // template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_REGISTERED", "H_MESSAGE_REGISTERED");
-$content_tpl->set_block("F_CONTENT", "B_MESSAGE_REGISTERED_WITH_EMAIL", "H_MESSAGE_REGISTERED_WITH_EMAIL");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED", "H_MESSAGE_APPLIED");
-$content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED_WITH_EMAIL", "H_MESSAGE_APPLIED_WITH_EMAIL");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_UNIQUE_USERNAME", "H_WARNING_UNIQUE_USERNAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME", "H_WARNING_USERNAME");
@@ -114,62 +112,48 @@ if ($is_complete)
   }
 
   // send a mail to the player that signed up
-  if ($cfg['mail_enabled'])
+  $to = $_REQUEST['email'];
+
+  if ($signup == false)
   {
-    $to = $_REQUEST['email'];
+    // subject
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+    $content_tpl->parse("MAIL_REGISTERED_SUBJECT", "B_MAIL_REGISTERED_SUBJECT");
+    $subject = $content_tpl->get("MAIL_REGISTERED_SUBJECT");
 
-    if ($signup == false)
-    {
-      // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-      $content_tpl->parse("MAIL_REGISTERED_SUBJECT", "B_MAIL_REGISTERED_SUBJECT");
-      $subject = $content_tpl->get("MAIL_REGISTERED_SUBJECT");
-
-      // message
-      $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
-      $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
-      $content_tpl->parse("MAIL_REGISTERED_BODY", "B_MAIL_REGISTERED_BODY");
-      $message = $content_tpl->get("MAIL_REGISTERED_BODY");
-    }
-    else
-    {
-      // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-      $content_tpl->parse("MAIL_APPLIED_SUBJECT", "B_MAIL_APPLIED_SUBJECT");
-      $subject = $content_tpl->get("MAIL_APPLIED_SUBJECT");
-
-      // message
-      $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
-      $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-      $content_tpl->set_var("I_SEASON_NAME", $season['name']);
-      $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
-      $content_tpl->parse("MAIL_APPLIED_BODY", "B_MAIL_APPLIED_BODY");
-      $message = $content_tpl->get("MAIL_APPLIED_BODY");
-    }
-
-    sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
-
-    if ($signup == false)
-    {
-      $content_tpl->parse("H_MESSAGE_REGISTERED_WITH_EMAIL", "B_MESSAGE_REGISTERED_WITH_EMAIL");
-    }
-    else
-    {
-      $content_tpl->parse("H_MESSAGE_APPLIED_WITH_EMAIL", "B_MESSAGE_APPLIED_WITH_EMAIL");
-    }
+    // message
+    $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
+    $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
+    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
+    $content_tpl->parse("MAIL_REGISTERED_BODY", "B_MAIL_REGISTERED_BODY");
+    $message = $content_tpl->get("MAIL_REGISTERED_BODY");
   }
   else
   {
-    if ($signup == false)
-    {
-      $content_tpl->parse("H_MESSAGE_REGISTERED", "B_MESSAGE_REGISTERED");
-    }
-    else
-    {
-      $content_tpl->parse("H_MESSAGE_APPLIED", "B_MESSAGE_APPLIED");
-    }
+    // subject
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+    $content_tpl->parse("MAIL_APPLIED_SUBJECT", "B_MAIL_APPLIED_SUBJECT");
+    $subject = $content_tpl->get("MAIL_APPLIED_SUBJECT");
+
+    // message
+    $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
+    $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_SEASON_NAME", $season['name']);
+    $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
+    $content_tpl->parse("MAIL_APPLIED_BODY", "B_MAIL_APPLIED_BODY");
+    $message = $content_tpl->get("MAIL_APPLIED_BODY");
+  }
+
+  sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
+
+  if ($signup == false)
+  {
+    $content_tpl->parse("H_MESSAGE_REGISTERED", "B_MESSAGE_REGISTERED");
+  }
+  else
+  {
+    $content_tpl->parse("H_MESSAGE_APPLIED", "B_MESSAGE_APPLIED");
   }
 
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
