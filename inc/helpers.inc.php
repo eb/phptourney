@@ -39,18 +39,7 @@ function execAction()
 
     // template files
     $content_tpl = new Template("html/{$_REQUEST['mod']}", "remove");
-    if (file_exists("html/{$_REQUEST['mod']}/{$_REQUEST['act']}.{$_REQUEST['sec']}.html"))
-    {
-      $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.{$_REQUEST['sec']}.html");
-    }
-    elseif (file_exists("html/{$_REQUEST['mod']}/{$_REQUEST['act']}.html"))
-    {
-      $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.html");
-    }
-    else
-    {
-      $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.default.html");
-    }
+    $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.html");
 
     // execute action
     require($act_file);

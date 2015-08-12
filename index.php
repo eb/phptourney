@@ -32,18 +32,7 @@ header("Content-type: text/html");
 
 // template files
 $main_tpl = new Template("html", "remove");
-if (file_exists("html/index.{$_REQUEST['sec']}.html"))
-{
-  $main_tpl->set_file("F_INDEX", "index.{$_REQUEST['sec']}.html");
-}
-elseif (file_exists("html/index.html"))
-{
-  $main_tpl->set_file("F_INDEX", "index.html");
-}
-else
-{
-  $main_tpl->set_file("F_INDEX", "index.default.html");
-}
+$main_tpl->set_file("F_INDEX", "index.html");
 
 // template blocks
 $main_tpl->set_block("F_INDEX", "B_SEASON_DROPDOWN", "H_SEASON_DROPDOWN");

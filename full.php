@@ -26,18 +26,7 @@ require("inc/inc.php");
 
 // template files
 $main_tpl = new Template("html", "remove");
-if (file_exists("html/full.{$_REQUEST['sec']}.html"))
-{
-  $main_tpl->set_file("F_FULL", "full.{$_REQUEST['sec']}.html");
-}
-elseif (file_exists("html/full.html"))
-{
-  $main_tpl->set_file("F_FULL", "full.html");
-}
-else
-{
-  $main_tpl->set_file("F_FULL", "full.default.html");
-}
+$main_tpl->set_file("F_FULL", "full.html");
 
 // template blocks
 $main_tpl->set_block("F_FULL", "B_FILE_NOT_FOUND", "H_FILE_NOT_FOUND");
@@ -50,7 +39,7 @@ fclose($fh_version);
 if ($season_exists)
 {
   $main_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-  $main_tpl->set_var("I_SEASON_NAME", $season['name']);
+ $main_tpl->set_var("I_SEASON_NAME", $season['name']);
 }
 else
 {
