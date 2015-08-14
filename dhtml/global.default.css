@@ -460,6 +460,7 @@ td.pl1 {
 	padding-left: 2px;
 	padding-right: 2px;
 	background-color: #A9A9A9;
+	text-align: left;
 }
 
 td.pl2 {
@@ -468,6 +469,7 @@ td.pl2 {
 	padding-left: 2px;
 	padding-right: 2px;
 	background-color: #939393;
+	text-align: left;
 }
 
 td.v {
