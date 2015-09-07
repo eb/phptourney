@@ -22,109 +22,26 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ////////////////////////////////////////////////////////////////////////////////
 
-// connect to db
-mysql_pconnect($cfg['db_host'], $cfg['db_username'], $cfg['db_password']);
-
-// set charset
-mysql_set_charset('utf8');
-
-// select the database
-mysql_select_db($cfg['db_name']);
-
-//================================================================================
-// function dbQuery
-// wrapper for mysql_query
-//================================================================================
+$mysqli_link = mysqli_connect('p:' . $cfg['db_host'], $cfg['db_username'], $cfg['db_password']);
+mysqli_set_charset($mysqli_link, 'utf8');
+mysqli_select_db($mysqli_link, $cfg['db_name']);
 
 function dbQuery($sql_query)
 {
-  return(mysql_query($sql_query));
+  global $mysqli_link;
+  return(mysqli_query($mysqli_link, $sql_query));
 }
-
-//================================================================================
-// function dbNumRows
-// wrapper for mysql_num_rows
-//================================================================================
 
 function dbNumRows($data_ref)
 {
-  return(mysql_num_rows($data_ref));
+  global $mysqli_link;
+  return(mysqli_num_rows($data_ref));
 }
-
-//================================================================================
-// function dbFetch
-// wrapper for mysql_fetch_array
-//================================================================================
 
 function dbFetch($data_ref)
 {
-  return(mysql_fetch_array($data_ref, MYSQL_ASSOC));
-}
-
-//================================================================================
-// function dbSQL
-// executes sql
-//================================================================================
-
-function dbSQL($sql)
-{
-  // split sql into separate lines
-  $sql_lines = explode("\n", $sql);
-
-  for ($i = 0; $i < count($sql_lines); $i++)
-  {
-    // remove comments
-    if (substr($sql_lines[$i], 0, 1) == "#")
-    {
-      array_splice($sql_lines, $i, 1);
-      $i--;
-    }
-    // remove empty lines
-    elseif ($sql_lines[$i] == "")
-    {
-      array_splice($sql_lines, $i, 1);
-      $i--;
-    }
-  }
-
-  // join the separate lines again
-  $cleaned_sql = implode("", $sql_lines);
-
-  // split sql into separate queries
-  $sql_queries = array();
-  $quoted = false;
-  $query = "";
-  for ($i = 0; $i < strlen($cleaned_sql); $i++)
-  {
-    $pre_pre_char = $pre_char;
-    $pre_char = $char;
-    $char = substr($cleaned_sql, $i, 1);
-    if ($char == "'" and !$quoted and ($pre_char != "\\" or $pre_pre_char == "\\"))
-    {
-      $quoted = true;
-      $query .= $char;
-    }
-    elseif ($char == "'" and $quoted and ($pre_char != "\\" or $pre_pre_char == "\\"))
-    {
-      $quoted = false;
-      $query .= $char;
-    }
-    elseif ($char == ";" and !$quoted)
-    {
-      array_push($sql_queries, $query);
-      $query = "";
-    }
-    else
-    {
-      $query .= $char;
-    }
-  }
-
-  // execute the queries
-  for ($i = 0; $i < count($sql_queries); $i++)
-  {
-    dbQuery($sql_queries[$i]);
-  }
+  global $mysqli_link;
+  return(mysqli_fetch_assoc($data_ref));
 }
 
 ?>
