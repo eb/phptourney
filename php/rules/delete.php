@@ -19,7 +19,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for headadmins at season level
 if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user['usertype_headadmin'])
 {
-  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = {$_REQUEST['opt']}");
+  $id_rule = intval($_REQUEST['opt']);
+  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");
   $content_tpl->parse("H_MESSAGE_RULE_REMOVED", "B_MESSAGE_RULE_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

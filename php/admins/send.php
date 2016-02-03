@@ -21,7 +21,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACk");
 if ($user['uid'])
 {
   // users-query
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['opt']}");
+  $id_user = intval($_REQUEST['opt']);
+  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
 
   // users-query
@@ -30,7 +31,7 @@ if ($user['uid'])
 
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-      			 "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = {$_REQUEST['opt']}");
+      			 "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);
 
   if ($season_users_row['usertype_headadmin'] or $season_users_row['usertype_admin'])

@@ -41,8 +41,9 @@ if ($user['usertype_headadmin'])
     {
       if (isset($_REQUEST[$matches_row['id']]))
       {
+        $num_winmaps = intval($_REQUEST[$matches_row['id']]);
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
-		 "`num_winmaps` = {$_REQUEST[$matches_row['id']]} " .
+		 "`num_winmaps` = $num_winmaps " .
 		 "WHERE `id` = {$matches_row['id']}");
       }
     }

@@ -20,7 +20,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
 // news-query
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = {$_REQUEST['opt']} AND `deleted` = 0");
+$id_news = intval($_REQUEST['opt']);
+$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // access for admins [public / private news]
@@ -48,8 +49,6 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1 and $user['uid'])
 
   if ($is_complete)
   {
-    $_REQUEST['body'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['body']));
-
     preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
     // bans-query
     $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
@@ -65,10 +64,11 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1 and $user['uid'])
     }
     else
     {
+      $body = dbEscape($_REQUEST['body']);
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}news_comments` " .
 	      "(`id_user`, `body`, `id_news`, `ip`, `submitted`) " .
 	       "VALUES ('{$user['uid']}', " .
-	       "'{$_REQUEST['body']}', " .
+	       "'$body', " .
 	       "{$news_row['id']}, " .
 	       "'{$_SERVER['REMOTE_ADDR']}', " .
 	       "NOW())");

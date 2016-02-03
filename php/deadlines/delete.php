@@ -18,7 +18,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id` = {$_REQUEST['opt']}");
+  $id_deadline = intval($_REQUEST['opt']);
+  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id` = $id_deadline");
   $content_tpl->parse("H_MESSAGE_DEADLINE_REMOVED", "B_MESSAGE_DEADLINE_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

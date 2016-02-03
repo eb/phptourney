@@ -17,7 +17,6 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_ALL_MATCHES", "H_VIEW_ALL_MATCHES")
 // matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			"WHERE `id_season` = {$_REQUEST['sid']} " .
-			"AND `submitted` <> '0000-00-00 00:00:00' " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .
 			"AND `wo` = 0 " .
 			"AND `bye` = 0 " .

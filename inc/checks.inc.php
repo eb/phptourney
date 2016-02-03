@@ -25,13 +25,9 @@
 $this_path = dirname(__FILE__);
 
 // magic quotes
-if (ini_get("magic_quotes_gpc") != "1")
+if (ini_get("magic_quotes_gpc") == "1")
 {
-  exit("'magic_quotes_gpc' has to be set to 'On'");
-}
-if (ini_get("magic_quotes_sybase") == "1")
-{
-  exit("'magic_quotes_sybase' has to be set to 'Off'");
+  exit("'magic_quotes_gpc' has to be set to 'Off'");
 }
 if (ini_get("magic_quotes_runtime") == "1")
 {

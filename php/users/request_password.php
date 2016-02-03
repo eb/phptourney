@@ -16,8 +16,9 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_SUBJECT", "H_MAIL_SUBJECT");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
+$username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-		      "WHERE `username` = '{$_REQUEST['username']}'");
+		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
   // generate password

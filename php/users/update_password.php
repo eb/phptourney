@@ -34,9 +34,9 @@ if (!$_REQUEST['opt'] and $user['uid'])
 
   if ($is_complete)
   {
-    $password = crypt($_REQUEST['password'], createSalt());
+    $password = dbEscape(crypt($_REQUEST['password'], createSalt()));
     dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
-	     "`password` = '{$password}' " .
+	     "`password` = '$password' " .
 	     "WHERE `id` = {$user['uid']}");
     $content_tpl->parse("H_MESSAGE_PASSWORD_EDITED", "B_MESSAGE_PASSWORD_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
@@ -66,10 +66,11 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
 
   if ($is_complete)
   {
-    $password = crypt($_REQUEST['password'], createSalt());
+    $id_user = intval($_REQUEST['opt']);
+    $password = dbEscape(crypt($_REQUEST['password'], createSalt()));
     dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
-	     "`password` = '{$password}' " .
-	     "WHERE `id` = {$_REQUEST['opt']}");
+	     "`password` = '$password' " .
+	     "WHERE `id` = $id_user");
     $content_tpl->parse("H_MESSAGE_PASSWORD_EDITED", "B_MESSAGE_PASSWORD_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   }

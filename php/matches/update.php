@@ -25,7 +25,8 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_DEADLINE", "H_MAIL_DEADLINE");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
 // matches-query
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+$id_match = intval($_REQUEST['opt']);
+$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
   if ($user['usertype_admin'])
@@ -78,10 +79,11 @@ if ($matches_row = dbFetch($matches_ref))
 	}
 
 	dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` WHERE `id_match` = {$matches_row['id']}");
+        $comment_admin = dbEscape($_REQUEST['comment_admin']);
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
 		 "`wo` = $wo, `bye` = $bye, `out` = $out, " .
 		 "`score_p1` = 0, `score_p2` = 0, " .
-		 "`comment_admin` = '{$_REQUEST['comment_admin']}', " .
+		 "`comment_admin` = '$comment_admin', " .
 		 "`confirmed` = NOW(), `confirmer` = {$user['uid']} " . 
 		 "WHERE `id` = {$matches_row['id']}");
 
@@ -247,8 +249,8 @@ if ($matches_row = dbFetch($matches_ref))
 	  dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
 		   "`wo` = 0, " . 
 		   "`out` = 0, " . 
-		   "`score_p1` = {$score_p1}, " .
-		   "`score_p2` = {$score_p2}, " .
+		   "`score_p1` = $score_p1, " .
+		   "`score_p2` = $score_p2, " .
 		   "`comment_admin` = '', " .
 		   "`confirmed` = NOW(), " . 
 		   "`confirmer` = {$user['uid']} " . 
@@ -273,12 +275,18 @@ if ($matches_row = dbFetch($matches_ref))
 	      $_REQUEST['comment_m' . $i . '_p1'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['comment_m' . $i . '_p1']));
 	      $_REQUEST['comment_m' . $i . '_p2'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['comment_m' . $i . '_p2']));
 
+              $id_map = intval($_REQUEST['id_map' . $i]);
+              $score_p1 = intval($_REQUEST['score_m' . $i . '_p1']);
+              $score_p2 = intval($_REQUEST['score_m' . $i . '_p2']);
+              $comment_p1 = dbEscape($_REQUEST['comment_m' . $i . '_p1']);
+              $comment_p2 = dbEscape($_REQUEST['comment_m' . $i . '_p2']);
+              $comment_admin = dbEscape($_REQUEST['comment_m' . $i . '_admin']);
 	      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}maps` " .
 		       "(`id_match`,`id_map`,`score_p1`,`score_p2`,`comment_p1`,`comment_p2`,`comment_admin`,`num_map`) " .
-		       "VALUES({$matches_row['id']},{$_REQUEST['id_map' . $i]}," .
-		       "{$_REQUEST['score_m' . $i . '_p1']},{$_REQUEST['score_m' . $i . '_p2']}," .
-		       "'{$_REQUEST['comment_m' . $i . '_p1']}','{$_REQUEST['comment_m' . $i . '_p2']}'," .
-		       "'{$_REQUEST['comment_m' . $i . '_admin']}',$i) ");
+		       "VALUES({$matches_row['id']},$id_map," .
+		       "$score_p1,$score_p2," .
+		       "'$comment_p1','$comment_p2'," .
+		       "'$comment_admin',$i) ");
 	    }
 	  }
 

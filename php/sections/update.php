@@ -34,15 +34,18 @@ if ($user['usertype_root'])
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_ABBREVIATION", "B_WARNING_ABBREVIATION");
   }
+  $id_section = intval($_REQUEST['opt']);
+  $name = dbEscape($_REQUEST['name']);
+  $abbreviation = dbEscape($_REQUEST['abbreviation']);
   $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` " .
-			   "WHERE `name` = '{$_REQUEST['name']}' AND `id` <> {$_REQUEST['opt']} AND `deleted` = 0");
+			   "WHERE `name` = '$name' AND `id` <> $id_section AND `deleted` = 0");
   if (dbNumRows($sections_ref) > 0)
   {
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_UNIQUE_NAME", "B_WARNING_UNIQUE_NAME");
   }
   $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` " .
-			   "WHERE `abbreviation` = '{$_REQUEST['abbreviation']}' AND `id` <> {$_REQUEST['opt']} AND `deleted` = 0");
+			   "WHERE `abbreviation` = '$abbreviation' AND `id` <> $id_section AND `deleted` = 0");
   if (dbNumRows($sections_ref) >0)
   {
     $is_complete = 0;
@@ -51,15 +54,20 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
+    $admin_irc_channels = dbEscape($_REQUEST['admin_irc_channels']);
+    $public_irc_channels = dbEscape($_REQUEST['public_irc_channels']);
+    $bot_host = dbEscape($_REQUEST['bot_host']);
+    $bot_port = intval($_REQUEST['bot_port']);
+    $bot_password = dbEscape($_REQUEST['bot_password']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}sections` SET " .
-	     "`name` = '{$_REQUEST['name']}', " .
-	     "`abbreviation` = '{$_REQUEST['abbreviation']}', " .
-	     "`admin_irc_channels` = '{$_REQUEST['admin_irc_channels']}', " .
-	     "`public_irc_channels` = '{$_REQUEST['public_irc_channels']}', " .
-	     "`bot_host` = '{$_REQUEST['bot_host']}', " .
-	     "`bot_port` = '{$_REQUEST['bot_port']}', " .
-	     "`bot_password` = '{$_REQUEST['bot_password']}' " .
-	     "WHERE `id` = {$_REQUEST['opt']}");
+	     "`name` = '$name', " .
+	     "`abbreviation` = '$abbreviation', " .
+	     "`admin_irc_channels` = '$admin_irc_channels', " .
+	     "`public_irc_channels` = '$public_irc_channels', " .
+	     "`bot_host` = '$bot_host', " .
+	     "`bot_port` = '$bot_port', " .
+	     "`bot_password` = '$bot_password' " .
+	     "WHERE `id` = $id_section");
     $content_tpl->parse("H_MESSAGE_SECTION_EDITED", "B_MESSAGE_SECTION_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

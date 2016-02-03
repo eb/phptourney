@@ -36,8 +36,10 @@ if ($user['usertype_root'])
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_SEASON_NAME", "B_WARNING_SEASON_NAME");
   }
+  $id_section = intval($_REQUEST['id_section']);
+  $season_name = dbEscape($_REQUEST['season_name']);
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `id_section` = {$_REQUEST['id_section']} AND `name` = '{$_REQUEST['season_name']}' AND `deleted` = 0");
+			  "WHERE `id_section` = $id_section AND `name` = '$season_name' AND `deleted` = 0");
   if (dbNumRows($seasons_ref) == 1)
   {
     $is_complete = 0;
@@ -52,19 +54,20 @@ if ($user['usertype_root'])
   if ($is_complete)
   {
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}seasons` (`id_section`,`submitted`, `name`, `status`) " .
-	    "VALUES ({$_REQUEST['id_section']}, NOW(), '{$_REQUEST['season_name']}', NULL)");
+	    "VALUES ($id_section, NOW(), '$season_name', NULL)");
 
     // seasons-query
     $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			    "WHERE `id_section` = {$_REQUEST['id_section']} AND `name` = '{$_REQUEST['season_name']}' AND `deleted` = 0");
+			    "WHERE `id_section` = $id_section AND `name` = '$season_name' AND `deleted` = 0");
     $seasons_row = dbFetch($seasons_ref);
 
     // sections-query
-    $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = '{$seasons_row['id_section']}' AND `deleted` = 0");
+    $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = {$seasons_row['id_section']} AND `deleted` = 0");
     $sections_row = dbFetch($sections_ref);
 
     // users-query
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['id_user']}");
+    $id_user = intval($_REQUEST['id_user']);
+    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
 
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .

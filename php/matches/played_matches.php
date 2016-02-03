@@ -23,12 +23,8 @@ if ($user['usertype_player'])
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$_REQUEST['sid']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
-			  "AND `wo` = 0 " .
-			  "AND `bye` = 0 " .
-			  "AND `out` = 0 " .
-			  "AND `submitted` <> '0000-00-00 00:00:00' " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
-			  "ORDER BY `submitted` DESC");
+			  "ORDER BY `confirmed` DESC");
   if (dbNumRows($matches_ref) <= 0)
   {
     $content_tpl->parse("H_NO_PLAYED_MATCHES", "B_NO_PLAYED_MATCHES");

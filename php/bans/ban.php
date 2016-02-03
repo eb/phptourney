@@ -20,9 +20,10 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 if ($user['usertype_admin'])
 {
   // bans-query
+  $ip = dbEscape($_REQUEST['opt']);
   $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
 		       "WHERE `id_season` = {$_REQUEST['sid']} " .
-		       "AND `ip` = '{$_REQUEST['opt']}'");
+		       "AND `ip` = '$ip'");
   if (dbNumRows($bans_ref) == 1)
   {
     $content_tpl->parse("H_WARNING_IP_ALREADY_BANNED", "B_WARNING_IP_ALREADY_BANNED");
@@ -32,7 +33,7 @@ if ($user['usertype_admin'])
   else
   {
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}bans` (`id_season`, `ip`) " .
-	     "VALUES ({$_REQUEST['sid']}, '{$_REQUEST['opt']}')");
+	     "VALUES ({$_REQUEST['sid']}, '$ip')");
     $content_tpl->parse("H_MESSAGE_IP_BANNED", "B_MESSAGE_IP_BANNED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   }

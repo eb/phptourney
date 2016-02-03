@@ -32,8 +32,9 @@ if ($user['usertype_headadmin'])
   }
   else
   {
+    $id_user = intval($_REQUEST['opt']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `usertype_player` = 0 " .
-	     "WHERE `id_user` = {$_REQUEST['opt']} AND `id_season` = {$_REQUEST['sid']}");
+	     "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
     $content_tpl->parse("H_MESSAGE_PLAYER_REMOVED", "B_MESSAGE_PLAYER_REMOVED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

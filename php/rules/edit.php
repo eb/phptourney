@@ -17,7 +17,8 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_RULE", "H_EDIT_RULE");
 // access for headadmins at season level
 if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user['usertype_headadmin'])
 {
-  $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = {$_REQUEST['opt']}");
+  $id_rule = intval($_REQUEST['opt']);
+  $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");
   $rules_row = dbFetch($rules_ref);
   $content_tpl->set_var("I_ID_RULE", $_REQUEST['opt']);
   $content_tpl->set_var("I_SUBJECT", $rules_row['subject']);

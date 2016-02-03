@@ -30,8 +30,9 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEASONS", "H_OVERVIEW_SEASONS")
 ////////////////////////////////////////////////////////////////////////////////
 
 // users-query
+$id_user = intval($_REQUEST['opt']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-		      "WHERE `id` = {$_REQUEST['opt']}");
+		      "WHERE `id` = $id_user");
 $users_row = dbFetch($users_ref);
 
 $content_tpl->set_var("I_USERNAME", $users_row['username']);
@@ -57,7 +58,7 @@ else if ($user['usertype_player'])
                          "WHERE `submitted` = '0000-00-00 00:00:00' " .
                          "AND `id_season` = {$_REQUEST['sid']} " .
                          "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
-                         "AND (`id_player1` = {$_REQUEST['opt']} OR `id_player2` = {$_REQUEST['opt']})");
+                         "AND (`id_player1` = $id_user OR `id_player2` = $id_user)");
   if (dbNumRows($matches_ref) > 0)
   {
     $is_complete = 1;
@@ -73,7 +74,7 @@ if ($user['usertype_admin'])
 {
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-			       "WHERE `id_user` = {$_REQUEST['opt']}");
+			       "WHERE `id_user` = $id_user");
   while ($season_users_row = dbFetch($season_users_ref))
   {
     if ($season_users_row['ip'] != "")
@@ -93,13 +94,12 @@ $content_tpl->parse("H_SHOW_PROFILE", "B_SHOW_PROFILE");
 // matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			"WHERE `id_season` = {$_REQUEST['sid']} " .
-			"AND (`id_player1` = {$_REQUEST['opt']} OR `id_player2` = {$_REQUEST['opt']}) " .
+			"AND (`id_player1` = $id_user OR `id_player2` = $id_user) " .
 			"AND `wo` = 0 " .
 			"AND `bye` = 0 " .
 			"AND `out` = 0 " .
-			"AND `submitted` <> '0000-00-00 00:00:00' " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .
-			"ORDER BY `submitted` DESC");
+			"ORDER BY `confirmed` DESC");
 $match_counter = 0;
 if (dbNumRows($matches_ref) <= 0)
 {
@@ -158,7 +158,7 @@ $content_tpl->parse("H_OVERVIEW_PLAYED_MATCHES", "B_OVERVIEW_PLAYED_MATCHES");
 $season_users_ref = dbQuery("SELECT SU.*,S1.`name` AS `season_name`,S2.`name` AS `section_name` " .
 			     "FROM `{$cfg['db_table_prefix']}season_users` SU,`{$cfg['db_table_prefix']}seasons` S1," .
 			     "`{$cfg['db_table_prefix']}sections` S2 " .
-			     "WHERE SU.`id_user` = {$_REQUEST['opt']} " .
+			     "WHERE SU.`id_user` = $id_user " .
 			     "AND SU.`id_season` = S1.`id` " .
 			     "AND S1.`id_section` = S2.`id` " .
 			     "ORDER BY `submitted` DESC");

@@ -37,7 +37,8 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_COMMENTS", "H_VIEW_COMMENTS");
 $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_LOGIN_TO_COMMENT", "H_LOGIN_TO_COMMENT");
 
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+$id_match = intval($_REQUEST['opt']);
+$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
   // player1
@@ -205,7 +206,7 @@ if ($matches_row = dbFetch($matches_ref))
     $content_tpl->set_var("I_COMMENT", "");
 
     // demos-query
-    $demos_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}demos` WHERE `id_match` = {$_REQUEST['opt']}");
+    $demos_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}demos` WHERE `id_match` = $id_match");
     while ($demos_row = dbFetch($demos_ref))
     {
       $content_tpl->set_var("I_URL", $demos_row['url']);
@@ -244,7 +245,7 @@ if ($matches_row = dbFetch($matches_ref))
 			  "FROM `{$cfg['db_table_prefix']}match_comments` MC " .
 			  "LEFT JOIN `{$cfg['db_table_prefix']}users` U " .
 			  "ON MC.`id_user` = U.`id` " .
-			  "WHERE `id_match` = {$_REQUEST['opt']} ORDER BY `submitted`");
+			  "WHERE `id_match` = $id_match ORDER BY `submitted`");
   if (dbNumRows($comments_ref) <= 0)
   {
     $content_tpl->parse("H_VIEW_NO_COMMENTS", "B_VIEW_NO_COMMENTS");
@@ -269,7 +270,8 @@ if ($matches_row = dbFetch($matches_ref))
 	$content_tpl->parse("H_BANS", "B_BANS");
       }
 
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '{$comments_row['username']}'");
+      $username = dbEscape($comments_row['username']);
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '$username'");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);

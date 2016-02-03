@@ -61,7 +61,8 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
 // access for the headadmin to edit any profile
 elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['usertype_root']))
 {
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['opt']}");
+  $id_user = intval($_REQUEST['opt']);
+  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
   $content_tpl->set_var("I_USERNAME", $users_row['username']);

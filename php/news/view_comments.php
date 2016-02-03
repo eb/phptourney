@@ -20,7 +20,8 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_LOGIN_TO_COMMENT", "H_LOGIN_TO_COMMENT");
 
 // news-query
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = '{$_REQUEST['opt']}' AND `deleted` = 0");
+$id_news = intval($_REQUEST['opt']);
+$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = '$id_news' AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // access for admins [private news]
@@ -77,7 +78,8 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
 	$content_tpl->parse("H_BANS", "B_BANS");
       }
 
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '{$comments_row['username']}'");
+      $username = dbEscape($comments_row['username']);
+      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '$username'");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);

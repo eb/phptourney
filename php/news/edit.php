@@ -14,7 +14,8 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_EDIT_NEWS", "H_EDIT_NEWS");
 
 // news-query
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = {$_REQUEST['opt']} AND `deleted` = 0");
+$id_news = intval($_REQUEST['opt']);
+$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // access for roots [global news]

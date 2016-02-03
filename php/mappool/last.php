@@ -30,8 +30,9 @@ if ($user['usertype_headadmin'])
 	$maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` WHERE `id_season` = {$seasons_row['id']} AND `deleted` = 0");
 	while ($maps_row = dbFetch($maps_ref))
 	{
+          $map = dbEscape($maps_row['map']);
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}mappool` (`id_season`, `map`) " .
-		   "VALUES ({$_REQUEST['sid']}, '{$maps_row['map']}')");
+		   "VALUES ({$_REQUEST['sid']}, '$map')");
 	}
 	$content_tpl->parse("H_MESSAGE_LAST", "B_MESSAGE_LAST");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");

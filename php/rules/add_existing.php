@@ -19,17 +19,18 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for headadmins
 if ($user['usertype_headadmin'])
 {
+  $id_season = intval($_REQUEST['id_season']);
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			 "WHERE `id` = {$_REQUEST['id_season']}");
+			 "WHERE `id` = $id_season");
   if ($seasons_row = dbFetch($seasons_ref))
   {
     $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id_season` = {$seasons_row['id']}");
     while ($rules_row = dbFetch($rules_ref))
     {
-      $rules_row['subject'] = addslashes($rules_row['subject']);
-      $rules_row['body'] = addslashes($rules_row['body']);
+      $subject = dbEscape($rules_row['subject']);
+      $body = dbEscape($rules_row['body']);
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}rules` (`id_season`, `subject`, `body`) " .
-	      "VALUES ({$_REQUEST['sid']}, '{$rules_row['subject']}', '{$rules_row['body']}')");
+	      "VALUES ({$_REQUEST['sid']}, '$subject', '$body')");
     }
     $content_tpl->parse("H_MESSAGE_COPIED", "B_MESSAGE_COPIED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

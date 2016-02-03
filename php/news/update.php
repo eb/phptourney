@@ -19,7 +19,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
 // news-query
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = {$_REQUEST['opt']} AND `deleted` = 0");
+$id_news = intval($_REQUEST['opt']);
+$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // access for roots [global news]
@@ -41,9 +42,11 @@ if ($news_row['id_season'] == 0 and $user['usertype_root'] or
 
   if ($is_complete)
   {
+    $heading = dbEscape($_REQUEST['heading']);
+    $body = dbEscape($_REQUEST['body']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}news` " .
-	     "SET `heading` = '{$_REQUEST['heading']}', " .
-	     "`body` = '{$_REQUEST['body']}' " .
+	     "SET `heading` = '$heading', " .
+	     "`body` = '$body' " .
 	     "WHERE `id` = {$news_row['id']}");
     $content_tpl->parse("H_MESSAGE_NEWS_EDITED", "B_MESSAGE_NEWS_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

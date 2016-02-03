@@ -29,8 +29,10 @@ if ($user['usertype_headadmin'])
 
   if ($is_complete)
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}mappool` SET `map` = '{$_REQUEST['map']}' " .
-	     "WHERE `id` = {$_REQUEST['opt']} AND `deleted` = 0");
+    $id_map = intval($_REQUEST['opt']);
+    $map = dbEscape($_REQUEST['map']);
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}mappool` SET `map` = '$map' " .
+	     "WHERE `id` = $id_map AND `deleted` = 0");
     $content_tpl->parse("H_MESSAGE_MAP_EDITED", "B_MESSAGE_MAP_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

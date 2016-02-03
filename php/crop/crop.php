@@ -16,7 +16,8 @@ $content_tpl->set_block("F_CONTENT", "B_MAP", "H_MAP");
 $content_tpl->set_block("F_CONTENT", "B_CROP", "H_CROP");
 
 // matches-query
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+$id_match = intval($_REQUEST['opt']);
+$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 if ($user['usertype_admin']) {

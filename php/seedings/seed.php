@@ -43,8 +43,9 @@ if ($user['usertype_headadmin'])
     {
       if (isset($_REQUEST[$season_users_row['id_user']]))
       {
+        $seedgroup = intval($_REQUEST[$season_users_row['id_user']]);
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
-		 "`seedgroup` = {$_REQUEST[$season_users_row['id_user']]} " .
+		 "`seedgroup` = $seedgroup " .
 		 "WHERE `id_user` = {$season_users_row['id_user']} AND `id_season` = {$_REQUEST['sid']}");
       }
     }

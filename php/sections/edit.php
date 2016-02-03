@@ -16,7 +16,8 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_SECTION", "H_EDIT_SECTION");
 // access for root only
 if ($user['usertype_root'])
 {
-  $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = {$_REQUEST['opt']} AND `deleted` = 0");
+  $id_section = intval($_REQUEST['opt']);
+  $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = $id_section AND `deleted` = 0");
   $sections_row = dbFetch($sections_ref);
   $content_tpl->set_var("I_ID_SECTION", $_REQUEST['opt']);
   $content_tpl->set_var("I_NAME", $sections_row['name']);

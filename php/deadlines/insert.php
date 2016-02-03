@@ -45,12 +45,14 @@ if ($user['usertype_headadmin'])
 
     if ($is_complete)
     {
+      $round = dbEscape($_REQUEST['round']);
       $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} and `round` = '{$_REQUEST['round']}'");
+				"WHERE `id_season` = {$_REQUEST['sid']} and `round` = '$round'");
       if (dbNumRows($deadlines_ref) == 0)
       {
+        $deadline = dbEscape($_REQUEST['deadline']);
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
-		 "VALUES ('{$_REQUEST['round']}', '{$_REQUEST['deadline']}', {$_REQUEST['sid']})");
+		 "VALUES ('$round', '$deadline', {$_REQUEST['sid']})");
 	$content_tpl->parse("H_MESSAGE_DEADLINE_ADDED", "B_MESSAGE_DEADLINE_ADDED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

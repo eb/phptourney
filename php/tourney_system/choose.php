@@ -80,11 +80,16 @@ if ($user['usertype_headadmin'])
       dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$_REQUEST['sid']}");
 
       // choose tourney-system
-      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `qualification` = {$_REQUEST['qualification']}, " .
-	       "`single_elimination` = '{$_REQUEST['single_elimination']}', " .
-	       "`double_elimination` = '{$_REQUEST['double_elimination']}', " .
-	       "`winmaps` = {$_REQUEST['winmaps']} " .
-	       "WHERE `id` = {$_REQUEST['opt']}");
+      $id_season = intval($_REQUEST['opt']); // XXX
+      $qualification = intval($_REQUEST['qualification']);
+      $single_elimination = intval($_REQUEST['single_elimination']);
+      $double_elimination = intval($_REQUEST['double_elimination']);
+      $winmaps = intval($_REQUEST['winmaps']);
+      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `qualification` = $qualification, " .
+	       "`single_elimination` = '$single_elimination', " . // XXX
+	       "`double_elimination` = '$double_elimination', " . // XXX
+	       "`winmaps` = $winmaps " .
+	       "WHERE `id` = $id_season");
       $content_tpl->parse("H_MESSAGE_TOURNEY_SYSTEM_CHOSEN", "B_MESSAGE_TOURNEY_SYSTEM_CHOSEN");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

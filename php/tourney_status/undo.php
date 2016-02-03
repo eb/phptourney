@@ -47,6 +47,7 @@ if ($user['usertype_headadmin'])
       dbQuery("DELETE FROM `{$cfg['db_table_prefix']}matches` WHERE `id_season` = {$_REQUEST['sid']}");
 
       // reset seedings
+      // XXX
 
 
       // unset season-status

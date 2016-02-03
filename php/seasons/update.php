@@ -33,8 +33,10 @@ if ($user['usertype_root'])
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_SEASON_NAME", "B_WARNING_SEASON_NAME");
   }
+  $id_season = intval($_REQUEST['opt']);
+  $season_name = dbEscape($_REQUEST['season_name']);
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `name` = '{$_REQUEST['season_name']}' AND `id` <> {$_REQUEST['opt']} AND `deleted` = 0");
+			  "WHERE `name` = '$season_name' AND `id` <> $id_season AND `deleted` = 0");
   if (dbNumRows($seasons_ref) == 1)
   {
     $is_complete = 0;
@@ -43,10 +45,11 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
+    $id_section = intval($_REQUEST['id_section']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET " .
-	     "`id_section` = {$_REQUEST['id_section']}, " .
-	     "`name` = '{$_REQUEST['season_name']}' " .
-	     "WHERE `id` = {$_REQUEST['opt']}");
+	     "`id_section` = $id_section, " .
+	     "`name` = '$season_name' " .
+	     "WHERE `id` = $id_season");
     $content_tpl->parse("H_MESSAGE_SEASON_EDITED", "B_MESSAGE_SEASON_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

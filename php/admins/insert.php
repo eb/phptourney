@@ -36,23 +36,25 @@ if ($user['usertype_headadmin'])
       $_REQUEST['headadmin'] = 0;
     }
 
+    $id_user = intval($_REQUEST['id_user']);
     $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				  "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = {$_REQUEST['id_user']}");
+				  "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
+    $headadmin = intval($_REQUEST['headadmin']);
     if ($season_users_row = dbFetch($season_users_ref))
     {
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
-	       "`usertype_admin` = 1, `usertype_headadmin` = {$_REQUEST['headadmin']} " .
-	       "WHERE `id_user` = {$_REQUEST['id_user']} AND `id_season` = {$_REQUEST['sid']}");
+	       "`usertype_admin` = 1, `usertype_headadmin` = $headadmin " .
+	       "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
     }
     else
     {
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
 	       "(`id_user`, `id_season`, `submitted`, `usertype_headadmin`, `usertype_admin`) " .
-	       "VALUES({$_REQUEST['id_user']}, {$_REQUEST['sid']}, NOW(), {$_REQUEST['headadmin']}, 1)");
+	       "VALUES($id_user, {$_REQUEST['sid']}, NOW(), $headadmin, 1)");
     }
 
     // send a mail to the new admin
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$_REQUEST['id_user']}");
+    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
     $to = $users_row['email'];
 

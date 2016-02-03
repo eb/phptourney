@@ -34,14 +34,16 @@ if ($user['usertype_root'])
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_ABBREVIATION", "B_WARNING_ABBREVIATION");
   }
-  $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `name` = '{$_REQUEST['name']}' AND `deleted` = 0");
+  $name = dbEscape($_REQUEST['name']);
+  $abbreviation = dbEscape($_REQUEST['abbreviation']);
+  $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `name` = '$name' AND `deleted` = 0");
   if (dbNumRows($sections_ref) > 0)
   {
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_UNIQUE_NAME", "B_WARNING_UNIQUE_NAME");
   }
   $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` " .
-			   "WHERE `abbreviation` = '{$_REQUEST['abbreviation']}' AND `deleted` = 0");
+			   "WHERE `abbreviation` = '$abbreviation' AND `deleted` = 0");
   if (dbNumRows($sections_ref) > 0)
   {
     $is_complete = 0;
@@ -50,11 +52,16 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
+    $admin_irc_channels = dbEscape($_REQUEST['admin_irc_channels']);
+    $public_irc_channels = dbEscape($_REQUEST['public_irc_channels']);
+    $bot_host = dbEscape($_REQUEST['bot_host']);
+    $bot_port = intval($_REQUEST['bot_port']);
+    $bot_password = dbEscape($_REQUEST['bot_password']);
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}sections` " .
 	     "(`name`, `abbreviation`, `admin_irc_channels`, `public_irc_channels`, `bot_host`, `bot_port`, `bot_password`) " .
-	     "VALUES ('{$_REQUEST['name']}', '{$_REQUEST['abbreviation']}', " .
-	     "'{$_REQUEST['admin_irc_channels']}', '{$_REQUEST['public_irc_channels']}', " .
-	     "'{$_REQUEST['bot_host']}', '{$_REQUEST['bot_port']}', '{$_REQUEST['bot_password']}')");
+	     "VALUES ('$name', '$abbreviation', " .
+	     "'$admin_irc_channels', '$public_irc_channels', " .
+	     "'$bot_host', '$bot_port', '$bot_password')");
     $content_tpl->parse("H_MESSAGE_SECTION_ADDED", "B_MESSAGE_SECTION_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

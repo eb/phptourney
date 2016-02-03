@@ -18,8 +18,9 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_SEASON", "H_EDIT_SEASON");
 // access for root only
 if ($user['usertype_root'])
 {
+  $id_season = intval($_REQUEST['opt']);
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `id` = {$_REQUEST['opt']} AND `deleted`  = 0");
+			  "WHERE `id` = $id_season AND `deleted`  = 0");
   $seasons_row = dbFetch($seasons_ref);
   $content_tpl->set_var("I_ID_SEASON_OPT", $_REQUEST['opt']);
   $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);

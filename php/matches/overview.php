@@ -102,6 +102,7 @@ if ($user['usertype_admin'])
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$_REQUEST['sid']} " .
 			  "AND `submitted` = '0000-00-00 00:00:00' " .
+			  "AND `confirmed` = '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
   while ($matches_row = dbFetch($matches_ref))
   {
@@ -157,7 +158,6 @@ if ($user['usertype_admin'])
   // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$_REQUEST['sid']} " .
-			  "AND `submitted` <> '0000-00-00 00:00:00' " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
   if (dbNumRows($matches_ref) <= 0)

@@ -32,7 +32,8 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_REPORT", "H_EDIT_REPORT");
 
 if ($user['usertype_admin'])
 {
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+  $id_match = intval($_REQUEST['opt']);
+  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
   $matches_row = dbFetch($matches_ref);
   if (isLastMatch($matches_row))
   {

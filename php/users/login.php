@@ -15,8 +15,9 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_LOGIN_FAILED", "H_WARNING_LOGIN_
 $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME", "H_WARNING_USERNAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 
+$username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-		      "WHERE `username` = '{$_REQUEST['username']}'");
+		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
   $password = crypt($_REQUEST['password'], substr($users_row['password'], 0, 2));

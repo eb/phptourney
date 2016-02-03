@@ -80,7 +80,7 @@ if (!isset($_REQUEST['act']) or !isWord($_REQUEST['act']))
 }
 
 // check opt
-if (!isset($_REQUEST['opt']) or !isWholePositiveNumber($_REQUEST['opt']) and !isWord($_REQUEST['act']))
+if (!isset($_REQUEST['opt']))
 {
   $_REQUEST['opt'] = "";
 }

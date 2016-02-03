@@ -36,12 +36,15 @@ if ($_REQUEST['sid'] == 0 and $user['usertype_root'] or
 
   if ($is_complete)
   {
+    $id_news_group = intval($_REQUEST['opt']);
+    $heading = dbEscape($_REQUEST['heading']);
+    $body = dbEscape($_REQUEST['body']);
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}news` (`heading`, `body`, `id_season`, `id_user`, `id_news_group`, `submitted`) " .
-	     "VALUES ('{$_REQUEST['heading']}', " .
-	     "'{$_REQUEST['body']}', " .
+	     "VALUES ('$heading', " .
+	     "'$body', " .
 	     "{$_REQUEST['sid']}, " .
 	     "{$user['uid']}, " .
-	     "{$_REQUEST['opt']}, " .
+	     "$id_news_group, " .
 	     "NOW())");
 
     $content_tpl->parse("H_MESSAGE_NEWS_ADDED", "B_MESSAGE_NEWS_ADDED");

@@ -18,7 +18,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for admins only
 if ($user['usertype_admin'])
 {
-  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}bans` WHERE `id` = {$_REQUEST['opt']}");
+  $id_ban = intval($_REQUEST['opt']);
+  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}bans` WHERE `id` = $id_ban");
   $content_tpl->parse("H_MESSAGE_IP_UNBANNED", "B_MESSAGE_IP_UNBANNED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

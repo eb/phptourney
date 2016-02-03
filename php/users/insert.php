@@ -30,8 +30,9 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_BODY", "H_MAIL_APPLIED_BODY
 
 $is_complete = 1;
 // users-query
+$username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-		      "WHERE `username` = '{$_REQUEST['username']}'");
+		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
   $is_complete = 0;
@@ -90,10 +91,14 @@ if ($is_complete)
   $password = crypt($_REQUEST['password'], createSalt());
 
   // register an account
+  $id_country = intval($_REQUEST['id_country']);
+  $email = dbEscape($_REQUEST['email']);
+  $irc_channel = dbEscape($_REQUEST['irc_channel']);
+  $notify = intval($_REQUEST['notify']);
   dbQuery("INSERT INTO `{$cfg['db_table_prefix']}users` " .
 	   "(`username`, `id_country`, `password`, `email`, `irc_channel`, `notify`, `submitted`) " .
-	   "VALUES ('{$_REQUEST['username']}', {$_REQUEST['id_country']}, " .
-	   "'$password', '{$_REQUEST['email']}', '{$_REQUEST['irc_channel']}', {$_REQUEST['notify']}, NOW())");
+	   "VALUES ('$username', $id_country, " .
+	   "'$password', '$email', '$irc_channel', $notify, NOW())");
 
   // sign up
   $signup = false;
@@ -101,7 +106,7 @@ if ($is_complete)
   {
     // users-query
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-			  "WHERE `username` = '{$_REQUEST['username']}'");
+			  "WHERE `username` = '$username'");
     $users_row = dbFetch($users_ref);
 
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .

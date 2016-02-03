@@ -31,8 +31,9 @@ if ($user['usertype_root'] or $user['usertype_admin'])
 if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
 {
   // news-query
+  $id_news_group = intval($_REQUEST['opt']);
   $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
-		       "WHERE `id_news_group` = {$_REQUEST['opt']} AND `id_season` = {$_REQUEST['sid']} AND `deleted` = 0 " .
+		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$_REQUEST['sid']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC LIMIT 0, 5");
   if (dbNumRows($news_ref) <= 0)
   {

@@ -18,7 +18,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for root only
 if ($user['usertype_root'])
 {
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `deleted` = 1 WHERE `id` = {$_REQUEST['opt']}");
+  $id_season = intval($_REQUEST['opt']);
+  dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `deleted` = 1 WHERE `id` = $id_season");
   $content_tpl->parse("H_MESSAGE_SEASON_REMOVED", "B_MESSAGE_SEASON_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

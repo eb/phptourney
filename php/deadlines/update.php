@@ -45,12 +45,15 @@ if ($user['usertype_headadmin'])
 
     if ($is_complete)
     {
+      $id_deadline = intval($_REQUEST['opt']);
+      $round = dbEscape($_REQUEST['round']);
       $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} AND `round` = '{$_REQUEST['round']}' AND `id` <> {$_REQUEST['opt']}");
+				"WHERE `id_season` = {$_REQUEST['sid']} AND `round` = '$round' AND `id` <> $id_deadline");
       if (dbNumRows($deadlines_ref) == 0)
       {
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}deadlines` SET `round` = '{$_REQUEST['round']}', `deadline` = '{$_REQUEST['deadline']}' " .
-		 "WHERE `id` = {$_REQUEST['opt']}");
+        $deadline = dbEscape($_REQUEST['deadline']);
+	dbQuery("UPDATE `{$cfg['db_table_prefix']}deadlines` SET `round` = '$round', `deadline` = '$deadline' " .
+		 "WHERE `id` = $id_deadline");
 	$content_tpl->parse("H_MESSAGE_DEADLINE_EDITED", "B_MESSAGE_DEADLINE_EDITED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

@@ -31,10 +31,11 @@ if ($user['uid'])
     $content_tpl->parse("H_WARNING_BODY", "B_WARNING_BODY");
   }
   // comments-query
+  $id_match = intval($_REQUEST['opt']);
   $minute = (date("i") + 55) % 60;
   $now = date("Y-m-d H:{$minute}:s");
   $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}match_comments` " .
-			   "WHERE `id_match` = {$_REQUEST['opt']} " .
+			   "WHERE `id_match` = $id_match " .
 			   "AND `ip` = '{$_SERVER['REMOTE_ADDR']}' " .
 			   "AND `submitted` > '$now'");
   if (dbNumRows($comments_ref) > 0)
@@ -45,10 +46,8 @@ if ($user['uid'])
 
   if ($is_complete)
   {
-    $_REQUEST['body'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['body']));
-
-    preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
     // bans-query
+    preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
     $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
 			 "WHERE `id_season` = {$_REQUEST['sid']} " .
 			 "AND (`ip` = '{$matches[1]}.*.*.*' " .
@@ -62,11 +61,13 @@ if ($user['uid'])
     }
     else
     {
+      $id_match = intval($_REQUEST['opt']);
+      $body = dbEscape($_REQUEST['body']);
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}match_comments` " .
-	      "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .
+	       "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .
 	       "VALUES ('{$user['uid']}', " .
-	       "'{$_REQUEST['body']}', " .
-	       "{$_REQUEST['opt']}, " .
+	       "'$body', " .
+	       "$id_match, " .
 	       "'{$_SERVER['REMOTE_ADDR']}', " .
 	       "NOW())");
       $content_tpl->parse("H_MESSAGE_COMMENT_ADDED", "B_MESSAGE_COMMENT_ADDED");

@@ -28,8 +28,9 @@ if ($_REQUEST['new_password'] == "")
   $is_complete = 0;
   $content_tpl->parse("H_WARNING_PASSWORD", "B_WARNING_PASSWORD");
 }
+$username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-		      "WHERE `username` = '{$_REQUEST['username']}'");
+		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
   $new_password = crypt($_REQUEST['new_password'], substr($users_row['new_password'], 0, 2));
@@ -47,8 +48,9 @@ else
 
 if ($is_complete)
 {
+  $new_password = dbEscape($users_row['new_password']);
   dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
-	   "`password` = '{$users_row['new_password']}', " .
+	   "`password` = '$new_password', " .
 	   "`new_password` = '' " .
 	   "WHERE `id` = {$users_row['id']}");
   $content_tpl->parse("H_MESSAGE_PASSWORD_ACTIVATED", "B_MESSAGE_PASSWORD_ACTIVATED");

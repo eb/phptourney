@@ -29,8 +29,9 @@ if ($user['usertype_headadmin'])
 
   if ($is_complete)
   {
+    $map = dbEscape($_REQUEST['map']);
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}mappool` (`map`, `id_season`) " .
-	     "VALUES ('{$_REQUEST['map']}', {$_REQUEST['sid']})");
+	     "VALUES ('$map', {$_REQUEST['sid']})");
     $content_tpl->parse("H_MESSAGE_MAP_ADDED", "B_MESSAGE_MAP_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

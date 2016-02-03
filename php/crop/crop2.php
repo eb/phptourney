@@ -15,7 +15,8 @@ $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_CROP2", "H_CROP2");
 
 // matches-query
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = {$_REQUEST['opt']}");
+$id_match = intval($_REQUEST['opt']);
+$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 if ($user['usertype_admin']) {
@@ -48,10 +49,11 @@ if ($user['usertype_admin']) {
   ////////////////////////////////////////////////////////////////////////////////
 
   // maps-query
+  $num_map = intval($_REQUEST['num_map']);
   $maps_ref = dbQuery("SELECT M2.`map` " .
 		      "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
 		      "WHERE M1.`id_match` = {$matches_row['id']} AND M2.`id` = M1.`id_map` " .
-		      "AND M1.`num_map` = {$_REQUEST['num_map']}");
+		      "AND M1.`num_map` = $num_map");
   $maps_row = dbFetch($maps_ref);
 
   $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";

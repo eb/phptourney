@@ -36,8 +36,11 @@ if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user
 
   if ($is_complete)
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}rules` SET `subject` = '{$_REQUEST['subject']}', `body` = '{$_REQUEST['body']}' " .
-	     "WHERE `id` = {$_REQUEST['opt']}");
+    $id_rule = intval($_REQUEST['opt']);
+    $subject = dbEscape($_REQUEST['subject']);
+    $body = dbEscape($_REQUEST['body']);
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}rules` SET `subject` = '$subject', `body` = '$body' " .
+	     "WHERE `id` = $id_rule");
     $content_tpl->parse("H_MESSAGE_RULE_EDITED", "B_MESSAGE_RULE_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
