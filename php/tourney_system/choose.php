@@ -80,14 +80,14 @@ if ($user['usertype_headadmin'])
       dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']}");
 
       // choose tourney-system
-      $id_season = intval($_REQUEST['opt']); // XXX
+      $id_season = intval($_REQUEST['opt']);
       $qualification = intval($_REQUEST['qualification']);
       $single_elimination = intval($_REQUEST['single_elimination']);
       $double_elimination = intval($_REQUEST['double_elimination']);
       $winmaps = intval($_REQUEST['winmaps']);
       dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `qualification` = $qualification, " .
-	       "`single_elimination` = '$single_elimination', " . // XXX
-	       "`double_elimination` = '$double_elimination', " . // XXX
+	       "`single_elimination` = '$single_elimination', " .
+	       "`double_elimination` = '$double_elimination', " .
 	       "`winmaps` = $winmaps " .
 	       "WHERE `id` = $id_season");
       $content_tpl->parse("H_MESSAGE_TOURNEY_SYSTEM_CHOSEN", "B_MESSAGE_TOURNEY_SYSTEM_CHOSEN");

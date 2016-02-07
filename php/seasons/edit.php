@@ -20,7 +20,7 @@ if ($user['usertype_root'])
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			  "WHERE `id` = $id_season AND `deleted`  = 0");
   $seasons_row = dbFetch($seasons_ref);
-  $content_tpl->set_var("I_ID_SEASON_OPT", $id_season); // XXX
+  $content_tpl->set_var("I_ID_SEASON_OPT", $id_season);
   $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
 
   $content_tpl->set_var("I_ID_SEASON", $season['id']);

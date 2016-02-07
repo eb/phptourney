@@ -46,10 +46,6 @@ if ($user['usertype_headadmin'])
       // delete all matches
       dbQuery("DELETE FROM `{$cfg['db_table_prefix']}matches` WHERE `id_season` = {$season['id']}");
 
-      // reset seedings
-      // XXX
-
-
       // unset season-status
       dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$season['id']}");
       $content_tpl->parse("H_MESSAGE_BRACKET_UNDONE", "B_MESSAGE_BRACKET_UNDONE");

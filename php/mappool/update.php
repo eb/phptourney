@@ -20,6 +20,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
+  $id_map = intval($_REQUEST['opt']);
+
   $is_complete = 1;
   if ($_REQUEST['map'] == "")
   {
@@ -29,7 +31,6 @@ if ($user['usertype_headadmin'])
 
   if ($is_complete)
   {
-    $id_map = intval($_REQUEST['opt']);
     $map = dbEscape($_REQUEST['map']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}mappool` SET `map` = '$map' " .
 	     "WHERE `id` = $id_map AND `deleted` = 0");
@@ -41,7 +42,6 @@ if ($user['usertype_headadmin'])
 
   if (!$is_complete)
   {
-    $id_map = intval($_REQUEST['opt']); // XXX
     $content_tpl->set_var("I_MAP", htmlspecialchars($_REQUEST['map']));
     $content_tpl->set_var("I_ID_MAP", $id_map);
     $content_tpl->parse("H_WARNING", "B_WARNING");

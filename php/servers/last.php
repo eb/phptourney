@@ -22,7 +22,7 @@ if ($user['usertype_headadmin'])
 {
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
-  while ($seasons_row = dbFetch($seasons_ref) // XXX: Ugly
+  while ($seasons_row = dbFetch($seasons_ref)
   {
     if ($seasons_row['id'] == $season['id'])
     {
@@ -57,6 +57,7 @@ if ($user['usertype_headadmin'])
 	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
       }
+      break;
     }
   }
 }

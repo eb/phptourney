@@ -102,7 +102,6 @@ if ($user['usertype_headadmin'])
     // set all players who signed up too late to rejected
     if ($season['qualification'] == 1)
     {
-      // XXX
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `rejected` = 1 " .
 	       "WHERE `id_season` = {$season['id']} " .
 	       "AND `rejected` = 0 " .
