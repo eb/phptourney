@@ -167,11 +167,13 @@ table.commentbox {
 	border-left: 3px #000000 solid;
 	background-image: url(../gfx/default/lbbg.png);
 	background-repeat: repeat;
+        table-layout: fixed;
 }
 
 .commentbox td {
 	padding: 5px;
 	font-size: 10pt;
+        overflow: hidden;
 }
 
 .form td {
@@ -230,6 +232,7 @@ legend {
 
 .notice {
 	font-style: italic;
+        overflow: hidden;
 }
 
 .timestamp {
