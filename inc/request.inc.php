@@ -29,15 +29,8 @@ if (!isset($_REQUEST['sid']) or !isWholePositiveNumber($_REQUEST['sid']))
 }
 
 // get season data
-$season_exists = false;
-if ($_REQUEST['sid'] >= 0)
-{
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
-  if ($season = dbFetch($seasons_ref))
-  {
-    $season_exists = true;
-  }
-}
+$seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
+$season = dbFetch($seasons_ref);
 
 // check mod
 if (!isset($_REQUEST['mod']) or !isWord($_REQUEST['mod']))

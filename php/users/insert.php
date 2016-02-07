@@ -102,7 +102,7 @@ if ($is_complete)
 
   // sign up
   $signup = false;
-  if ($season_exists and $season['status'] == "signups" and $_REQUEST['signup'] == 1)
+  if ($season['status'] == "signups" and $_REQUEST['signup'] == 1)
   {
     // users-query
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .

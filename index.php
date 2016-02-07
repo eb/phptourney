@@ -37,7 +37,6 @@ $main_tpl->set_file("F_INDEX", "index.html");
 // template blocks
 $main_tpl->set_block("F_INDEX", "B_SEASON_DROPDOWN", "H_SEASON_DROPDOWN");
 $main_tpl->set_block("F_INDEX", "B_SIGNUP", "H_SIGNUP");
-$main_tpl->set_block("F_INDEX", "B_FILE_NOT_FOUND", "H_FILE_NOT_FOUND");
 $main_tpl->set_block("F_INDEX", "B_ROOT_PANEL", "H_ROOT_PANEL");
 $main_tpl->set_block("F_INDEX", "B_HEADADMIN_PANEL", "H_HEADADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_ADMIN_PANEL", "H_ADMIN_PANEL");
@@ -61,16 +60,19 @@ while ($seasons_row = dbFetch($seasons_ref))
 }
 
 // default action, if none is set
-if (!$_REQUEST['mod'] or !$_REQUEST['act'])
+if (isset($season))
 {
-  $_REQUEST['mod'] = "news";
-  $_REQUEST['act'] = "view";
-  $_REQUEST['opt'] = "1";
+  if (!$_REQUEST['mod'] or !$_REQUEST['act'])
+  {
+    $_REQUEST['mod'] = "news";
+    $_REQUEST['act'] = "view";
+    $_REQUEST['opt'] = "1";
+  }
 }
 $main_tpl->set_var("I_CONTENT", execAction());
 
 // navigation panels
-if ($season_exists)
+if (isset($season))
 {
   if ($season['status'] == "signups")
   {
@@ -102,10 +104,6 @@ if ($season_exists)
   $_REQUEST['opt'] = "";
   $main_tpl->set_var("I_LATEST_MATCHES", execAction());
 }
-else
-{
-  $season['id'] = 0;
-}
 
 // root navigation
 if ($user['usertype_root'])
@@ -126,7 +124,7 @@ $main_tpl->parse("H_NETWORK_PANEL", "B_NETWORK_PANEL");
 $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 $main_tpl->set_var("I_ID_SEASON", "");
 $main_tpl->set_var("I_SEASON_NAME", "");
-if ($season_exists)
+if (isset($season))
 {
   $main_tpl->set_var("I_ID_SEASON", $season['id']);
   $main_tpl->set_var("I_SEASON_NAME", $season['name']);

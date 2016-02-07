@@ -54,7 +54,6 @@ function execAction()
   }
   else
   {
-    $main_tpl->parse("H_FILE_NOT_FOUND", "B_FILE_NOT_FOUND");
     return("");
   }
 }

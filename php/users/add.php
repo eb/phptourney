@@ -25,7 +25,7 @@ while ($countries_row = dbFetch($countries_ref))
 }
 
 // signup
-if ($season_exists and $season['status'] == "signups")
+if ($season['status'] == "signups")
 {
   $content_tpl->parse("H_SIGNUP", "B_SIGNUP");
 }
