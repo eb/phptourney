@@ -285,19 +285,19 @@ if ($user['usertype_admin'] or
 	  }
 
 	  // send match report to irc
-	  if ($section['admin_irc_channels'] != "")
+	  if ($cfg['bot_admin_targets'] != "")
 	  {
-	    $irc_channels = explode(";", $section['admin_irc_channels']);
+	    $irc_channels = explode(";", $cfg['bot_admin_targets']);
 	    foreach($irc_channels as $irc_channel) {
-	      if ($cfg['bot_enabled'] and $section['bot_host'] != "" and $section['bot_port'] != "")
+	      if ($cfg['bot_enabled'] and $cfg['bot_host'] != "" and $cfg['bot_port'] != "")
 	      {
-		$bot_socket = fsockopen($section['bot_host'], $section['bot_port']);
+		$bot_socket = fsockopen($cfg['bot_host'], $cfg['bot_port']);
 	      }
 	      else
 	      {
 		$bot_socket = NULL;
 	      }
-	      if ($bot_socket and $section['admin_irc_channels'] != "")
+	      if ($bot_socket and $cfg['bot_admin_targets'] != "")
 	      {
 		// player1
 		if ($matches_row['id_player1'] > 0)
@@ -325,7 +325,7 @@ if ($user['usertype_admin'] or
 		}
 		sleep(2);
 		fwrite($bot_socket,
-		       "{$section['bot_password']} $irc_channel {$section['name']} [$player1 vs $player2] reported - " .
+		       "{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} [$player1 vs $player2] reported - " .
 		       "{$cfg['host']}{$cfg['path']}?sid={$_REQUEST['sid']}&mod=matches&act=edit&opt={$matches_row['id']}\r\n");
 		fclose($bot_socket);
 	      }

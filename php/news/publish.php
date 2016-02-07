@@ -34,13 +34,13 @@ if ($news_row['id_news_group'] == 2 and ($user['usertype_headadmin'] or $user['u
 	  "WHERE `id_news` = {$news_row['id']}");
 
   // send news to irc
-  if ($section['public_irc_channels'] != "")
+  if ($cfg['bot_public_targets'] != "")
   {
-    $irc_channels = explode(";", $section['public_irc_channels']);
+    $irc_channels = explode(";", $cfg['bot_public_targets']);
     foreach($irc_channels as $irc_channel) {
-      if ($section['bot_host'] != "" and $section['bot_port'] != "")
+      if ($cfg['bot_host'] != "" and $cfg['bot_port'] != "")
       {
-	$bot_socket = fsockopen($section['bot_host'], $section['bot_port']);
+	$bot_socket = fsockopen($cfg['bot_host'], $cfg['bot_port']);
       }
       else
       {
@@ -50,7 +50,7 @@ if ($news_row['id_news_group'] == 2 and ($user['usertype_headadmin'] or $user['u
       {
 	sleep(2);
 	fwrite($bot_socket,
-		"{$section['bot_password']} $irc_channel {$section['name']} news updated: '{$news_row['heading']}' - " .
+		"{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} news updated: '{$news_row['heading']}' - " .
 		"{$cfg['host']}{$cfg['path']}?sid={$_REQUEST['sid']}\r\n");
 	fclose($bot_socket);
       }

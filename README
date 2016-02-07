@@ -42,7 +42,7 @@
        - Execute the SQL-script /sql/phptourney.sql (i.e. with phpMyAdmin)
        - Copy the file /inc/config-default.inc.php to /inc/config.inc.php
          and edit its content to your needs
-       - Log in with admin/password and create sections and seasons
+       - Log in with admin/password and create seasons
 
   2.3. Update
        - To do an update just extract the new version over the old installation

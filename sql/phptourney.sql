@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.35, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: test_phptourney
 -- ------------------------------------------------------
--- Server version	5.5.35-0+wheezy1
+-- Server version	5.5.46-0+deb8u1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -362,7 +362,6 @@ DROP TABLE IF EXISTS `seasons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seasons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_section` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `qualification` tinyint(4) NOT NULL DEFAULT '0',
   `single_elimination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -383,38 +382,6 @@ CREATE TABLE `seasons` (
 LOCK TABLES `seasons` WRITE;
 /*!40000 ALTER TABLE `seasons` DISABLE KEYS */;
 /*!40000 ALTER TABLE `seasons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sections`
---
-
-DROP TABLE IF EXISTS `sections`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sections` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `abbreviation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `bot_host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `bot_port` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `bot_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `admin_irc_channels` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `public_irc_channels` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`(50)),
-  UNIQUE KEY `abbreviation` (`abbreviation`(10))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci PACK_KEYS=0;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sections`
---
-
-LOCK TABLES `sections` WRITE;
-/*!40000 ALTER TABLE `sections` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sections` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -458,4 +425,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-12 19:19:54
+-- Dump completed on 2016-02-07 20:18:02

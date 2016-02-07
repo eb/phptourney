@@ -50,19 +50,14 @@ $main_tpl->set_var("I_VERSION", fread($fh_version, filesize("VERSION")));
 fclose($fh_version);
 
 // season dropdown-list
-$sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `deleted` = 0 ORDER BY `name` ASC");
-while ($sections_row = dbFetch($sections_ref))
+$main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+$seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+      		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
+while ($seasons_row = dbFetch($seasons_ref))
 {
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `id_section` = {$sections_row['id']} AND `deleted` = 0 " .
-			  "ORDER BY `submitted` DESC");
-  while ($seasons_row = dbFetch($seasons_ref))
-  {
-    $main_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
-    $main_tpl->set_var("I_SECTION_NAME", $sections_row['name']);
-    $main_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
-    $main_tpl->parse("H_SEASON_DROPDOWN", "B_SEASON_DROPDOWN", true);
-  }
+  $main_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
+  $main_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+  $main_tpl->parse("H_SEASON_DROPDOWN", "B_SEASON_DROPDOWN", true);
 }
 
 // default action, if none is set
@@ -127,25 +122,17 @@ $main_tpl->set_var("I_USER", execAction());
 // network panel
 $main_tpl->parse("H_NETWORK_PANEL", "B_NETWORK_PANEL");
 
-// parse and print the site
-if ($season['id'] == 0)
-{
-  $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-}
-else
-{
-  $main_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-}
-$main_tpl->set_var("I_ID_SEASON", $season['id']);
+// tourney / season name
+$main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+$main_tpl->set_var("I_ID_SEASON", "");
+$main_tpl->set_var("I_SEASON_NAME", "");
 if ($season_exists)
 {
+  $main_tpl->set_var("I_ID_SEASON", $season['id']);
   $main_tpl->set_var("I_SEASON_NAME", $season['name']);
 }
-else
-{
-  $main_tpl->set_var("I_SEASON_NAME", "");
-}
 
+// parse and print the site
 $main_tpl->pparse("PAGE", "F_INDEX");
 
 ?>

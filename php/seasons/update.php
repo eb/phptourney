@@ -12,7 +12,6 @@
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_SEASON_EDITED", "H_MESSAGE_SEASON_EDITED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_SECTION", "H_WARNING_SECTION");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SEASON_NAME", "H_WARNING_SEASON_NAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_UNIQUE_SEASON_NAME", "H_WARNING_UNIQUE_SEASON_NAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -23,11 +22,6 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 if ($user['usertype_root'])
 {
   $is_complete = 1;
-  if ($_REQUEST['id_section'] == "")
-  {
-    $is_complete = 0;
-    $content_tpl->parse("H_WARNING_SECTION", "B_WARNING_SECTION");
-  }
   if ($_REQUEST['season_name'] == "")
   {
     $is_complete = 0;
@@ -45,9 +39,7 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
-    $id_section = intval($_REQUEST['id_section']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET " .
-	     "`id_section` = $id_section, " .
 	     "`name` = '$season_name' " .
 	     "WHERE `id` = $id_season");
     $content_tpl->parse("H_MESSAGE_SEASON_EDITED", "B_MESSAGE_SEASON_EDITED");

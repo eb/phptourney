@@ -28,42 +28,14 @@ if (!isset($_REQUEST['sid']) or !isWholePositiveNumber($_REQUEST['sid']))
   $_REQUEST['sid'] = 0;
 }
 
-// check sec
-if (!isset($_REQUEST['sec']) or !isWord($_REQUEST['sec']))
-{
-  $_REQUEST['sec'] = "";
-}
-
-// get season and section data
+// get season data
 $season_exists = false;
-$section_exists = false;
-if ($_REQUEST['sid'] != "")
+if ($_REQUEST['sid'] >= 0)
 {
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
   if ($season = dbFetch($seasons_ref))
   {
-    $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = {$season['id_section']} AND `deleted` = 0");
-    if ($section = dbFetch($sections_ref))
-    {
-      $season_exists = true;
-      $section_exists = true;
-      $_REQUEST['sec'] = $section['abbreviation'];
-    }
-  }
-}
-elseif ($_REQUEST['sec'] != "")
-{
-  $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `abbreviation` = '{$_REQUEST['sec']}' AND `deleted` = 0");
-  if ($section = dbFetch($sections_ref))
-  {
-    $section_exists = true;
-    $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			    "WHERE `id_section` = {$section['id']} AND `deleted` = 0 ORDER BY `submitted` DESC");
-    if ($season = dbFetch($seasons_ref))
-    {
-      $season_exists = true;
-      $_REQUEST['sid'] = $season['id'];
-    }
+    $season_exists = true;
   }
 }
 

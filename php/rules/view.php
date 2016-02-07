@@ -22,16 +22,15 @@ if ($user['usertype_admin'])
   $content_tpl->parse("H_ADD", "B_ADD");
 
   // seasons-query
-  $seasons_ref = dbQuery("SELECT S1.`id`, S1.`name` AS season_name, S2.`name` AS section_name " .
-			  "FROM `{$cfg['db_table_prefix']}seasons` S1, `{$cfg['db_table_prefix']}sections` S2 " .
-			  "WHERE S1.`deleted` = 0 AND S1.`id` <> {$_REQUEST['sid']} AND S1.`id_section` = S2.`id`");
+  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+			  "WHERE `deleted` = 0 AND `id` <> {$_REQUEST['sid']} ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) > 0)
   {
+    $content_tpl->set_var("I_TOURNEY_NAME", htmlspecialchars($cfg['tourney_name']));
     while ($seasons_row = dbFetch($seasons_ref))
     {
       $content_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
-      $content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($seasons_row['section_name']));
-      $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['season_name']));
+      $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
       $content_tpl->parse("H_ADD_SEASON_RULES", "B_ADD_SEASON_RULES", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $season['id']);

@@ -143,7 +143,7 @@ if ($is_complete)
     // message
     $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
     $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
-    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $season['name']);
     $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
     $content_tpl->parse("MAIL_APPLIED_BODY", "B_MAIL_APPLIED_BODY");

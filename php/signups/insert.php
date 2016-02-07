@@ -60,7 +60,7 @@ if ($season['status'] == "signups")
       $to = $users_row['email'];
       
       // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+      $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
       $content_tpl->set_var("I_SEASON_NAME", $season['name']);
       $content_tpl->set_var("I_USERNAME", $users_row['username']);
       $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");

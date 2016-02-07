@@ -58,7 +58,7 @@ if ($user['usertype_headadmin'])
     while ($season_users_row = dbFetch($season_users_ref))
     {
       // subject
-      $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+      $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
       $content_tpl->set_var("I_SEASON_NAME", $season['name']);
       $content_tpl->set_var("I_USERNAME", $season_users_row['username']);
       $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
@@ -105,7 +105,7 @@ if ($user['usertype_headadmin'])
           $content_tpl->parse("H_MAIL_DEADLINE", "B_MAIL_DEADLINE");
         }
         $content_tpl->parse("H_MAIL_FIRST_MATCH", "B_MAIL_FIRST_MATCH");
-        $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+        $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
         $content_tpl->set_var("I_SEASON_NAME", $season['name']);
         $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
         $content_tpl->parse("MAIL_BODY_ACCEPTED", "B_MAIL_BODY_ACCEPTED");
@@ -114,7 +114,7 @@ if ($user['usertype_headadmin'])
       else
       {
         // message rejected
-        $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+        $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
         $content_tpl->set_var("I_SEASON_NAME", $season['name']);
         $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
         $content_tpl->parse("MAIL_BODY_REJECTED", "B_MAIL_BODY_REJECTED");

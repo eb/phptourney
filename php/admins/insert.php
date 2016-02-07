@@ -59,13 +59,13 @@ if ($user['usertype_headadmin'])
     $to = $users_row['email'];
 
     // subject
-    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $season['name']);
     $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
     $subject = $content_tpl->get("MAIL_SUBJECT");
 
     // message
-    $content_tpl->set_var("I_TOURNEY_NAME", $section['name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $season['name']);
     $content_tpl->set_var("I_USERNAME", $users_row['username']);
     $content_tpl->set_var("I_PASSWORD", $users_row['password']);

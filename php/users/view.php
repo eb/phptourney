@@ -155,12 +155,10 @@ $content_tpl->parse("H_OVERVIEW_PLAYED_MATCHES", "B_OVERVIEW_PLAYED_MATCHES");
 ////////////////////////////////////////////////////////////////////////////////
 
 // season_users-query
-$season_users_ref = dbQuery("SELECT SU.*,S1.`name` AS `season_name`,S2.`name` AS `section_name` " .
-			     "FROM `{$cfg['db_table_prefix']}season_users` SU,`{$cfg['db_table_prefix']}seasons` S1," .
-			     "`{$cfg['db_table_prefix']}sections` S2 " .
+$season_users_ref = dbQuery("SELECT SU.*,S.`name` AS `season_name` " .
+			     "FROM `{$cfg['db_table_prefix']}season_users` SU,`{$cfg['db_table_prefix']}seasons` S " .
 			     "WHERE SU.`id_user` = $id_user " .
-			     "AND SU.`id_season` = S1.`id` " .
-			     "AND S1.`id_section` = S2.`id` " .
+			     "AND SU.`id_season` = S.`id` " .
 			     "ORDER BY `submitted` DESC");
 $season_counter = $match_counter;
 if (dbNumRows($season_users_ref) <= 0)
@@ -195,7 +193,6 @@ else
       $usertype = true;
     }
 
-    $content_tpl->set_var("I_TOURNEY_NAME", htmlspecialchars($season_users_row['section_name']));
     $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($season_users_row['season_name']));
     if ($usertype)
     {

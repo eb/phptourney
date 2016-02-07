@@ -31,7 +31,10 @@ require("$inc_path/helpers.inc.php");
 // misc checks
 require("$inc_path/checks.inc.php");
 
-// global config
+// default config
+require("$inc_path/config-default.inc.php");
+
+// config
 require("$inc_path/config.inc.php");
 
 // database

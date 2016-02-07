@@ -12,7 +12,6 @@
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_SEASON_ADDED", "H_MESSAGE_SEASON_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_SECTION", "H_WARNING_SECTION");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SEASON_NAME", "H_WARNING_SEASON_NAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_UNIQUE_SEASON_NAME", "H_WARNING_UNIQUE_SEASON_NAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_HEADADMIN", "H_WARNING_HEADADMIN");
@@ -26,20 +25,14 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 if ($user['usertype_root'])
 {
   $is_complete = 1;
-  if ($_REQUEST['id_section'] == "")
-  {
-    $is_complete = 0;
-    $content_tpl->parse("H_WARNING_SECTION", "B_WARNING_SECTION");
-  }
   if ($_REQUEST['season_name'] == "")
   {
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_SEASON_NAME", "B_WARNING_SEASON_NAME");
   }
-  $id_section = intval($_REQUEST['id_section']);
   $season_name = dbEscape($_REQUEST['season_name']);
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `id_section` = $id_section AND `name` = '$season_name' AND `deleted` = 0");
+			  "WHERE `name` = '$season_name' AND `deleted` = 0");
   if (dbNumRows($seasons_ref) == 1)
   {
     $is_complete = 0;
@@ -53,17 +46,13 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}seasons` (`id_section`,`submitted`, `name`, `status`) " .
-	    "VALUES ($id_section, NOW(), '$season_name', NULL)");
+    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}seasons` (`submitted`, `name`, `status`) " .
+	    "VALUES (NOW(), '$season_name', NULL)");
 
     // seasons-query
     $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			    "WHERE `id_section` = $id_section AND `name` = '$season_name' AND `deleted` = 0");
+			    "WHERE `name` = '$season_name' AND `deleted` = 0");
     $seasons_row = dbFetch($seasons_ref);
-
-    // sections-query
-    $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = {$seasons_row['id_section']} AND `deleted` = 0");
-    $sections_row = dbFetch($sections_ref);
 
     // users-query
     $id_user = intval($_REQUEST['id_user']);
@@ -78,13 +67,13 @@ if ($user['usertype_root'])
     $to = $users_row['email'];
 
     // subject
-    $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
     $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
     $subject = $content_tpl->get("MAIL_SUBJECT");
 
     // message
-    $content_tpl->set_var("I_TOURNEY_NAME", $sections_row['name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
     $content_tpl->set_var("I_USERNAME", $users_row['username']);
     $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$seasons_row['id']}");

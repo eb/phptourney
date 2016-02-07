@@ -20,8 +20,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 if ($user['usertype_headadmin'])
 {
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `id_section` = {$section['id']} AND `deleted` = 0 ORDER BY `submitted` DESC");
-  while ($seasons_row = dbFetch($seasons_ref))
+			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
+  while ($seasons_row = dbFetch($seasons_ref)) // XXX: Ugly
   {
     if ($seasons_row['id'] == $_REQUEST['sid'])
     {

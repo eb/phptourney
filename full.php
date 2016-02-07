@@ -36,41 +36,23 @@ $fh_version = fopen("VERSION", "r");
 $main_tpl->set_var("I_VERSION", fread($fh_version, filesize("VERSION")));
 fclose($fh_version);
 
+$main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+$main_tpl->set_var("I_SEASON_NAME", "");
 if ($season_exists)
 {
-  $main_tpl->set_var("I_TOURNEY_NAME", $section['name']);
- $main_tpl->set_var("I_SEASON_NAME", $season['name']);
-}
-else
-{
-  if ($_REQUEST['sec'] != "")
-  {
-    $main_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-  }
-  else
-  {
-    $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-  }
+  $main_tpl->set_var("I_SEASON_NAME", $season['name']);
 }
 
 // default action, if none is set
-$_REQUEST['mod'] = "{$_REQUEST['mod']}";
-$_REQUEST['act'] = "{$_REQUEST['act']}";
-$_REQUEST['opt'] = "{$_REQUEST['opt']}";
+if (!$_REQUEST['mod'] or !$_REQUEST['act'])
+{
+  $_REQUEST['mod'] = "news";
+  $_REQUEST['act'] = "view";
+  $_REQUEST['opt'] = "1";
+}
 $main_tpl->set_var("I_CONTENT", execAction());
 
 // parse and print the site
-if ($season['id'] == 0)
-{
-  $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-}
-else
-{
-  $main_tpl->set_var("I_TOURNEY_NAME", $section['name']);
-}
-$main_tpl->set_var("I_ID_SEASON", $season['id']);
-$main_tpl->set_var("I_SEASON_NAME", $season['name']);
-
 $main_tpl->pparse("PAGE", "F_FULL");
 
 ?>
