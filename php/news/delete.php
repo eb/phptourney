@@ -20,11 +20,9 @@ $id_news = intval($_REQUEST['opt']);
 $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
-// access for roots [global news]
 // access for headadmins [public / private news]
 // access for admins [public / private news that they wrote themselves]
-if ($news_row['id_season'] == 0 and $user['usertype_root'] or
-    $news_row['id_season'] != 0 and ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user'])) {
+if ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user']) {
   dbQuery("UPDATE `{$cfg['db_table_prefix']}news` SET `deleted` = 1 WHERE `id` = $id_news");
   $content_tpl->parse("H_MESSAGE_NEWS_REMOVED", "B_MESSAGE_NEWS_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

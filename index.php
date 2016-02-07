@@ -43,7 +43,6 @@ $main_tpl->set_block("F_INDEX", "B_ROOT_PANEL", "H_ROOT_PANEL");
 $main_tpl->set_block("F_INDEX", "B_HEADADMIN_PANEL", "H_HEADADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_ADMIN_PANEL", "H_ADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_TOURNAMENT_PANEL", "H_TOURNAMENT_PANEL");
-$main_tpl->set_block("F_INDEX", "B_NETWORK_PANEL", "H_NETWORK_PANEL");
 
 // read version
 $fh_version = fopen("VERSION", "r");
@@ -128,9 +127,6 @@ $_REQUEST['mod'] = "users";
 $_REQUEST['act'] = "show";
 $_REQUEST['opt'] = "";
 $main_tpl->set_var("I_USER", execAction());
-
-// network panel
-$main_tpl->parse("H_NETWORK_PANEL", "B_NETWORK_PANEL");
 
 // tourney / season name
 $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);

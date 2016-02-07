@@ -21,7 +21,7 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_NEWS", "H_VIEW_NEWS");
 
 $id_news_group = intval($_REQUEST['opt']);
 
-if ($user['usertype_root'] or $user['usertype_admin'])
+if ($user['usertype_admin'])
 {
   $content_tpl->set_var("I_OPT", $id_news_group);
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
@@ -29,7 +29,7 @@ if ($user['usertype_root'] or $user['usertype_admin'])
 }
 
 // access for admins [private news]
-// access for guests [global / public news]
+// access for guests [public news]
 if ($user['usertype_admin'] or $id_news_group == 1)
 {
   // news-query

@@ -13,9 +13,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_EDIT_RULE", "H_EDIT_RULE");
 
-// access for roots at network level
-// access for headadmins at season level
-if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user['usertype_headadmin'])
+if ($user['usertype_headadmin'])
 {
   $id_rule = intval($_REQUEST['opt']);
   $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");

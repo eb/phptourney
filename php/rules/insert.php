@@ -18,9 +18,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for roots at network level
-// access for headadmins at season level
-if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user['usertype_headadmin'])
+if ($user['usertype_headadmin'])
 {
   $is_complete = 1;
   if ($_REQUEST['subject'] == "")

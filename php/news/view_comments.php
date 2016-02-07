@@ -25,7 +25,7 @@ $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = 
 $news_row = dbFetch($news_ref);
 
 // access for admins [private news]
-// access for guests [global / public news]
+// access for guests [public news]
 if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
 {
   // users-query

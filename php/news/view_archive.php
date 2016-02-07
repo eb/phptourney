@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_COMMENTS_LINK", "H_COMMENTS_LINK");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NEWS", "H_VIEW_NEWS");
 
 // access for admins [private news]
-// access for guests [global / public news]
+// access for guests [public news]
 if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
 {
   // news-query

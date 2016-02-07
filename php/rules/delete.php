@@ -15,9 +15,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for roots at network level
-// access for headadmins at season level
-if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user['usertype_headadmin'])
+if ($user['usertype_headadmin'])
 {
   $id_rule = intval($_REQUEST['opt']);
   dbQuery("DELETE FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");

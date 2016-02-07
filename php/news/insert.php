@@ -18,10 +18,8 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for roots [global news]
 // access for admins [public / private news]
-if ($season['id'] == 0 and $user['usertype_root'] or
-    $season['id'] != 0 and $user['usertype_admin']) {
+if ($user['usertype_admin']) {
   $is_complete = 1;
   if ($_REQUEST['heading'] == "")
   {
