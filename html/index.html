@@ -23,20 +23,24 @@
 <div align="center">
 
 <table align="center" width="799" cellspacing="0">
+<!-- BEGIN B_SEASON_SELECTOR -->
 <tr>
 	<td class="header" colspan="2">
 	<form action="">
 		Select Season:
 		<select name="sid" size="1">
-		<option value="">-</option>
-<!-- BEGIN B_SEASON_DROPDOWN -->
+<!-- BEGIN B_SEASON_SELECTOR_OPTION -->
 		<option value="{I_ID_SEASON}">{I_SEASON_NAME}</option>
-<!-- END B_SEASON_DROPDOWN -->
+<!-- END B_SEASON_SELECTOR_OPTION -->
+<!-- BEGIN B_SEASON_SELECTOR_OPTION_SELECTED -->
+		<option value="{I_ID_SEASON}" selected="selected">{I_SEASON_NAME}</option>
+<!-- END B_SEASON_SELECTOR_OPTION_SELECTED -->
 		</select>
 		<input class="submit" type="submit" value=" Go "/>
 	</form>
 	</td>
 </tr>
+<!-- END B_SEASON_SELECTOR -->
 
 <tr>
 	<td>

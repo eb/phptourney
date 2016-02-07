@@ -35,7 +35,9 @@ $main_tpl = new Template("html", "remove");
 $main_tpl->set_file("F_INDEX", "index.html");
 
 // template blocks
-$main_tpl->set_block("F_INDEX", "B_SEASON_DROPDOWN", "H_SEASON_DROPDOWN");
+$main_tpl->set_block("F_INDEX", "B_SEASON_SELECTOR_OPTION", "H_SEASON_SELECTOR_OPTION");
+$main_tpl->set_block("F_INDEX", "B_SEASON_SELECTOR_OPTION_SELECTED", "H_SEASON_SELECTOR_OPTION_SELECTED");
+$main_tpl->set_block("F_INDEX", "B_SEASON_SELECTOR", "H_SEASON_SELECTOR");
 $main_tpl->set_block("F_INDEX", "B_SIGNUP", "H_SIGNUP");
 $main_tpl->set_block("F_INDEX", "B_ROOT_PANEL", "H_ROOT_PANEL");
 $main_tpl->set_block("F_INDEX", "B_HEADADMIN_PANEL", "H_HEADADMIN_PANEL");
@@ -49,14 +51,24 @@ $main_tpl->set_var("I_VERSION", fread($fh_version, filesize("VERSION")));
 fclose($fh_version);
 
 // season dropdown-list
-$main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
       		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
-while ($seasons_row = dbFetch($seasons_ref))
+if (dbNumRows($seasons_ref) > 0)
 {
-  $main_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
-  $main_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
-  $main_tpl->parse("H_SEASON_DROPDOWN", "B_SEASON_DROPDOWN", true);
+  while ($seasons_row = dbFetch($seasons_ref))
+  {
+    $main_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
+    $main_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+    if ($seasons_row['id'] != $season['id'])
+    {
+      $main_tpl->parse("H_SEASON_SELECTOR_OPTION", "B_SEASON_SELECTOR_OPTION", true);
+    }
+    else
+    {
+      $main_tpl->parse("H_SEASON_SELECTOR_OPTION", "B_SEASON_SELECTOR_OPTION_SELECTED", true);
+    }
+  }
+  $main_tpl->parse("H_SEASON_SELECTOR", "B_SEASON_SELECTOR");
 }
 
 // default action, if none is set

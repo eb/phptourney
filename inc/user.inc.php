@@ -50,26 +50,34 @@ function setUser($user_id_md5) {
       $user['username'] = $users_row['username'];
 
       // season_users-query
-      $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_user` = {$users_row['id']} AND (`id_season` = 0 OR `id_season` = {$season['id']})");
+      if (!isset($season))
+      {
+        $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  				   "WHERE `id_user` = {$users_row['id']} AND `id_season` = 0");
+      }
+      else
+      {
+        $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  				   "WHERE `id_user` = {$users_row['id']} AND (`id_season` = 0 OR `id_season` = {$season['id']})");
+      }
       while ($season_users_row = dbFetch($season_users_ref))
       {
-	if ($season_users_row['usertype_root'] == 1)
-	{
-	  $user['usertype_root'] = $season_users_row['usertype_root'];
-	}
-	if ($season_users_row['usertype_headadmin'] == 1)
-	{
-	  $user['usertype_headadmin'] = $season_users_row['usertype_headadmin'];
-	}
-	if ($season_users_row['usertype_admin'] == 1)
-	{
-	  $user['usertype_admin'] = $season_users_row['usertype_admin'];
-	}
-	if ($season_users_row['usertype_player'] == 1)
-	{
-	  $user['usertype_player'] = $season_users_row['usertype_player'];
-	}
+        if ($season_users_row['usertype_root'] == 1)
+        {
+          $user['usertype_root'] = $season_users_row['usertype_root'];
+        }
+        if ($season_users_row['usertype_headadmin'] == 1)
+        {
+          $user['usertype_headadmin'] = $season_users_row['usertype_headadmin'];
+        }
+        if ($season_users_row['usertype_admin'] == 1)
+        {
+          $user['usertype_admin'] = $season_users_row['usertype_admin'];
+        }
+        if ($season_users_row['usertype_player'] == 1)
+        {
+          $user['usertype_player'] = $season_users_row['usertype_player'];
+        }
       }
     }
   }
