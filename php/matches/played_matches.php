@@ -46,7 +46,7 @@ if ($user['usertype_player'])
       {
 	$player1 = "-";
       }
-      $content_tpl->set_var("I_PLAYER1", $player1);
+      $content_tpl->set_var("I_PLAYER1", htmlspecialchars($player1));
 
       if ($matches_row['id_player2'] > 0)
       {
@@ -58,13 +58,13 @@ if ($user['usertype_player'])
       {
 	$player2 = "-";
       }
-      $content_tpl->set_var("I_PLAYER2", $player2);
+      $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
 
       // outcome
       $outcome = "{$matches_row['score_p1']} - {$matches_row['score_p2']}";
 
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-      $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+      $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       $content_tpl->set_var("I_OUTCOME", $outcome);

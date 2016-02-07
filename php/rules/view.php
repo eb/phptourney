@@ -30,8 +30,8 @@ if ($user['usertype_admin'])
     while ($seasons_row = dbFetch($seasons_ref))
     {
       $content_tpl->set_var("I_ID_SEASON", $seasons_row['id']);
-      $content_tpl->set_var("I_SECTION_NAME", $seasons_row['section_name']);
-      $content_tpl->set_var("I_SEASON_NAME", $seasons_row['season_name']);
+      $content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($seasons_row['section_name']));
+      $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['season_name']));
       $content_tpl->parse("H_ADD_SEASON_RULES", "B_ADD_SEASON_RULES", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $season['id']);
@@ -53,8 +53,8 @@ else
   {
     $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->set_var("I_ID_RULE", $rules_row['id']);
-    $content_tpl->set_var("I_SUBJECT", $rules_row['subject']);
-    $content_tpl->set_var("I_BODY", nl2br($rules_row['body']));
+    $content_tpl->set_var("I_SUBJECT", htmlspecialchars($rules_row['subject']));
+    $content_tpl->set_var("I_BODY", Parsedown::instance()->text($rules_row['body']));
     if ($user['usertype_admin'])
     {
       $content_tpl->parse("H_EDIT_DELETE", "B_EDIT_DELETE");

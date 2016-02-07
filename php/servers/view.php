@@ -51,11 +51,11 @@ if (file_exists($f_serverlist))
     $no_servers = 0;
     $content_tpl->set_var("H_SERVER", "");
     foreach($serverlist_assoc[$country] as $server) {
-      $content_tpl->set_var("I_NAME", $server['name']);
-      $content_tpl->set_var("I_SERVER", $server['address']);
+      $content_tpl->set_var("I_NAME", htmlspecialchars($server['name']));
+      $content_tpl->set_var("I_SERVER", htmlspecialchars($server['address']));
       $content_tpl->parse("H_SERVER", "B_SERVER", true);
     }
-    $content_tpl->set_var("I_COUNTRY", $country);
+    $content_tpl->set_var("I_COUNTRY", htmlspecialchars($country));
     $content_tpl->parse("H_COUNTRY", "B_COUNTRY", true);
   }
   $content_tpl->parse("H_VIEW_SERVERS", "B_VIEW_SERVERS", true);

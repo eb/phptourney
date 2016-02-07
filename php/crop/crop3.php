@@ -31,8 +31,8 @@ if ($user['usertype_admin']) {
 		       "ON {$cfg['db_table_prefix']}users.`id_country` = {$cfg['db_table_prefix']}countries.`id` " .
 		       "WHERE {$cfg['db_table_prefix']}users.`id` = {$matches_row['id_player1']}");
   $users_row = dbFetch($users_ref);
-  $content_tpl->set_var("I_PLAYER1", $users_row['username']);
-  $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", $users_row['abbreviation']);
+  $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
+  $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row['abbreviation']));
 
   $users_ref = dbQuery("SELECT {$cfg['db_table_prefix']}users.*, {$cfg['db_table_prefix']}countries.`abbreviation` " .
 		       "FROM `{$cfg['db_table_prefix']}users` " .
@@ -40,8 +40,8 @@ if ($user['usertype_admin']) {
 		       "ON {$cfg['db_table_prefix']}users.`id_country` = {$cfg['db_table_prefix']}countries.`id` " .
 		       "WHERE {$cfg['db_table_prefix']}users.`id` = {$matches_row['id_player2']}");
   $users_row = dbFetch($users_ref);
-  $content_tpl->set_var("I_PLAYER2", $users_row['username']);
-  $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", $users_row['abbreviation']);
+  $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
+  $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row['abbreviation']));
   $content_tpl->parse("H_MATCH", "B_MATCH");
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -87,10 +87,10 @@ if ($user['usertype_admin']) {
   `{$cfg['convert']} -geometry 320 $sshot_thumb $sshot_thumb`;
 
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-  $content_tpl->set_var("I_ID_MATCH", $_REQUEST['opt']);
-  $content_tpl->set_var("I_NUM_MAP", $_REQUEST['num_map']);
-  $content_tpl->set_var("I_MAP_NAME", $maps_row['map']);
-  $content_tpl->set_var("I_SCREENSHOT_THUMB", $sshot_thumb);
+  $content_tpl->set_var("I_ID_MATCH", $id_match);
+  $content_tpl->set_var("I_NUM_MAP", $num_map);
+  $content_tpl->set_var("I_MAP_NAME", htmlspecialchars($maps_row['map']));
+  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb));
   $content_tpl->parse("H_CROP3", "B_CROP3");
 }
 else

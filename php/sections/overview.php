@@ -32,8 +32,8 @@ if ($user['usertype_root'])
     {
       $content_tpl->set_var("I_SECTION_COUNTER", ++$section_counter);
       $content_tpl->set_var("I_ID_SECTION", $sections_row['id']);
-      $content_tpl->set_var("I_SECTION_NAME", $sections_row['name']);
-      $content_tpl->set_var("I_SECTION_ABBREVIATION", $sections_row['abbreviation']);
+      $content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($sections_row['name']));
+      $content_tpl->set_var("I_SECTION_ABBREVIATION", htmlspecialchars($sections_row['abbreviation']));
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
       $content_tpl->parse("H_SECTION", "B_SECTION", true);
     }

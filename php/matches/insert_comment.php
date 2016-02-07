@@ -19,7 +19,8 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-$content_tpl->set_var("I_ID_MATCH", $_REQUEST['opt']);
+$id_match = intval($_REQUEST['opt']);
+$content_tpl->set_var("I_ID_MATCH", $id_match);
 
 // access for users
 if ($user['uid'])
@@ -31,7 +32,6 @@ if ($user['uid'])
     $content_tpl->parse("H_WARNING_BODY", "B_WARNING_BODY");
   }
   // comments-query
-  $id_match = intval($_REQUEST['opt']);
   $minute = (date("i") + 55) % 60;
   $now = date("Y-m-d H:{$minute}:s");
   $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}match_comments` " .
@@ -61,7 +61,6 @@ if ($user['uid'])
     }
     else
     {
-      $id_match = intval($_REQUEST['opt']);
       $body = dbEscape($_REQUEST['body']);
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}match_comments` " .
 	       "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .

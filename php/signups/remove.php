@@ -34,7 +34,8 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    $content_tpl->set_var("I_ID_PLAYER", $_REQUEST['opt']);
+    $id_player = intval($_REQUEST['opt']);
+    $content_tpl->set_var("I_ID_PLAYER", $id_player);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_REMOVE_PLAYER", "B_REMOVE_PLAYER");
   }

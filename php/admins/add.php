@@ -23,8 +23,8 @@ if ($user['usertype_headadmin'])
   while ($users_row = dbFetch($users_ref))
   {
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
-    $content_tpl->set_var("I_USERNAME", $users_row['username']);
-    $content_tpl->set_var("I_EMAIL", $users_row['email']);
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+    $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
     $content_tpl->parse("H_USERNAME", "B_USERNAME", true);
   }
 

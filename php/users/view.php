@@ -35,13 +35,13 @@ $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 		      "WHERE `id` = $id_user");
 $users_row = dbFetch($users_ref);
 
-$content_tpl->set_var("I_USERNAME", $users_row['username']);
-$content_tpl->set_var("I_IRC_CHANNEL", $users_row['irc_channel']);
+$content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+$content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
 $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$users_row['id_country']}");
 $countries_row = dbFetch($countries_ref);
-$content_tpl->set_var("I_COUNTRY_ABBREVIATION", $countries_row['abbreviation']);
-$content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+$content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
+$content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
 
 $is_complete = 0;
 if ($user['usertype_admin'])
@@ -66,7 +66,7 @@ else if ($user['usertype_player'])
 }
 if ($is_complete)
 {
-  $content_tpl->set_var("I_EMAIL", $users_row['email']);
+  $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
   $content_tpl->parse("H_SHOW_EMAIL", "B_SHOW_EMAIL");
 }
 
@@ -79,7 +79,7 @@ if ($user['usertype_admin'])
   {
     if ($season_users_row['ip'] != "")
     {
-      $content_tpl->set_var("I_IP", $season_users_row['ip']);
+      $content_tpl->set_var("I_IP", htmlspecialchars($season_users_row['ip']));
       $content_tpl->parse("H_SHOW_IP", "B_SHOW_IP", true);
     }
   }
@@ -121,7 +121,7 @@ else
     {
       $player1 = "-";
     }
-    $content_tpl->set_var("I_PLAYER1", $player1);
+    $content_tpl->set_var("I_PLAYER1", htmlspecialchars($player1));
 
     if ($matches_row['id_player2'] > 0)
     {
@@ -133,16 +133,16 @@ else
     {
       $player2 = "-";
     }
-    $content_tpl->set_var("I_PLAYER2", $player2);
+    $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
 
     // outcome
     $outcome = "{$matches_row['score_p1']} - {$matches_row['score_p2']}";
 
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
-    $content_tpl->set_var("I_ROUND", $matches_row['round']);
-    $content_tpl->set_var("I_MATCH", $matches_row['match']);
-    $content_tpl->set_var("I_OUTCOME", $outcome);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
+    $content_tpl->set_var("I_ROUND", htmlspecialchars($matches_row['round']));
+    $content_tpl->set_var("I_MATCH", htmlspecialchars($matches_row['match']));
+    $content_tpl->set_var("I_OUTCOME", htmlspecialchars($outcome));
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_PLAYED_MATCH", "B_PLAYED_MATCH", true);
   }
@@ -195,8 +195,8 @@ else
       $usertype = true;
     }
 
-    $content_tpl->set_var("I_TOURNEY_NAME", $season_users_row['section_name']);
-    $content_tpl->set_var("I_SEASON_NAME", $season_users_row['season_name']);
+    $content_tpl->set_var("I_TOURNEY_NAME", htmlspecialchars($season_users_row['section_name']));
+    $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($season_users_row['season_name']));
     if ($usertype)
     {
       $content_tpl->parse("H_SEASON", "B_SEASON", true);

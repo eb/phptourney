@@ -17,7 +17,8 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_ADMIN", "H_REMOVE_ADMIN");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $content_tpl->set_var("I_ID_USER", $_REQUEST['opt']);
+  $id_user = intval($_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_USER", $id_user);
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_REMOVE_ADMIN", "B_REMOVE_ADMIN");
 }

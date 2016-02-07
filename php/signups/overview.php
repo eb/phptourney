@@ -73,8 +73,8 @@ if ($user['usertype_headadmin'])
       if (dbNumRows($season_users_ref) == 0)
       {
 	$content_tpl->set_var("I_ID_USER", $users_row['id']);
-	$content_tpl->set_var("I_USERNAME", $users_row['username']);
-	$content_tpl->set_var("I_EMAIL", $users_row['email']);
+	$content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+	$content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
 	$content_tpl->parse("H_ADD_PLAYER", "B_ADD_PLAYER", true);
       }
     }
@@ -103,8 +103,8 @@ if ($user['usertype_headadmin'])
       if (dbNumRows($season_users_ref) == 0)
       {
 	$content_tpl->set_var("I_ID_USER", $users_row['id']);
-	$content_tpl->set_var("I_USERNAME", $users_row['username']);
-	$content_tpl->set_var("I_EMAIL", $users_row['email']);
+	$content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+	$content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
 	$content_tpl->parse("H_INVITE_PLAYER", "B_INVITE_PLAYER", true);
       }
     }
@@ -134,8 +134,8 @@ if ($user['usertype_headadmin'])
     {
       $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_EMAIL", $users_row['email']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+      $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_ACCEPTED_PLAYER", "B_ACCEPTED_PLAYER", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
@@ -165,8 +165,8 @@ if ($user['usertype_headadmin'])
     {
       $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_EMAIL", $users_row['email']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+      $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_REJECTED_PLAYER", "B_REJECTED_PLAYER", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
@@ -196,8 +196,8 @@ if ($user['usertype_headadmin'])
     {
       $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_EMAIL", $users_row['email']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+      $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_INVITATION", "B_INVITATION", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

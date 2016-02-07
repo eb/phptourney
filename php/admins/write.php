@@ -28,9 +28,9 @@ if ($user['uid'])
 
   if ($season_users_row['usertype_headadmin'] or $season_users_row['usertype_admin'])
   {
-    $content_tpl->set_var("I_ID_USER", $_REQUEST['opt']);
+    $content_tpl->set_var("I_ID_USER", $id_user);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_WRITE_MAIL", "B_WRITE_MAIL");
   }
   else

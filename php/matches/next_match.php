@@ -29,7 +29,7 @@ if ($user['usertype_player'])
   {
     if ($matches_row['id_player1'] != 0 and $matches_row['id_player2'] != 0)
     {
-      $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+      $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
@@ -52,14 +52,14 @@ if ($user['usertype_player'])
       if ($seed_p1 < $seed_p2)
       {
 	$content_tpl->parse("H_MARK_PLAYER1", "B_MARK_PLAYER1");
-	$content_tpl->set_var("I_PLAYER1", $username_p1);
-	$content_tpl->set_var("I_PLAYER2", $username_p2);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($username_p1));
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($username_p2));
       }
       elseif ($seed_p1 > $seed_p2)
       {
 	$content_tpl->parse("H_MARK_PLAYER2", "B_MARK_PLAYER2");
-	$content_tpl->set_var("I_PLAYER1", $username_p1);
-	$content_tpl->set_var("I_PLAYER2", $username_p2);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($username_p1));
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($username_p2));
       }
 
       $users_ref1 = dbQuery("SELECT U.*, C.`abbreviation` " .
@@ -69,7 +69,7 @@ if ($user['usertype_player'])
 			     "WHERE U.`id` = {$matches_row['id_player1']}");
       $users_row1 = dbFetch($users_ref1);
       $content_tpl->set_var("I_ID_PLAYER1", $matches_row['id_player1']);
-      $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", $users_row1['abbreviation']);
+      $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row1['abbreviation']));
 
       $users_ref2 = dbQuery("SELECT U.*, C.`abbreviation` " .
 			     "FROM `{$cfg['db_table_prefix']}users` U " .
@@ -78,7 +78,7 @@ if ($user['usertype_player'])
 			     "WHERE U.`id` = {$matches_row['id_player2']}");
       $users_row2 = dbFetch($users_ref2);
       $content_tpl->set_var("I_ID_PLAYER2", $matches_row['id_player2']);
-      $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", $users_row2['abbreviation']);
+      $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row2['abbreviation']));
 
       $round_pre = $matches_row['round'] - 1;
       $round_post = $matches_row['round'];
@@ -99,8 +99,8 @@ if ($user['usertype_player'])
 	$day = $matches[1];
 	$deadline_pre = date("Y-m-d", gmmktime(0, 0, 0, $month, $day + 1, $year));
 	$deadline_post = $deadlines_row2['deadline'];
-	$content_tpl->set_var("I_DEADLINE_PRE", $deadline_pre);
-	$content_tpl->set_var("I_DEADLINE_POST", $deadline_post);
+	$content_tpl->set_var("I_DEADLINE_PRE", htmlspecialchars($deadline_pre));
+	$content_tpl->set_var("I_DEADLINE_POST", htmlspecialchars($deadline_post));
 	$content_tpl->parse("H_DEADLINE", "B_DEADLINE");
       }
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

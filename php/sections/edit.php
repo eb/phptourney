@@ -19,14 +19,14 @@ if ($user['usertype_root'])
   $id_section = intval($_REQUEST['opt']);
   $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = $id_section AND `deleted` = 0");
   $sections_row = dbFetch($sections_ref);
-  $content_tpl->set_var("I_ID_SECTION", $_REQUEST['opt']);
-  $content_tpl->set_var("I_NAME", $sections_row['name']);
-  $content_tpl->set_var("I_ABBREVIATION", $sections_row['abbreviation']);
-  $content_tpl->set_var("I_ADMIN_IRC_CHANNELS", $sections_row['admin_irc_channels']);
-  $content_tpl->set_var("I_PUBLIC_IRC_CHANNELS", $sections_row['public_irc_channels']);
-  $content_tpl->set_var("I_BOT_HOST", $sections_row['bot_host']);
-  $content_tpl->set_var("I_BOT_PORT", $sections_row['bot_port']);
-  $content_tpl->set_var("I_BOT_PASSWORD", $sections_row['bot_password']);
+  $content_tpl->set_var("I_ID_SECTION", $id_section);
+  $content_tpl->set_var("I_NAME", htmlspecialchars($sections_row['name']));
+  $content_tpl->set_var("I_ABBREVIATION", htmlspecialchars($sections_row['abbreviation']));
+  $content_tpl->set_var("I_ADMIN_IRC_CHANNELS", htmlspecialchars($sections_row['admin_irc_channels']));
+  $content_tpl->set_var("I_PUBLIC_IRC_CHANNELS", htmlspecialchars($sections_row['public_irc_channels']));
+  $content_tpl->set_var("I_BOT_HOST", htmlspecialchars($sections_row['bot_host']));
+  $content_tpl->set_var("I_BOT_PORT", htmlspecialchars($sections_row['bot_port']));
+  $content_tpl->set_var("I_BOT_PASSWORD", htmlspecialchars($sections_row['bot_password']));
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_EDIT_SECTION", "B_EDIT_SECTION");
 }

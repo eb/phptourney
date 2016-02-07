@@ -33,7 +33,6 @@ if ($users_row = dbFetch($users_ref))
 
   // subject
   $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
-  $content_tpl->set_var("I_SEASON_NAME", $_REQUEST['name']);
   $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
   $subject = $content_tpl->get("MAIL_SUBJECT");
 

@@ -17,13 +17,13 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_BANS", "H_VIEW_BANS");
 if ($user['usertype_admin'])
 {
   $ip = $_REQUEST['opt'];
-  $content_tpl->set_var("I_IP", $ip);
+  $content_tpl->set_var("I_IP", htmlspecialchars($ip));
   $ipc = preg_replace("/(.*\\.).*/", "$1*", $_REQUEST['opt']);
-  $content_tpl->set_var("I_IPC", $ipc);
+  $content_tpl->set_var("I_IPC", htmlspecialchars($ipc));
   $ipb = preg_replace("/(.*\\.).*\\..*/", "$1*.*", $_REQUEST['opt']);
-  $content_tpl->set_var("I_IPB", $ipb);
+  $content_tpl->set_var("I_IPB", htmlspecialchars($ipb));
   $ipa = preg_replace("/(.*\\.).*\\..*\\..*/", "$1*.*.*", $_REQUEST['opt']);
-  $content_tpl->set_var("I_IPA", $ipa);
+  $content_tpl->set_var("I_IPA", htmlspecialchars($ipa));
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_VIEW_BANS", "B_VIEW_BANS");
 }

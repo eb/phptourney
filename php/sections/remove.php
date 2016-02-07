@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_SECTION", "H_REMOVE_SECTION");
 // access for root only
 if ($user['usertype_root'])
 {
-  $content_tpl->set_var("I_ID_SECTION", $_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_SECTION", htmlspecialchars($_REQUEST['opt']));
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_REMOVE_SECTION", "B_REMOVE_SECTION");
 }

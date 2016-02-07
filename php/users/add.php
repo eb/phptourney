@@ -20,7 +20,7 @@ $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
 while ($countries_row = dbFetch($countries_ref))
 {
   $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);
-  $content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+  $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
   $content_tpl->parse("H_ADD_COUNTRY", "B_ADD_COUNTRY", true);
 }
 

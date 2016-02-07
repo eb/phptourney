@@ -109,34 +109,6 @@ function isIp($string)
 }
 
 //================================================================================
-// function addSpacesToLongWords
-// Cuts strings in pieces
-//================================================================================
-
-function addSpacesToLongWords($string)
-{
-  $counter = 0;
-  for ($i = 0; $i < strlen($string); $i++)
-  {
-    if (preg_match("/[^ \\t\\n]/", substr($string, $i, 1)))
-    {
-      $counter++;
-    }
-    else
-    {
-      $counter = 0;
-    }
-    if ($counter == 80)
-    {
-      $counter = 0;
-      $string = substr($string, 0, $i + 1) . " " . substr($string, $i + 1);
-      $i++;
-    }
-  }
-  return($string);
-}
-
-//================================================================================
 // function sendMail
 // Wrapper function for mail()
 //================================================================================

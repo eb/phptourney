@@ -48,8 +48,8 @@ else
 			 "ORDER BY `username` ASC");
     $users_row = dbFetch($users_ref);
     $content_tpl->set_var("I_ADMIN_COUNTER", ++$admin_counter);
-    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $users_row['abbreviation']);
-    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($users_row['abbreviation']));
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->set_var("H_USERTYPE_HEADADMIN", "");
@@ -68,7 +68,7 @@ else
     if ($user['usertype_admin'])
     {
       $content_tpl->set_var("I_ID_SEASON", $season['id']);
-      $content_tpl->set_var("I_EMAIL", $users_row['email']);
+      $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_EMAIL", "B_EMAIL");
       $content_tpl->parse("H_EDIT_DELETE", "B_EDIT_DELETE");
     }

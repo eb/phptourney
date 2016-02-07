@@ -33,10 +33,10 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   $users_row = dbFetch($users_ref);
 
   $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
-  $content_tpl->set_var("I_USERNAME", $users_row['username']);
-  $content_tpl->set_var("I_HEADING", $news_row['heading']);
-  $content_tpl->set_var("I_BODY", nl2br($news_row['body']));
-  $content_tpl->set_var("I_SUBMITTED", $news_row['submitted']);
+  $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+  $content_tpl->set_var("I_HEADING", htmlspecialchars($news_row['heading']));
+  $content_tpl->set_var("I_BODY", Parsedown::instance()->text($news_row['body']));
+  $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($news_row['submitted']));
   $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
 
   // comments-query
@@ -57,7 +57,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
     while ($comments_row = dbFetch($comments_ref))
     {
       $content_tpl->set_var("I_COUNTER", $counter);
-      $content_tpl->set_var("I_USERNAME", $comments_row['username']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($comments_row['username']));
       if ($user['usertype_admin'])
       {
 	$ip = $comments_row['ip'];
@@ -66,14 +66,14 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
       {
 	$ip = preg_replace("/(.*\\.).*/", "$1xxx", $comments_row['ip']);
       }
-      $content_tpl->set_var("I_IP", $ip);
-      $content_tpl->set_var("I_BODY", nl2br(addSpacesToLongWords($comments_row['body'])));
-      $content_tpl->set_var("I_SUBMITTED", $comments_row['submitted']);
+      $content_tpl->set_var("I_IP", htmlspecialchars($ip));
+      $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
+      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($comments_row['submitted']));
 
       if ($user['usertype_admin'] == 1)
       {
 	$ip = $comments_row['ip'];
-	$content_tpl->set_var("I_IP", $ip);
+	$content_tpl->set_var("I_IP", htmlspecialchars($ip));
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
 	$content_tpl->parse("H_BANS", "B_BANS");
       }

@@ -59,7 +59,7 @@ if ($user['usertype_admin'] or
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			      "WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER1", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -70,7 +70,7 @@ if ($user['usertype_admin'] or
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			      "WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER2", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -89,7 +89,7 @@ if ($user['usertype_admin'] or
       while ($mappool_row = dbFetch($mappool_ref))
       {
 	$content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
-	$content_tpl->set_var("I_MAP", $mappool_row['map']);
+	$content_tpl->set_var("I_MAP", htmlspecialchars($mappool_row['map']));
 	$content_tpl->parse("H_OPTION_MAP", "B_OPTION_MAP", true);
       }
 
@@ -102,12 +102,12 @@ if ($user['usertype_admin'] or
       $content_tpl->parse("H_MATCH", "B_MATCH");
 
       // matchkey
-      $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+      $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-      $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+      $content_tpl->set_var("I_OPT", $id_match);
       $content_tpl->parse("H_ADD_REPORT", "B_ADD_REPORT");
     }
 
@@ -140,7 +140,7 @@ if ($user['usertype_admin'] or
 	  $content_tpl->set_var("H_SCREENSHOT", "");
 	  if (file_exists($sshot))
 	  {
-	    $content_tpl->set_var("I_SCREENSHOT", $sshot);
+	    $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($sshot));
 	    $content_tpl->parse("H_SCREENSHOT", "B_SCREENSHOT");
 	  }
 	  $content_tpl->set_var("I_NUM_MAP", $maps_row['num_map']);
@@ -154,7 +154,7 @@ if ($user['usertype_admin'] or
       else
       {
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-	$content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+	$content_tpl->set_var("I_OPT", $id_match);
 	$content_tpl->parse("H_ADD_COMMENT", "B_ADD_COMMENT");
       }
     }

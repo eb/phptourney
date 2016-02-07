@@ -36,7 +36,7 @@ if ($season['status'] == "signups")
       $users_row = dbFetch($users_ref);
 
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_VIEW_LOGIN", "B_VIEW_LOGIN");
     }
 

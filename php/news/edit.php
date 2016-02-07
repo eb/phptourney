@@ -23,10 +23,10 @@ $news_row = dbFetch($news_ref);
 // access for admins [public / private news that they wrote themselves]
 if ($news_row['id_season'] == 0 and $user['usertype_root'] or
     $news_row['id_season'] != 0 and ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user'])) {
-  $content_tpl->set_var("I_HEADING", $news_row['heading']);
-  $content_tpl->set_var("I_BODY", $news_row['body']);
+  $content_tpl->set_var("I_HEADING", htmlspecialchars($news_row['heading']));
+  $content_tpl->set_var("I_BODY", htmlspecialchars($news_row['body']));
   $content_tpl->set_var("I_OPT", $news_row['id_news_group']);
-  $content_tpl->set_var("I_ID_NEWS", $_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_NEWS", $id_news);
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_EDIT_NEWS", "B_EDIT_NEWS");
 }

@@ -75,7 +75,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1 and $user['uid'])
       $content_tpl->parse("H_MESSAGE_COMMENT_ADDED", "B_MESSAGE_COMMENT_ADDED");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-      $content_tpl->set_var("I_ID_NEWS", $_REQUEST['opt']);
+      $content_tpl->set_var("I_ID_NEWS", $id_news);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }
   }

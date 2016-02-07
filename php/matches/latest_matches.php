@@ -38,8 +38,8 @@ else
     $player2 = $users_row['username'];
 
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_PLAYER1", "$player1");
-    $content_tpl->set_var("I_PLAYER2", "$player2");
+    $content_tpl->set_var("I_PLAYER1", htmlspecialchars($player1));
+    $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_LATEST_MATCH", "B_LATEST_MATCH", true);
   }

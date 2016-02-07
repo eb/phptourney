@@ -18,7 +18,7 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_NEWS", "H_ADD_NEWS");
 if ($_REQUEST['sid'] == 0 and $user['usertype_root'] or
     $_REQUEST['sid'] != 0 and $user['usertype_admin']) {
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-  $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+  $content_tpl->set_var("I_OPT", htmlspecialchars($_REQUEST['opt']));
   $content_tpl->parse("H_ADD_NEWS", "B_ADD_NEWS");
 }
 else

@@ -51,14 +51,14 @@ if ($user['usertype_admin'])
     {
       $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-      $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+      $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       if ($matches_row['id_player1'] > 0)
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER1", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -68,7 +68,7 @@ if ($user['usertype_admin'])
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER2", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -108,14 +108,14 @@ if ($user['usertype_admin'])
   {
     $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     if ($matches_row['id_player1'] > 0)
     {
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_PLAYER1", $users_row['username']);
+      $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
     }
     else
     {
@@ -125,7 +125,7 @@ if ($user['usertype_admin'])
     {
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_PLAYER2", $users_row['username']);
+      $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
     }
     else
     {
@@ -170,14 +170,14 @@ if ($user['usertype_admin'])
     {
       $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-      $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+      $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       if ($matches_row['id_player1'] > 0)
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER1", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -187,7 +187,7 @@ if ($user['usertype_admin'])
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER2", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
       }
       else
       {

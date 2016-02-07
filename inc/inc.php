@@ -40,6 +40,9 @@ require("$inc_path/db_mysql.inc.php");
 // template-class of the phplib
 require("$inc_path/template.inc.php");
 
+// markdown parser
+require("$inc_path/parsedown.inc.php");
+
 // http-requests
 require("$inc_path/request.inc.php");
 

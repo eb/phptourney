@@ -16,7 +16,8 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_MAP", "H_REMOVE_MAP");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $content_tpl->set_var("I_ID_MAP", $_REQUEST['opt']);
+  $id_map = intval($_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_MAP", $id_map);
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_REMOVE_MAP", "B_REMOVE_MAP");
 }

@@ -41,8 +41,9 @@ if ($user['usertype_headadmin'])
 
   if (!$is_complete)
   {
-    $content_tpl->set_var("I_MAP", $_REQUEST['map']);
-    $content_tpl->set_var("I_ID_MAP", $_REQUEST['opt']);
+    $id_map = intval($_REQUEST['opt']); // XXX
+    $content_tpl->set_var("I_MAP", htmlspecialchars($_REQUEST['map']));
+    $content_tpl->set_var("I_ID_MAP", $id_map);
     $content_tpl->parse("H_WARNING", "B_WARNING");
     $content_tpl->parse("H_BACK", "B_BACK");
   }

@@ -51,8 +51,8 @@ if ($matches_row = dbFetch($matches_ref))
 			  "WHERE U.`id` = {$matches_row['id_player1']}");
     $users_row = dbFetch($users_ref);
     $content_tpl->set_var("I_ID_PLAYER1", $users_row['id']);
-    $content_tpl->set_var("I_PLAYER1", $users_row['username']);
-    $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", $users_row['abbreviation']);
+    $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row['abbreviation']));
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_PLAYER1", "B_PLAYER1");
   }
@@ -71,8 +71,8 @@ if ($matches_row = dbFetch($matches_ref))
 			  "WHERE U.`id` = {$matches_row['id_player2']}");
     $users_row = dbFetch($users_ref);
     $content_tpl->set_var("I_ID_PLAYER2", $users_row['id']);
-    $content_tpl->set_var("I_PLAYER2", $users_row['username']);
-    $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", $users_row['abbreviation']);
+    $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row['abbreviation']));
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_PLAYER2", "B_PLAYER2");
   }
@@ -95,11 +95,11 @@ if ($matches_row = dbFetch($matches_ref))
     {
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['wo']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_PLAYER", $users_row['username']);
+      $content_tpl->set_var("I_PLAYER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_WO", "B_WO");
       if ($matches_row['comment_admin'] != "")
       {
-	$content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($matches_row['comment_admin'])));
+	$content_tpl->set_var("I_COMMENT", Parsedown::instance()->test($matches_row['comment_admin']));
 	$content_tpl->parse("I_COMMENT", "B_COMMENT_ADMIN");
       }
       $content_tpl->parse("H_OUTCOME", "B_OUTCOME");
@@ -110,17 +110,17 @@ if ($matches_row = dbFetch($matches_ref))
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
-	$content_tpl->set_var("I_PLAYER1", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
 	$content_tpl->set_var("I_PLAYER2", "-");
-	$content_tpl->set_var("I_PLAYER", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER", htmlspecialchars($users_row['username']));
       }
       elseif ($matches_row['id_player2'] > 0)
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", "-");
-	$content_tpl->set_var("I_PLAYER2", $users_row['username']);
-	$content_tpl->set_var("I_PLAYER", $users_row['username']);
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
+	$content_tpl->set_var("I_PLAYER", htmlspecialchars($users_row['username']));
       }
       else
       {
@@ -131,7 +131,7 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->parse("H_BYE", "B_BYE");
       if ($matches_row['comment_admin'] != "")
       {
-	$content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($matches_row['comment_admin'])));
+	$content_tpl->set_var("I_COMMENT", Parsedown::instance()->text($matches_row['comment_admin']));
 	$content_tpl->parse("I_COMMENT", "B_COMMENT_ADMIN");
       }
       $content_tpl->parse("H_OUTCOME", "B_OUTCOME");
@@ -141,7 +141,7 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->parse("H_OUT", "B_OUT");
       if ($matches_row['comment_admin'] != "")
       {
-	$content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($matches_row['comment_admin'])));
+	$content_tpl->set_var("I_COMMENT", Parsedown::instance()->text($matches_row['comment_admin']));
 	$content_tpl->parse("I_COMMENT", "B_COMMENT_ADMIN");
       }
       $content_tpl->parse("H_OUTCOME", "B_OUTCOME");
@@ -172,32 +172,32 @@ if ($matches_row = dbFetch($matches_ref))
 	$screenshot_thumb = $screenshot_prefix . "-m" . $maps_row['num_map'] . "_thumb.jpg";
 	if (file_exists($screenshot) and file_exists($screenshot_thumb))
 	{
-	  $content_tpl->set_var("I_SCREENSHOT", $screenshot);
-	  $content_tpl->set_var("I_SCREENSHOT_THUMB", $screenshot_thumb);
+	  $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($screenshot));
+	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($screenshot_thumb));
 	  $content_tpl->parse("I_MAP_SCREENSHOT", "B_SCREENSHOT");
 	}
-	$content_tpl->set_var("I_MAP", $maps_row['map']);
+	$content_tpl->set_var("I_MAP", htmlspecialchars($maps_row['map']));
 	$content_tpl->set_var("I_SCORE", $maps_row['score_p1'] . " - " . $maps_row['score_p2']);
 
 	$content_tpl->set_var("I_MAP_COMMENTS", "");
 	// comments player1
 	if ($maps_row['comment_p1'] != "")
 	{
-	  $content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($maps_row['comment_p1'])));
+	  $content_tpl->set_var("I_COMMENT", nl2br(htmlspecialchars($maps_row['comment_p1'])));
 	  $content_tpl->parse("I_MAP_COMMENTS", "B_COMMENT_P1", true);
 	}
 
 	// comments player2
 	if ($maps_row['comment_p2'] != "")
 	{
-	  $content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($maps_row['comment_p2'])));
+	  $content_tpl->set_var("I_COMMENT", nl2br(htmlspecialchars($maps_row['comment_p2'])));
 	  $content_tpl->parse("I_MAP_COMMENTS", "B_COMMENT_P2", true);
 	}
 
 	// comments admin
 	if ($maps_row['comment_admin'] != "")
 	{
-	  $content_tpl->set_var("I_COMMENT", nl2br(addSpacesToLongWords($maps_row['comment_admin'])));
+	  $content_tpl->set_var("I_COMMENT", Parsedown::instance()->text($maps_row['comment_admin']));
 	  $content_tpl->parse("I_MAP_COMMENTS", "B_COMMENT_ADMIN", true);
 	}
 	$content_tpl->parse("H_MAP", "B_MAP", true);
@@ -209,12 +209,12 @@ if ($matches_row = dbFetch($matches_ref))
     $demos_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}demos` WHERE `id_match` = $id_match");
     while ($demos_row = dbFetch($demos_ref))
     {
-      $content_tpl->set_var("I_URL", $demos_row['url']);
+      $content_tpl->set_var("I_URL", htmlspecialchars($demos_row['url']));
       $content_tpl->parse("H_DEMOS", "B_DEMOS");
     }
   }
   // matchkey
-  $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+  $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
   $content_tpl->set_var("I_ROUND", $matches_row['round']);
   $content_tpl->set_var("I_MATCH", $matches_row['match']);
   $content_tpl->parse("H_MATCH", "B_MATCH");
@@ -222,20 +222,20 @@ if ($matches_row = dbFetch($matches_ref))
   // submitted
   if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
   {
-    $content_tpl->set_var("I_SUBMITTED", $matches_row['submitted']);
+    $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['submitter']}");
     $users_row = dbFetch($users_ref);
-    $content_tpl->set_var("I_SUBMITTER", $users_row['username']);
+    $content_tpl->set_var("I_SUBMITTER", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
   }
 
   // confirmed
   if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
   {
-    $content_tpl->set_var("I_CONFIRMED", $matches_row['confirmed']);
+    $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['confirmer']}");
     $users_row = dbFetch($users_ref);
-    $content_tpl->set_var("I_CONFIRMER", $users_row['username']);
+    $content_tpl->set_var("I_CONFIRMER", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");
   }
   $content_tpl->parse("H_VIEW_MATCH", "B_VIEW_MATCH");
@@ -256,16 +256,16 @@ if ($matches_row = dbFetch($matches_ref))
     while ($comments_row = dbFetch($comments_ref))
     {
       $content_tpl->set_var("I_COUNTER", $counter);
-      $content_tpl->set_var("I_USERNAME", $comments_row['username']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($comments_row['username']));
       $ip = preg_replace("/(.*\\.).*/", "$1xxx", $comments_row['ip']);
-      $content_tpl->set_var("I_IP", $ip);
-      $content_tpl->set_var("I_BODY", nl2br(addSpacesToLongWords($comments_row['body'])));
-      $content_tpl->set_var("I_SUBMITTED", $comments_row['submitted']);
+      $content_tpl->set_var("I_IP", htmlspecialchars($ip));
+      $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
+      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($comments_row['submitted']));
 
       if ($user['usertype_admin'] == 1)
       {
 	$ip = $comments_row['ip'];
-	$content_tpl->set_var("I_IP", $ip);
+	$content_tpl->set_var("I_IP", htmlspecialchars($ip));
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
 	$content_tpl->parse("H_BANS", "B_BANS");
       }
@@ -281,7 +281,7 @@ if ($matches_row = dbFetch($matches_ref))
   $content_tpl->parse("H_VIEW_COMMENTS", "B_VIEW_COMMENTS");
 
   // add comments
-  $content_tpl->set_var("I_ID_MATCH", $_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_MATCH", $id_match);
   $content_tpl->set_var("I_BODY", "");
   if ($user['uid'])
   {

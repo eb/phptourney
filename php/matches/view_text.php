@@ -52,8 +52,8 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	$content_tpl->set_var("I_MATCH_NUMBER", $j);
-	$content_tpl->set_var("I_PLAYER1", $matches[$matchkey]['player1']);
-	$content_tpl->set_var("I_PLAYER2", $matches[$matchkey]['player2']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($matches[$matchkey]['player1']));
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($matches[$matchkey]['player2']));
 
 	if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")
 	{
@@ -100,7 +100,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->parse("H_Q_ACTUAL_ROUND", "B_Q_ACTUAL_ROUND");
       }
-      $content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+      $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
       $content_tpl->parse("H_Q_DEADLINE", "B_Q_DEADLINE");
     }
 
@@ -122,8 +122,8 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	$content_tpl->set_var("I_MATCH_NUMBER", $j);
-	$content_tpl->set_var("I_PLAYER1", $matches[$matchkey]['player1']);
-	$content_tpl->set_var("I_PLAYER2", $matches[$matchkey]['player2']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($matches[$matchkey]['player1']));
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($matches[$matchkey]['player2']));
 
 	if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")
 	{
@@ -172,7 +172,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->parse("H_WB_ACTUAL_ROUND", "B_WB_ACTUAL_ROUND");
       }
-      $content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+      $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
       $content_tpl->parse("H_WB_DEADLINE", "B_WB_DEADLINE");
     }
     $content_tpl->parse("H_WB_ROUND", "B_WB_ROUND", true);
@@ -192,8 +192,8 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	$content_tpl->set_var("I_MATCH_NUMBER", $j);
-	$content_tpl->set_var("I_PLAYER1", $matches[$matchkey]['player1']);
-	$content_tpl->set_var("I_PLAYER2", $matches[$matchkey]['player2']);
+	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($matches[$matchkey]['player1']));
+	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($matches[$matchkey]['player2']));
 
 	if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")
 	{
@@ -236,7 +236,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       {
 	$content_tpl->parse("H_GF_ACTUAL_ROUND", "B_GF_ACTUAL_ROUND");
       }
-      $content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+      $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
       $content_tpl->parse("H_GF_DEADLINE", "B_GF_DEADLINE");
     }
 
@@ -268,8 +268,8 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
         {
 	  $content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	  $content_tpl->set_var("I_MATCH_NUMBER", $j);
-	  $content_tpl->set_var("I_PLAYER1", $matches[$matchkey]['player1']);
-	  $content_tpl->set_var("I_PLAYER2", $matches[$matchkey]['player2']);
+	  $content_tpl->set_var("I_PLAYER1", htmlspecialchars($matches[$matchkey]['player1']));
+	  $content_tpl->set_var("I_PLAYER2", htmlspecialchars($matches[$matchkey]['player2']));
 
 	  if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")
 	  {
@@ -314,7 +314,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 	{
 	  $content_tpl->parse("H_LB_ACTUAL_ROUND", "B_LB_ACTUAL_ROUND");
 	}
-	$content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+	$content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
 	$content_tpl->parse("H_LB_DEADLINE", "B_LB_DEADLINE");
       }
       $content_tpl->parse("H_LB_ROUND", "B_LB_ROUND", true);

@@ -371,7 +371,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  // cropping
 	  if ($cfg['convert'] != "")
 	  {
-	    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+	    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
 	    $content_tpl->set_var("I_ROUND", $matches_row['round']);
 	    $content_tpl->set_var("I_MATCH", $matches_row['match']);
 	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

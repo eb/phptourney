@@ -34,8 +34,8 @@ if ($user['usertype_root'])
     {
       $content_tpl->set_var("I_USER_COUNTER", ++$user_counter);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_EMAIL", $users_row['email']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+      $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_USER", "B_USER", true);
     }
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);

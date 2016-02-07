@@ -30,7 +30,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     $content_tpl->set_var("I_WINMAPS", $matches_row['num_winmaps']);
@@ -47,7 +47,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     $content_tpl->set_var("I_WINMAPS", $matches_row['num_winmaps']);
@@ -64,7 +64,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     $content_tpl->set_var("I_WINMAPS", $matches_row['num_winmaps']);

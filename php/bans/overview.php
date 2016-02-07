@@ -33,7 +33,7 @@ if ($user['usertype_admin'])
     {
       $content_tpl->set_var("I_BAN_COUNTER", ++$ban_counter);
       $content_tpl->set_var("I_ID_BAN", $bans_row['id']);
-      $content_tpl->set_var("I_IP", $bans_row['ip']);
+      $content_tpl->set_var("I_IP", htmlspecialchars($bans_row['ip']));
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
       $content_tpl->parse("H_BAN", "B_BAN", true);
     }

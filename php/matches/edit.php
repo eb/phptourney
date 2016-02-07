@@ -37,8 +37,8 @@ if ($user['usertype_admin'])
   $matches_row = dbFetch($matches_ref);
   if (isLastMatch($matches_row))
   {
-    $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_OPT", $id_match);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
@@ -48,7 +48,7 @@ if ($user['usertype_admin'])
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			   "WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_PLAYER1", $users_row['username']);
+      $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
     }
     else
     {
@@ -59,7 +59,7 @@ if ($user['usertype_admin'])
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			   "WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_PLAYER2", $users_row['username']);
+      $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
     }
     else
     {
@@ -99,7 +99,7 @@ if ($user['usertype_admin'])
     {
       $content_tpl->parse("H_OPTION_BYE_SELECTED", "B_OPTION_BYE_UNSELECTED");
     }
-    $content_tpl->set_var("I_COMMENT_ADMIN", $matches_row['comment_admin']);
+    $content_tpl->set_var("I_COMMENT_ADMIN", htmlspecialchars($matches_row['comment_admin']));
     $content_tpl->parse("H_NOT_PLAYED", "B_NOT_PLAYED");
 
     // maps
@@ -119,7 +119,7 @@ if ($user['usertype_admin'])
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
 	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
-	  $content_tpl->set_var("I_MAP", $mappool_row['map']);
+	  $content_tpl->set_var("I_MAP", htmlspecialchars($mappool_row['map']));
 	  if ($maps_row['id_map'] == $mappool_row['id'])
 	  {
 	    $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_SELECTED", true);
@@ -145,15 +145,15 @@ if ($user['usertype_admin'])
 	$sshot_thumb = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}_thumb.jpg";
 	if (file_exists($sshot))
 	{
-	  $content_tpl->set_var("I_SCREENSHOT", $sshot);
-	  $content_tpl->set_var("I_SCREENSHOT_THUMB", $sshot_thumb);
+	  $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($sshot));
+	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb));
 	  $content_tpl->parse("H_SCREENSHOT", "B_SCREENSHOT");
 	}
 
 	// comments
-	$content_tpl->set_var("I_COMMENT_ADMIN", $maps_row['comment_admin']);
-	$content_tpl->set_var("I_COMMENT_P1", $maps_row['comment_p1']);
-	$content_tpl->set_var("I_COMMENT_P2", $maps_row['comment_p2']);
+	$content_tpl->set_var("I_COMMENT_ADMIN", htmlspecialchars($maps_row['comment_admin']));
+	$content_tpl->set_var("I_COMMENT_P1", htmlspecialchars($maps_row['comment_p1']));
+	$content_tpl->set_var("I_COMMENT_P2", htmlspecialchars($maps_row['comment_p2']));
       }
       else
       {
@@ -164,7 +164,7 @@ if ($user['usertype_admin'])
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
 	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
-	  $content_tpl->set_var("I_MAP", $mappool_row['map']);
+	  $content_tpl->set_var("I_MAP", htmlspecialchars($mappool_row['map']));
 	  $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_UNSELECTED", true);
 	}
 
@@ -182,27 +182,27 @@ if ($user['usertype_admin'])
     $content_tpl->parse("H_MATCH", "B_MATCH");
 
     // matchkey
-    $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
+    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
     // submitted
     if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
     {
-      $content_tpl->set_var("I_SUBMITTED", $matches_row['submitted']);
+      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['submitter']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_SUBMITTER", $users_row['username']);
+      $content_tpl->set_var("I_SUBMITTER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
     }
 
     // confirmed
     if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
     {
-      $content_tpl->set_var("I_CONFIRMED", $matches_row['confirmed']);
+      $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['confirmer']}");
       $users_row = dbFetch($users_ref);
-      $content_tpl->set_var("I_CONFIRMER", $users_row['username']);
+      $content_tpl->set_var("I_CONFIRMER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");
     }
 

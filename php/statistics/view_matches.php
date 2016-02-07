@@ -86,7 +86,7 @@ while ($sections_row = dbFetch($sections_ref))
     $season_outs = dbNumRows($matches_ref);
     $section_outs += $season_outs;
 
-    $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+    $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
     if ($seasons_row['status'] == "")
     {
       $content_tpl->parse("I_LED", "B_LED_RED");
@@ -119,17 +119,17 @@ while ($sections_row = dbFetch($sections_ref))
   $total_byes += $section_byes;
   $total_outs += $section_outs;
 
+  $content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($sections_row['name']));
   $content_tpl->set_var("I_SIGNUPS", $section_signups);
   $content_tpl->set_var("I_MATCHES", $section_matches);
   $content_tpl->set_var("I_PLAYED", $section_played);
   $content_tpl->set_var("I_WOS", $section_wos);
   $content_tpl->set_var("I_BYES", $section_byes);
   $content_tpl->set_var("I_OUTS", $section_outs);
-  $content_tpl->set_var("I_SECTION_NAME", $sections_row['name']);
   $content_tpl->parse("H_SECTION_MATCHES", "B_SECTION_MATCHES", true);
 }
 
-$content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
+$content_tpl->set_var("I_TOURNEY_NAME", htmlspecialchars($cfg['tourney_name']));
 $content_tpl->set_var("I_SIGNUPS", $total_signups);
 $content_tpl->set_var("I_MATCHES", $total_matches);
 $content_tpl->set_var("I_PLAYED", $total_played);

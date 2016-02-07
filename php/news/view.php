@@ -19,19 +19,20 @@ $content_tpl->set_block("F_CONTENT", "B_COMMENTS_LINK", "H_COMMENTS_LINK");
 $content_tpl->set_block("F_CONTENT", "B_NEWS_ARCHIVE", "H_NEWS_ARCHIVE");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NEWS", "H_VIEW_NEWS");
 
+$id_news_group = intval($_REQUEST['opt']);
+
 if ($user['usertype_root'] or $user['usertype_admin'])
 {
-  $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+  $content_tpl->set_var("I_OPT", $id_news_group);
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_ADD", "B_ADD");
 }
 
 // access for admins [private news]
 // access for guests [global / public news]
-if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
+if ($user['usertype_admin'] or $id_news_group == 1)
 {
   // news-query
-  $id_news_group = intval($_REQUEST['opt']);
   $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
 		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$_REQUEST['sid']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC LIMIT 0, 5");
@@ -48,15 +49,15 @@ if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
       $users_row = dbFetch($users_ref);
 
       $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
-      $content_tpl->set_var("I_USERNAME", $users_row['username']);
-      $content_tpl->set_var("I_HEADING", $news_row['heading']);
-      $content_tpl->set_var("I_BODY", nl2br($news_row['body']));
-      $content_tpl->set_var("I_SUBMITTED", $news_row['submitted']);
+      $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+      $content_tpl->set_var("I_HEADING", htmlspecialchars($news_row['heading']));
+      $content_tpl->set_var("I_BODY", Parsedown::instance()->text($news_row['body']));
+      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($news_row['submitted']));
 
       if ($user['usertype_admin'])
       {
 	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-	if ($_REQUEST['opt'] == 2)
+	if ($id_news_group == 2)
 	{
 	  $content_tpl->parse("H_PUBLISH", "B_PUBLISH");
 	}
@@ -70,7 +71,7 @@ if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
       $content_tpl->parse("H_COMMENTS_LINK", "B_COMMENTS_LINK");
       $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
     }
-    $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+    $content_tpl->set_var("I_OPT", $id_news_group);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_NEWS_ARCHIVE", "B_NEWS_ARCHIVE");
   }

@@ -22,15 +22,15 @@ if ($user['usertype_root'])
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			  "WHERE `id` = $id_season AND `deleted`  = 0");
   $seasons_row = dbFetch($seasons_ref);
-  $content_tpl->set_var("I_ID_SEASON_OPT", $_REQUEST['opt']);
-  $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+  $content_tpl->set_var("I_ID_SEASON_OPT", $id_season); // XXX
+  $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
 
   // sections-query
   $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `deleted` = 0 ORDER BY `name` ASC");
   while ($sections_row = dbFetch($sections_ref))
   {
     $content_tpl->set_var("I_ID_SECTION", $sections_row['id']);
-    $content_tpl->set_var("I_SECTION_NAME", $sections_row['name']);
+    $content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($sections_row['name']));
     if ($sections_row['id'] == $seasons_row['id_section'])
     {
       $content_tpl->parse("H_SECTION", "B_SECTION_SELECTED", true);

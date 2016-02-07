@@ -34,9 +34,8 @@ if ($user['usertype_headadmin'])
       $content_tpl->set_var("I_DEADLINE_COUNTER", ++$deadline_counter);
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
       $content_tpl->set_var("I_ID_DEADLINE", $deadlines_row['id']);
-      $content_tpl->set_var("I_ROUND", $deadlines_row['round']);
-      $content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ROUND", htmlspecialchars($deadlines_row['round']));
+      $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadlines_row['deadline']));
       $content_tpl->parse("H_DEADLINE", "B_DEADLINE", true);
     }
     $content_tpl->parse("H_DEADLINES", "B_DEADLINES");

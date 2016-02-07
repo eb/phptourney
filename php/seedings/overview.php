@@ -41,8 +41,8 @@ if ($user['usertype_admin'])
   {
     $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
     $content_tpl->set_var("I_ID_USER", $season_users_row['id_user']);
-    $content_tpl->set_var("I_USERNAME", $season_users_row['username']);
-    $content_tpl->set_var("I_EMAIL", $season_users_row['email']);
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($season_users_row['username']));
+    $content_tpl->set_var("I_EMAIL", htmlspecialchars($season_users_row['email']));
     $content_tpl->set_var("I_SEEDGROUP", $season_users_row['seedgroup']);
     if ($user['usertype_headadmin'] and $_REQUEST['opt'] != "view")
     {
@@ -64,8 +64,8 @@ if ($user['usertype_admin'])
   {
     $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
     $content_tpl->set_var("I_ID_USER", $season_users_row['id_user']);
-    $content_tpl->set_var("I_USERNAME", $season_users_row['username']);
-    $content_tpl->set_var("I_EMAIL", $season_users_row['email']);
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($season_users_row['username']));
+    $content_tpl->set_var("I_EMAIL", htmlspecialchars($season_users_row['email']));
     $content_tpl->set_var("I_SEEDGROUP", $season_users_row['seedgroup']);
     if ($user['usertype_headadmin'] and $_REQUEST['opt'] != "view")
     {

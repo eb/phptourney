@@ -19,8 +19,8 @@ if ($user['usertype_headadmin'])
   $id_map = intval($_REQUEST['opt']);
   $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` WHERE `id` = $id_map AND `deleted` = 0");
   $maps_row = dbFetch($maps_ref);
-  $content_tpl->set_var("I_ID_MAP", $_REQUEST['opt']);
-  $content_tpl->set_var("I_MAP", $maps_row['map']);
+  $content_tpl->set_var("I_ID_MAP", $id_map);
+  $content_tpl->set_var("I_MAP", htmlspecialchars($maps_row['map']));
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_EDIT_MAP", "B_EDIT_MAP");
 }

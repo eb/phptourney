@@ -42,7 +42,7 @@ if ($user['usertype_headadmin'])
   {
     if (isset($_REQUEST['map']))
     {
-      $content_tpl->set_var("I_MAP", $_REQUEST['map']);
+      $content_tpl->set_var("I_MAP", htmlspecialchars($_REQUEST['map']));
     }
     $content_tpl->parse("H_WARNING", "B_WARNING");
     $content_tpl->parse("H_BACK", "B_BACK");

@@ -35,10 +35,10 @@ if ($user['usertype_root'])
       $sections_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}sections` WHERE `id` = {$seasons_row['id_section']} AND `deleted` = 0");
       if ($sections_row = dbFetch($sections_ref))
       {
-	$content_tpl->set_var("I_SECTION_NAME", $sections_row['name']);
+	$content_tpl->set_var("I_SECTION_NAME", htmlspecialchars($sections_row['name']));
 	$content_tpl->set_var("I_SEASON_COUNTER", ++$season_counter);
 	$content_tpl->set_var("I_ID_SEASON_OPT", $seasons_row['id']);
-	$content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
+	$content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
 	$content_tpl->parse("H_SEASON", "B_SEASON", true);
       }
     }

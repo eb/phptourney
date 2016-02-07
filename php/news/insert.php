@@ -50,7 +50,7 @@ if ($_REQUEST['sid'] == 0 and $user['usertype_root'] or
     $content_tpl->parse("H_MESSAGE_NEWS_ADDED", "B_MESSAGE_NEWS_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
-    $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
+    $content_tpl->set_var("I_OPT", $id_news_group);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 

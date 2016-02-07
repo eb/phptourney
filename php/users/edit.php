@@ -22,12 +22,12 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
 {
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
   $users_row = dbFetch($users_ref);
-  $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
-  $content_tpl->set_var("I_USERNAME", $users_row['username']);
-  $content_tpl->set_var("I_PASSWORD", $users_row['password']);
-  $content_tpl->set_var("I_PASSWORD_RETYPED", $users_row['password']);
-  $content_tpl->set_var("I_EMAIL", $users_row['email']);
-  $content_tpl->set_var("I_IRC_CHANNEL", $users_row['irc_channel']);
+  $content_tpl->set_var("I_OPT", "");
+  $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+  $content_tpl->set_var("I_PASSWORD", htmlspecialchars($users_row['password']));
+  $content_tpl->set_var("I_PASSWORD_RETYPED", htmlspecialchars($users_row['password']));
+  $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
+  $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
   // countries-query
   $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
@@ -36,7 +36,7 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   while ($countries_row = dbFetch($countries_ref))
   {
     $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);
-    $content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+    $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
     if ($countries_row['id'] == $users_row['id_country'])
     {
       $content_tpl->parse("H_COUNTRY_SELECTED", "B_COUNTRY_SELECTED", true);
@@ -64,10 +64,10 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
   $id_user = intval($_REQUEST['opt']);
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
-  $content_tpl->set_var("I_OPT", $_REQUEST['opt']);
-  $content_tpl->set_var("I_USERNAME", $users_row['username']);
-  $content_tpl->set_var("I_EMAIL", $users_row['email']);
-  $content_tpl->set_var("I_IRC_CHANNEL", $users_row['irc_channel']);
+  $content_tpl->set_var("I_OPT", $id_user);
+  $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
+  $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
+  $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
   $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
 			    "WHERE `active` = 1 " .
@@ -75,7 +75,7 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
   while ($countries_row = dbFetch($countries_ref))
   {
     $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);
-    $content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+    $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
     if ($countries_row['id'] == $users_row['id_country'])
     {
       $content_tpl->parse("H_COUNTRY_SELECTED", "B_COUNTRY_SELECTED", true);

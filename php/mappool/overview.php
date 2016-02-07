@@ -33,7 +33,7 @@ if ($user['usertype_headadmin'])
     {
       $content_tpl->set_var("I_MAP_COUNTER", ++$map_counter);
       $content_tpl->set_var("I_ID_MAP", $maps_row['id']);
-      $content_tpl->set_var("I_MAP", $maps_row['map']);
+      $content_tpl->set_var("I_MAP", htmlspecialchars($maps_row['map']));
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
       $content_tpl->parse("H_MAP", "B_MAP", true);
     }

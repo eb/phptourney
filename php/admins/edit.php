@@ -22,8 +22,8 @@ if ($user['usertype_headadmin'])
   $id_user = intval($_REQUEST['opt']);
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
-  $content_tpl->set_var("I_ID_USER", $_REQUEST['opt']);
-  $content_tpl->set_var("I_USERNAME", $users_row['username']);
+  $content_tpl->set_var("I_ID_USER", $id_user);
+  $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .

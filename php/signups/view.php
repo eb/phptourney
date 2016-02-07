@@ -50,7 +50,7 @@ else
   {
     $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
-    $content_tpl->set_var("I_USERNAME", $users_row['username']);
+    $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 
     // countries-query
     $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$users_row['id_country']}");
@@ -63,7 +63,7 @@ else
     {
       $players_per_country[$countries_row['id']] = 1;
     }
-    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $countries_row['abbreviation']);
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
     if ($player_counter % 2 == 1)
     {
       $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
@@ -86,8 +86,8 @@ else
     $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = '$id_country'");
     $countries_row = dbFetch($countries_ref);
     $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);
-    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $countries_row['abbreviation']);
-    $content_tpl->set_var("I_COUNTRY", $countries_row['name']);
+    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
+    $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
     $content_tpl->set_var("I_NUMBER_PLAYERS", $players_per_country[$id_country]);
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_COUNTRY", "B_COUNTRY", true);

@@ -70,7 +70,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
 	  $content_tpl->parse("H_WB_ACTUAL_ROUND", "B_WB_ACTUAL_ROUND");
 	}
-	$content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+	$content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
 	$content_tpl->parse("H_WB_DEADLINE", "B_WB_DEADLINE");
       }
 
@@ -98,13 +98,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player2'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country2']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country2']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player2']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player2']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player2']);
 	}
 	else
@@ -126,13 +126,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player1'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country1']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country1']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player1']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player1']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player1']);
 	}
 	elseif ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00" and
@@ -140,13 +140,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player2'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country2']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country2']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player2']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player2']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player2']);
 	}
 	else
@@ -173,13 +173,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player1'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country1']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country1']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player1']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player1']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player1']);
 	  $content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	  if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")
@@ -261,7 +261,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
 	  $content_tpl->parse("H_LB_ACTUAL_ROUND", "B_LB_ACTUAL_ROUND");
 	}
-	$content_tpl->set_var("I_DEADLINE", $deadline_row['deadline']);
+	$content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadline_row['deadline']));
 	$content_tpl->parse("H_LB_DEADLINE", "B_LB_DEADLINE");
       }
 
@@ -298,13 +298,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player2'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country2']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country2']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player2']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player2']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player2']);
 	}
 	else
@@ -327,13 +327,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player1'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country1']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country1']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player1']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player1']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player1']);
 	}
 	elseif ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00" and
@@ -341,13 +341,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player2'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country2']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country2']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player2']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player2']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player2']);
 	}
 	else
@@ -373,13 +373,13 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	{
           if ($matches[$matchkey]['id_player1'] != 0)
           {
-	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", $matches[$matchkey]['country1']);
+	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($matches[$matchkey]['country1']));
           }
           else
           {
 	    $content_tpl->set_var("I_COUNTRY_ABBREVIATION", "00");
           }
-	  $content_tpl->set_var("I_PLAYER", $matches[$matchkey]['player1']);
+	  $content_tpl->set_var("I_PLAYER", htmlspecialchars($matches[$matchkey]['player1']));
 	  $content_tpl->set_var("I_ID_USER", $matches[$matchkey]['id_player1']);
 	  $content_tpl->set_var("I_ID_MATCH", $matches[$matchkey]['id']);
 	  if ($matches[$matchkey]['confirmed'] != "0000-00-00 00:00:00")

@@ -16,7 +16,8 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_DEADLINE", "H_REMOVE_DEADLINE");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $content_tpl->set_var("I_ID_DEADLINE", $_REQUEST['opt']);
+  $id_deadline = intval($_REQUEST['opt']);
+  $content_tpl->set_var("I_ID_DEADLINE", $id_deadline);
   $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
   $content_tpl->parse("H_REMOVE_DEADLINE", "B_REMOVE_DEADLINE");
 }

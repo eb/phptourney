@@ -111,8 +111,8 @@ if ($user['usertype_headadmin'])
       $content_tpl->parse("H_EDIT_GF_ROUND_SELECTED", "B_EDIT_GF_ROUND_UNSELECTED", true);
     }
 
-    $content_tpl->set_var("I_ID_DEADLINE", $_REQUEST['opt']);
-    $content_tpl->set_var("I_DEADLINE", $deadlines_row['deadline']);
+    $content_tpl->set_var("I_ID_DEADLINE", $id_deadline);
+    $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadlines_row['deadline']));
     $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
     $content_tpl->parse("H_EDIT_DEADLINE", "B_EDIT_DEADLINE");
   }
