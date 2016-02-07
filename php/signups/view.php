@@ -22,7 +22,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYERS", "H_OVERVIEW_PLAYERS")
 
 if ($season['status'] == "signups")
 {
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_VIEW_SIGNUP", "B_VIEW_SIGNUP");
 }
 else
@@ -33,7 +33,7 @@ else
 // users-query
 $users_ref = dbQuery("SELECT U.* " .
 		      "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-		      "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+		      "WHERE SU.`id_season` = {$season['id']} " .
 		      "AND SU.`usertype_player` = 1 " .
 		      "AND SU.`id_user` = U.`id` " .
 		      "ORDER BY SU.`submitted` ASC");
@@ -66,12 +66,12 @@ else
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
     if ($player_counter % 2 == 1)
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_PLAYER_COL1", "B_PLAYER_COL1", true);
     }
     elseif ($player_counter % 2 == 0)
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_PLAYER_COL2", "B_PLAYER_COL2", true);
     }
   }
@@ -89,7 +89,7 @@ else
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
     $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
     $content_tpl->set_var("I_NUMBER_PLAYERS", $players_per_country[$id_country]);
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_COUNTRY", "B_COUNTRY", true);
   }
 }

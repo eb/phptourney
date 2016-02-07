@@ -28,21 +28,21 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_BRACKET_CREATED", "B_WARNING_BRACKET_CREATED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "running")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_RUNNING", "B_WARNING_TOURNEY_RUNNING");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "finished")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_FINISHED", "B_WARNING_TOURNEY_FINISHED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
@@ -71,13 +71,13 @@ if ($user['usertype_headadmin'])
     if (!$is_complete)
     {
       $content_tpl->parse("H_WARNING", "B_WARNING");
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }
     else
     {
       // delete deadlines
-      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$_REQUEST['sid']}");
+      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']}");
 
       // choose tourney-system
       $id_season = intval($_REQUEST['opt']); // XXX
@@ -92,7 +92,7 @@ if ($user['usertype_headadmin'])
 	       "WHERE `id` = $id_season");
       $content_tpl->parse("H_MESSAGE_TOURNEY_SYSTEM_CHOSEN", "B_MESSAGE_TOURNEY_SYSTEM_CHOSEN");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }
   }

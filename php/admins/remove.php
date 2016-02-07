@@ -19,7 +19,7 @@ if ($user['usertype_headadmin'])
 {
   $id_user = intval($_REQUEST['opt']);
   $content_tpl->set_var("I_ID_USER", $id_user);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_REMOVE_ADMIN", "B_REMOVE_ADMIN");
 }
 else

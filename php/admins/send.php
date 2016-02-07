@@ -31,7 +31,7 @@ if ($user['uid'])
 
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-      			 "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
+      			 "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);
 
   if ($season_users_row['usertype_headadmin'] or $season_users_row['usertype_admin'])

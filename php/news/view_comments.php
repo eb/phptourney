@@ -74,7 +74,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
       {
 	$ip = $comments_row['ip'];
 	$content_tpl->set_var("I_IP", htmlspecialchars($ip));
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BANS", "B_BANS");
       }
 
@@ -91,7 +91,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   $content_tpl->set_var("I_BODY", "");
   if ($user['uid'])
   {
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_ADD_COMMENT", "B_ADD_COMMENT");
   }
   else

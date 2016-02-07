@@ -25,36 +25,36 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_TOURNEY_RUNNING", "B_WARNING_TOURNEY_RUNNING");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "finished")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_FINISHED", "B_WARNING_TOURNEY_FINISHED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
   {
     // matches-query
     $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			    "WHERE `id_season` = {$_REQUEST['sid']} " .
+			    "WHERE `id_season` = {$season['id']} " .
 			    "AND `confirmed` <> '0000-00-00 00:00:00'");
     if (dbNumRows($matches_ref) == 0)
     {
       // delete all matches
-      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}matches` WHERE `id_season` = {$_REQUEST['sid']}");
+      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}matches` WHERE `id_season` = {$season['id']}");
 
       // reset seedings
       // XXX
 
 
       // unset season-status
-      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$_REQUEST['sid']}");
+      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$season['id']}");
       $content_tpl->parse("H_MESSAGE_BRACKET_UNDONE", "B_MESSAGE_BRACKET_UNDONE");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }
     else

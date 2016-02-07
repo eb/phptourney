@@ -35,10 +35,10 @@ if ($user['usertype_headadmin'])
   else
   {
     dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `seedgroup` = 0 " .
-	     "WHERE `id_season` = {$_REQUEST['sid']}");
+	     "WHERE `id_season` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_SEEDGROUPS_RESETTED", "B_MESSAGE_SEEDGROUPS_RESETTED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

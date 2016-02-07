@@ -63,7 +63,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->set_var("H_WB_DEADLINE", "");
       $wb_round = $i + 1;
       $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			      "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'wb$wb_round'");
+			      "WHERE `id_season` = {$season['id']} AND `round` = 'wb$wb_round'");
       if ($deadline_row = dbFetch($deadline_ref))
       {
 	if (isAfterPreDeadline($season, "wb", $i + 1) and isBeforePostDeadline($season, "wb", $i + 1))
@@ -186,28 +186,28 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	  {
 	    if ($matches[$matchkey]['wo'] != 0)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_WB_WO_MATCH", "B_WB_WO_MATCH");
 	    }
 	    elseif ($matches[$matchkey]['bye'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_WB_BYE_MATCH", "B_WB_BYE_MATCH");
 	    }
 	    elseif ($matches[$matchkey]['out'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_WB_OUT_MATCH", "B_WB_OUT_MATCH");
 	    }
 	    else
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_WB_PLAYED_MATCH", "B_WB_PLAYED_MATCH");
 	    }
 	  }
 	  else
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("H_WB_UNPLAYED_MATCH", "B_WB_UNPLAYED_MATCH");
 	  }
 	}
@@ -224,12 +224,12 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 
     if ($season['double_elimination'] != "")
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_WB_DOUBLE_ELIMINATION", "B_WB_DOUBLE_ELIMINATION");
     }
     else
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_WB_SINGLE_ELIMINATION", "B_WB_SINGLE_ELIMINATION");
     }
     $content_tpl->parse("H_WINNERS_BRACKET", "B_WINNERS_BRACKET");
@@ -254,7 +254,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->set_var("H_LB_DEADLINE", "");
       $lb_round = $i + 1;
       $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			      "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'lb$lb_round'");
+			      "WHERE `id_season` = {$season['id']} AND `round` = 'lb$lb_round'");
       if ($deadline_row = dbFetch($deadline_ref))
       {
 	if (isAfterPreDeadline($season, "lb", $i + 1) and isBeforePostDeadline($season, "lb", $i + 1))
@@ -386,28 +386,28 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 	  {
 	    if ($matches[$matchkey]['wo'] != 0)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_LB_WO_MATCH", "B_LB_WO_MATCH");
 	    }
 	    elseif ($matches[$matchkey]['bye'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_LB_BYE_MATCH", "B_LB_BYE_MATCH");
 	    }
 	    elseif ($matches[$matchkey]['out'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_LB_OUT_MATCH", "B_LB_OUT_MATCH");
 	    }
 	    else
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("H_LB_PLAYED_MATCH", "B_LB_PLAYED_MATCH");
 	    }
 	  }
 	  else
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("H_LB_UNPLAYED_MATCH", "B_LB_UNPLAYED_MATCH");
 	  }
 	}
@@ -422,7 +422,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       }
     }
 
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_LOSERS_BRACKET", "B_LOSERS_BRACKET");
     $content_tpl->parse("H_RESULTS", "B_RESULTS");
   }

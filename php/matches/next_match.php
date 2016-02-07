@@ -23,7 +23,7 @@ if ($user['usertype_player'])
 {
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `submitted` = '0000-00-00 00:00:00' " .
-			  "AND `id_season` = {$_REQUEST['sid']} " .
+			  "AND `id_season` = {$season['id']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']})");
   if ($matches_row = dbFetch($matches_ref))
   {
@@ -36,7 +36,7 @@ if ($user['usertype_player'])
       $season_users_ref = dbQuery("SELECT SU.`seedlevel`, U.`username` " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 				   "WHERE U.`id` = {$matches_row['id_player1']} " .
-				   "AND U.`id` = SU.`id_user` AND `id_season` = {$_REQUEST['sid']}");
+				   "AND U.`id` = SU.`id_user` AND `id_season` = {$season['id']}");
       $season_users_row = dbFetch($season_users_ref);
       $username_p1 = $season_users_row['username'];
       $seed_p1 = $season_users_row['seedlevel'];
@@ -44,7 +44,7 @@ if ($user['usertype_player'])
       $season_users_ref = dbQuery("SELECT SU.`seedlevel`, U.`username` " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 				   "WHERE U.`id` = {$matches_row['id_player2']} " .
-				   "AND U.`id` = SU.`id_user` AND `id_season` = {$_REQUEST['sid']}");
+				   "AND U.`id` = SU.`id_user` AND `id_season` = {$season['id']}");
       $season_users_row = dbFetch($season_users_ref);
       $username_p2 = $season_users_row['username'];
       $seed_p2 = $season_users_row['seedlevel'];
@@ -82,9 +82,9 @@ if ($user['usertype_player'])
 
       $round_pre = $matches_row['round'] - 1;
       $round_post = $matches_row['round'];
-      $deadlines_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$_REQUEST['sid']} " .
+      $deadlines_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']} " .
 				 "AND `round` = '{$matches_row['bracket']}$round_pre'");
-      $deadlines_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$_REQUEST['sid']} " .
+      $deadlines_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']} " .
 				 "AND `round` = '{$matches_row['bracket']}$round_post'");
       if (dbNumRows($deadlines_ref1) == 1 and dbNumRows($deadlines_ref2) == 1)
       {
@@ -103,7 +103,7 @@ if ($user['usertype_player'])
 	$content_tpl->set_var("I_DEADLINE_POST", htmlspecialchars($deadline_post));
 	$content_tpl->parse("H_DEADLINE", "B_DEADLINE");
       }
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
       $content_tpl->parse("H_NEXT_MATCH", "B_NEXT_MATCH");
     }

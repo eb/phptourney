@@ -27,7 +27,7 @@ if ($user['usertype_headadmin'])
   // season_users-query
   $id_user = intval($_REQUEST['id_user']);
   $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user AND `usertype_player` = 1");
+				"WHERE `id_season` = {$season['id']} AND `id_user` = $id_user AND `usertype_player` = 1");
   if (dbNumRows($season_users_ref) > 0)
   {
     $content_tpl->parse("H_WARNING_PLAYER", "B_WARNING_PLAYER");
@@ -80,22 +80,22 @@ if ($user['usertype_headadmin'])
       }
 
       $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				    "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
+				    "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
       if ($season_users_row = dbFetch($season_users_ref))
       {
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
 		 "`usertype_player` = $player, `invited` = $invited " .
-		 "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
+		 "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
       }
       else
       {
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
 		 "(`id_user`, `id_season`, `submitted`, `usertype_player`, `invited`) " .
-		 "VALUES($id_user, {$_REQUEST['sid']}, NOW(), $player, $invited)");
+		 "VALUES($id_user, {$season['id']}, NOW(), $player, $invited)");
       }
 
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }
 

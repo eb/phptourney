@@ -56,8 +56,8 @@ if ($user['usertype_admin']) {
 		      "AND M1.`num_map` = $num_map");
   $maps_row = dbFetch($maps_ref);
 
-  $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
-  $sshot_prefix = "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$_REQUEST['num_map']}";
+  $sshot_dir = "data/screenshots/{$season['id']}/";
+  $sshot_prefix = "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$_REQUEST['num_map']}";
   $sshot = $sshot_dir . $sshot_prefix . ".jpg";
   $sshot_thumb = $sshot_dir . $sshot_prefix . "_thumb.jpg";
 
@@ -65,7 +65,7 @@ if ($user['usertype_admin']) {
   $y = intval($_REQUEST['y']);
   $content_tpl->set_var("I_CROP1_X", $x);
   $content_tpl->set_var("I_CROP1_Y", $y);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->set_var("I_ID_MATCH", $id_match);
   $content_tpl->set_var("I_NUM_MAP", $num_map);
   $content_tpl->set_var("I_MAP_NAME", htmlspecialchars($maps_row['map']));

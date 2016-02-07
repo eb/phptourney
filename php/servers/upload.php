@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_UPLOAD_SERVERLIST", "H_UPLOAD_SERVERLIST
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_UPLOAD_SERVERLIST", "B_UPLOAD_SERVERLIST");
 }
 else

@@ -19,11 +19,11 @@ if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "signups")
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$_REQUEST['sid']}");
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$season['id']}");
   }
   $content_tpl->parse("H_WARNING_SIGNUPS_CLOSED", "B_WARNING_SIGNUPS_CLOSED");
   $content_tpl->parse("H_WARNING", "B_WARNING");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

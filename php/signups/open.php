@@ -23,10 +23,10 @@ if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "" or $season['status'] == "signups")
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'signups' WHERE `id` = {$_REQUEST['sid']}");
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'signups' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_SIGNUPS_OPEN", "B_MESSAGE_SIGNUPS_OPEN");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "bracket")

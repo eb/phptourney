@@ -31,9 +31,9 @@ if ($user['usertype_admin'])
     // delete screenshots
     for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
     {
-      $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
+      $sshot_dir = "data/screenshots/{$season['id']}/";
       $dst_file = $sshot_dir .
-	"{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}";
+	"{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}";
       if (file_exists($dst_file . ".jpg"))
       {
 	unlink($dst_file . ".jpg");

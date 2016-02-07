@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_SERVERLIST", "H_REMOVE_SERVERLIST
 // access for headadmin only
 if ($user['usertype_headadmin'])
 {
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_REMOVE_SERVERLIST", "B_REMOVE_SERVERLIST");
 }
 else

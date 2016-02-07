@@ -23,7 +23,7 @@ if ($user['usertype_headadmin'])
   $match_counter = 0;
   // matches-query [gf]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'gf' " .
 			  "ORDER BY `round` DESC, `match` ASC");
   while ($matches_row = dbFetch($matches_ref))
@@ -40,7 +40,7 @@ if ($user['usertype_headadmin'])
 
   // matches-query [wb]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'wb' " .
 			  "ORDER BY `round` DESC, `match` ASC");
   while ($matches_row = dbFetch($matches_ref))
@@ -57,7 +57,7 @@ if ($user['usertype_headadmin'])
 
   // matches-query [lb]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'lb' " .
 			  "ORDER BY `round` DESC, `match` ASC");
   while ($matches_row = dbFetch($matches_ref))
@@ -76,7 +76,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_NO_MATCHES", "B_NO_MATCHES");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_MATCHES", "B_MATCHES");
   $content_tpl->parse("H_OVERVIEW_WINMAPS", "B_OVERVIEW_WINMAPS");
 }

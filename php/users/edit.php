@@ -54,7 +54,7 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   {
     $content_tpl->parse("H_NOTIFY_UNCHECKED", "B_NOTIFY_UNCHECKED");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_PROFILE", "B_EDIT_PROFILE");
 }
 
@@ -85,7 +85,7 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
       $content_tpl->parse("H_COUNTRY_SELECTED", "B_COUNTRY", true);
     }
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_PROFILE", "B_EDIT_PROFILE");
 }
 else

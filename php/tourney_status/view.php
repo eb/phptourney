@@ -34,13 +34,13 @@ if ($user['usertype_headadmin'])
   }
   elseif ($season['status'] == "bracket")
   {
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_START_TOURNEY", "B_START_TOURNEY");
     $content_tpl->parse("H_UNDO_BRACKET", "B_UNDO_BRACKET");
   }
   else
   {
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_CREATE_BRACKET", "B_CREATE_BRACKET");
   }
 }

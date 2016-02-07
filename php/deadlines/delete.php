@@ -22,7 +22,7 @@ if ($user['usertype_headadmin'])
   dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id` = $id_deadline");
   $content_tpl->parse("H_MESSAGE_DEADLINE_REMOVED", "B_MESSAGE_DEADLINE_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

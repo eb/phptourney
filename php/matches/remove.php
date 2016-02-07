@@ -23,7 +23,7 @@ if ($user['usertype_admin'])
   if (isLastMatch($matches_row))
   {
     $content_tpl->set_var("I_ID_MATCH", $id_match);
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_REMOVE_MATCH", "B_REMOVE_MATCH");
   }
   else

@@ -22,7 +22,7 @@ if ($season['status'] == "signups")
     $is_complete = 1;
     // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$_REQUEST['sid']} AND `usertype_player` = 1");
+				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$season['id']} AND `usertype_player` = 1");
     if (dbNumRows($season_users_ref) == 1)
     {
       $is_complete = 0;
@@ -35,7 +35,7 @@ if ($season['status'] == "signups")
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
       $users_row = dbFetch($users_ref);
 
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_VIEW_LOGIN", "B_VIEW_LOGIN");
     }

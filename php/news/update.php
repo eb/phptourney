@@ -50,7 +50,7 @@ if ($news_row['id_season'] == 0 and $user['usertype_root'] or
 	     "WHERE `id` = {$news_row['id']}");
     $content_tpl->parse("H_MESSAGE_NEWS_EDITED", "B_MESSAGE_NEWS_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->set_var("I_OPT", $news_row['id_news_group']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }

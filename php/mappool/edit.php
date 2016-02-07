@@ -21,7 +21,7 @@ if ($user['usertype_headadmin'])
   $maps_row = dbFetch($maps_ref);
   $content_tpl->set_var("I_ID_MAP", $id_map);
   $content_tpl->set_var("I_MAP", htmlspecialchars($maps_row['map']));
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_MAP", "B_EDIT_MAP");
 }
 else

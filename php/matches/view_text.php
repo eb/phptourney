@@ -34,7 +34,7 @@ $content_tpl->set_block("F_CONTENT", "B_LB_ROUND", "H_LB_ROUND");
 $content_tpl->set_block("F_CONTENT", "B_LB_BRACKET", "H_LB_BRACKET");
 $content_tpl->set_block("F_CONTENT", "B_BRACKET", "H_BRACKET");
 
-$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+$content_tpl->set_var("I_ID_SEASON", $season['id']);
 
 if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['status'] == "running" or $season['status'] == "finished")
 {
@@ -59,22 +59,22 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 	{
 	  if ($matches[$matchkey]['wo'] != 0)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_WO_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['out'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_OUT_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['bye'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_BYE_MATCH", true);
 	  }
 	  else
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_PLAYED_MATCH", true);
 	  }
 	}
@@ -93,7 +93,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     $content_tpl->set_var("H_Q_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_Q_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			    "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'q1'");
+			    "WHERE `id_season` = {$season['id']} AND `round` = 'q1'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
       if (isAfterPreDeadline($season, "q", 1) and isBeforePostDeadline($season, "q", 1))
@@ -129,22 +129,22 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 	{
 	  if ($matches[$matchkey]['wo'] != 0)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_WO_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['out'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_OUT_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['bye'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_BYE_MATCH", true);
 	  }
 	  else
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_PLAYED_MATCH", true);
 	  }
 	}
@@ -165,7 +165,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     $content_tpl->set_var("H_WB_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_WB_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			     "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'wb$i'");
+			     "WHERE `id_season` = {$season['id']} AND `round` = 'wb$i'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
       if (isAfterPreDeadline($season, "wb", $i) and isBeforePostDeadline($season, "wb", $i))
@@ -199,22 +199,22 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 	{
 	  if ($matches[$matchkey]['wo'] != 0)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_WO_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['out'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_OUT_MATCH", true);
 	  }
 	  elseif ($matches[$matchkey]['bye'] == 1)
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_BYE_MATCH", true);
 	  }
 	  else
 	  {
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->parse("I_MATCH", "B_PLAYED_MATCH", true);
 	  }
 	}
@@ -229,7 +229,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     $content_tpl->set_var("H_GF_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_GF_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			     "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'gf1'");
+			     "WHERE `id_season` = {$season['id']} AND `round` = 'gf1'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
       if (isAfterPreDeadline($season, "gf", 1) and isBeforePostDeadline($season, "gf", 1))
@@ -275,22 +275,22 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 	  {
 	    if ($matches[$matchkey]['wo'] != 0)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("I_MATCH", "B_WO_MATCH", true);
 	    }
 	    elseif ($matches[$matchkey]['out'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("I_MATCH", "B_OUT_MATCH", true);
 	    }
 	    elseif ($matches[$matchkey]['bye'] == 1)
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("I_MATCH", "B_BYE_MATCH", true);
 	    }
 	    else
 	    {
-	      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	      $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	      $content_tpl->parse("I_MATCH", "B_PLAYED_MATCH", true);
 	    }
 	  }
@@ -307,7 +307,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       $content_tpl->set_var("H_LB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_LB_DEADLINE", "");
       $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			      "WHERE `id_season` = {$_REQUEST['sid']} AND `round` = 'lb$i'");
+			      "WHERE `id_season` = {$season['id']} AND `round` = 'lb$i'");
       if ($deadline_row = dbFetch($deadline_ref))
       {
 	if (isAfterPreDeadline($season, "lb", $i) and isBeforePostDeadline($season, "lb", $i))

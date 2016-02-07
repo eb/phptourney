@@ -26,7 +26,7 @@ if ($season['status'] == "signups")
     $is_complete = 1;
     // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$_REQUEST['sid']} AND `usertype_player` = 1");
+				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$season['id']} AND `usertype_player` = 1");
     if (dbNumRows($season_users_ref) == 1)
     {
       $is_complete = 0;
@@ -42,18 +42,18 @@ if ($season['status'] == "signups")
 
       // season_users-query
       $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_user` = {$user['uid']} AND `id_season` = {$_REQUEST['sid']}");
+				   "WHERE `id_user` = {$user['uid']} AND `id_season` = {$season['id']}");
       if (dbNumRows($season_users_ref) == 1)
       {
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
 		 "`ip` = '{$_SERVER['REMOTE_ADDR']}', `submitted` = NOW(), `usertype_player` = 1 " .
-		 "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = {$user['uid']} ");
+		 "WHERE `id_season` = {$season['id']} AND `id_user` = {$user['uid']} ");
       }
       else
       {
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
 		 "(`ip`, `submitted`, `usertype_player`, `id_season`, `id_user`) " .
-		 "VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW(), 1, {$_REQUEST['sid']}, {$users_row['id']})");
+		 "VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW(), 1, {$season['id']}, {$users_row['id']})");
       }
 
       // send a mail to the player that signed up

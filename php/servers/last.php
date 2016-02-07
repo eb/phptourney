@@ -24,13 +24,13 @@ if ($user['usertype_headadmin'])
 			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
   while ($seasons_row = dbFetch($seasons_ref) // XXX: Ugly
   {
-    if ($seasons_row['id'] == $_REQUEST['sid'])
+    if ($seasons_row['id'] == $season['id'])
     {
       if ($seasons_row = dbFetch($seasons_ref))
       {
 	if (file_exists("data/serverlists/{$seasons_row['id']}"))
 	{
-	  $f_serverlist = "data/serverlists/{$_REQUEST['sid']}";
+	  $f_serverlist = "data/serverlists/{$season['id']}";
 	  $f_serverlist_old = "data/serverlists/{$seasons_row['id']}";
 	  if (file_exists($f_serverlist))
 	  {
@@ -39,14 +39,14 @@ if ($user['usertype_headadmin'])
 	  copy($f_serverlist_old, $f_serverlist);
 	  $content_tpl->parse("H_MESSAGE_LAST", "B_MESSAGE_LAST");
 	  $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-	  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	  $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	  $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 	}
 	else
 	{
 	  $content_tpl->parse("H_WARNING_SERVERLIST", "B_WARNING_SERVERLIST");
 	  $content_tpl->parse("H_WARNING", "B_WARNING");
-	  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	  $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	  $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 	}
       }
@@ -54,7 +54,7 @@ if ($user['usertype_headadmin'])
       {
 	$content_tpl->parse("H_WARNING_LAST", "B_WARNING_LAST");
 	$content_tpl->parse("H_WARNING", "B_WARNING");
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
       }
     }

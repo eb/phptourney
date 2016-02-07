@@ -52,7 +52,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1 and $user['uid'])
     preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
     // bans-query
     $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
-			 "WHERE `id_season` = {$_REQUEST['sid'] } " .
+			 "WHERE `id_season` = {$season['id'] } " .
 			 "AND (`ip` = '{$matches[1]}.*.*.*' " .
 			 "OR `ip` = '{$matches[1]}.{$matches[2]}.*.*' " .
 			 "OR `ip` = '{$matches[1]}.{$matches[2]}.{$matches[3]}.*' " . 
@@ -74,7 +74,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1 and $user['uid'])
 	       "NOW())");
       $content_tpl->parse("H_MESSAGE_COMMENT_ADDED", "B_MESSAGE_COMMENT_ADDED");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_ID_NEWS", $id_news);
       $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
     }

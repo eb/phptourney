@@ -85,7 +85,7 @@ if ($user['usertype_admin'] or
 
       // mappool
       $mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
-			      "WHERE `id_season` = {$_REQUEST['sid']} AND `deleted` = 0");
+			      "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
       while ($mappool_row = dbFetch($mappool_ref))
       {
 	$content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
@@ -106,7 +106,7 @@ if ($user['usertype_admin'] or
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_OPT", $id_match);
       $content_tpl->parse("H_ADD_REPORT", "B_ADD_REPORT");
     }
@@ -135,8 +135,8 @@ if ($user['usertype_admin'] or
 	if ($maps_row["comment_$player"] == "")
 	{
 	  $comments = true;
-	  $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
-	  $sshot = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$maps_row['num_map']}_thumb.jpg";
+	  $sshot_dir = "data/screenshots/{$season['id']}/";
+	  $sshot = $sshot_dir . "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$maps_row['num_map']}_thumb.jpg";
 	  $content_tpl->set_var("H_SCREENSHOT", "");
 	  if (file_exists($sshot))
 	  {
@@ -153,7 +153,7 @@ if ($user['usertype_admin'] or
       }
       else
       {
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->set_var("I_OPT", $id_match);
 	$content_tpl->parse("H_ADD_COMMENT", "B_ADD_COMMENT");
       }

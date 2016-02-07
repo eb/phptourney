@@ -38,19 +38,19 @@ if ($user['usertype_headadmin'])
 
     $id_user = intval($_REQUEST['id_user']);
     $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				  "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
+				  "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
     $headadmin = intval($_REQUEST['headadmin']);
     if ($season_users_row = dbFetch($season_users_ref))
     {
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
 	       "`usertype_admin` = 1, `usertype_headadmin` = $headadmin " .
-	       "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
+	       "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
     }
     else
     {
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
 	       "(`id_user`, `id_season`, `submitted`, `usertype_headadmin`, `usertype_admin`) " .
-	       "VALUES($id_user, {$_REQUEST['sid']}, NOW(), $headadmin, 1)");
+	       "VALUES($id_user, {$season['id']}, NOW(), $headadmin, 1)");
     }
 
     // send a mail to the new admin
@@ -77,7 +77,7 @@ if ($user['usertype_headadmin'])
 
     $content_tpl->parse("H_MESSAGE_ADMIN_ADDED", "B_MESSAGE_ADMIN_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 

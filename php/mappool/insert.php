@@ -31,10 +31,10 @@ if ($user['usertype_headadmin'])
   {
     $map = dbEscape($_REQUEST['map']);
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}mappool` (`map`, `id_season`) " .
-	     "VALUES ('$map', {$_REQUEST['sid']})");
+	     "VALUES ('$map', {$season['id']})");
     $content_tpl->parse("H_MESSAGE_MAP_ADDED", "B_MESSAGE_MAP_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 

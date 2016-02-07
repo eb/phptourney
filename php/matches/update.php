@@ -32,11 +32,11 @@ if ($matches_row = dbFetch($matches_ref))
   if ($user['usertype_admin'])
   {
     // screenshot filenames
-    $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
+    $sshot_dir = "data/screenshots/{$season['id']}/";
     for ($i = 1; $i <= 5; $i++)
     {
       $dst_filename['m' . $i] = $sshot_dir .
-	"{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m$i";
+	"{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m$i";
     }
 
     if (isLastMatch($matches_row))
@@ -140,7 +140,7 @@ if ($matches_row = dbFetch($matches_ref))
 	if ($new_winner_match == NULL)
 	{
 	  dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
-		   "WHERE `id` = {$_REQUEST['sid']}");
+		   "WHERE `id` = {$season['id']}");
 	}
 
 	$content_tpl->parse("H_MESSAGE_MATCH_CONFIRMED", "B_MESSAGE_MATCH_CONFIRMED");
@@ -312,7 +312,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  if ($new_winner_match == NULL)
 	  {
 	    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
-		     "WHERE `id` = {$_REQUEST['sid']}");
+		     "WHERE `id` = {$season['id']}");
 	  }
 
 	  // send match report to irc
@@ -359,7 +359,7 @@ if ($matches_row = dbFetch($matches_ref))
 		sleep(2);
 		fwrite($bot_socket,
 			"{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} [$player1 vs $player2] confirmed - " .
-			"{$cfg['host']}{$cfg['path']}?sid={$_REQUEST['sid']}&mod=matches&act=view_match&opt={$matches_row['id']}\r\n");
+			"{$cfg['host']}{$cfg['path']}?sid={$season['id']}&mod=matches&act=view_match&opt={$matches_row['id']}\r\n");
 		fclose($bot_socket);
 	      }
 	    }
@@ -374,7 +374,7 @@ if ($matches_row = dbFetch($matches_ref))
 	    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
 	    $content_tpl->set_var("I_ROUND", $matches_row['round']);
 	    $content_tpl->set_var("I_MATCH", $matches_row['match']);
-	    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	    $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	    $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	    for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	    {
@@ -473,7 +473,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->set_var("I_MATCH", $new_match['match']);
 			$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 			$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} " .
+				"WHERE `id_season` = {$season['id']} " .
 				"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
 			if ($deadlines_row = dbFetch($deadlines_ref))
 			{
@@ -506,7 +506,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->set_var("I_MATCH", $new_match['match']);
 			$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
 			$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} " .
+				"WHERE `id_season` = {$season['id']} " .
 				"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
 			if ($deadlines_row = dbFetch($deadlines_ref))
 			{

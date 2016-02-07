@@ -23,7 +23,7 @@ if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
   $id_news_group = intval($_REQUEST['opt']);
   $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
 		       "WHERE `id_news_group` = $id_news_group " .
-		       "AND `id_season` = {$_REQUEST['sid']} AND `deleted` = 0 " .
+		       "AND `id_season` = {$season['id']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC");
   if (dbNumRows($news_ref) <= 0)
   {
@@ -46,7 +46,7 @@ if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
       // comments-query
       $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news_comments` WHERE `id_news` = {$news_row['id']}");
       $content_tpl->set_var("I_NUM_COMMENTS", dbNumRows($comments_ref));
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_COMMENTS_LINK", "B_COMMENTS_LINK");
       $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
     }

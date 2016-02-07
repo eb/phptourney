@@ -36,7 +36,7 @@ if ($user['usertype_headadmin'])
   {
     // matches-query
     $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			    "WHERE `id_season` = {$_REQUEST['sid']}");
+			    "WHERE `id_season` = {$season['id']}");
     while ($matches_row = dbFetch($matches_ref))
     {
       if (isset($_REQUEST[$matches_row['id']]))
@@ -49,7 +49,7 @@ if ($user['usertype_headadmin'])
     }
     $content_tpl->parse("H_MESSAGE_WINMAPS_SET", "B_MESSAGE_WINMAPS_SET");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

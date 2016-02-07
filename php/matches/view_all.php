@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_ALL_MATCHES", "H_VIEW_ALL_MATCHES")
 
 // matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			"WHERE `id_season` = {$_REQUEST['sid']} " .
+			"WHERE `id_season` = {$season['id']} " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .
 			"AND `wo` = 0 " .
 			"AND `bye` = 0 " .
@@ -56,7 +56,7 @@ else
     {
       $content_tpl->set_var("I_PLAYER2", "-");
     }
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_MATCH", "B_MATCH", true);
   }
   $content_tpl->parse("H_MATCHES", "B_MATCHES");

@@ -39,10 +39,10 @@ if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user
     $subject = dbEscape($_REQUEST['subject']);
     $body = dbEscape($_REQUEST['body']);
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}rules` (`subject`, `body`, `id_season`) " .
-	     "VALUES ('$subject', '$body', {$_REQUEST['sid']})");
+	     "VALUES ('$subject', '$body', {$season['id']})");
     $content_tpl->parse("H_MESSAGE_RULE_ADDED", "B_MESSAGE_RULE_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 

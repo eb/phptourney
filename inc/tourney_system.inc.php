@@ -125,7 +125,7 @@ function getWinnerMatch(& $match)
     $winner_player = getNextWinnerPlayer($match);
 
     $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			   "WHERE `id_season` = {$_REQUEST['sid']} " .
+			   "WHERE `id_season` = {$season['id']} " .
 			   "AND `bracket` = '$winner_bracket' " .
 			   "AND `round` = $winner_round " .
 			   "AND `match` = $winner_match");
@@ -158,7 +158,7 @@ function getLoserMatch(& $match)
     $loser_player = getNextLoserPlayer($match);
 
     $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			   "WHERE `id_season` = {$_REQUEST['sid']} " .
+			   "WHERE `id_season` = {$season['id']} " .
 			   "AND `bracket` = '$loser_bracket' " .
 			   "AND `round` = $loser_round " .
 			   "AND `match` = $loser_match");

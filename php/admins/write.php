@@ -23,13 +23,13 @@ if ($user['uid'])
 
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-      			 "WHERE `id_season` = {$_REQUEST['sid']} AND `id_user` = $id_user");
+      			 "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);
 
   if ($season_users_row['usertype_headadmin'] or $season_users_row['usertype_admin'])
   {
     $content_tpl->set_var("I_ID_USER", $id_user);
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_WRITE_MAIL", "B_WRITE_MAIL");
   }

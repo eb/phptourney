@@ -28,7 +28,7 @@ if ($user['usertype_root'])
     $content_tpl->parse("H_USERNAME", "B_USERNAME", true);
   }
 
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->set_var("I_USERNAME", "");
   $content_tpl->set_var("I_EMAIL", "");
   $content_tpl->parse("H_ADD_SEASON", "B_ADD_SEASON");

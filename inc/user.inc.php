@@ -33,6 +33,7 @@ if (isset($_COOKIE["user_id"]))
 function setUser($user_id_md5) {
   global $user;
   global $cfg;
+  global $season;
   unsetUser($user);
 
   $user_id_md5 = stripslashes($user_id_md5);
@@ -50,7 +51,7 @@ function setUser($user_id_md5) {
 
       // season_users-query
       $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_user` = {$users_row['id']} AND (`id_season` = 0 OR `id_season` = {$_REQUEST['sid']})");
+				   "WHERE `id_user` = {$users_row['id']} AND (`id_season` = 0 OR `id_season` = {$season['id']})");
       while ($season_users_row = dbFetch($season_users_ref))
       {
 	if ($season_users_row['usertype_root'] == 1)

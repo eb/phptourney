@@ -24,7 +24,7 @@ $id_news_group = intval($_REQUEST['opt']);
 if ($user['usertype_root'] or $user['usertype_admin'])
 {
   $content_tpl->set_var("I_OPT", $id_news_group);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_ADD", "B_ADD");
 }
 
@@ -34,7 +34,7 @@ if ($user['usertype_admin'] or $id_news_group == 1)
 {
   // news-query
   $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
-		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$_REQUEST['sid']} AND `deleted` = 0 " .
+		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$season['id']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC LIMIT 0, 5");
   if (dbNumRows($news_ref) <= 0)
   {
@@ -56,7 +56,7 @@ if ($user['usertype_admin'] or $id_news_group == 1)
 
       if ($user['usertype_admin'])
       {
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	if ($id_news_group == 2)
 	{
 	  $content_tpl->parse("H_PUBLISH", "B_PUBLISH");
@@ -67,12 +67,12 @@ if ($user['usertype_admin'] or $id_news_group == 1)
       // comments-query
       $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news_comments` WHERE `id_news` = {$news_row['id']} AND `deleted` = 0");
       $content_tpl->set_var("I_NUM_COMMENTS", dbNumRows($comments_ref));
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_COMMENTS_LINK", "B_COMMENTS_LINK");
       $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
     }
     $content_tpl->set_var("I_OPT", $id_news_group);
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_NEWS_ARCHIVE", "B_NEWS_ARCHIVE");
   }
 }

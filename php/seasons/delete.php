@@ -22,7 +22,7 @@ if ($user['usertype_root'])
   dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `deleted` = 1 WHERE `id` = $id_season");
   $content_tpl->parse("H_MESSAGE_SEASON_REMOVED", "B_MESSAGE_SEASON_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

@@ -27,7 +27,7 @@ if ($news_row['id_season'] == 0 and $user['usertype_root'] or
   $content_tpl->set_var("I_BODY", htmlspecialchars($news_row['body']));
   $content_tpl->set_var("I_OPT", $news_row['id_news_group']);
   $content_tpl->set_var("I_ID_NEWS", $id_news);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_NEWS", "B_EDIT_NEWS");
 }
 else

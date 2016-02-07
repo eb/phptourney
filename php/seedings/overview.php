@@ -23,7 +23,7 @@ if ($user['usertype_admin'])
 {
   if ($season['status'] == "" or $season['status'] == "signups")
   {
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_RESET_SEEDINGS", "B_RESET_SEEDINGS");
   }
 
@@ -31,7 +31,7 @@ if ($user['usertype_admin'])
   // season_users-query [seeded players]
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
 			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			       "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			       "WHERE SU.`id_season` = {$season['id']} " .
 			       "AND SU.`usertype_player` = 1 " .
 			       "AND SU.`rejected` = 0 " .
 			       "AND SU.`seedgroup` > 0 " .
@@ -54,7 +54,7 @@ if ($user['usertype_admin'])
   // season_users-query [unseeded players]
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
 			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			       "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			       "WHERE SU.`id_season` = {$season['id']} " .
 			       "AND SU.`usertype_player` = 1 " .
 			       "AND SU.`rejected` = 0 " .
 			       "AND SU.`seedgroup` = 0 " .
@@ -78,7 +78,7 @@ if ($user['usertype_admin'])
   {
     $content_tpl->parse("H_NO_PLAYERS", "B_NO_PLAYERS");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_PLAYERS", "B_PLAYERS");
   $content_tpl->parse("H_OVERVIEW_SEEDINGS", "B_OVERVIEW_SEEDINGS");
 }

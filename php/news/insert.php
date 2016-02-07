@@ -20,8 +20,8 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
 // access for roots [global news]
 // access for admins [public / private news]
-if ($_REQUEST['sid'] == 0 and $user['usertype_root'] or
-    $_REQUEST['sid'] != 0 and $user['usertype_admin']) {
+if ($season['id'] == 0 and $user['usertype_root'] or
+    $season['id'] != 0 and $user['usertype_admin']) {
   $is_complete = 1;
   if ($_REQUEST['heading'] == "")
   {
@@ -42,14 +42,14 @@ if ($_REQUEST['sid'] == 0 and $user['usertype_root'] or
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}news` (`heading`, `body`, `id_season`, `id_user`, `id_news_group`, `submitted`) " .
 	     "VALUES ('$heading', " .
 	     "'$body', " .
-	     "{$_REQUEST['sid']}, " .
+	     "{$season['id']}, " .
 	     "{$user['uid']}, " .
 	     "$id_news_group, " .
 	     "NOW())");
 
     $content_tpl->parse("H_MESSAGE_NEWS_ADDED", "B_MESSAGE_NEWS_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->set_var("I_OPT", $id_news_group);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }

@@ -23,7 +23,7 @@ if ($user['usertype_root'])
   $content_tpl->set_var("I_ID_SEASON_OPT", $id_season); // XXX
   $content_tpl->set_var("I_SEASON_NAME", htmlspecialchars($seasons_row['name']));
 
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_SEASON", "B_EDIT_SEASON");
 }
 else

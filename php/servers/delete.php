@@ -18,11 +18,11 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 // access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $f_serverlist = "data/serverlists/{$_REQUEST['sid']}";
+  $f_serverlist = "data/serverlists/{$season['id']}";
   unlink($f_serverlist);
   $content_tpl->parse("H_MESSAGE_SERVERLIST_REMOVED", "B_MESSAGE_SERVERLIST_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

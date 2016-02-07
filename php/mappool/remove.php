@@ -18,7 +18,7 @@ if ($user['usertype_headadmin'])
 {
   $id_map = intval($_REQUEST['opt']);
   $content_tpl->set_var("I_ID_MAP", $id_map);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_REMOVE_MAP", "B_REMOVE_MAP");
 }
 else

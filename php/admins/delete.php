@@ -22,10 +22,10 @@ if ($user['usertype_headadmin'])
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
   dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `usertype_headadmin` = 0, `usertype_admin` = 0 " .
-	   "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
+	   "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
   $content_tpl->parse("H_MESSAGE_ADMIN_REMOVED", "B_MESSAGE_ADMIN_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

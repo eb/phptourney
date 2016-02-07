@@ -20,7 +20,7 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_SERVERS", "H_VIEW_SERVERS");
 $no_servers = 0;
 
 // read serverlist
-$f_serverlist = "data/serverlists/{$_REQUEST['sid']}";
+$f_serverlist = "data/serverlists/{$season['id']}";
 if (file_exists($f_serverlist))
 {
   // serverlist

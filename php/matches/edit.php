@@ -115,7 +115,7 @@ if ($user['usertype_admin'])
 	// map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
 	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
-			       "WHERE `id_season` = {$_REQUEST['sid']} AND `deleted` = 0");
+			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
 	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
@@ -140,9 +140,9 @@ if ($user['usertype_admin'])
 	$content_tpl->set_var("I_SCORE_P2", $maps_row['score_p2']);
 
 	// screenshot
-	$sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
-	$sshot = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}.jpg";
-	$sshot_thumb = $sshot_dir . "{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}_thumb.jpg";
+	$sshot_dir = "data/screenshots/{$season['id']}/";
+	$sshot = $sshot_dir . "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}.jpg";
+	$sshot_thumb = $sshot_dir . "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}_thumb.jpg";
 	if (file_exists($sshot))
 	{
 	  $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($sshot));
@@ -160,7 +160,7 @@ if ($user['usertype_admin'])
 	// map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
 	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
-			       "WHERE `id_season` = {$_REQUEST['sid']} AND `deleted` = 0");
+			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
 	  $content_tpl->set_var("I_ID_MAP", $mappool_row['id']);
@@ -206,7 +206,7 @@ if ($user['usertype_admin'])
       $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");
     }
 
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_EDIT_REPORT", "B_EDIT_REPORT");
   }
   else

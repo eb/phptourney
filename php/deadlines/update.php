@@ -48,7 +48,7 @@ if ($user['usertype_headadmin'])
       $id_deadline = intval($_REQUEST['opt']);
       $round = dbEscape($_REQUEST['round']);
       $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-				"WHERE `id_season` = {$_REQUEST['sid']} AND `round` = '$round' AND `id` <> $id_deadline");
+				"WHERE `id_season` = {$season['id']} AND `round` = '$round' AND `id` <> $id_deadline");
       if (dbNumRows($deadlines_ref) == 0)
       {
         $deadline = dbEscape($_REQUEST['deadline']);
@@ -56,7 +56,7 @@ if ($user['usertype_headadmin'])
 		 "WHERE `id` = $id_deadline");
 	$content_tpl->parse("H_MESSAGE_DEADLINE_EDITED", "B_MESSAGE_DEADLINE_EDITED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
       }
       else

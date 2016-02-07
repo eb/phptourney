@@ -17,7 +17,7 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_SEASON", "H_REMOVE_SEASON");
 if ($user['usertype_root'])
 {
   $id_season = intval($_REQUEST['opt']);
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->set_var("I_ID_SEASON_OPT", $id_season);
   $content_tpl->parse("H_REMOVE_SEASON", "B_REMOVE_SEASON");
 }

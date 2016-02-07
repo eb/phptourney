@@ -40,14 +40,14 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_MESSAGE_SIGNUPS_OPEN", "B_MESSAGE_SIGNUPS_OPEN");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_CLOSE_SIGNUPS", "B_CLOSE_SIGNUPS");
   }
   else
   {
     $content_tpl->parse("H_WARNING_SIGNUPS_CLOSED", "B_WARNING_SIGNUPS_CLOSED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_OPEN_SIGNUPS", "B_OPEN_SIGNUPS");
   }
 
@@ -67,7 +67,7 @@ if ($user['usertype_headadmin'])
       // season_users-query
       $season_users_ref = dbQuery("SELECT * " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_season` = {$_REQUEST['sid']} " .
+				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `id_user` = {$users_row['id']} " .
 				   "AND `usertype_player` = 1");
       if (dbNumRows($season_users_ref) == 0)
@@ -97,7 +97,7 @@ if ($user['usertype_headadmin'])
       // season_users-query
       $season_users_ref = dbQuery("SELECT * " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_season` = {$_REQUEST['sid']} " .
+				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `id_user` = {$users_row['id']} " .
 				   "AND (`usertype_player` = 1 OR `invited` = 1)");
       if (dbNumRows($season_users_ref) == 0)
@@ -118,7 +118,7 @@ if ($user['usertype_headadmin'])
   // users-query
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			"WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 1 " .
 			"AND SU.`rejected` = 0 " .
 			"AND SU.`id_user` = U.`id` " .
@@ -138,7 +138,7 @@ if ($user['usertype_headadmin'])
       $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_ACCEPTED_PLAYER", "B_ACCEPTED_PLAYER", true);
     }
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_ACCEPTED_PLAYERS", "B_ACCEPTED_PLAYERS");
   }
   $content_tpl->parse("H_OVERVIEW_ACCEPTED_PLAYERS", "B_OVERVIEW_ACCEPTED_PLAYERS");
@@ -150,7 +150,7 @@ if ($user['usertype_headadmin'])
   // users-query
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			"WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 1 " .
 			"AND SU.`rejected` = 1 " .
 			"AND SU.`id_user` = U.`id` " .
@@ -169,7 +169,7 @@ if ($user['usertype_headadmin'])
       $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_REJECTED_PLAYER", "B_REJECTED_PLAYER", true);
     }
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_REJECTED_PLAYERS", "B_REJECTED_PLAYERS");
   }
   $content_tpl->parse("H_OVERVIEW_REJECTED_PLAYERS", "B_OVERVIEW_REJECTED_PLAYERS");
@@ -181,7 +181,7 @@ if ($user['usertype_headadmin'])
   // users-query
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			"WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 0 " .
 			"AND SU.`invited` = 1 " .
 			"AND SU.`id_user` = U.`id` " .
@@ -200,7 +200,7 @@ if ($user['usertype_headadmin'])
       $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_INVITATION", "B_INVITATION", true);
     }
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_INVITATIONS", "B_INVITATIONS");
   }
   $content_tpl->parse("H_OVERVIEW_INVITATIONS", "B_OVERVIEW_INVITATIONS");

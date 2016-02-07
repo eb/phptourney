@@ -22,7 +22,7 @@ if ($user['usertype_headadmin'])
 { 
   $src_file['serverlist'] = $_FILES['serverlist']['name'];
   $tmp_file['serverlist'] = $_FILES['serverlist']['tmp_name'];
-  $dst_file['serverlist'] = "data/serverlists/{$_REQUEST['sid']}";
+  $dst_file['serverlist'] = "data/serverlists/{$season['id']}";
 
   $is_complete = 1;
   if (!is_uploaded_file($tmp_file['serverlist']) or !file_exists($tmp_file['serverlist']))
@@ -41,7 +41,7 @@ if ($user['usertype_headadmin'])
     chmod($dst_file['serverlist'], 0646);
     $content_tpl->parse("H_MESSAGE_SERVERLIST_UPLOADED", "B_MESSAGE_SERVERLIST_UPLOADED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 

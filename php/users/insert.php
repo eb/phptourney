@@ -111,7 +111,7 @@ if ($is_complete)
 
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
 	     "(`ip`, `submitted`, `usertype_player`, `id_season`, `id_user`) " .
-	     "VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW(), 1, {$_REQUEST['sid']}, {$users_row['id']})");
+	     "VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW(), 1, {$season['id']}, {$users_row['id']})");
 
     $signup = true;
   }

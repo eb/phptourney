@@ -27,7 +27,7 @@ if ($user['usertype_headadmin'])
 
   // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-			       "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
+			       "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
   $season_users_row = dbFetch($season_users_ref);
   if ($season_users_row['usertype_headadmin'])
   {
@@ -37,7 +37,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_EDIT_HEADADMIN_UNCHECKED", "B_EDIT_HEADADMIN_UNCHECKED");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_ADMIN", "B_EDIT_ADMIN");
 }
 else

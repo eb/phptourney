@@ -70,7 +70,7 @@ if ($user['usertype_headadmin'])
   // win-maps
   $content_tpl->set_var("I_WINMAPS", $season['winmaps']);
 
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_CHOOSE_TOURNEY_SYSTEM", "B_CHOOSE_TOURNEY_SYSTEM");
 }
 else

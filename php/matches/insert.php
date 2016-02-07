@@ -46,11 +46,11 @@ if ($user['usertype_admin'] or
       ($prev_match_player2 == "" or $matches[$prev_match_player2]['confirmed'] != "0000-00-00 00:00:00"))
   {
     // screenshot filenames
-    $sshot_dir = "data/screenshots/{$_REQUEST['sid']}/";
+    $sshot_dir = "data/screenshots/{$season['id']}/";
     for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
     {
       $dst_filename['m' . $i] = $sshot_dir .
-	"{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m$i";
+	"{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m$i";
     }
 
     if ($matches_row['submitted'] == "0000-00-00 00:00:00")
@@ -109,7 +109,7 @@ if ($user['usertype_admin'] or
 	  $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
 	  $content_tpl->set_var("I_ROUND", $matches_row['round']);
 	  $content_tpl->set_var("I_MATCH", $matches_row['match']);
-	  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	  $content_tpl->set_var("I_ID_SEASON", $season['id']);
 	  $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
@@ -326,7 +326,7 @@ if ($user['usertype_admin'] or
 		sleep(2);
 		fwrite($bot_socket,
 		       "{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} [$player1 vs $player2] reported - " .
-		       "{$cfg['host']}{$cfg['path']}?sid={$_REQUEST['sid']}&mod=matches&act=edit&opt={$matches_row['id']}\r\n");
+		       "{$cfg['host']}{$cfg['path']}?sid={$season['id']}&mod=matches&act=edit&opt={$matches_row['id']}\r\n");
 		fclose($bot_socket);
 	      }
 	    }

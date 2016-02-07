@@ -28,7 +28,7 @@ if ($user['usertype_admin'])
 // season_users-query
 $season_users_ref = dbQuery("SELECT SU.* " .
 			     "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-			     "WHERE SU.`id_season` = {$_REQUEST['sid']} AND (SU.`usertype_admin` = 1 OR SU.`usertype_headadmin` = 1) " .
+			     "WHERE SU.`id_season` = {$season['id']} AND (SU.`usertype_admin` = 1 OR SU.`usertype_headadmin` = 1) " .
 			     "AND U.`id` = SU.`id_user` " .
 			     "ORDER BY U.`username` ASC");
 if (dbNumRows($season_users_ref) == 0)
@@ -51,7 +51,7 @@ else
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($users_row['abbreviation']));
     $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->set_var("H_USERTYPE_HEADADMIN", "");
     $content_tpl->set_var("H_USERTYPE_ADMIN", "");
 

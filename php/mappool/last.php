@@ -23,7 +23,7 @@ if ($user['usertype_headadmin'])
 			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
   while ($seasons_row = dbFetch($seasons_ref)) // XXX: Ugly
   {
-    if ($seasons_row['id'] == $_REQUEST['sid'])
+    if ($seasons_row['id'] == $season['id'])
     {
       if ($seasons_row = dbFetch($seasons_ref))
       {
@@ -32,18 +32,18 @@ if ($user['usertype_headadmin'])
 	{
           $map = dbEscape($maps_row['map']);
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}mappool` (`id_season`, `map`) " .
-		   "VALUES ({$_REQUEST['sid']}, '$map')");
+		   "VALUES ({$season['id']}, '$map')");
 	}
 	$content_tpl->parse("H_MESSAGE_LAST", "B_MESSAGE_LAST");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
       }
       else
       {
 	$content_tpl->parse("H_WARNING_LAST", "B_WARNING_LAST");
 	$content_tpl->parse("H_WARNING", "B_WARNING");
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
       }
     }

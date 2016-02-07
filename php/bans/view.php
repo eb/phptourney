@@ -24,7 +24,7 @@ if ($user['usertype_admin'])
   $content_tpl->set_var("I_IPB", htmlspecialchars($ipb));
   $ipa = preg_replace("/(.*\\.).*\\..*\\..*/", "$1*.*.*", $_REQUEST['opt']);
   $content_tpl->set_var("I_IPA", htmlspecialchars($ipa));
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_VIEW_BANS", "B_VIEW_BANS");
 }
 else

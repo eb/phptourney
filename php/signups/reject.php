@@ -24,24 +24,24 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_TOURNEY_RUNNING", "B_WARNING_TOURNEY_RUNNING");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "finished")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_FINISHED", "B_WARNING_TOURNEY_FINISHED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
   {
     $id_user = intval($_REQUEST['opt']);
     dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `rejected` = 1 " .
-	     "WHERE `id_user` = $id_user AND `id_season` = {$_REQUEST['sid']}");
+	     "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_PLAYER_REJECTED", "B_MESSAGE_PLAYER_REJECTED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

@@ -23,7 +23,7 @@ if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user
   $content_tpl->set_var("I_ID_RULE", $id_rule);
   $content_tpl->set_var("I_SUBJECT", htmlspecialchars($rules_row['subject']));
   $content_tpl->set_var("I_BODY", htmlspecialchars($rules_row['body']));
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_EDIT_RULE", "B_EDIT_RULE");
 }
 else

@@ -30,7 +30,7 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_TOURNEY_SYSTEM", "B_WARNING_TOURNEY_SYSTEM");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
@@ -113,7 +113,7 @@ if ($user['usertype_headadmin'])
 
     $content_tpl->set_var("I_ID_DEADLINE", $id_deadline);
     $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadlines_row['deadline']));
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_EDIT_DEADLINE", "B_EDIT_DEADLINE");
   }
 }

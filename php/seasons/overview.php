@@ -38,7 +38,7 @@ if ($user['usertype_root'])
     }
     $content_tpl->parse("H_SEASONS", "B_SEASONS");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_OVERVIEW_SEASONS", "B_OVERVIEW_SEASONS");
 }
 else

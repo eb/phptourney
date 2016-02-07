@@ -30,18 +30,18 @@ if ($user['usertype_headadmin'])
       $subject = dbEscape($rules_row['subject']);
       $body = dbEscape($rules_row['body']);
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}rules` (`id_season`, `subject`, `body`) " .
-	      "VALUES ({$_REQUEST['sid']}, '$subject', '$body')");
+	      "VALUES ({$season['id']}, '$subject', '$body')");
     }
     $content_tpl->parse("H_MESSAGE_COPIED", "B_MESSAGE_COPIED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
   {
     $content_tpl->parse("H_WARNING_SEASON", "B_WARNING_SEASON");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

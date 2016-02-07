@@ -38,7 +38,7 @@ if ($user['usertype_root'])
       $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
       $content_tpl->parse("H_USER", "B_USER", true);
     }
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_USERS", "B_USERS");
   }
   $content_tpl->parse("H_OVERVIEW_USERS", "B_OVERVIEW_USERS");

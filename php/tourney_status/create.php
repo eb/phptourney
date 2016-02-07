@@ -26,35 +26,35 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_TOURNEY_SYSTEM", "B_WARNING_TOURNEY_SYSTEM");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "bracket")
   {
     $content_tpl->parse("H_WARNING_BRACKET_CREATED", "B_WARNING_BRACKET_CREATED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "running")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_RUNNING", "B_WARNING_TOURNEY_RUNNING");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "finished")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_FINISHED", "B_WARNING_TOURNEY_FINISHED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
   {
     // process seeding-groups
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_season` = {$_REQUEST['sid']} " .
+				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `rejected` = 0 " .
 				 "AND `seedgroup` > 0 " .
 				 "AND `usertype_player` = 1 " .
@@ -81,13 +81,13 @@ if ($user['usertype_headadmin'])
 	$uid = $seeding_group[$rand_key];
 	unset($seeding_group[$rand_key]);
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `seedlevel` = $seedlevel " .
-		 "WHERE `id_user` = $uid AND `id_season` = {$_REQUEST['sid']}");
+		 "WHERE `id_user` = $uid AND `id_season` = {$season['id']}");
 	$seedlevel++;
       }
     }
     // seed unseeded players
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_season` = {$_REQUEST['sid']} " .
+				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `rejected` = 0 " .
 				 "AND `seedgroup` = 0 " .
 				 "AND `usertype_player` = 1 " .
@@ -95,7 +95,7 @@ if ($user['usertype_headadmin'])
     while ($season_users_row = dbFetch($season_users_ref))
     {
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `seedlevel` = $seedlevel " .
-	       "WHERE `id` = {$season_users_row['id']} AND `id_season` = {$_REQUEST['sid']}");
+	       "WHERE `id` = {$season_users_row['id']} AND `id_season` = {$season['id']}");
       $seedlevel++;
     }
 
@@ -104,26 +104,26 @@ if ($user['usertype_headadmin'])
     {
       // XXX
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `rejected` = 1 " .
-	       "WHERE `id_season` = {$_REQUEST['sid']} " .
+	       "WHERE `id_season` = {$season['id']} " .
 	       "AND `rejected` = 0 " .
 	       "AND `seedlevel` > {$season['single_elimination']} + {$season['single_elimination']} / 2 " .
 	       "AND `usertype_player` = 1");
 
       // unset qualification if no qualification games were created
       $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				   "WHERE `id_season` = {$_REQUEST['sid']} " .
+				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `seedlevel` > {$season['single_elimination']} " .
 				   "AND `usertype_player` = 1");
       if (dbNumRows($season_users_ref) == 0)
       {
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `qualification` = 0 " .
-		 "WHERE `id` = {$_REQUEST['sid']}");
+		 "WHERE `id` = {$season['id']}");
       }
     }
     else
     {
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `rejected` = 1 " .
-	       "WHERE `id_season` = {$_REQUEST['sid']} " .
+	       "WHERE `id_season` = {$season['id']} " .
 	       "AND `rejected` = 0 " .
 	       "AND `seedlevel` > {$season['single_elimination']} " .
 	       "AND `usertype_player` = 1");
@@ -140,7 +140,7 @@ if ($user['usertype_headadmin'])
       $seedlevel = $counter;
       $users_ref = dbQuery("SELECT U.`id` " .
 			    "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
-			    "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			    "WHERE SU.`id_season` = {$season['id']} " .
 			    "AND SU.`usertype_player` = 1 " .
 			    "AND SU.`seedlevel` = $seedlevel " .
 			    "AND U.`id` = SU.`id_user`");
@@ -153,7 +153,7 @@ if ($user['usertype_headadmin'])
       $seedlevel = $season['single_elimination'] - $counter + 1;
       $users_ref = dbQuery("SELECT U.`id` " .
 			    "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
-			    "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			    "WHERE SU.`id_season` = {$season['id']} " .
 			    "AND SU.`usertype_player` = 1 " .
 			    "AND SU.`seedlevel` = $seedlevel " .
 			    "AND U.`id` = SU.`id_user`");
@@ -169,7 +169,7 @@ if ($user['usertype_headadmin'])
 	$seedlevel = $season['single_elimination'] + $counter;
 	$users_ref = dbQuery("SELECT U.`id` " .
 			      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
-			      "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+			      "WHERE SU.`id_season` = {$season['id']} " .
 			      "AND SU.`usertype_player` = 1 " .
 			      "AND SU.`seedlevel` = $seedlevel " .
 			      "AND U.`id` = SU.`id_user`");
@@ -181,9 +181,9 @@ if ($user['usertype_headadmin'])
 	{
 	  $qualification = 1;
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` (`id_season`, `bracket`, `round`, `match`, `id_player1`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'wb', 1, $match, $id_player1, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'wb', 1, $match, $id_player1, $num_winmaps)");
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` (`id_season`, `bracket`, `round`, `match`, `id_player1`, `id_player2`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'q', 1, $match, $id_player2, $id_player3, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'q', 1, $match, $id_player2, $id_player3, $num_winmaps)");
 	}
       }
 
@@ -192,25 +192,25 @@ if ($user['usertype_headadmin'])
 	if (isset($id_player1) and isset($id_player2))
 	{
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` (`id_season`, `bracket`, `round`, `match`, `id_player1`, `id_player2`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'wb', 1, $match, $id_player1, $id_player2, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'wb', 1, $match, $id_player1, $id_player2, $num_winmaps)");
 	}
 	elseif (isset($id_player1) and !isset($id_player2))
 	{
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		   "(`id_season`, `bracket`, `round`, `match`, `id_player1`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'wb', 1, $match, $id_player1, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'wb', 1, $match, $id_player1, $num_winmaps)");
 	}
 	elseif (!isset($id_player1) and isset($id_player2))
 	{
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		   "(`id_season`, `bracket`, `round`, `match`, `id_player2`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'wb', 1, $match, $id_player2, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'wb', 1, $match, $id_player2, $num_winmaps)");
 	}
 	else
 	{
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		   "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'wb', 1, $match, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'wb', 1, $match, $num_winmaps)");
 	}
       }
       unset($id_player1);
@@ -227,7 +227,7 @@ if ($user['usertype_headadmin'])
       {
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		 "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-		 "VALUES ({$_REQUEST['sid']}, 'wb', $i, $j, $num_winmaps)");
+		 "VALUES ({$season['id']}, 'wb', $i, $j, $num_winmaps)");
       }
     }
     if ($season['double_elimination'] != "")
@@ -240,26 +240,26 @@ if ($user['usertype_headadmin'])
 	  $num_round = $i * 2 - 1;
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		   "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'lb', $num_round, $j, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'lb', $num_round, $j, $num_winmaps)");
 	  $num_round = $i * 2;
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 		   "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-		   "VALUES ({$_REQUEST['sid']}, 'lb', $num_round, $j, $num_winmaps)");
+		   "VALUES ({$season['id']}, 'lb', $num_round, $j, $num_winmaps)");
 	}
       }
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 	       "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-	       "VALUES ({$_REQUEST['sid']}, 'gf', 1, 1, $num_winmaps)");
+	       "VALUES ({$season['id']}, 'gf', 1, 1, $num_winmaps)");
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}matches` " .
 	       "(`id_season`, `bracket`, `round`, `match`, `num_winmaps`) " .
-	       "VALUES ({$_REQUEST['sid']}, 'gf', 1, 2, $num_winmaps)");
+	       "VALUES ({$season['id']}, 'gf', 1, 2, $num_winmaps)");
     }
 
     // set season-status to bracket
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'bracket' WHERE `id` = {$_REQUEST['sid']}");
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'bracket' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_BRACKET_CREATED", "B_MESSAGE_BRACKET_CREATED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

@@ -14,7 +14,7 @@ $content_tpl->set_block("F_CONTENT", "B_BRACKET", "H_BRACKET");
 
 if (($season['status'] == "bracket" or $season['status'] == "running" or $season['status'] == "finished"))
 {
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BRACKET", "B_BRACKET");
 }
 else

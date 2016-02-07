@@ -23,7 +23,7 @@ if ($season['id'] == 0 and $user['usertype_root'] or $season['id'] > 0 and $user
   dbQuery("DELETE FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");
   $content_tpl->parse("H_MESSAGE_RULE_REMOVED", "B_MESSAGE_RULE_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
 }
 else

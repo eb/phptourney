@@ -30,21 +30,21 @@ if ($user['usertype_headadmin'])
   {
     $content_tpl->parse("H_WARNING_TOURNEY_RUNNING", "B_WARNING_TOURNEY_RUNNING");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] == "finished")
   {
     $content_tpl->parse("H_WARNING_TOURNEY_FINISHED", "B_WARNING_TOURNEY_FINISHED");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   elseif ($season['status'] != "bracket")
   {
     $content_tpl->parse("H_WARNING_BRACKET", "B_WARNING_BRACKET");
     $content_tpl->parse("H_WARNING", "B_WARNING");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
   else
@@ -52,7 +52,7 @@ if ($user['usertype_headadmin'])
     // send a mail to all player that signed up
     $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
       			  "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
-      			  "WHERE SU.`id_season` = {$_REQUEST['sid']} " .
+      			  "WHERE SU.`id_season` = {$season['id']} " .
       			  "AND SU.`usertype_player` = 1 " .
       			  "AND SU.`id_user` = U.`id`");
     while ($season_users_row = dbFetch($season_users_ref))
@@ -97,7 +97,7 @@ if ($user['usertype_headadmin'])
         $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
         $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-      			   "WHERE `id_season` = {$_REQUEST['sid']} " .
+      			   "WHERE `id_season` = {$season['id']} " .
       			   "AND `round` = '{$matches_row['bracket']}{$matches_row['round']}'");
         if ($deadlines_row = dbFetch($deadlines_ref))
         {
@@ -125,10 +125,10 @@ if ($user['usertype_headadmin'])
     }
 
     // set season-status to running
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'running' WHERE `id` = {$_REQUEST['sid']}");
+    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'running' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_TOURNEY_RUNNING", "B_MESSAGE_TOURNEY_RUNNING");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

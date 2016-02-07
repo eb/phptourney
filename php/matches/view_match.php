@@ -53,7 +53,7 @@ if ($matches_row = dbFetch($matches_ref))
     $content_tpl->set_var("I_ID_PLAYER1", $users_row['id']);
     $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row['abbreviation']));
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_PLAYER1", "B_PLAYER1");
   }
   else
@@ -73,7 +73,7 @@ if ($matches_row = dbFetch($matches_ref))
     $content_tpl->set_var("I_ID_PLAYER2", $users_row['id']);
     $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row['abbreviation']));
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_PLAYER2", "B_PLAYER2");
   }
   else
@@ -153,8 +153,8 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->parse("H_OUTCOME", "B_OUTCOME");
 
       $screenshot_prefix =
-	"data/screenshots/{$_REQUEST['sid']}/" .
-	"{$_REQUEST['sid']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}";
+	"data/screenshots/{$season['id']}/" .
+	"{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}";
 
       ////////////////////////////////////////////////////////////////////////////////
       // maps
@@ -266,7 +266,7 @@ if ($matches_row = dbFetch($matches_ref))
       {
 	$ip = $comments_row['ip'];
 	$content_tpl->set_var("I_IP", htmlspecialchars($ip));
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->parse("H_BANS", "B_BANS");
       }
 
@@ -285,7 +285,7 @@ if ($matches_row = dbFetch($matches_ref))
   $content_tpl->set_var("I_BODY", "");
   if ($user['uid'])
   {
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_ADD_COMMENT", "B_ADD_COMMENT");
   }
   else

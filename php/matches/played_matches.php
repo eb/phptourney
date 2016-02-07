@@ -21,7 +21,7 @@ if ($user['usertype_player'])
 {
   // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
 			  "ORDER BY `confirmed` DESC");
@@ -68,7 +68,7 @@ if ($user['usertype_player'])
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       $content_tpl->set_var("I_OUTCOME", $outcome);
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_PLAYED_MATCH", "B_PLAYED_MATCH", true);
     }
     $content_tpl->parse("H_PLAYED_MATCHES", "B_PLAYED_MATCHES");

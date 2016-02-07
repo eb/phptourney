@@ -21,7 +21,7 @@ if ($user['usertype_headadmin'])
 {
   // deadlines-query
   $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
-			    "WHERE `id_season` = {$_REQUEST['sid']} ORDER BY `deadline` ASC");
+			    "WHERE `id_season` = {$season['id']} ORDER BY `deadline` ASC");
   if (dbNumRows($deadlines_ref) <= 0)
   {
     $content_tpl->parse("H_NO_DEADLINES", "B_NO_DEADLINES");
@@ -32,7 +32,7 @@ if ($user['usertype_headadmin'])
     while ($deadlines_row = dbFetch($deadlines_ref))
     {
       $content_tpl->set_var("I_DEADLINE_COUNTER", ++$deadline_counter);
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_ID_DEADLINE", $deadlines_row['id']);
       $content_tpl->set_var("I_ROUND", htmlspecialchars($deadlines_row['round']));
       $content_tpl->set_var("I_DEADLINE", htmlspecialchars($deadlines_row['deadline']));
@@ -40,7 +40,7 @@ if ($user['usertype_headadmin'])
     }
     $content_tpl->parse("H_DEADLINES", "B_DEADLINES");
   }
-  $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_OVERVIEW_DEADLINES", "B_OVERVIEW_DEADLINES");
 }
 else

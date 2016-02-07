@@ -25,7 +25,7 @@ $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
 // users-query
 $users_ref = dbQuery("SELECT U.* " .
 		      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
-		      "WHERE SU.`id_user` = U.`id` AND SU.`id_season` = {$_REQUEST['sid']} AND U.`id_country` = $id_country " .
+		      "WHERE SU.`id_user` = U.`id` AND SU.`id_season` = {$season['id']} AND U.`id_country` = $id_country " .
 		      "AND SU.`usertype_player` = 1 AND SU.`rejected` = 0 ORDER BY SU.`submitted` ASC");
 if (dbNumRows($users_ref) <= 0)
 {
@@ -43,12 +43,12 @@ else
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
     if ($player_counter % 2 == 1)
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_PLAYER_COL1", "B_PLAYER_COL1", true);
     }
     elseif ($player_counter % 2 == 0)
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_PLAYER_COL2", "B_PLAYER_COL2", true);
     }
   }

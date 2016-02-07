@@ -36,7 +36,7 @@ if ($user['usertype_headadmin'])
   {
     // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
-				 "WHERE `id_season` = {$_REQUEST['sid']} " .
+				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `usertype_player` = 1 " .
 				 "AND `rejected` = 0");
     while ($season_users_row = dbFetch($season_users_ref))
@@ -46,12 +46,12 @@ if ($user['usertype_headadmin'])
         $seedgroup = intval($_REQUEST[$season_users_row['id_user']]);
 	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
 		 "`seedgroup` = $seedgroup " .
-		 "WHERE `id_user` = {$season_users_row['id_user']} AND `id_season` = {$_REQUEST['sid']}");
+		 "WHERE `id_user` = {$season_users_row['id_user']} AND `id_season` = {$season['id']}");
       }
     }
     $content_tpl->parse("H_MESSAGE_PLAYERS_SEEDED", "B_MESSAGE_PLAYERS_SEEDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 }

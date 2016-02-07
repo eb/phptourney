@@ -15,7 +15,7 @@ $content_tpl->set_block("F_CONTENT", "B_LATEST_MATCHES", "H_LATEST_MATCHES");
 
 // matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			"WHERE `id_season` = {$_REQUEST['sid']} " .
+			"WHERE `id_season` = {$season['id']} " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .
 			"AND `bye` = 0 AND `wo` = 0 AND `out` = 0 " .
 			"ORDER BY `confirmed` DESC " .
@@ -40,11 +40,11 @@ else
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
     $content_tpl->set_var("I_PLAYER1", htmlspecialchars($player1));
     $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_LATEST_MATCH", "B_LATEST_MATCH", true);
   }
 }
-$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+$content_tpl->set_var("I_ID_SEASON", $season['id']);
 $content_tpl->parse("H_LATEST_MATCHES", "B_LATEST_MATCHES");
 
 ?>

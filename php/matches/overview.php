@@ -37,7 +37,7 @@ if ($user['usertype_admin'])
 
   // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` != '0000-00-00 00:00:00' " .
 			  "AND `confirmed` = '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
@@ -77,13 +77,13 @@ if ($user['usertype_admin'])
       // deadlines-query
       if (isAfterPreDeadline($season, $matches_row['bracket'], $matches_row['round']))
       {
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	$content_tpl->parse("H_REPORTED_MATCH", "B_REPORTED_MATCH", true);
       }
       else
       {
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	$content_tpl->parse("H_REPORTED_MATCH_OUT_OF_TIMEFRAME", "B_REPORTED_MATCH_OUT_OF_TIMEFRAME", true);
       }
@@ -100,7 +100,7 @@ if ($user['usertype_admin'])
 
   // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` = '0000-00-00 00:00:00' " .
 			  "AND `confirmed` = '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
@@ -135,7 +135,7 @@ if ($user['usertype_admin'])
     // deadlines-query
     if (isAfterPreDeadline($season, $matches_row['bracket'], $matches_row['round']))
     {
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
       $unreported_matches = true;
       $content_tpl->parse("H_UNREPORTED_MATCH", "B_UNREPORTED_MATCH", true);
@@ -157,7 +157,7 @@ if ($user['usertype_admin'])
 
   // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			  "WHERE `id_season` = {$_REQUEST['sid']} " .
+			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
   if (dbNumRows($matches_ref) <= 0)
@@ -195,11 +195,11 @@ if ($user['usertype_admin'])
       }
       if ($cfg['convert'] != "")
       {
-	$content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	$content_tpl->parse("H_CROP", "B_CROP");
       }
-      $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_CONFIRMED_MATCH", "B_CONFIRMED_MATCH", true);
     }
     $content_tpl->parse("H_CONFIRMED_MATCHES", "B_CONFIRMED_MATCHES");

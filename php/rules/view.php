@@ -23,7 +23,7 @@ if ($user['usertype_admin'])
 
   // seasons-query
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
-			  "WHERE `deleted` = 0 AND `id` <> {$_REQUEST['sid']} ORDER BY `submitted` DESC");
+			  "WHERE `deleted` = 0 AND `id` <> {$season['id']} ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) > 0)
   {
     $content_tpl->set_var("I_TOURNEY_NAME", htmlspecialchars($cfg['tourney_name']));

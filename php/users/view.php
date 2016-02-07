@@ -56,7 +56,7 @@ else if ($user['usertype_player'])
 {
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
                          "WHERE `submitted` = '0000-00-00 00:00:00' " .
-                         "AND `id_season` = {$_REQUEST['sid']} " .
+                         "AND `id_season` = {$season['id']} " .
                          "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
                          "AND (`id_player1` = $id_user OR `id_player2` = $id_user)");
   if (dbNumRows($matches_ref) > 0)
@@ -93,7 +93,7 @@ $content_tpl->parse("H_SHOW_PROFILE", "B_SHOW_PROFILE");
 
 // matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
-			"WHERE `id_season` = {$_REQUEST['sid']} " .
+			"WHERE `id_season` = {$season['id']} " .
 			"AND (`id_player1` = $id_user OR `id_player2` = $id_user) " .
 			"AND `wo` = 0 " .
 			"AND `bye` = 0 " .
@@ -143,7 +143,7 @@ else
     $content_tpl->set_var("I_ROUND", htmlspecialchars($matches_row['round']));
     $content_tpl->set_var("I_MATCH", htmlspecialchars($matches_row['match']));
     $content_tpl->set_var("I_OUTCOME", htmlspecialchars($outcome));
-    $content_tpl->set_var("I_ID_SEASON", $_REQUEST['sid']);
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_PLAYED_MATCH", "B_PLAYED_MATCH", true);
   }
   $content_tpl->parse("H_PLAYED_MATCHES", "B_PLAYED_MATCHES");
