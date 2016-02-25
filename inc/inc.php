@@ -41,10 +41,10 @@ require("$inc_path/config.inc.php");
 require("$inc_path/db_mysql.inc.php");
 
 // template-class of the phplib
-require("$inc_path/template.inc.php");
+require("$inc_path/phplib/template.inc");
 
 // markdown parser
-require("$inc_path/parsedown.inc.php");
+require("$inc_path/parsedown/Parsedown.php");
 
 // http-requests
 require("$inc_path/request.inc.php");
