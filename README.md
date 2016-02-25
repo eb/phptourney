@@ -12,7 +12,7 @@ phpTourney is a PHP script collection consisting of user management,news, match 
 
 ### Installation
 - Extract the phpTourney archive to a directory on your webserver
-- Make sure that the directories /data/screenshots and /data/serverlists and the file /VERSION are writable for the www-user
+- Make sure that the /data/screenshots and /data/serverlists directories are writable for the www-user
 - Execute the SQL-script /sql/phptourney.sql (i.e. with phpMyAdmin, or the mysql command line utility)
 - Copy the file /inc/config-default.inc.php to /inc/config.inc.php and edit its content to your needs
 - Log in with admin/password and start a tournament

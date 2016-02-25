@@ -6,11 +6,6 @@ require("inc/inc.php");
 $main_tpl = new Template("html", "remove");
 $main_tpl->set_file("F_FULL", "full.html");
 
-// Read version
-$fh_version = fopen("VERSION", "r");
-$main_tpl->set_var("I_VERSION", fread($fh_version, filesize("VERSION")));
-fclose($fh_version);
-
 $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 $main_tpl->set_var("I_SEASON_NAME", "");
 if (isset($season))

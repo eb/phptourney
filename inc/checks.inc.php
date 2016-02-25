@@ -30,10 +30,4 @@ if (!is_writable("$this_path/../data/serverlists"))
   exit("the directory 'data/serverlists' has to be writable");
 }
 
-// Writable version file
-if (!is_writable("$this_path/../VERSION"))
-{
-  exit("the file 'VERSION' has to be writable");
-}
-
 ?>

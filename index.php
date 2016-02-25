@@ -20,11 +20,6 @@ $main_tpl->set_block("F_INDEX", "B_HEADADMIN_PANEL", "H_HEADADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_ADMIN_PANEL", "H_ADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_TOURNAMENT_PANEL", "H_TOURNAMENT_PANEL");
 
-// Read version
-$fh_version = fopen("VERSION", "r");
-$main_tpl->set_var("I_VERSION", fread($fh_version, filesize("VERSION")));
-fclose($fh_version);
-
 // Season dropdown-list
 $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
       		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
