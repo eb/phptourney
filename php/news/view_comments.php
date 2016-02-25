@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view_comments.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NEWS", "H_VIEW_NEWS");
@@ -19,16 +10,14 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_COMMENTS", "H_VIEW_COMMENTS");
 $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_LOGIN_TO_COMMENT", "H_LOGIN_TO_COMMENT");
 
-// news-query
 $id_news = intval($_REQUEST['opt']);
 $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = '$id_news' AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
-// access for admins [private news]
-// access for guests [public news]
+// Access for admins [private news]
+// Access for guests [public news]
 if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
 {
-  // users-query
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = '{$news_row['id_user']}'");
   $users_row = dbFetch($users_ref);
 
@@ -39,7 +28,6 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($news_row['submitted']));
   $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
 
-  // comments-query
   $comments_ref = dbQuery("SELECT NC.*, U.`username` " .
 			  "FROM `{$cfg['db_table_prefix']}news_comments` NC " .
 			  "LEFT JOIN `{$cfg['db_table_prefix']}users` U " .

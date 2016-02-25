@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert.php,v 1.4 2006/04/28 19:37:59 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_SEASON_ADDED", "H_MESSAGE_SEASON_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -21,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_SUBJECT", "H_MAIL_SUBJECT");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
-// access for root only
+// Access for root only
 if ($user['usertype_root'])
 {
   $is_complete = 1;
@@ -49,12 +40,10 @@ if ($user['usertype_root'])
     dbQuery("INSERT INTO `{$cfg['db_table_prefix']}seasons` (`submitted`, `name`, `status`) " .
 	    "VALUES (NOW(), '$season_name', NULL)");
 
-    // seasons-query
     $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			    "WHERE `name` = '$season_name' AND `deleted` = 0");
     $seasons_row = dbFetch($seasons_ref);
 
-    // users-query
     $id_user = intval($_REQUEST['id_user']);
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
@@ -63,16 +52,16 @@ if ($user['usertype_root'])
 	     "(`submitted`, `usertype_headadmin`, `usertype_admin`, `id_season`, `id_user`) " .
 	     "VALUES (NOW(), 1, 1, {$seasons_row['id']}, {$users_row['id']})");
 
-    // send a mail to the new headadmin
+    // Send a mail to the new headadmin
     $to = $users_row['email'];
 
-    // subject
+    // Subject
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
     $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
     $subject = $content_tpl->get("MAIL_SUBJECT");
 
-    // message
+    // Message
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $seasons_row['name']);
     $content_tpl->set_var("I_USERNAME", $users_row['username']);

@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: seed.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_PLAYERS_SEEDED", "H_MESSAGE_PLAYERS_SEEDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -17,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_TOURNEY_FINISHED", "H_WARNING_TO
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "running")
@@ -34,7 +25,6 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `usertype_player` = 1 " .

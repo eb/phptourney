@@ -1,30 +1,17 @@
 <?php
 
-################################################################################
-#
-# $Id: crop1.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_CROP1", "H_CROP1");
 
-// matches-query
 $id_match = intval($_REQUEST['opt']);
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 if ($user['usertype_admin']) {
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // match
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Match
   $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
 		       "FROM `{$cfg['db_table_prefix']}users` U " .
 		       "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
@@ -44,11 +31,7 @@ if ($user['usertype_admin']) {
   $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row['abbreviation']));
   $content_tpl->parse("H_MATCH", "B_MATCH");
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // screenshot
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // maps-query
+  // Screenshot
   $num_map = intval($_REQUEST['num_map']);
   $maps_ref = dbQuery("SELECT M2.`map` " .
 		      "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .

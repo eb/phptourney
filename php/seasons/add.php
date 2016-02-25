@@ -1,23 +1,13 @@
 <?php
 
-################################################################################
-#
-# $Id: add.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_USERNAME", "H_USERNAME");
 $content_tpl->set_block("F_CONTENT", "B_ADD_SEASON", "H_ADD_SEASON");
 
-// access for root only
+// Access for root only
 if ($user['usertype_root'])
 {
-  // users-query
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			"ORDER BY `username` ASC");
   while ($users_row = dbFetch($users_ref))

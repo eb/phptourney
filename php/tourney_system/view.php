@@ -1,19 +1,10 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
 define("MAX_ROUNDS_SE", 9);
 define("MIN_ROUNDS_SE", 1);
 define("MAX_ROUNDS_DE", 9);
 define("MIN_ROUNDS_DE", 2);
 
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_QUALIFICATION_CHECKED", "H_QUALIFICATION_CHECKED");
@@ -24,10 +15,10 @@ $content_tpl->set_block("F_CONTENT", "B_DOUBLE_ELIMINATION_SELECTED", "H_DOUBLE_
 $content_tpl->set_block("F_CONTENT", "B_DOUBLE_ELIMINATION_UNSELECTED", "H_DOUBLE_ELIMINATION_UNSELECTED");
 $content_tpl->set_block("F_CONTENT", "B_CHOOSE_TOURNEY_SYSTEM", "H_CHOOSE_TOURNEY_SYSTEM");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  // qualification
+  // Qualification
   if ($season['qualification'] == 1)
   {
       $content_tpl->parse("H_QUALIFICATION_CHECKED", "B_QUALIFICATION_CHECKED");
@@ -37,7 +28,7 @@ if ($user['usertype_headadmin'])
       $content_tpl->parse("H_QUALIFICATION_CHECKED", "B_QUALIFICATION_UNCHECKED");
   }
 
-  // single elimination
+  // Single elimination
   for ($i = MAX_ROUNDS_SE; $i >= MIN_ROUNDS_SE; $i--)
   {
     $num_participants = pow(2, $i);
@@ -52,7 +43,7 @@ if ($user['usertype_headadmin'])
     }
   }
 
-  // double elimination
+  // Double elimination
   for ($i = MAX_ROUNDS_DE; $i >= MIN_ROUNDS_DE; $i--)
   {
     $num_participants = pow(2, $i);
@@ -67,7 +58,7 @@ if ($user['usertype_headadmin'])
     }
   }
 
-  // win-maps
+  // Win-maps
   $content_tpl->set_var("I_WINMAPS", $season['winmaps']);
 
   $content_tpl->set_var("I_ID_SEASON", $season['id']);

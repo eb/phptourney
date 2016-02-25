@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_RESET_SEEDINGS", "H_RESET_SEEDINGS");
@@ -18,7 +9,7 @@ $content_tpl->set_block("F_CONTENT", "B_PLAYER", "H_PLAYER");
 $content_tpl->set_block("F_CONTENT", "B_PLAYERS", "H_PLAYERS");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEEDINGS", "H_OVERVIEW_SEEDINGS");
 
-// access for headadmins [management] / access for admins [viewing]
+// Access for headadmins [management] / access for admins [viewing]
 if ($user['usertype_admin'])
 {
   if ($season['status'] == "" or $season['status'] == "signups")
@@ -28,7 +19,6 @@ if ($user['usertype_admin'])
   }
 
   $player_counter = 0;
-  // season_users-query [seeded players]
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
 			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			       "WHERE SU.`id_season` = {$season['id']} " .
@@ -51,7 +41,6 @@ if ($user['usertype_admin'])
     $content_tpl->parse("H_PLAYER", "B_PLAYER", true);
   }
 
-  // season_users-query [unseeded players]
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
 			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			       "WHERE SU.`id_season` = {$season['id']} " .

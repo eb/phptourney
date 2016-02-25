@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view_match.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_SCREENSHOT", "H_SCREENSHOT");
 $content_tpl->set_block("F_CONTENT", "B_COMMENT_P1", "H_COMMENT_P1");
 $content_tpl->set_block("F_CONTENT", "B_COMMENT_P2", "H_COMMENT_P2");
@@ -41,7 +32,7 @@ $id_match = intval($_REQUEST['opt']);
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
-  // player1
+  // Player1
   if ($matches_row['id_player1'] > 0)
   {
     $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
@@ -61,7 +52,7 @@ if ($matches_row = dbFetch($matches_ref))
     $content_tpl->parse("H_NO_PLAYER1", "B_NO_PLAYER1");
   }
 
-  // player2
+  // Player2
   if ($matches_row['id_player2'] > 0)
   {
     $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
@@ -82,7 +73,7 @@ if ($matches_row = dbFetch($matches_ref))
   }
   $content_tpl->parse("H_PLAYERS", "B_PLAYERS");
 
-  // not confirmed yet
+  // Not confirmed yet
   if ($matches_row['confirmed'] == "0000-00-00 00:00:00")
   {
     $content_tpl->parse("H_NOT_PLAYED", "B_NOT_PLAYED");
@@ -156,11 +147,7 @@ if ($matches_row = dbFetch($matches_ref))
 	"data/screenshots/{$season['id']}/" .
 	"{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}";
 
-      ////////////////////////////////////////////////////////////////////////////////
-      // maps
-      ////////////////////////////////////////////////////////////////////////////////
-
-      // maps-query
+      // Maps
       $maps_ref = dbQuery("SELECT M1.*, M2.`map` " .
 			   "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
 			   "WHERE M1.`id_match` = {$matches_row['id']} AND M1.`id_map` = M2.`id` " .
@@ -180,21 +167,21 @@ if ($matches_row = dbFetch($matches_ref))
 	$content_tpl->set_var("I_SCORE", $maps_row['score_p1'] . " - " . $maps_row['score_p2']);
 
 	$content_tpl->set_var("I_MAP_COMMENTS", "");
-	// comments player1
+	// Comments player1
 	if ($maps_row['comment_p1'] != "")
 	{
 	  $content_tpl->set_var("I_COMMENT", nl2br(htmlspecialchars($maps_row['comment_p1'])));
 	  $content_tpl->parse("I_MAP_COMMENTS", "B_COMMENT_P1", true);
 	}
 
-	// comments player2
+	// Comments player2
 	if ($maps_row['comment_p2'] != "")
 	{
 	  $content_tpl->set_var("I_COMMENT", nl2br(htmlspecialchars($maps_row['comment_p2'])));
 	  $content_tpl->parse("I_MAP_COMMENTS", "B_COMMENT_P2", true);
 	}
 
-	// comments admin
+	// Comments admin
 	if ($maps_row['comment_admin'] != "")
 	{
 	  $content_tpl->set_var("I_COMMENT", Parsedown::instance()->text($maps_row['comment_admin']));
@@ -205,7 +192,6 @@ if ($matches_row = dbFetch($matches_ref))
     }
     $content_tpl->set_var("I_COMMENT", "");
 
-    // demos-query
     $demos_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}demos` WHERE `id_match` = $id_match");
     while ($demos_row = dbFetch($demos_ref))
     {
@@ -213,13 +199,13 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->parse("H_DEMOS", "B_DEMOS");
     }
   }
-  // matchkey
+  // Matchkey
   $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
   $content_tpl->set_var("I_ROUND", $matches_row['round']);
   $content_tpl->set_var("I_MATCH", $matches_row['match']);
   $content_tpl->parse("H_MATCH", "B_MATCH");
 
-  // submitted
+  // Submitted
   if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
   {
     $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
@@ -229,7 +215,7 @@ if ($matches_row = dbFetch($matches_ref))
     $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
   }
 
-  // confirmed
+  // Confirmed
   if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
   {
     $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));
@@ -240,7 +226,6 @@ if ($matches_row = dbFetch($matches_ref))
   }
   $content_tpl->parse("H_VIEW_MATCH", "B_VIEW_MATCH");
 
-  // comments-query
   $comments_ref = dbQuery("SELECT MC.*, U.`username` " .
 			  "FROM `{$cfg['db_table_prefix']}match_comments` MC " .
 			  "LEFT JOIN `{$cfg['db_table_prefix']}users` U " .
@@ -280,7 +265,7 @@ if ($matches_row = dbFetch($matches_ref))
   }
   $content_tpl->parse("H_VIEW_COMMENTS", "B_VIEW_COMMENTS");
 
-  // add comments
+  // Add comments
   $content_tpl->set_var("I_ID_MATCH", $id_match);
   $content_tpl->set_var("I_BODY", "");
   if ($user['uid'])

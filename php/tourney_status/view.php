@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_BRACKET_CREATED", "H_MESSAGE_BRACKET_CREATED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_TOURNEY_RUNNING", "H_MESSAGE_TOURNEY_RUNNING");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
@@ -19,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_CREATE_BRACKET", "H_CREATE_BRACKET");
 $content_tpl->set_block("F_CONTENT", "B_START_TOURNEY", "H_START_TOURNEY");
 $content_tpl->set_block("F_CONTENT", "B_UNDO_BRACKET", "H_UNDO_BRACKET");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "running")

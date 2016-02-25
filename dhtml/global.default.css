@@ -1,30 +1,4 @@
-/* ********************************************************************************
- *
- * Global CSS classes
- *
- * $Id: global.default.css,v 1.2 2006/04/28 19:37:59 eb Exp $
- *
- * Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- ******************************************************************************** */
-
-/* ********************************************************************************
- * structural elements
- ******************************************************************************** */
+/* Structural elements */
 
 body, table, th, td {
 	border: 0px;
@@ -211,9 +185,7 @@ table.message {
 	text-align: center;
 }
 
-/* ********************************************************************************
- * text elements
- ******************************************************************************** */
+/* Text elements */
 
 hr {
 	height: 1px;
@@ -272,9 +244,7 @@ a:hover {
 	color: #1f3e73;
 }
 
-/* ********************************************************************************
- * forms
- ******************************************************************************** */
+/* Forms */
 
 form {
 	margin: 0px;
@@ -314,9 +284,8 @@ select {
 	font-size: 10px;
 }
 
-/* ********************************************************************************
- * text bracket
- ******************************************************************************** */
+/* Text bracket */
+
 table.text_bracket {
 	border: 1px #000000 solid;
 	padding: 0px;
@@ -407,9 +376,7 @@ th.text_actual_round {
 	color: #660000;
 }
 
-/* ********************************************************************************
- * table bracket
- ******************************************************************************** */
+/* Table bracket */
 
 table.table_bracket {
 	border: 1px #000000 solid;

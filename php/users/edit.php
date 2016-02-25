@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: edit.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_COUNTRY", "H_COUNTRY");
@@ -17,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_NOTIFY_UNCHECKED", "H_NOTIFY_UNCHECKED")
 $content_tpl->set_block("F_CONTENT", "B_NOTIFY_CHECKED", "H_NOTIFY_CHECKED");
 $content_tpl->set_block("F_CONTENT", "B_EDIT_PROFILE", "H_EDIT_PROFILE");
 
-// access for the user to edit his own profile
+// Access for the user to edit his own profile
 if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
 {
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
@@ -29,7 +20,6 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
   $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
-  // countries-query
   $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
 			    "WHERE `active` = 1 " .
 			    "ORDER BY `name` ASC");
@@ -58,7 +48,7 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   $content_tpl->parse("H_EDIT_PROFILE", "B_EDIT_PROFILE");
 }
 
-// access for the headadmin to edit any profile
+// Access for the headadmin to edit any profile
 elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['usertype_root']))
 {
   $id_user = intval($_REQUEST['opt']);

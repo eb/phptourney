@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert.php,v 1.4 2006/05/01 14:55:10 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_MATCH_REPORTED", "H_MESSAGE_MATCH_REPORTED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_COMMENT_ADDED", "H_MESSAGE_COMMENT_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
@@ -20,17 +11,16 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_CROP", "H_CROP");
 
-// matches-query
 $id_match = intval($_REQUEST['opt']);
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
-// access for admins
-// access for players when it is their own match
+// Access for admins
+// Access for players when it is their own match
 if ($user['usertype_admin'] or
     $user['uid'] == $matches_row['id_player1'] or $user['uid'] == $matches_row['id_player2']) {
 
-  // check if the previous matches are played already
+  // Check if the previous matches are played already
   $matchkey = $matches_row['bracket'] . '-' . $matches_row['round'] . '-' . $matches_row['match'];
   $prev_match_player1 = "";
   $prev_match_player2 = "";
@@ -45,7 +35,7 @@ if ($user['usertype_admin'] or
   if (($prev_match_player1 == "" or $matches[$prev_match_player1]['confirmed'] != "0000-00-00 00:00:00") and
       ($prev_match_player2 == "" or $matches[$prev_match_player2]['confirmed'] != "0000-00-00 00:00:00"))
   {
-    // screenshot filenames
+    // Screenshot filenames
     $sshot_dir = "data/screenshots/{$season['id']}/";
     for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
     {
@@ -55,35 +45,32 @@ if ($user['usertype_admin'] or
 
     if ($matches_row['submitted'] == "0000-00-00 00:00:00")
     {
-      ////////////////////////////////////////////////////////////////////////////////
-      // not played
-      ////////////////////////////////////////////////////////////////////////////////
-
+      // Not played
       if (isset($_REQUEST['not_played']) and $_REQUEST['not_played'] and $user['usertype_admin'])
       {
 	$_REQUEST['comment_admin'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['comment_admin']));
-	// wo for player1
+	// Wo for player1
 	if ($_REQUEST['not_played'] == "wo1")
 	{
 	  $wo = $matches_row['id_player1'];
 	  $bye = 0;
 	  $out = 0;
 	}
-	// wo for player2
+	// Wo for player2
 	elseif ($_REQUEST['not_played'] == "wo2")
 	{
 	  $wo = $matches_row['id_player2'];
 	  $bye = 0;
 	  $out = 0;
 	}
-	// bye
+	// Bye
 	elseif ($_REQUEST['not_played'] == "bye")
 	{
 	  $wo = 0;
 	  $bye = 1;
 	  $out = 0;
 	}
-	// out
+	// Out
 	elseif ($_REQUEST['not_played'] == "both_out")
 	{
 	  $wo = 0;
@@ -103,7 +90,7 @@ if ($user['usertype_admin'] or
 	$content_tpl->parse("H_MESSAGE_MATCH_REPORTED", "B_MESSAGE_MATCH_REPORTED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 
-	// cropping
+	// Cropping
 	if ($cfg['convert'] != "")
 	{
 	  $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
@@ -120,7 +107,7 @@ if ($user['usertype_admin'] or
 	  }
 	}
 
-	// delete screenshots
+	// Delete screenshots
 	for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	{
 	  if (file_exists($dst_filename['m' . $i] . ".jpg"))
@@ -134,15 +121,12 @@ if ($user['usertype_admin'] or
 	}
       }
 
-      ////////////////////////////////////////////////////////////////////////////////
-      // played
-      ////////////////////////////////////////////////////////////////////////////////
-
+      // Played
       else
       {
 	$is_complete = 1;
 
-	// check maps
+	// Check maps
 	$score_p1 = 0;
 	$score_p2 = 0;
 	for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
@@ -165,7 +149,7 @@ if ($user['usertype_admin'] or
 	      $score_p2++;
 	    }
 
-	    // check screenshots
+	    // Check screenshots
 	    $src_file['m' . $i] = $_FILES['screenshot_m' . $i]['name'];
 	    $src_filetype['m' . $i] = strtolower(array_pop(explode(".", $src_file['m' . $i])));
 	    $tmp_file['m' . $i] = $_FILES['screenshot_m' . $i]['tmp_name'];
@@ -188,14 +172,14 @@ if ($user['usertype_admin'] or
 
 	if ($is_complete)
 	{
-	  // check whether screenshot directory exists
+	  // Check whether screenshot directory exists
 	  if (!file_exists($sshot_dir))
 	  {
 	    mkdir($sshot_dir);
 	    chmod($sshot_dir, 0777);
 	  }
 
-	  // screenshots
+	  // Screenshots
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
 	    $sshot['m' . $i] = false;
@@ -229,7 +213,7 @@ if ($user['usertype_admin'] or
 	    }
 	  }
 
-	  // match
+	  // Match
 	  dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
 		   "`wo` = 0, " . 
 		   "`out` = 0, " . 
@@ -240,7 +224,7 @@ if ($user['usertype_admin'] or
 		   "`submitter` = {$user['uid']} " . 
 		   "WHERE `id` = {$matches_row['id']}");
 
-	  // maps
+	  // Maps
 	  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` " .
 		   "WHERE `id_match` = {$matches_row['id']}");
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
@@ -284,7 +268,7 @@ if ($user['usertype_admin'] or
 	    }
 	  }
 
-	  // send match report to irc
+	  // Send match report to irc
 	  if ($cfg['bot_admin_targets'] != "")
 	  {
 	    $irc_channels = explode(";", $cfg['bot_admin_targets']);
@@ -299,7 +283,7 @@ if ($user['usertype_admin'] or
 	      }
 	      if ($bot_socket and $cfg['bot_admin_targets'] != "")
 	      {
-		// player1
+		// Player1
 		if ($matches_row['id_player1'] > 0)
 		{
 		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -311,7 +295,7 @@ if ($user['usertype_admin'] or
 		{
 		  $player1 = "-";
 		}
-		// player2
+		// Player2
 		if ($matches_row['id_player2'] > 0)
 		{
 		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -345,7 +329,7 @@ if ($user['usertype_admin'] or
     }
     else
     {
-      // comment from player
+      // Comment from player
       if ($matches_row['id_player1'] == $user['uid'])
       {
 	$commentator = "p1";
@@ -355,7 +339,6 @@ if ($user['usertype_admin'] or
 	$commentator = "p2";
       }
 
-      // maps-query
       $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
 			   "WHERE `id_match` = {$matches_row['id']} " . 
 			   "ORDER BY `num_map`");

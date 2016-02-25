@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: played_matches.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_PLAYED_MATCHES", "H_NO_PLAYED_MATCHES");
@@ -16,10 +7,9 @@ $content_tpl->set_block("F_CONTENT", "B_PLAYED_MATCH", "H_PLAYED_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_PLAYED_MATCHES", "H_PLAYED_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYED_MATCHES", "H_OVERVIEW_PLAYED_MATCHES");
 
-// access for players only
+// Access for players only
 if ($user['usertype_player'])
 {
-  // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
@@ -35,7 +25,7 @@ if ($user['usertype_player'])
     while ($matches_row = dbFetch($matches_ref))
     {
       $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
-      // match
+      // Match
       if ($matches_row['id_player1'] > 0)
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
@@ -60,7 +50,7 @@ if ($user['usertype_player'])
       }
       $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
 
-      // outcome
+      // Outcome
       $outcome = "{$matches_row['score_p1']} - {$matches_row['score_p2']}";
 
       $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);

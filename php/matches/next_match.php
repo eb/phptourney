@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: next_match.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_NEXT_MATCH", "H_NO_NEXT_MATCH");
@@ -18,7 +9,7 @@ $content_tpl->set_block("F_CONTENT", "B_DEADLINE", "H_DEADLINE");
 $content_tpl->set_block("F_CONTENT", "B_NEXT_MATCH", "H_NEXT_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NEXT_MATCH", "H_VIEW_NEXT_MATCH");
 
-// access for players only
+// Access for players only
 if ($user['usertype_player'])
 {
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .

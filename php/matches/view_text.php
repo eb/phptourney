@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view_text.php,v 1.2 2006/03/25 22:38:22 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_BRACKET", "H_NO_BRACKET");
 $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_PLAYED_MATCH", "H_PLAYED_MATCH");
@@ -38,10 +29,7 @@ $content_tpl->set_var("I_ID_SEASON", $season['id']);
 
 if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['status'] == "running" or $season['status'] == "finished")
 {
-  ////////////////////////////////////////////////////////////////////////////////
-  // qualification
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Qualification
   if ($season['qualification'] == 1)
   {
     $content_tpl->set_var("I_MATCH", "");
@@ -89,7 +77,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       }
     }
 
-    // deadline
+    // Deadline
     $content_tpl->set_var("H_Q_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_Q_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
@@ -107,10 +95,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     $content_tpl->parse("H_Q_ROUND", "B_Q_ROUND");
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // winners bracket
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Winners bracket
   for ($i = 1; $i <= getNumWBRounds($season); $i++)
   {
 #    $num_empty_matches = pow(2, $i - 1) - 1;
@@ -161,7 +146,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 
     $content_tpl->set_var("I_ROUND", $i);
 
-    // deadline
+    // Deadline
     $content_tpl->set_var("H_WB_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_WB_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
@@ -178,10 +163,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     $content_tpl->parse("H_WB_ROUND", "B_WB_ROUND", true);
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // grand finale
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Grand final
   if ($season['double_elimination'] != "")
   {
     $content_tpl->set_var("I_MATCH", "");
@@ -225,7 +207,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       }
     }
 
-    // deadline
+    // Deadline
     $content_tpl->set_var("H_GF_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_GF_DEADLINE", "");
     $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
@@ -252,10 +234,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
   }
   $content_tpl->parse("H_WB_BRACKET", "B_WB_BRACKET");
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // losers bracket
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Losers bracket
   if ($season['double_elimination'] != "")
   {
     for ($i = 1; $i <= getNumLBRounds($season); $i++)
@@ -303,7 +282,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
 
       $content_tpl->set_var("I_ROUND", $i);
 
-      // deadline
+      // Deadline
       $content_tpl->set_var("H_LB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_LB_DEADLINE", "");
       $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .

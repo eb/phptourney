@@ -1,30 +1,8 @@
 <?php
 
-////////////////////////////////////////////////////////////////////////////////
-// User check - checks if a user is logged in/valid
-//
-// $Id: user.inc.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-//
-// Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-////////////////////////////////////////////////////////////////////////////////
-
 unsetUser();
 
-// check user
+// Check user
 if (isset($_COOKIE["user_id"]))
 {
   setUser($_COOKIE["user_id"]);
@@ -41,7 +19,6 @@ function setUser($user_id_md5) {
 
   if ($id_user != "")
   {
-    // users query
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
 
     if ($users_row = dbFetch($users_ref) and $md5_password == md5($users_row['password']))
@@ -49,7 +26,6 @@ function setUser($user_id_md5) {
       $user['uid'] = $users_row['id'];
       $user['username'] = $users_row['username'];
 
-      // season_users-query
       if (!isset($season))
       {
         $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .

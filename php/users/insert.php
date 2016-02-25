@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_REGISTERED", "H_MESSAGE_REGISTERED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED", "H_MESSAGE_APPLIED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
@@ -29,7 +20,6 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_SUBJECT", "H_MAIL_APPLIED_S
 $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_BODY", "H_MAIL_APPLIED_BODY");
 
 $is_complete = 1;
-// users-query
 $username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 		      "WHERE `username` = '$username'");
@@ -81,16 +71,16 @@ if ($_REQUEST['id_country'] == "")
 
 if ($is_complete)
 {
-  // notification
+  // Notification
   if (!isset($_REQUEST['notify']))
   {
     $_REQUEST['notify'] = 0;
   }
 
-  // encrypt password
+  // Encrypt password
   $password = crypt($_REQUEST['password'], createSalt());
 
-  // register an account
+  // Register an account
   $id_country = intval($_REQUEST['id_country']);
   $email = dbEscape($_REQUEST['email']);
   $irc_channel = dbEscape($_REQUEST['irc_channel']);
@@ -100,11 +90,10 @@ if ($is_complete)
 	   "VALUES ('$username', $id_country, " .
 	   "'$password', '$email', '$irc_channel', $notify, NOW())");
 
-  // sign up
+  // Sign up
   $signup = false;
   if ($season['status'] == "signups" and $_REQUEST['signup'] == 1)
   {
-    // users-query
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 			  "WHERE `username` = '$username'");
     $users_row = dbFetch($users_ref);
@@ -116,17 +105,17 @@ if ($is_complete)
     $signup = true;
   }
 
-  // send a mail to the player that signed up
+  // Send a mail to the player that signed up
   $to = $_REQUEST['email'];
 
   if ($signup == false)
   {
-    // subject
+    // Subject
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->parse("MAIL_REGISTERED_SUBJECT", "B_MAIL_REGISTERED_SUBJECT");
     $subject = $content_tpl->get("MAIL_REGISTERED_SUBJECT");
 
-    // message
+    // Message
     $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
     $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
     $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path']);
@@ -135,12 +124,12 @@ if ($is_complete)
   }
   else
   {
-    // subject
+    // Subject
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->parse("MAIL_APPLIED_SUBJECT", "B_MAIL_APPLIED_SUBJECT");
     $subject = $content_tpl->get("MAIL_APPLIED_SUBJECT");
 
-    // message
+    // Message
     $content_tpl->set_var("I_USERNAME", $_REQUEST['username']);
     $content_tpl->set_var("I_PASSWORD", $_REQUEST['password']);
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);

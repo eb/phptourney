@@ -1,32 +1,6 @@
 <?php
 
-////////////////////////////////////////////////////////////////////////////////
-// Tourney System functions - Tourney System related functions
-//
-// $Id: tourney_system.inc.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-//
-// Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-////////////////////////////////////////////////////////////////////////////////
-
-//================================================================================
-// function insertWinnerMatch
-// insert winners next round match
-//================================================================================
-
+// Inserts winner's next round match
 function insertWinnerMatch(& $match, $id_winner)
 {
   global $cfg;
@@ -65,11 +39,7 @@ function insertWinnerMatch(& $match, $id_winner)
   return(NULL);
 }
 
-//================================================================================
-// function insertLoserMatch
-// insert losers next round match
-//================================================================================
-
+// Inserts loser's next round match
 function insertLoserMatch(& $match, $id_loser)
 {
   global $cfg;
@@ -108,11 +78,7 @@ function insertLoserMatch(& $match, $id_loser)
   return(NULL);
 }
 
-//================================================================================
-// function getWinnerMatch
-// get winners next round match
-//================================================================================
-
+// Gets winner's next round match
 function getWinnerMatch(& $match)
 {
   global $cfg;
@@ -141,11 +107,7 @@ function getWinnerMatch(& $match)
   return(NULL);
 }
 
-//================================================================================
-// function getLoserMatch
-// get losers next round match
-//================================================================================
-
+// Gets loser's next round match
 function getLoserMatch(& $match)
 {
   global $cfg;
@@ -174,11 +136,7 @@ function getLoserMatch(& $match)
   return(NULL);
 }
 
-//================================================================================
-// function isLastMatch
-// checks whether the given match is an editable match
-//================================================================================
-
+// Checks whether the given match is an editable match
 function isLastMatch(& $match)
 {
   global $cfg;
@@ -232,11 +190,7 @@ function isLastMatch(& $match)
   }
 }
 
-//================================================================================
-// function hasNextWinnerMatch
-// checks whether the winner of the given match has another match
-//================================================================================
-
+// Checks whether the winner of the given match has another match
 function hasNextWinnerMatch(& $match)
 {
   global $season;
@@ -267,11 +221,7 @@ function hasNextWinnerMatch(& $match)
   }
 }
 
-//================================================================================
-// function hasNextLoserMatch
-// checks whether the loser of the given match has another match
-//================================================================================
-
+// Checks whether the loser of the given match has another match
 function hasNextLoserMatch(& $match)
 {
   global $season;
@@ -291,11 +241,7 @@ function hasNextLoserMatch(& $match)
   }
 }
 
-//================================================================================
-// function getNextWinnerBracket
-// returns the bracket of the winners next match
-//================================================================================
-
+// Returns the bracket of the winner's next match
 function getNextWinnerBracket(& $match)
 {
   global $season;
@@ -325,11 +271,7 @@ function getNextWinnerBracket(& $match)
   }
 }
 
-//================================================================================
-// function get_next_losers_bracket
-// returns the bracket of the losers next match
-//================================================================================
-
+// Returns the bracket of the loser's next match
 function getNextLoserBracket(& $match)
 {
   global $season;
@@ -345,11 +287,7 @@ function getNextLoserBracket(& $match)
   }
 }
 
-//================================================================================
-// function getNextWinnerRound
-// returns the round of the winners next match
-//================================================================================
-
+// Returns the round of the winner's next match
 function getNextWinnerRound(& $match)
 {
   global $season;
@@ -379,11 +317,7 @@ function getNextWinnerRound(& $match)
   }
 }
 
-//================================================================================
-// function getNextLoserRound
-// returns the round of the losers next match
-//================================================================================
-
+// Returns the round of the loser's next match
 function getNextLoserRound(& $match)
 {
   global $season;
@@ -410,11 +344,7 @@ function getNextLoserRound(& $match)
   }
 }
 
-//================================================================================
-// function getNextWinnerMatch
-// returns the match of the winners next match
-//================================================================================
-
+// Returns the match of the winner's next match
 function getNextWinnerMatch(& $match)
 {
   global $season;
@@ -465,11 +395,7 @@ function getNextWinnerMatch(& $match)
   }
 }
 
-//================================================================================
-// function getNextLoserMatch
-// returns the match of the losers next match
-//================================================================================
-
+// Returns the match of the loser's next match
 function getNextLoserMatch(& $match)
 { 
   global $season;
@@ -501,11 +427,7 @@ function getNextLoserMatch(& $match)
   }
 }
 
-//================================================================================
-// function getNextWinnerPlayer
-// returns the player of the winners next match
-//================================================================================
-
+// Returns the player of the winner's next match
 function getNextWinnerPlayer(& $match)
 {
   global $season;
@@ -556,11 +478,7 @@ function getNextWinnerPlayer(& $match)
   }
 }
 
-//================================================================================
-// function getNextLoserPlayer
-// returns the player of the losers next match
-//================================================================================
-
+// Returns the player of the loser's next match
 function getNextLoserPlayer(& $match)
 {
   global $season;
@@ -590,11 +508,7 @@ function getNextLoserPlayer(& $match)
   }
 }
 
-//================================================================================
-// function getSeeding
-// returns the seeding of a given exponent of 2
-//================================================================================
-
+// Returns the seeding of a given exponent of 2
 function getSeeding($number)
 {
   $counter = 0;
@@ -633,12 +547,8 @@ function getSeeding($number)
   return($matches);
 }
 
-//================================================================================
-// function getDblElDrop
-// returns the drop to the LB
-// thx to frode nilsen for the code-segment
-//================================================================================
-
+// Returns the drop to the LB
+// Thanks to Frode Nilsen for the algorithm
 function getDblElDrop($round, $match)
 {
   global $season;
@@ -664,11 +574,7 @@ function getDblElDrop($round, $match)
   return($nr + 1);
 }
 
-//================================================================================
-// function getNumWBRounds
-// returns the number of winners bracket rounds of a given season
-//================================================================================
-
+// Returns the number of winners bracket rounds of a given season
 function getNumWBRounds(& $season)
 {
   $num_participants = $season['single_elimination'];
@@ -676,11 +582,7 @@ function getNumWBRounds(& $season)
   return($num_wb_rounds);
 }
 
-//================================================================================
-// function getNumLBRounds
-// returns the number of losers bracket rounds of a given season divided by 2
-//================================================================================
-
+// Returns the number of losers bracket rounds of a given season divided by 2
 function getNumLBRounds(& $season)
 {
   $num_participants = $season['double_elimination'];
@@ -688,11 +590,7 @@ function getNumLBRounds(& $season)
   return($num_lb_rounds);
 }
 
-//================================================================================
-// function getNumWBMatches
-// returns the number of matches in a winners bracket round of a given season
-//================================================================================
-
+// Returns the number of matches in a winners bracket round of a given season
 function getNumWBMatches(& $season, $i)
 {
   $num_participants = $season['single_elimination'];
@@ -700,11 +598,7 @@ function getNumWBMatches(& $season, $i)
   return($num_wb_matches);
 }
 
-//================================================================================
-// function getNumLBMatches
-// returns the number of matches in a losers bracket round of a given season
-//================================================================================
-
+// Returns the number of matches in a losers bracket round of a given season
 function getNumLBMatches(& $season, $i)
 {
   if ((1 & $i))
@@ -720,11 +614,7 @@ function getNumLBMatches(& $season, $i)
   return($num_lb_matches);
 }
 
-//================================================================================
-// function isAfterPreDeadline
-// checks whether a given round is after the pre-deadline
-//================================================================================
-
+// Checks whether a given round is after the pre-deadline
 function isAfterPreDeadline(& $season, $bracket, $round) {
   global $cfg;
 
@@ -765,11 +655,7 @@ function isAfterPreDeadline(& $season, $bracket, $round) {
   }
 }
 
-//================================================================================
-// function isBeforePostDeadline
-// checks whether a given round is before the post-deadline
-//================================================================================
-
+// Checks whether a given round is before the post-deadline
 function isBeforePostDeadline(& $season, $bracket, $round)
 {
   global $cfg;
@@ -810,11 +696,7 @@ function isBeforePostDeadline(& $season, $bracket, $round)
   }
 }
 
-//================================================================================
-// function winnerOf
-// returns the player-id of the winner of the given match
-//================================================================================
-
+// Returns the player-id of the winner of the given match
 function winnerOf(& $match)
 {
   global $cfg;

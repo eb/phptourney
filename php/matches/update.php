@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: update.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_MATCH_CONFIRMED", "H_MESSAGE_MATCH_CONFIRMED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -24,14 +15,13 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_SUBJECT", "H_MAIL_SUBJECT");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_DEADLINE", "H_MAIL_DEADLINE");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
-// matches-query
 $id_match = intval($_REQUEST['opt']);
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
   if ($user['usertype_admin'])
   {
-    // screenshot filenames
+    // Screenshot filenames
     $sshot_dir = "data/screenshots/{$season['id']}/";
     for ($i = 1; $i <= 5; $i++)
     {
@@ -42,35 +32,32 @@ if ($matches_row = dbFetch($matches_ref))
     if (isLastMatch($matches_row))
     {
 
-      ////////////////////////////////////////////////////////////////////////////////
-      // not played
-      ////////////////////////////////////////////////////////////////////////////////
-
+      // Not played
       if (isset($_REQUEST['not_played']) and $_REQUEST['not_played'] and $user['usertype_admin'])
       {
 	$_REQUEST['comment_admin'] = str_replace(">", "&gt;", str_replace("<", "&lt;", $_REQUEST['comment_admin']));
-	// wo for player1
+	// Wo for player1
 	if ($_REQUEST['not_played'] == "wo1")
 	{
 	  $wo = $matches_row['id_player1'];
 	  $bye = 0;
 	  $out = 0;
 	}
-	// wo for player2
+	// Wo for player2
 	elseif ($_REQUEST['not_played'] == "wo2")
 	{
 	  $wo = $matches_row['id_player2'];
 	  $bye = 0;
 	  $out = 0;
 	}
-	// bye
+	// Bye
 	elseif ($_REQUEST['not_played'] == "bye")
 	{
 	  $wo = 0;
 	  $bye = 1;
 	  $out = 0;
 	}
-	// out
+	// Out
 	elseif ($_REQUEST['not_played'] == "both_out")
 	{
 	  $wo = 0;
@@ -87,7 +74,7 @@ if ($matches_row = dbFetch($matches_ref))
 		 "`confirmed` = NOW(), `confirmer` = {$user['uid']} " . 
 		 "WHERE `id` = {$matches_row['id']}");
 
-	// insert next matches
+	// Insert next matches
 	if ($wo != 0 and $wo == $matches_row['id_player1'])
 	{
 	  $old_winner_match = getWinnerMatch($matches_row);
@@ -136,7 +123,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  $new_loser_match = insertLoserMatch($matches_row, 0);
 	}
 
-	// tourney finished?
+	// Tourney finished?
 	if ($new_winner_match == NULL)
 	{
 	  dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
@@ -146,7 +133,7 @@ if ($matches_row = dbFetch($matches_ref))
 	$content_tpl->parse("H_MESSAGE_MATCH_CONFIRMED", "B_MESSAGE_MATCH_CONFIRMED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 
-	// delete screenshots
+	// Delete screenshots
 	for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	{
 	  if (file_exists($dst_filename['m' . $i] . ".jpg"))
@@ -160,15 +147,12 @@ if ($matches_row = dbFetch($matches_ref))
 	}
       }
 
-      ////////////////////////////////////////////////////////////////////////////////
-      // played
-      ////////////////////////////////////////////////////////////////////////////////
-
+      // Played
       else
       {
 	$is_complete = 1;
 
-	// check maps
+	// Check maps
 	$score_p1 = 0;
 	$score_p2 = 0;
 	for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
@@ -197,14 +181,14 @@ if ($matches_row = dbFetch($matches_ref))
 
 	if ($is_complete)
 	{
-	  // check whether screenshot directory exists
+	  // Check whether screenshot directory exists
 	  if (!file_exists($sshot_dir))
 	  {
 	    mkdir($sshot_dir);
 	    chmod($sshot_dir, 0777);
 	  }
 
-	  // screenshots
+	  // Screenshots
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
 	    $sshot['m' . $i] = false;
@@ -245,7 +229,7 @@ if ($matches_row = dbFetch($matches_ref))
 	    }
 	  }
 
-	  // match
+	  // Match
 	  dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
 		   "`wo` = 0, " . 
 		   "`out` = 0, " . 
@@ -256,7 +240,7 @@ if ($matches_row = dbFetch($matches_ref))
 		   "`confirmer` = {$user['uid']} " . 
 		   "WHERE `id` = {$matches_row['id']}");
 
-	  // maps
+	  // Maps
 	  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` " .
 		   "WHERE `id_match` = {$matches_row['id']}");
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
@@ -290,7 +274,7 @@ if ($matches_row = dbFetch($matches_ref))
 	    }
 	  }
 
-	  // insert next matches
+	  // Insert next matches
 	  if ($score_p1 > $score_p2)
 	  {
 	    $id_winner = $matches_row['id_player1'];
@@ -308,14 +292,14 @@ if ($matches_row = dbFetch($matches_ref))
 	  $new_loser_match = insertLoserMatch($matches_row, $id_loser);
 	  notifyPlayers($new_loser_match, $old_loser_match);
 
-	  // tourney finished?
+	  // Tourney finished?
 	  if ($new_winner_match == NULL)
 	  {
 	    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
 		     "WHERE `id` = {$season['id']}");
 	  }
 
-	  // send match report to irc
+	  // Send match report to irc
 	  if ($cfg['bot_public_targets'] != "")
 	  {
 	    $irc_channels = explode(";", $cfg['bot_public_targets']);
@@ -332,7 +316,7 @@ if ($matches_row = dbFetch($matches_ref))
 		  ($score_p1 > $score_p2 and $matches_row['score_p1'] <= $matches_row['score_p2'] or
 		    $score_p1 < $score_p2 and $matches_row['score_p1'] >= $matches_row['score_p2'] or 
 		    $matches_row['confirmed'] == "0000-00-00 00:00:00")) {
-	        // player1
+	        // Player1
                 if ($matches_row['id_player1'] > 0)
                 {
 		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -344,7 +328,7 @@ if ($matches_row = dbFetch($matches_ref))
 		{
 		  $player1 = "-";
 		}
-		// player2
+		// Player2
 		if ($matches_row['id_player2'] > 0)
 		{
 		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -368,7 +352,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  $content_tpl->parse("H_MESSAGE_MATCH_CONFIRMED", "B_MESSAGE_MATCH_CONFIRMED");
 	  $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 
-	  // cropping
+	  // Cropping
 	  if ($cfg['convert'] != "")
 	  {
 	    $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
@@ -385,7 +369,7 @@ if ($matches_row = dbFetch($matches_ref))
 	    }
 	  }
 
-	  // delete screenshots
+	  // Delete screenshots
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
 	    if ($_REQUEST['id_map' . $i] == "" and file_exists($dst_filename['m' . $i] . ".jpg"))
@@ -424,10 +408,7 @@ else
   $content_tpl->parse("H_WARNING", "B_WARNING");
 }
 
-################################################################################
-# function notifyPlayers
-# notifies the players per mail, when a new match is avaiable
-################################################################################
+// Notifies the players per mail, when a new match is avaiable
 function notifyPlayers($new_match, $old_match) {
   global $cfg;
   global $content_tpl;
@@ -451,20 +432,20 @@ function notifyPlayers($new_match, $old_match) {
 			       "WHERE `id` = {$new_match['id_player2']}");
 	$users_row2 = dbFetch($users_ref2);
 
-	// mail to player1
+	// Mail to player1
 	if ($new_match['id_player1'] > 0 and $new_match['id_player2'] > 0)
 	{
 		if ($users_row1['notify'] == 1)
 		{
 			$to = $users_row1['email'];
 
-			// subject
+			// Subject
 			$content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 			$content_tpl->set_var("I_SEASON_NAME", $season['name']);
 			$content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
 			$subject = $content_tpl->get("MAIL_SUBJECT");
 
-			// message
+			// Message
 			$content_tpl->set_var("I_PLAYER", $users_row1['username']);
 			$content_tpl->set_var("I_OPPONENT", $users_row2['username']);
 			$content_tpl->set_var("I_IRC_CHANNEL", $users_row2['irc_channel']);
@@ -486,18 +467,18 @@ function notifyPlayers($new_match, $old_match) {
 			sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
 		}
 
-		// mail to player2
+		// Mail to player2
 		if ($users_row2['notify'] == 1)
 		{
 			$to = $users_row2['email'];
 
-			// subject
+			// Subject
 			$content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 			$content_tpl->set_var("I_SEASON_NAME", $season['name']);
 			$content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
 			$subject = $content_tpl->get("MAIL_SUBJECT");
 
-			// message
+			// Message
 			$content_tpl->set_var("I_PLAYER", $users_row2['username']);
 			$content_tpl->set_var("I_OPPONENT", $users_row1['username']);
 			$content_tpl->set_var("I_IRC_CHANNEL", $users_row1['irc_channel']);

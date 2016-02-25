@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: choose.php,v 1.2 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_TOURNEY_SYSTEM_CHOSEN", "H_MESSAGE_TOURNEY_SYSTEM_CHOSEN");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -21,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_WINMAPS", "H_WARNING_WINMAPS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "bracket")
@@ -76,10 +67,10 @@ if ($user['usertype_headadmin'])
     }
     else
     {
-      // delete deadlines
+      // Delete deadlines
       dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']}");
 
-      // choose tourney-system
+      // Choose tourney-system
       $id_season = intval($_REQUEST['opt']);
       $qualification = intval($_REQUEST['qualification']);
       $single_elimination = intval($_REQUEST['single_elimination']);

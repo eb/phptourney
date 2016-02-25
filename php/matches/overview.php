@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_REPORTED_MATCHES", "H_NO_REPORTED_MATCHES");
@@ -26,16 +17,12 @@ $content_tpl->set_block("F_CONTENT", "B_CONFIRMED_MATCH", "H_CONFIRMED_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_CONFIRMED_MATCHES", "H_CONFIRMED_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_CONFIRMED_MATCHES", "H_OVERVIEW_CONFIRMED_MATCHES");
 
-// access for admins only
+// Access for admins only
 if ($user['usertype_admin'])
 {
   $match_counter = 0;
 
-  ////////////////////////////////////////////////////////////////////////////////
   // Reported matches
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` != '0000-00-00 00:00:00' " .
@@ -74,7 +61,6 @@ if ($user['usertype_admin'])
       {
 	$content_tpl->set_var("I_PLAYER2", "-");
       }
-      // deadlines-query
       if (isAfterPreDeadline($season, $matches_row['bracket'], $matches_row['round']))
       {
 	$content_tpl->set_var("I_ID_SEASON", $season['id']);
@@ -92,13 +78,9 @@ if ($user['usertype_admin'])
   }
   $content_tpl->parse("H_OVERVIEW_REPORTED_MATCHES", "B_OVERVIEW_REPORTED_MATCHES");
 
-  ////////////////////////////////////////////////////////////////////////////////
   // Unreported matches
-  ////////////////////////////////////////////////////////////////////////////////
-
   $unreported_matches = false;
 
-  // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` = '0000-00-00 00:00:00' " .
@@ -132,7 +114,6 @@ if ($user['usertype_admin'])
       $content_tpl->set_var("I_PLAYER2", "-");
     }
 
-    // deadlines-query
     if (isAfterPreDeadline($season, $matches_row['bracket'], $matches_row['round']))
     {
       $content_tpl->set_var("I_ID_SEASON", $season['id']);
@@ -151,11 +132,7 @@ if ($user['usertype_admin'])
   }
   $content_tpl->parse("H_OVERVIEW_UNREPORTED_MATCHES", "B_OVERVIEW_UNREPORTED_MATCHES");
 
-  ////////////////////////////////////////////////////////////////////////////////
   // Confirmed matches
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // matches-query
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .

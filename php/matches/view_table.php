@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view_table.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_BRACKET", "H_NO_BRACKET");
 $content_tpl->set_block("F_CONTENT", "B_WB_ACTUAL_ROUND", "H_WB_ACTUAL_ROUND");
 $content_tpl->set_block("F_CONTENT", "B_WB_DEADLINE", "H_WB_DEADLINE");
@@ -46,11 +37,8 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
 
   if ($_REQUEST['opt'] == "wb")
   {
-    ////////////////////////////////////////////////////////////////////////////////
     // WB
-    ////////////////////////////////////////////////////////////////////////////////
-
-    // set the wb_round names
+    // Set the wb_round names
     $num_wb_rounds = getNumWBRounds($season);
     for ($i = 0; $i <= $num_wb_rounds; ++$i)
     {
@@ -58,7 +46,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $counter_wb_match[$i] = 1;
       $content_tpl->set_var("I_ROUND", $i + 1);
 
-      // deadline
+      // Deadline
       $content_tpl->set_var("H_WB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_WB_DEADLINE", "");
       $wb_round = $i + 1;
@@ -77,14 +65,14 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->parse("H_WB_ROUND", "B_WB_ROUND", true);
     }
 
-    // calculate the order of the wb_rounds
+    // Calculate the order of the wb_rounds
     $order_wb_rounds = array(1);
     for ($i = 1; $i <= $num_wb_rounds; $i++)
     {
       $order_wb_rounds = array_merge($order_wb_rounds, array($i + 1), $order_wb_rounds);
     }
 
-    // set the matches
+    // Set the matches
     foreach ($order_wb_rounds as $round)
     {
       $matchkey = "wb-" . $round . "-" . $counter_wb_match[$round - 1];
@@ -237,11 +225,8 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
   }
   elseif ($_REQUEST['opt'] == "lb" and $season['double_elimination'] != "")
   {
-    ////////////////////////////////////////////////////////////////////////////////
     // LB
-    ////////////////////////////////////////////////////////////////////////////////
-
-    // set the lb_round names
+    // Set the lb_round names
     $num_lb_rounds = getNumLBRounds($season);
     for ($i = 0; $i <= $num_lb_rounds; ++$i)
     {
@@ -249,7 +234,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $counter_lb_match[$i] = 1;
       $content_tpl->set_var("I_ROUND", $i + 1);
 
-      // deadline
+      // Deadline
       $content_tpl->set_var("H_LB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_LB_DEADLINE", "");
       $lb_round = $i + 1;
@@ -268,14 +253,14 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->parse("H_LB_ROUND", "B_LB_ROUND", true);
     }
 
-    // calculate the order of the lb_rounds
+    // Calculate the order of the lb_rounds
     $order_lb_rounds = array(1);
     for ($i = 1; $i <= $num_lb_rounds / 2; ++$i)
     {
       $order_lb_rounds = array_merge(array($i * 2), array($i * 2 + 1), $order_lb_rounds, array($i * 2), $order_lb_rounds);
     }
 
-    // set the matches
+    // Set the matches
     foreach ($order_lb_rounds as $round)
     {
       $matchkey = "lb-" . $round . "-" . $counter_lb_match[$round - 1];

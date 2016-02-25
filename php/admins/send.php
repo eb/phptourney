@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: send.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_MESSAGE_SENT", "H_MESSAGE_MESSAGE_SENT");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -20,16 +11,13 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACk");
 
 if ($user['uid'])
 {
-  // users-query
   $id_user = intval($_REQUEST['opt']);
   $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
 
-  // users-query
   $users_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
   $users_row2 = dbFetch($users_ref2);
 
-  // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
       			 "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);

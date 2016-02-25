@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: start.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_TOURNEY_RUNNING", "H_MESSAGE_TOURNEY_RUNNING");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_BRACKET", "H_WARNING_BRACKET");
@@ -23,7 +14,7 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_FIRST_MATCH", "H_MAIL_FIRST_MATCH")
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY_ACCEPTED", "H_MAIL_BODY_ACCEPTED");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY_REJECTED", "H_MAIL_BODY_REJECTED");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "running")
@@ -49,7 +40,7 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    // send a mail to all player that signed up
+    // Send a mail to all player that signed up
     $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
       			  "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
       			  "WHERE SU.`id_season` = {$season['id']} " .
@@ -57,7 +48,7 @@ if ($user['usertype_headadmin'])
       			  "AND SU.`id_user` = U.`id`");
     while ($season_users_row = dbFetch($season_users_ref))
     {
-      // subject
+      // Subject
       $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
       $content_tpl->set_var("I_SEASON_NAME", $season['name']);
       $content_tpl->set_var("I_USERNAME", $season_users_row['username']);
@@ -66,10 +57,9 @@ if ($user['usertype_headadmin'])
 
       $to = $season_users_row['email'];
 
-      // message
+      // Message
       if ($season_users_row['rejected'] == 0)
       {
-        // matches query
         $matches_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       			  "WHERE `id_season` = {$season['id']} " .
       			  "AND `id_player1` = {$season_users_row['id_user']}");
@@ -78,7 +68,6 @@ if ($user['usertype_headadmin'])
       			  "AND `id_player2` = {$season_users_row['id_user']}");
         if ($matches_row = dbFetch($matches_ref1))
         {
-          // users query
           $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
       			 "WHERE `id` = {$matches_row['id_player2']}");
         }
@@ -89,7 +78,7 @@ if ($user['usertype_headadmin'])
         }
         $users_row = dbFetch($users_ref);
 
-        // message accepted
+        // Message accepted
         $content_tpl->set_var("I_OPPONENT", $users_row['username']);
         $content_tpl->set_var("I_IRC_CHANNEL", $users_row['irc_channel']);
         $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
@@ -113,7 +102,7 @@ if ($user['usertype_headadmin'])
       }
       else
       {
-        // message rejected
+        // Message rejected
         $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
         $content_tpl->set_var("I_SEASON_NAME", $season['name']);
         $content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
@@ -124,7 +113,7 @@ if ($user['usertype_headadmin'])
       sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
     }
 
-    // set season-status to running
+    // Set season-status to running
     dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'running' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_TOURNEY_RUNNING", "B_MESSAGE_TOURNEY_RUNNING");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

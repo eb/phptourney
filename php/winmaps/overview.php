@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_MATCHES", "H_NO_MATCHES");
@@ -17,11 +8,10 @@ $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_MATCHES", "H_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_WINMAPS", "H_OVERVIEW_WINMAPS");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   $match_counter = 0;
-  // matches-query [gf]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'gf' " .
@@ -38,7 +28,6 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_MATCH", "B_MATCH", true);
   }
 
-  // matches-query [wb]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'wb' " .
@@ -55,7 +44,6 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_MATCH", "B_MATCH", true);
   }
 
-  // matches-query [lb]
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'lb' " .

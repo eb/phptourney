@@ -1,32 +1,6 @@
 <?php
 
-////////////////////////////////////////////////////////////////////////////////
-// Helper functions - Miscellaneous useful functions
-//
-// $Id: helpers.inc.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-//
-// Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-////////////////////////////////////////////////////////////////////////////////
-
-//================================================================================
-// function execAction
-// executes the current module-action
-//================================================================================
-
+// Executes the current module-action
 function execAction()
 {
   extract($GLOBALS);
@@ -37,14 +11,14 @@ function execAction()
   {
     $mod_name = ucwords(str_replace("_", " ", $_REQUEST['mod']));
 
-    // template files
+    // Template files
     $content_tpl = new Template("html/{$_REQUEST['mod']}", "remove");
     $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.html");
 
-    // execute action
+    // Execute action
     require($act_file);
 
-    // get content
+    // Get content
     $content_tpl->parse("PAGE", "F_CONTENT");
     $content = $content_tpl->get("PAGE");
     unset($content_tpl);
@@ -58,31 +32,19 @@ function execAction()
   }
 }
 
-//================================================================================
-// function createSalt
 // Creates a random salt consisting of two characters
-//================================================================================
-
 function createSalt()
 {
   return(chr(round(mt_rand(97, 122))) . chr(round(mt_rand(97, 122))));
 }
 
-//================================================================================
-// function isWholePositiveNumber
 // Checks whether the given string is an integer
-//================================================================================
-
 function isWholePositiveNumber($string)
 {
   return(is_numeric($string) and (intval($string) == floatval($string)) and intval($string) >= 0);
 }
 
-//================================================================================
-// function isWord
 // Checks whether the given string contains only [a-zA-Z0-9_]
-//================================================================================
-
 function isWord($string)
 {
   $matches = array();
@@ -97,21 +59,13 @@ function isWord($string)
   }
 }
 
-//================================================================================
-// function isIp
 // Checks whether the given string is an IP
-//================================================================================
-
 function isIp($string)
 {
   return(preg_match("/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/", $string));
 }
 
-//================================================================================
-// function sendMail
-// Wrapper function for mail()
-//================================================================================
-
+// Sends email
 function sendMail($to, $subject, $message, $from_address, $reply_to_address, $return_path, $bcc_address)
 {
   $headers =

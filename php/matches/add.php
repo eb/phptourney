@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: add.php,v 1.3 2006/05/01 14:55:10 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_PREV_MATCHES", "H_WARNING_PREV_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -22,17 +13,16 @@ $content_tpl->set_block("F_CONTENT", "B_COMMENT", "H_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_NO_COMMENT", "H_NO_COMMENT");
 
-// matches-query
 $id_match = intval($_REQUEST['opt']);
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
-// access for admins
-// access for players when it is their own match
+// Access for admins
+// Access for players when it is their own match
 if ($user['usertype_admin'] or
     $user['uid'] == $matches_row['id_player1'] or $user['uid'] == $matches_row['id_player2'])
 {
-  // check if the previous matches are played already
+  // Check if the previous matches are played already
   $matchkey = $matches_row['bracket'] . '-' . $matches_row['round'] . '-' . $matches_row['match'];
   $prev_match_player1 = "";
   $prev_match_player2 = "";
@@ -47,13 +37,10 @@ if ($user['usertype_admin'] or
   if (($prev_match_player1 == "" or $matches[$prev_match_player1]['confirmed'] != "0000-00-00 00:00:00") and
       ($prev_match_player2 == "" or $matches[$prev_match_player2]['confirmed'] != "0000-00-00 00:00:00"))
   {
-    ////////////////////////////////////////////////////////////////////////////////
-    // report match
-    ////////////////////////////////////////////////////////////////////////////////
-
+    // Report match
     if ($matches_row['submitted'] == "0000-00-00 00:00:00")
     {
-      // players
+      // Players
       if ($matches_row['id_player1'] != 0)
       {
 	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -77,13 +64,13 @@ if ($user['usertype_admin'] or
 	$content_tpl->set_var("I_PLAYER2", "-");
       }
 
-      // not played
+      // Not played
       if ($user['usertype_admin'])
       {
 	$content_tpl->parse("H_NOT_PLAYED", "B_NOT_PLAYED");
       }
 
-      // mappool
+      // Mappool
       $mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
 			      "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
       while ($mappool_row = dbFetch($mappool_ref))
@@ -93,7 +80,7 @@ if ($user['usertype_admin'] or
 	$content_tpl->parse("H_OPTION_MAP", "B_OPTION_MAP", true);
       }
 
-      // maps
+      // Maps
       for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
       {
 	$content_tpl->set_var("I_NUM_MAP", $i);
@@ -101,7 +88,7 @@ if ($user['usertype_admin'] or
       }
       $content_tpl->parse("H_MATCH", "B_MATCH");
 
-      // matchkey
+      // Matchkey
       $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
       $content_tpl->set_var("I_ROUND", $matches_row['round']);
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
@@ -111,10 +98,7 @@ if ($user['usertype_admin'] or
       $content_tpl->parse("H_ADD_REPORT", "B_ADD_REPORT");
     }
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // add comment
-    ////////////////////////////////////////////////////////////////////////////////
-
+    // Add comment
     else
     {
       if ($matches_row['id_player1'] == $user['uid'])
@@ -126,7 +110,6 @@ if ($user['usertype_admin'] or
 	$player = "p2";
       }
 
-      // maps-query
       $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
 			   "WHERE `id_match` = {$matches_row['id']} ORDER BY `num_map` ASC");
       $comments = false;

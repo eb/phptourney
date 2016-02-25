@@ -1,24 +1,11 @@
 <?php
 
-################################################################################
-#
-# $Id: view_matches.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_LED_RED", "H_LED_RED");
 $content_tpl->set_block("F_CONTENT", "B_LED_ORANGE", "H_LED_ORANGE");
 $content_tpl->set_block("F_CONTENT", "B_LED_GREEN", "H_LED_GREEN");
 $content_tpl->set_block("F_CONTENT", "B_LED_DONE", "H_LED_DONE");
 $content_tpl->set_block("F_CONTENT", "B_SEASON_MATCHES", "H_SEASON_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_STATISTICS", "H_VIEW_STATISTICS");
-
-////////////////////////////////////////////////////////////////////////////////
-// seasons
-////////////////////////////////////////////////////////////////////////////////
 
 $total_signups = 0;
 $total_matches = 0;
@@ -27,39 +14,38 @@ $total_wos = 0;
 $total_byes = 0;
 $total_outs = 0;
 
-// seasons-query
 $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
       		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
 $content_tpl->set_var("H_SEASON_MATCHES", "");
 while ($seasons_row = dbFetch($seasons_ref))
 {
-  // signups
+  // Signups
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
       			 "WHERE `usertype_player` = 1 AND `rejected` = 0 AND `id_season` = {$seasons_row['id']}");
   $season_signups = dbNumRows($season_users_ref);
 
-  // matches
+  // Matches
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       		    "WHERE `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_matches = dbNumRows($matches_ref);
 
-  // played matches
+  // Played matches
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       		    "WHERE `wo` = 0 AND `bye` = 0 AND `out` = 0 AND `confirmed` <> '0000-00-00 00:00:00' " .
       		    "AND `id_season` = {$seasons_row['id']}");
   $season_played = dbNumRows($matches_ref);
 
-  // walkovers
+  // Walkovers
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       		    "WHERE `wo` <> 0 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_wos = dbNumRows($matches_ref);
 
-  // byes
+  // Byes
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       		    "WHERE `bye` = 1 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_byes = dbNumRows($matches_ref);
 
-  // outs
+  // Outs
   $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
       		    "WHERE `out` = 1 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_outs = dbNumRows($matches_ref);

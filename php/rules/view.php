@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.2 2006/04/28 19:37:59 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NO_RULES", "H_VIEW_NO_RULES");
 $content_tpl->set_block("F_CONTENT", "B_ADD_SEASON_RULES", "H_ADD_SEASON_RULES");
 $content_tpl->set_block("F_CONTENT", "B_ADD", "H_ADD");
@@ -21,7 +12,6 @@ if ($user['usertype_admin'])
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_ADD", "B_ADD");
 
-  // seasons-query
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			  "WHERE `deleted` = 0 AND `id` <> {$season['id']} ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) > 0)
@@ -38,7 +28,6 @@ if ($user['usertype_admin'])
   }
 }
 
-// rules-query
 $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` " .
 		      "WHERE `id_season` = {$season['id']} " .
 		      "ORDER BY `subject`");

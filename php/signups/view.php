@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NO_SIGNUP", "H_VIEW_NO_SIGNUP");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_SIGNUP", "H_VIEW_SIGNUP");
 $content_tpl->set_block("F_CONTENT", "B_NO_PLAYERS", "H_NO_PLAYERS");
@@ -30,7 +21,6 @@ else
   $content_tpl->parse("H_VIEW_NO_SIGNUP", "B_VIEW_NO_SIGNUP");
 }
 
-// users-query
 $users_ref = dbQuery("SELECT U.* " .
 		      "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 		      "WHERE SU.`id_season` = {$season['id']} " .
@@ -52,7 +42,6 @@ else
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
     $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 
-    // countries-query
     $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$users_row['id_country']}");
     $countries_row = dbFetch($countries_ref);
     if (isset($players_per_country[$countries_row['id']]))
@@ -82,7 +71,6 @@ else
   arsort($players_per_country);
   $id_countries = array_keys($players_per_country);
   foreach($id_countries as $id_country) {
-    // countries-query
     $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = '$id_country'");
     $countries_row = dbFetch($countries_ref);
     $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);

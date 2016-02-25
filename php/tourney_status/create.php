@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: create.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_BRACKET_CREATED", "H_MESSAGE_BRACKET_CREATED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_TOURNEY_SYSTEM", "H_WARNING_TOURNEY_SYSTEM");
@@ -19,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['single_elimination'] == "")
@@ -52,7 +43,7 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    // process seeding-groups
+    // Process seeding-groups
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `rejected` = 0 " .
@@ -85,7 +76,7 @@ if ($user['usertype_headadmin'])
 	$seedlevel++;
       }
     }
-    // seed unseeded players
+    // Seed unseeded players
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `rejected` = 0 " .
@@ -99,7 +90,7 @@ if ($user['usertype_headadmin'])
       $seedlevel++;
     }
 
-    // set all players who signed up too late to rejected
+    // Set all players who signed up too late to rejected
     if ($season['qualification'] == 1)
     {
       dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `rejected` = 1 " .
@@ -108,7 +99,7 @@ if ($user['usertype_headadmin'])
 	       "AND `seedlevel` > {$season['single_elimination']} + {$season['single_elimination']} / 2 " .
 	       "AND `usertype_player` = 1");
 
-      // unset qualification if no qualification games were created
+      // Unset qualification if no qualification games were created
       $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `seedlevel` > {$season['single_elimination']} " .
@@ -128,14 +119,13 @@ if ($user['usertype_headadmin'])
 	       "AND `usertype_player` = 1");
     }
 
-    // set up the first round of matches
+    // Set up the first round of matches
     $num_winmaps = $season['winmaps'];
     $num_matches = $season['single_elimination'] / 2;
     $matches = getSeeding($num_matches);
 
     $counter = 1;
     foreach($matches as $match) {
-      // season_users-query [player1]
       $seedlevel = $counter;
       $users_ref = dbQuery("SELECT U.`id` " .
 			    "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
@@ -148,7 +138,6 @@ if ($user['usertype_headadmin'])
 	$id_player1 = $users_row['id'];
       }
 
-      // season_users-query [player2]
       $seedlevel = $season['single_elimination'] - $counter + 1;
       $users_ref = dbQuery("SELECT U.`id` " .
 			    "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
@@ -164,7 +153,6 @@ if ($user['usertype_headadmin'])
       $qualification = 0;
       if ($season['qualification'] == 1 and isset($id_player2))
       {
-	// season_users-query [player3]
 	$seedlevel = $season['single_elimination'] + $counter;
 	$users_ref = dbQuery("SELECT U.`id` " .
 			      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
@@ -218,7 +206,7 @@ if ($user['usertype_headadmin'])
       $counter++;
     }
     
-    // set up the remaining rounds of matches
+    // Set up the remaining rounds of matches
     for ($i = 2; $i <= getNumWBRounds($season); $i++)
     {
       $num_matches = $season['single_elimination'] / pow(2, $i);
@@ -254,7 +242,7 @@ if ($user['usertype_headadmin'])
 	       "VALUES ({$season['id']}, 'gf', 1, 2, $num_winmaps)");
     }
 
-    // set season-status to bracket
+    // Set season-status to bracket
     dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'bracket' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_BRACKET_CREATED", "B_MESSAGE_BRACKET_CREATED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

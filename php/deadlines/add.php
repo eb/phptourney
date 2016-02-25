@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: add.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_TOURNEY_SYSTEM", "H_WARNING_TOURNEY_SYSTEM");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -19,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_LB_ROUND", "H_ADD_LB_ROUND");
 $content_tpl->set_block("F_CONTENT", "B_ADD_GF_ROUND", "H_ADD_GF_ROUND");
 $content_tpl->set_block("F_CONTENT", "B_ADD_DEADLINE", "H_ADD_DEADLINE");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['qualification'] == 1)

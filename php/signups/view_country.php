@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view_country.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_PLAYERS", "H_NO_PLAYERS");
 $content_tpl->set_block("F_CONTENT", "B_PLAYER_COL1", "H_PLAYER_COL1");
 $content_tpl->set_block("F_CONTENT", "B_PLAYERS_COL1", "H_PLAYERS_COL1");
@@ -16,13 +7,11 @@ $content_tpl->set_block("F_CONTENT", "B_PLAYER_COL2", "H_PLAYER_COL2");
 $content_tpl->set_block("F_CONTENT", "B_PLAYERS_COL2", "H_PLAYERS_COL2");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYERS", "H_OVERVIEW_PLAYERS");
 
-// countries-query
 $id_country = intval($_REQUEST['opt']);
 $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = $id_country");
 $countries_row = dbFetch($countries_ref);
 $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
 
-// users-query
 $users_ref = dbQuery("SELECT U.* " .
 		      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
 		      "WHERE SU.`id_user` = U.`id` AND SU.`id_season` = {$season['id']} AND U.`id_country` = $id_country " .

@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert.php,v 1.2 2006/03/16 14:46:50 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_NEWS_ADDED", "H_MESSAGE_NEWS_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_HEADING", "H_WARNING_HEADING");
@@ -18,7 +9,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for admins [public / private news]
+// Access for admins [public / private news]
 if ($user['usertype_admin']) {
   $is_complete = 1;
   if ($_REQUEST['heading'] == "")

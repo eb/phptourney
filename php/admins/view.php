@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_ADD", "H_ADD");
 $content_tpl->set_block("F_CONTENT", "B_NO_ADMINS", "H_NO_ADMINS");
 $content_tpl->set_block("F_CONTENT", "B_EMAIL", "H_EMAIL");
@@ -25,7 +16,6 @@ if ($user['usertype_admin'])
   $content_tpl->parse("H_ADD", "B_ADD");
 }
 
-// season_users-query
 $season_users_ref = dbQuery("SELECT SU.* " .
 			     "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			     "WHERE SU.`id_season` = {$season['id']} AND (SU.`usertype_admin` = 1 OR SU.`usertype_headadmin` = 1) " .
@@ -40,7 +30,6 @@ else
   $admin_counter = 0;
   while ($season_users_row = dbFetch($season_users_ref))
   {
-    // users-query
     $users_ref = dbQuery("SELECT U.*, C.`abbreviation` FROM `{$cfg['db_table_prefix']}users` U " .
 			 "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
 			 "ON U.`id_country` = C.`id` " .

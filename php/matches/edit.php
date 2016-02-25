@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: edit.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_EDIT", "H_WARNING_EDIT");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -42,7 +33,7 @@ if ($user['usertype_admin'])
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
-    // players
+    // Players
     if ($matches_row['id_player1'] != 0)
     {
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
@@ -66,7 +57,7 @@ if ($user['usertype_admin'])
       $content_tpl->set_var("I_PLAYER2", "-");
     }
 
-    // not played
+    // Not played
     if ($matches_row['wo'] == $matches_row['id_player1'])
     {
       $content_tpl->parse("H_OPTION_WO1_SELECTED", "B_OPTION_WO1_SELECTED");
@@ -102,7 +93,7 @@ if ($user['usertype_admin'])
     $content_tpl->set_var("I_COMMENT_ADMIN", htmlspecialchars($matches_row['comment_admin']));
     $content_tpl->parse("H_NOT_PLAYED", "B_NOT_PLAYED");
 
-    // maps
+    // Maps
     for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
     {
       $content_tpl->set_var("I_NUM_MAP", $i);
@@ -112,7 +103,7 @@ if ($user['usertype_admin'])
 			  "WHERE `id_match` = {$matches_row['id']} AND `num_map` = $i");
       if ($maps_row = dbFetch($maps_ref))
       {
-	// map
+	// Map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
 	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
 			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
@@ -130,7 +121,7 @@ if ($user['usertype_admin'])
 	  }
 	}
 
-	// score
+	// Score
 	if ($maps_row['score_p1'] == 0 and $maps_row['score_p2'] == 0)
 	{
 	  $maps_row['score_p1'] = "";
@@ -139,7 +130,7 @@ if ($user['usertype_admin'])
 	$content_tpl->set_var("I_SCORE_P1", $maps_row['score_p1']);
 	$content_tpl->set_var("I_SCORE_P2", $maps_row['score_p2']);
 
-	// screenshot
+	// Screenshot
 	$sshot_dir = "data/screenshots/{$season['id']}/";
 	$sshot = $sshot_dir . "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}.jpg";
 	$sshot_thumb = $sshot_dir . "{$season['id']}-{$matches_row['bracket']}-{$matches_row['round']}-{$matches_row['match']}-m{$i}_thumb.jpg";
@@ -150,14 +141,14 @@ if ($user['usertype_admin'])
 	  $content_tpl->parse("H_SCREENSHOT", "B_SCREENSHOT");
 	}
 
-	// comments
+	// Comments
 	$content_tpl->set_var("I_COMMENT_ADMIN", htmlspecialchars($maps_row['comment_admin']));
 	$content_tpl->set_var("I_COMMENT_P1", htmlspecialchars($maps_row['comment_p1']));
 	$content_tpl->set_var("I_COMMENT_P2", htmlspecialchars($maps_row['comment_p2']));
       }
       else
       {
-	// map
+	// Map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
 	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
 			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
@@ -168,11 +159,11 @@ if ($user['usertype_admin'])
 	  $content_tpl->parse("H_OPTION_MAP_SELECTED", "B_OPTION_MAP_UNSELECTED", true);
 	}
 
-	// score
+	// Score
 	$content_tpl->set_var("I_SCORE_P1", "");
 	$content_tpl->set_var("I_SCORE_P2", "");
 
-	// comments
+	// Comments
 	$content_tpl->set_var("I_COMMENT_ADMIN", "");
 	$content_tpl->set_var("I_COMMENT_P1", "");
 	$content_tpl->set_var("I_COMMENT_P2", "");
@@ -181,12 +172,12 @@ if ($user['usertype_admin'])
     }
     $content_tpl->parse("H_MATCH", "B_MATCH");
 
-    // matchkey
+    // Matchkey
     $content_tpl->set_var("I_BRACKET", htmlspecialchars($matches_row['bracket']));
     $content_tpl->set_var("I_ROUND", $matches_row['round']);
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
-    // submitted
+    // Submitted
     if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
     {
       $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
@@ -196,7 +187,7 @@ if ($user['usertype_admin'])
       $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
     }
 
-    // confirmed
+    // Confirmed
     if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
     {
       $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));

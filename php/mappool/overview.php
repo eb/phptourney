@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_MAPS", "H_NO_MAPS");
@@ -16,10 +7,9 @@ $content_tpl->set_block("F_CONTENT", "B_MAP", "H_MAP");
 $content_tpl->set_block("F_CONTENT", "B_MAPS", "H_MAPS");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_MAPS", "H_OVERVIEW_MAPS");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  // maps-query
   $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
 		       "WHERE `id_season` = {$season['id']} AND `deleted` = 0 ORDER BY `map` ASC");
   if (dbNumRows($maps_ref) <= 0)

@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert_comment.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_COMMENT_ADDED", "H_MESSAGE_COMMENT_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -22,7 +13,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 $id_match = intval($_REQUEST['opt']);
 $content_tpl->set_var("I_ID_MATCH", $id_match);
 
-// access for users
+// Access for users
 if ($user['uid'])
 {
   $is_complete = 1;
@@ -31,7 +22,6 @@ if ($user['uid'])
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_BODY", "B_WARNING_BODY");
   }
-  // comments-query
   $minute = (date("i") + 55) % 60;
   $now = date("Y-m-d H:{$minute}:s");
   $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}match_comments` " .
@@ -46,7 +36,6 @@ if ($user['uid'])
 
   if ($is_complete)
   {
-    // bans-query
     preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
     $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
 			 "WHERE `id_season` = {$season['id']} " .

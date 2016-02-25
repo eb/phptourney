@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: edit.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_TOURNEY_SYSTEM", "H_WARNING_TOURNEY_SYSTEM");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -23,7 +14,7 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_GF_ROUND_SELECTED", "H_EDIT_GF_ROUN
 $content_tpl->set_block("F_CONTENT", "B_EDIT_GF_ROUND_UNSELECTED", "H_EDIT_GF_ROUND_UNSELECTED");
 $content_tpl->set_block("F_CONTENT", "B_EDIT_DEADLINE", "H_EDIT_DEADLINE");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['single_elimination'] == "")
@@ -35,7 +26,6 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    // deadlines-query
     $id_deadline = intval($_REQUEST['opt']);
     $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id` = $id_deadline");
     $deadlines_row = dbFetch($deadlines_ref);

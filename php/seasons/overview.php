@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_SEASONS", "H_NO_SEASONS");
@@ -16,10 +7,9 @@ $content_tpl->set_block("F_CONTENT", "B_SEASON", "H_SEASON");
 $content_tpl->set_block("F_CONTENT", "B_SEASONS", "H_SEASONS");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEASONS", "H_OVERVIEW_SEASONS");
 
-// access for root only
+// Access for root only
 if ($user['usertype_root'])
 {
-  // seasons-query
   $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
 			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) <= 0)

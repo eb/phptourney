@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_BRACKET", "H_NO_BRACKET");
 $content_tpl->set_block("F_CONTENT", "B_BRACKET", "H_BRACKET");
 

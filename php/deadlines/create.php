@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: create.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_DEADLINES_SETUP", "H_MESSAGE_DEADLINES_SETUP");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -24,7 +15,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['single_elimination'] == "")
@@ -78,7 +69,7 @@ if ($user['usertype_headadmin'])
 
       $deadline = $_REQUEST['startdate'];
 
-      // q
+      // Q
       if ($season['qualification'])
       {
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
@@ -88,7 +79,7 @@ if ($user['usertype_headadmin'])
 		 "VALUES ('q1', '$deadline', {$season['id']})");
       }
 
-      // wb
+      // Wb
       dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
 	       "VALUES ('wb0', '$deadline', {$season['id']})");
 
@@ -103,7 +94,7 @@ if ($user['usertype_headadmin'])
 	}
       }
 
-      // lb
+      // Lb
       if ($season['double_elimination'] != "")
       {
 	$deadline = $lb_startdate;
@@ -127,7 +118,7 @@ if ($user['usertype_headadmin'])
 	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
 		   "VALUES ('lb$i', '$deadline', {$season['id']})");
 	}
-	// gf
+	// Gf
 	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('gf0', '$deadline', {$season['id']})");
 	$deadline = addDaysToDate($deadline, $_REQUEST['wb_round_length'] - $_REQUEST['lb_round_length']);

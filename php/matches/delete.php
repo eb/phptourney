@@ -1,21 +1,12 @@
 <?php
 
-################################################################################
-#
-# $Id: delete.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_MATCH_REMOVED", "H_MESSAGE_MATCH_REMOVED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_DELETE", "H_WARNING_DELETE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 
-// access for admins only
+// Access for admins only
 if ($user['usertype_admin'])
 {
   $id_match = intval($_REQUEST['opt']);
@@ -28,7 +19,7 @@ if ($user['usertype_admin'])
 	     "`confirmed` = '0000-00-00 00:00:00' " . 
 	     "WHERE `id` = {$matches_row['id']}");
 
-    // delete screenshots
+    // Delete screenshots
     for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
     {
       $sshot_dir = "data/screenshots/{$season['id']}/";
@@ -44,7 +35,7 @@ if ($user['usertype_admin'])
       }
     }
 
-    // delete next matches
+    // Delete next matches
     $winner_match = insertWinnerMatch($matches_row, 0);
     $loser_match = insertLoserMatch($matches_row, 0);
 

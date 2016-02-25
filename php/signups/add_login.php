@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: add_login.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNED_UP", "H_WARNING_SIGNED_UP");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_LOGIN", "H_WARNING_LOGIN");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -20,7 +11,6 @@ if ($season['status'] == "signups")
   if ($user['uid'])
   {
     $is_complete = 1;
-    // season_users-query
     $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$season['id']} AND `usertype_player` = 1");
     if (dbNumRows($season_users_ref) == 1)
@@ -31,7 +21,6 @@ if ($season['status'] == "signups")
 
     if ($is_complete)
     {
-      // users-query
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
       $users_row = dbFetch($users_ref);
 

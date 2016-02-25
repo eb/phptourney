@@ -1,33 +1,10 @@
 <?php
 
-////////////////////////////////////////////////////////////////////////////////
-// Bracket functions - Gets all users/matches from the database
-//
-// $Id: bracket.inc.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-//
-// Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-////////////////////////////////////////////////////////////////////////////////
-
 if (isset($season))
 {
-  $users = array(); // user array
-  $matches = array(); // matches array
+  $users = array(); // User array
+  $matches = array(); // Matches array
 
-  // users-query
   $users_ref = dbQuery("SELECT U.`id`, U.`username`, C.`abbreviation` " .
 		       "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}countries` C " .
 		       "WHERE U.`id_country` = C.`id`");
@@ -36,14 +13,13 @@ if (isset($season))
     $users[$users_row['id']] = $users_row;
   }
 
-  // matches-query
   $matches_ref = dbQuery("SELECT `id`, `bracket`, `round`, `match`, `wo`, `out`, `bye`, " .
 			 "`id_player1`, `id_player2`, `score_p1`, `score_p2`, `confirmed` " .
 			 "FROM `{$cfg['db_table_prefix']}matches` " .
 			 "WHERE `id_season` = {$season['id']} ");
   while ($matches_row = dbFetch($matches_ref))
   {
-    // player1
+    // Player1
     if ($matches_row['id_player1'] > 0)
     {
       $matches_row['player1'] = $users[$matches_row['id_player1']]['username'];
@@ -54,7 +30,7 @@ if (isset($season))
       $matches_row['player1'] = "";
       $matches_row['country1'] = "";
     }
-    // player2
+    // Player2
     if ($matches_row['id_player2'] > 0)
     {
       $matches_row['player2'] = $users[$matches_row['id_player2']]['username'];
@@ -73,11 +49,7 @@ if (isset($season))
   }
 }
 
-//================================================================================
-// function recMatches
 // Browses recursively through the bracket
-//================================================================================
-
 function recMatches(& $matches, $key) {
   if (hasNextWinnerMatch($matches[$key]))
   {

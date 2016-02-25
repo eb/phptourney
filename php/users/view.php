@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_SHOW_IP", "H_SHOW_IP");
 $content_tpl->set_block("F_CONTENT", "B_SHOW_IPS", "H_SHOW_IPS");
 $content_tpl->set_block("F_CONTENT", "B_SHOW_EMAIL", "H_SHOW_EMAIL");
@@ -25,11 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_SEASON", "H_SEASON");
 $content_tpl->set_block("F_CONTENT", "B_SEASONS", "H_SEASONS");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEASONS", "H_OVERVIEW_SEASONS");
 
-////////////////////////////////////////////////////////////////////////////////
-// profile
-////////////////////////////////////////////////////////////////////////////////
-
-// users-query
+// Profile
 $id_user = intval($_REQUEST['opt']);
 $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
 		      "WHERE `id` = $id_user");
@@ -72,7 +59,6 @@ if ($is_complete)
 
 if ($user['usertype_admin'])
 {
-  // season_users-query
   $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
 			       "WHERE `id_user` = $id_user");
   while ($season_users_row = dbFetch($season_users_ref))
@@ -87,11 +73,7 @@ if ($user['usertype_admin'])
 }
 $content_tpl->parse("H_SHOW_PROFILE", "B_SHOW_PROFILE");
 
-////////////////////////////////////////////////////////////////////////////////
-// played matches
-////////////////////////////////////////////////////////////////////////////////
-
-// matches-query
+// Played matches
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			"WHERE `id_season` = {$season['id']} " .
 			"AND (`id_player1` = $id_user OR `id_player2` = $id_user) " .
@@ -110,7 +92,7 @@ else
   while ($matches_row = dbFetch($matches_ref))
   {
     $content_tpl->set_var("I_MATCH_COUNTER", ++$match_counter);
-    // match
+    // Match
     if ($matches_row['id_player1'] > 0)
     {
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
@@ -135,7 +117,7 @@ else
     }
     $content_tpl->set_var("I_PLAYER2", htmlspecialchars($player2));
 
-    // outcome
+    // Outcome
     $outcome = "{$matches_row['score_p1']} - {$matches_row['score_p2']}";
 
     $content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
@@ -150,11 +132,7 @@ else
 }
 $content_tpl->parse("H_OVERVIEW_PLAYED_MATCHES", "B_OVERVIEW_PLAYED_MATCHES");
 
-////////////////////////////////////////////////////////////////////////////////
-// seasons
-////////////////////////////////////////////////////////////////////////////////
-
-// season_users-query
+// Seasons
 $season_users_ref = dbQuery("SELECT SU.*,S.`name` AS `season_name` " .
 			     "FROM `{$cfg['db_table_prefix']}season_users` SU,`{$cfg['db_table_prefix']}seasons` S " .
 			     "WHERE SU.`id_user` = $id_user " .

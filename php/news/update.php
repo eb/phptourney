@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: update.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_NEWS_EDITED", "H_MESSAGE_NEWS_EDITED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_HEADING", "H_WARNING_HEADING");
@@ -18,13 +9,12 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
-// news-query
 $id_news = intval($_REQUEST['opt']);
 $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
-// access for headadmins [public / private news]
-// access for admins [public / private news that they wrote themselves]
+// Access for headadmins [public / private news]
+// Access for admins [public / private news that they wrote themselves]
 if ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user']) {
   $is_complete = 1;
   if ($_REQUEST['heading'] == "")

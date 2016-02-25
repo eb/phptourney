@@ -1,19 +1,9 @@
 <?php
 
-################################################################################
-#
-# $Id: latest_matches.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_LATEST_MATCHES", "H_NO_LATEST_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_LATEST_MATCH", "H_LATEST_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_LATEST_MATCHES", "H_LATEST_MATCHES");
 
-// matches-query
 $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
 			"WHERE `id_season` = {$season['id']} " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .

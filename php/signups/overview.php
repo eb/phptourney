@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: overview.php,v 1.1 2006/03/16 00:05:18 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_SIGNUPS_OPEN", "H_MESSAGE_SIGNUPS_OPEN");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SIGNUPS_CLOSED", "H_WARNING_SIGNUPS_CLOSED");
@@ -33,7 +24,7 @@ $content_tpl->set_block("F_CONTENT", "B_INVITATION", "H_INVITATION");
 $content_tpl->set_block("F_CONTENT", "B_INVITATIONS", "H_INVITATIONS");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_INVITATIONS", "H_OVERVIEW_INVITATIONS");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "signups")
@@ -51,20 +42,15 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_OPEN_SIGNUPS", "B_OPEN_SIGNUPS");
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // add player
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Add player
   if ($season['status'] == "" or $season['status'] == "signups")
   {
-    // users-query
     $users_ref = dbQuery("SELECT * " .
 			  "FROM `{$cfg['db_table_prefix']}users` " .
 			  "ORDER BY `username` ASC");
 
     while ($users_row = dbFetch($users_ref))
     {
-      // season_users-query
       $season_users_ref = dbQuery("SELECT * " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` " .
 				   "WHERE `id_season` = {$season['id']} " .
@@ -81,20 +67,15 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_OVERVIEW_ADD_PLAYER", "B_OVERVIEW_ADD_PLAYER");
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // invite player
-  ////////////////////////////////////////////////////////////////////////////////
-
+  // Invite player
   if ($season['status'] == "" or $season['status'] == "signups")
   {
-    // users-query
     $users_ref = dbQuery("SELECT * " .
 			  "FROM `{$cfg['db_table_prefix']}users` " .
 			  "ORDER BY `username` ASC");
 
     while ($users_row = dbFetch($users_ref))
     {
-      // season_users-query
       $season_users_ref = dbQuery("SELECT * " .
 				   "FROM `{$cfg['db_table_prefix']}season_users` " .
 				   "WHERE `id_season` = {$season['id']} " .
@@ -111,11 +92,7 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_OVERVIEW_INVITE_PLAYER", "B_OVERVIEW_INVITE_PLAYER");
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // accepted players
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // users-query
+  // Accepted players
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .
@@ -143,11 +120,7 @@ if ($user['usertype_headadmin'])
   }
   $content_tpl->parse("H_OVERVIEW_ACCEPTED_PLAYERS", "B_OVERVIEW_ACCEPTED_PLAYERS");
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // rejected players
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // users-query
+  // Rejected players
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .
@@ -174,11 +147,7 @@ if ($user['usertype_headadmin'])
   }
   $content_tpl->parse("H_OVERVIEW_REJECTED_PLAYERS", "B_OVERVIEW_REJECTED_PLAYERS");
 
-  ////////////////////////////////////////////////////////////////////////////////
-  // invitations
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // users-query
+  // Invited players
   $users_ref = dbQuery("SELECT U.* " .
 			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .

@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.2 2006/03/16 14:46:50 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NO_NEWS", "H_VIEW_NO_NEWS");
@@ -28,11 +19,10 @@ if ($user['usertype_admin'])
   $content_tpl->parse("H_ADD", "B_ADD");
 }
 
-// access for admins [private news]
-// access for guests [public news]
+// Access for admins [private news]
+// Access for guests [public news]
 if ($user['usertype_admin'] or $id_news_group == 1)
 {
-  // news-query
   $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
 		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$season['id']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC LIMIT 0, 5");
@@ -44,7 +34,6 @@ if ($user['usertype_admin'] or $id_news_group == 1)
   {
     while ($news_row = dbFetch($news_ref))
     {
-      // users-query
       $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$news_row['id_user']}");
       $users_row = dbFetch($users_ref);
 
@@ -64,7 +53,6 @@ if ($user['usertype_admin'] or $id_news_group == 1)
 	$content_tpl->parse("H_PUBLISH_EDIT_DELETE", "B_PUBLISH_EDIT_DELETE");
       }
 
-      // comments-query
       $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news_comments` WHERE `id_news` = {$news_row['id']} AND `deleted` = 0");
       $content_tpl->set_var("I_NUM_COMMENTS", dbNumRows($comments_ref));
       $content_tpl->set_var("I_ID_SEASON", $season['id']);

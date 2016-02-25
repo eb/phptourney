@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: view.php,v 1.2 2006/04/28 19:37:59 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_NO_SERVERLIST", "H_NO_SERVERLIST");
 $content_tpl->set_block("F_CONTENT", "B_SERVERLIST", "H_SERVERLIST");
 $content_tpl->set_block("F_CONTENT", "B_SERVER_MANAGEMENT", "H_SERVER_MANAGEMENT");
@@ -19,15 +10,15 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_SERVERS", "H_VIEW_SERVERS");
 
 $no_servers = 0;
 
-// read serverlist
+// Read serverlist
 $f_serverlist = "data/serverlists/{$season['id']}";
 if (file_exists($f_serverlist))
 {
-  // serverlist
+  // Serverlist
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_SERVERLIST", "B_SERVERLIST");
 
-  // servers
+  // Servers
   $fh_serverlist = fopen($f_serverlist, "r");
   $serverlist = explode("\n", fread($fh_serverlist, filesize($f_serverlist)));
   fclose($fh_serverlist);

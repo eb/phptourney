@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: setup.php,v 1.1 2006/03/16 00:05:17 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_TOURNEY_SYSTEM", "H_WARNING_TOURNEY_SYSTEM");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
@@ -16,7 +7,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 $content_tpl->set_block("F_CONTENT", "B_LB", "H_LB");
 $content_tpl->set_block("F_CONTENT", "B_SETUP_DEADLINES", "H_SETUP_DEADLINES");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   if ($season['single_elimination'] == "")

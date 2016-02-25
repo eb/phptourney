@@ -1,14 +1,5 @@
 <?php
 
-################################################################################
-#
-# $Id: insert.php,v 1.3 2006/03/23 11:41:25 eb Exp $
-#
-# Copyright (c) 2004 A.Beisler <eb@subdevice.org> http://www.subdevice.org/
-#
-################################################################################
-
-// template blocks
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_ADMIN_ADDED", "H_MESSAGE_ADMIN_ADDED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
@@ -19,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_SUBJECT", "H_MAIL_SUBJECT");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
-// access for headadmins only
+// Access for headadmins only
 if ($user['usertype_headadmin'])
 {
   $is_complete = 1;
@@ -53,18 +44,18 @@ if ($user['usertype_headadmin'])
 	       "VALUES($id_user, {$season['id']}, NOW(), $headadmin, 1)");
     }
 
-    // send a mail to the new admin
+    // Send a mail to the new admin
     $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
     $to = $users_row['email'];
 
-    // subject
+    // Subject
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $season['name']);
     $content_tpl->parse("MAIL_SUBJECT", "B_MAIL_SUBJECT");
     $subject = $content_tpl->get("MAIL_SUBJECT");
 
-    // message
+    // Message
     $content_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
     $content_tpl->set_var("I_SEASON_NAME", $season['name']);
     $content_tpl->set_var("I_USERNAME", $users_row['username']);
