@@ -3,8 +3,8 @@
 require("inc/inc.php");
 
 // Template files
-$main_tpl = new Template("html", "remove");
-$main_tpl->set_file("F_FULL", "full.html");
+$main_tpl = new Template();
+$main_tpl->set_file("F_FULL", "full.tpl.html");
 
 $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 $main_tpl->set_var("I_SEASON_NAME", "");

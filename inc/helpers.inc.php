@@ -6,14 +6,14 @@ function execAction()
   extract($GLOBALS);
   global $content_tpl;
 
-  $act_file = "php/{$_REQUEST['mod']}/{$_REQUEST['act']}.php";
+  $act_file = "modules/{$_REQUEST['mod']}/{$_REQUEST['act']}.php";
   if (file_exists($act_file))
   {
     $mod_name = ucwords(str_replace("_", " ", $_REQUEST['mod']));
 
     // Template files
-    $content_tpl = new Template("html/{$_REQUEST['mod']}", "remove");
-    $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.html");
+    $content_tpl = new Template("modules/{$_REQUEST['mod']}");
+    $content_tpl->set_file("F_CONTENT", "{$_REQUEST['act']}.tpl.html");
 
     // Execute action
     require($act_file);
