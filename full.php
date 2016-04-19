@@ -4,7 +4,7 @@ require("inc/inc.php");
 
 // Template files
 $main_tpl = new Template();
-$main_tpl->set_file("F_FULL", "full.tpl.html");
+$main_tpl->set_file("F_FULL", $cfg['full_template_file']);
 
 $main_tpl->set_var("I_TOURNEY_NAME", $cfg['tourney_name']);
 $main_tpl->set_var("I_SEASON_NAME", "");
