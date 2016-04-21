@@ -16,11 +16,6 @@ body {
 	background-color: #52616e;
 }
 
-body.full {
-	background-image: url(../gfx/default/mfbg.png);
-	background-repeat: repeat;
-}
-
 img {
 	vertical-align: top;
 }
@@ -186,6 +181,12 @@ table.message {
 }
 
 /* Text elements */
+
+.caption {
+	color: #ffffff;
+	font-size: 11pt;
+	font-weight: bold;
+}
 
 hr {
 	height: 1px;
