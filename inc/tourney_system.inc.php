@@ -82,6 +82,7 @@ function insertLoserMatch(& $match, $id_loser)
 function getWinnerMatch(& $match)
 {
   global $cfg;
+  global $season;
 
   if (hasNextWinnerMatch($match))
   {
@@ -111,6 +112,7 @@ function getWinnerMatch(& $match)
 function getLoserMatch(& $match)
 {
   global $cfg;
+  global $season;
 
   if (hasNextLoserMatch($match))
   {
