@@ -1,0 +1,14 @@
+phpTourney is a PHP script collection consisting of user management, news, match reports and of course the tourney logic for single- and double-elimination brackets. It's released under the terms of the MIT license. Have a look at LICENSE for details.
+
+A Dockerfile and docker-compose.yml is included. You can find all relevant information wrt requirements and prerequisites in there.
+
+To initially populate the database:
+docker-compose run -p 127.0.0.1:3306:3306 -d db
+mysql -h127.0.0.1 -p3306 -uroot -pWMxP7Xd9MVZtvZ1D < app/phptourney.sql
+docker-compose down
+
+To start up a development environment, do the following:
+docker-compose up --build -d
+
+You then can access the website on http://127.0.0.1:8080
+

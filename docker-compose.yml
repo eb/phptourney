@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb:10.3
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=WMxP7Xd9MVZtvZ1D
+  app:
+    build: .
+    image: phptourney
+    restart: always
+    volumes:
+      - data:/var/www/html/data
+      - ./app:/var/www/html
+    environment:
+      - PHPTOURNEY_DB_HOST=db
+      - PHPTOURNEY_DB_PORT=3306
+      - PHPTOURNEY_DB_USERNAME=root
+      - PHPTOURNEY_DB_PASSWORD=WMxP7Xd9MVZtvZ1D
+      - PHPTOURNEY_DB_DATABASE=phptourney
+      - PHPTOURNEY_DB_PREFIX=
+      - PHPTOURNEY_DEBUG=1
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+
+volumes:
+  db:
+  data:

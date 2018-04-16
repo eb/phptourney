@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.14-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: test_phptourney
+-- Host: 127.0.0.1    Database: phptourney
 -- ------------------------------------------------------
--- Server version	5.5.46-0+deb8u1
+-- Server version	10.3.6-MariaDB-1:10.3.6+maria~jessie
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `phptourney`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `phptourney` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
+USE `phptourney`;
+
+--
 -- Table structure for table `bans`
 --
 
@@ -24,7 +32,7 @@ DROP TABLE IF EXISTS `bans`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
   `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -50,7 +58,7 @@ CREATE TABLE `countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `abbreviation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `active` tinyint(4) NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`(50)),
   UNIQUE KEY `abbreviation` (`abbreviation`(10))
@@ -76,7 +84,7 @@ DROP TABLE IF EXISTS `deadlines`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deadlines` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
   `round` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `deadline` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
@@ -100,8 +108,8 @@ DROP TABLE IF EXISTS `demos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demos` (
-  `id` int(11) NOT NULL DEFAULT '0',
-  `id_match` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_match` int(11) NOT NULL DEFAULT 0,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,9 +132,9 @@ DROP TABLE IF EXISTS `mappool`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mappool` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
   `map` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -149,14 +157,14 @@ DROP TABLE IF EXISTS `maps`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `maps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_match` int(11) NOT NULL DEFAULT '0',
-  `id_map` int(11) NOT NULL DEFAULT '0',
-  `score_p1` int(11) NOT NULL DEFAULT '0',
-  `score_p2` int(11) NOT NULL DEFAULT '0',
+  `id_match` int(11) NOT NULL DEFAULT 0,
+  `id_map` int(11) NOT NULL DEFAULT 0,
+  `score_p1` int(11) NOT NULL DEFAULT 0,
+  `score_p2` int(11) NOT NULL DEFAULT 0,
   `comment_p1` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment_p2` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment_admin` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `num_map` int(11) NOT NULL DEFAULT '0',
+  `num_map` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -179,8 +187,8 @@ DROP TABLE IF EXISTS `match_comments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `match_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_match` int(11) NOT NULL DEFAULT '0',
-  `id_user` int(11) NOT NULL DEFAULT '0',
+  `id_match` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) NOT NULL DEFAULT 0,
   `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -206,23 +214,23 @@ DROP TABLE IF EXISTS `matches`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
   `bracket` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `round` int(11) NOT NULL DEFAULT '0',
-  `match` int(11) NOT NULL DEFAULT '0',
-  `wo` int(11) NOT NULL DEFAULT '0',
-  `out` tinyint(4) NOT NULL DEFAULT '0',
-  `bye` tinyint(4) NOT NULL DEFAULT '0',
-  `id_player1` int(11) NOT NULL DEFAULT '0',
-  `id_player2` int(11) NOT NULL DEFAULT '0',
-  `num_winmaps` int(11) NOT NULL DEFAULT '0',
-  `score_p1` int(11) NOT NULL DEFAULT '0',
-  `score_p2` int(11) NOT NULL DEFAULT '0',
+  `round` int(11) NOT NULL DEFAULT 0,
+  `match` int(11) NOT NULL DEFAULT 0,
+  `wo` int(11) NOT NULL DEFAULT 0,
+  `out` tinyint(4) NOT NULL DEFAULT 0,
+  `bye` tinyint(4) NOT NULL DEFAULT 0,
+  `id_player1` int(11) NOT NULL DEFAULT 0,
+  `id_player2` int(11) NOT NULL DEFAULT 0,
+  `num_winmaps` int(11) NOT NULL DEFAULT 0,
+  `score_p1` int(11) NOT NULL DEFAULT 0,
+  `score_p2` int(11) NOT NULL DEFAULT 0,
   `comment_admin` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `submitter` int(11) NOT NULL DEFAULT '0',
+  `submitter` int(11) NOT NULL DEFAULT 0,
   `confirmed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `confirmer` int(11) NOT NULL DEFAULT '0',
+  `confirmer` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -245,13 +253,13 @@ DROP TABLE IF EXISTS `news`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
-  `id_user` int(11) NOT NULL DEFAULT '0',
-  `id_news_group` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `id_news_group` int(11) NOT NULL DEFAULT 0,
   `heading` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -274,12 +282,12 @@ DROP TABLE IF EXISTS `news_comments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `news_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_news` int(11) NOT NULL DEFAULT '0',
-  `id_user` int(11) NOT NULL DEFAULT '0',
+  `id_news` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) NOT NULL DEFAULT 0,
   `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -302,7 +310,7 @@ DROP TABLE IF EXISTS `rules`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
   `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -327,18 +335,18 @@ DROP TABLE IF EXISTS `season_users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `season_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_season` int(11) NOT NULL DEFAULT '0',
-  `id_user` int(11) NOT NULL DEFAULT '0',
+  `id_season` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) NOT NULL DEFAULT 0,
   `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `usertype_root` tinyint(4) NOT NULL DEFAULT '0',
-  `usertype_headadmin` tinyint(4) NOT NULL DEFAULT '0',
-  `usertype_admin` tinyint(4) NOT NULL DEFAULT '0',
-  `usertype_player` tinyint(4) NOT NULL DEFAULT '0',
-  `seedgroup` int(11) NOT NULL DEFAULT '0',
-  `seedlevel` int(11) NOT NULL DEFAULT '0',
-  `rejected` tinyint(4) NOT NULL DEFAULT '0',
-  `invited` tinyint(4) NOT NULL DEFAULT '0',
+  `usertype_root` tinyint(4) NOT NULL DEFAULT 0,
+  `usertype_headadmin` tinyint(4) NOT NULL DEFAULT 0,
+  `usertype_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `usertype_player` tinyint(4) NOT NULL DEFAULT 0,
+  `seedgroup` int(11) NOT NULL DEFAULT 0,
+  `seedlevel` int(11) NOT NULL DEFAULT 0,
+  `rejected` tinyint(4) NOT NULL DEFAULT 0,
+  `invited` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -363,13 +371,13 @@ DROP TABLE IF EXISTS `seasons`;
 CREATE TABLE `seasons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `qualification` tinyint(4) NOT NULL DEFAULT '0',
+  `qualification` tinyint(4) NOT NULL DEFAULT 0,
   `single_elimination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `double_elimination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `winmaps` int(11) NOT NULL DEFAULT '0',
+  `winmaps` int(11) NOT NULL DEFAULT 0,
   `status` enum('signups','bracket','running','finished') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`(50))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -393,12 +401,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_country` int(11) NOT NULL DEFAULT '0',
+  `id_country` int(11) NOT NULL DEFAULT 0,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `irc_channel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `notify` tinyint(4) NOT NULL DEFAULT '1',
+  `notify` tinyint(4) NOT NULL DEFAULT 1,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `new_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
@@ -425,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-07 20:18:02
+-- Dump completed on 2018-05-01 11:42:01

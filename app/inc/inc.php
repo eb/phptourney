@@ -4,7 +4,6 @@ $inc_path = dirname(__FILE__);
 
 require("$inc_path/helpers.inc.php");
 require("$inc_path/checks.inc.php");
-require("$inc_path/config-default.inc.php");
 require("$inc_path/config.inc.php");
 require("$inc_path/database.inc.php");
 

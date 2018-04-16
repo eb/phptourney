@@ -1,6 +1,11 @@
 <?php
 
-$mysqli = new mysqli('p:' . $cfg['db_host'], $cfg['db_username'], $cfg['db_password'], $cfg['db_name']);
+$mysqli = new mysqli($cfg['db_host'], $cfg['db_username'], $cfg['db_password'], $cfg['db_name'], $cfg['db_port']);
+if ($mysqli->connect_error)
+{
+  die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+}
+
 $mysqli->set_charset('utf8');
 
 function dbQuery($sql_query)

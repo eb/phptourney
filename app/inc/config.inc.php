@@ -1,11 +1,12 @@
 <?php
 
 // Database
-$cfg['db_host'] = "localhost";
-$cfg['db_username'] = "root";
-$cfg['db_password'] = "";
-$cfg['db_name'] = "";
-$cfg['db_table_prefix'] = "";
+$cfg['db_host'] = getenv("PHPTOURNEY_DB_HOST") ?: "localhost";
+$cfg['db_port'] = getenv("PHPTOURNEY_DB_PORT") ?: "3306";
+$cfg['db_username'] = getenv("PHPTOURNEY_DB_USERNAME") ?: "phptourney";
+$cfg['db_password'] = getenv("PHPTOURNEY_DB_PASSWORD") ?: "";
+$cfg['db_name'] = getenv("PHPTOURNEY_DB_DATABASE") ?: "phptourney";
+$cfg['db_table_prefix'] = getenv("PHPTOURNEY_DB_PREFIX") ?: "";
 
 // Mail
 $cfg['mail_from_address'] = "";     // I.e. "user@host"
@@ -30,7 +31,13 @@ $cfg['convert'] = "convert";         // Path to image magick convert
 $cfg['index_template_file'] = "index.tpl.html"; // File name of the template for index.php
 $cfg['full_template_file'] = "full.tpl.html";   // File name of the template for full.php
 
-ini_set("error_reporting", E_ALL);
-ini_set("display_errors", true);
+
+ini_set("error_reporting", NULL);
+
+if (getenv("PHPTOURNEY_DEBUG"))
+{
+  ini_set("error_reporting", E_ALL);
+  ini_set("display_errors", "true");
+}
 
 ?>
