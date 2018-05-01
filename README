@@ -12,3 +12,13 @@ docker-compose up --build -d
 
 You then can access the website on http://127.0.0.1:8080
 
+The default credentials for the administrator are:
+Username: admin
+Password: password
+
+To get started:
+- Register a new regular account, e.g. username 'doofus'
+- Log in as 'admin' (and change the default password)
+- Create a new section and season, and choose 'doofus' as headadmin
+- From then on you manage that new season with the 'doofus' user
+
