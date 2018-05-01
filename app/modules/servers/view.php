@@ -19,35 +19,39 @@ if (file_exists($f_serverlist))
   $content_tpl->parse("H_SERVERLIST", "B_SERVERLIST");
 
   // Servers
-  $fh_serverlist = fopen($f_serverlist, "r");
-  $serverlist = explode("\n", fread($fh_serverlist, filesize($f_serverlist)));
-  fclose($fh_serverlist);
+  $f_serverlist_size = filesize($f_serverlist);
+  if ($f_serverlist_size > 0)
+  {
+    $fh_serverlist = fopen($f_serverlist, "r");
+    $serverlist = explode("\n", fread($fh_serverlist, $f_serverlist_size));
+    fclose($fh_serverlist);
 
-  $serverlist_assoc = array();
-  foreach($serverlist as $server) {
-    if (preg_match("/\"(.*)\"\s*\"(.*)\"\s*\"(.*)\"/", $server, $matches))
-    {
-      if (!isset($serverlist_assoc[$matches[3]]))
+    $serverlist_assoc = array();
+    foreach($serverlist as $server) {
+      if (preg_match("/\"(.*)\"\s*\"(.*)\"\s*\"(.*)\"/", $server, $matches))
       {
-	$serverlist_assoc[$matches[3]] = array();
+        if (!isset($serverlist_assoc[$matches[3]]))
+        {
+          $serverlist_assoc[$matches[3]] = array();
+        }
+        array_push($serverlist_assoc[$matches[3]], array("name" => $matches[2], "address" => $matches[1]));
       }
-      array_push($serverlist_assoc[$matches[3]], array("name" => $matches[2], "address" => $matches[1]));
     }
-  }
 
-  ksort($serverlist_assoc);
-  $no_servers = 1;
-  foreach(array_keys($serverlist_assoc) as $country) {
-    sort($serverlist_assoc[$country]);
-    $no_servers = 0;
-    $content_tpl->set_var("H_SERVER", "");
-    foreach($serverlist_assoc[$country] as $server) {
-      $content_tpl->set_var("I_NAME", htmlspecialchars($server['name']));
-      $content_tpl->set_var("I_SERVER", htmlspecialchars($server['address']));
-      $content_tpl->parse("H_SERVER", "B_SERVER", true);
+    ksort($serverlist_assoc);
+    $no_servers = 1;
+    foreach(array_keys($serverlist_assoc) as $country) {
+      sort($serverlist_assoc[$country]);
+      $no_servers = 0;
+      $content_tpl->set_var("H_SERVER", "");
+      foreach($serverlist_assoc[$country] as $server) {
+        $content_tpl->set_var("I_NAME", htmlspecialchars($server['name']));
+        $content_tpl->set_var("I_SERVER", htmlspecialchars($server['address']));
+        $content_tpl->parse("H_SERVER", "B_SERVER", true);
+      }
+      $content_tpl->set_var("I_COUNTRY", htmlspecialchars($country));
+      $content_tpl->parse("H_COUNTRY", "B_COUNTRY", true);
     }
-    $content_tpl->set_var("I_COUNTRY", htmlspecialchars($country));
-    $content_tpl->parse("H_COUNTRY", "B_COUNTRY", true);
   }
   $content_tpl->parse("H_VIEW_SERVERS", "B_VIEW_SERVERS", true);
 }
