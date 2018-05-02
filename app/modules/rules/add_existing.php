@@ -11,16 +11,16 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 if ($user['usertype_headadmin'])
 {
   $id_season = intval($_REQUEST['id_season']);
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			 "WHERE `id` = $id_season");
   if ($seasons_row = dbFetch($seasons_ref))
   {
-    $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id_season` = {$seasons_row['id']}");
+    $rules_ref = dbQuery("SELECT * FROM `rules` WHERE `id_season` = {$seasons_row['id']}");
     while ($rules_row = dbFetch($rules_ref))
     {
       $subject = dbEscape($rules_row['subject']);
       $body = dbEscape($rules_row['body']);
-      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}rules` (`id_season`, `subject`, `body`) " .
+      dbQuery("INSERT INTO `rules` (`id_season`, `subject`, `body`) " .
 	      "VALUES ({$season['id']}, '$subject', '$body')");
     }
     $content_tpl->parse("H_MESSAGE_COPIED", "B_MESSAGE_COPIED");

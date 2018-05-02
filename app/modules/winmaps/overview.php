@@ -12,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_WINMAPS", "H_OVERVIEW_WINMAPS")
 if ($user['usertype_headadmin'])
 {
   $match_counter = 0;
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'gf' " .
 			  "ORDER BY `round` DESC, `match` ASC");
@@ -28,7 +28,7 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_MATCH", "B_MATCH", true);
   }
 
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'wb' " .
 			  "ORDER BY `round` DESC, `match` ASC");
@@ -44,7 +44,7 @@ if ($user['usertype_headadmin'])
     $content_tpl->parse("H_MATCH", "B_MATCH", true);
   }
 
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `bracket` = 'lb' " .
 			  "ORDER BY `round` DESC, `match` ASC");

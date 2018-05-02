@@ -5,7 +5,7 @@ $content_tpl->set_block("F_CONTENT", "B_SIGNUP", "H_SIGNUP");
 $content_tpl->set_block("F_CONTENT", "B_ADD_ACCOUNT", "H_ADD_ACCOUNT");
 
 // Countries
-$countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
+$countries_ref = dbQuery("SELECT * FROM `countries` " .
 			  "WHERE `active` = 1 " .
 			  "ORDER BY `name` ASC");
 while ($countries_row = dbFetch($countries_ref))

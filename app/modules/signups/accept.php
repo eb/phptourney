@@ -28,7 +28,7 @@ if ($user['usertype_headadmin'])
   else
   {
     $id_user = intval($_REQUEST['opt']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
+    dbQuery("UPDATE `season_users` SET " .
 	     "`rejected` = 0 " .
 	     "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_PLAYER_ACCEPTED", "B_MESSAGE_PLAYER_ACCEPTED");

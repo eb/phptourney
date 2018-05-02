@@ -28,24 +28,24 @@ if ($user['usertype_headadmin'])
     }
 
     $id_user = intval($_REQUEST['id_user']);
-    $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+    $season_users_ref =  dbQuery("SELECT * FROM `season_users` " .
 				  "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
     $headadmin = intval($_REQUEST['headadmin']);
     if ($season_users_row = dbFetch($season_users_ref))
     {
-      dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
+      dbQuery("UPDATE `season_users` SET " .
 	       "`usertype_admin` = 1, `usertype_headadmin` = $headadmin " .
 	       "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
     }
     else
     {
-      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
+      dbQuery("INSERT INTO `season_users` " .
 	       "(`id_user`, `id_season`, `submitted`, `usertype_headadmin`, `usertype_admin`) " .
 	       "VALUES($id_user, {$season['id']}, NOW(), $headadmin, 1)");
     }
 
     // Send a mail to the new admin
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+    $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
     $to = $users_row['email'];
 

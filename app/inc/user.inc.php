@@ -19,7 +19,7 @@ function setUser($user_id_md5) {
 
   if ($id_user != "")
   {
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+    $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
 
     if ($users_row = dbFetch($users_ref) and $md5_password == md5($users_row['password']))
     {
@@ -28,12 +28,12 @@ function setUser($user_id_md5) {
 
       if (!isset($season))
       {
-        $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+        $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
   				   "WHERE `id_user` = {$users_row['id']} AND `id_season` = 0");
       }
       else
       {
-        $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+        $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
   				   "WHERE `id_user` = {$users_row['id']} AND (`id_season` = 0 OR `id_season` = {$season['id']})");
       }
       while ($season_users_row = dbFetch($season_users_ref))

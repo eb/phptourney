@@ -12,7 +12,7 @@ if ($user['usertype_admin'])
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->parse("H_ADD", "B_ADD");
 
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			  "WHERE `deleted` = 0 AND `id` <> {$season['id']} ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) > 0)
   {
@@ -28,7 +28,7 @@ if ($user['usertype_admin'])
   }
 }
 
-$rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` " .
+$rules_ref = dbQuery("SELECT * FROM `rules` " .
 		      "WHERE `id_season` = {$season['id']} " .
 		      "ORDER BY `subject`");
 if (dbNumRows($rules_ref) <= 0)

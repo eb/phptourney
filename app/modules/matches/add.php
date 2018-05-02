@@ -14,7 +14,7 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_NO_COMMENT", "H_NO_COMMENT");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 // Access for admins
@@ -43,7 +43,7 @@ if ($user['usertype_admin'] or
       // Players
       if ($matches_row['id_player1'] != 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+	$users_ref = dbQuery("SELECT * FROM `users` " .
 			      "WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
@@ -54,7 +54,7 @@ if ($user['usertype_admin'] or
       }
       if ($matches_row['id_player2'] != 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+	$users_ref = dbQuery("SELECT * FROM `users` " .
 			      "WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
@@ -71,7 +71,7 @@ if ($user['usertype_admin'] or
       }
 
       // Mappool
-      $mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+      $mappool_ref = dbQuery("SELECT * FROM `mappool` " .
 			      "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
       while ($mappool_row = dbFetch($mappool_ref))
       {
@@ -110,7 +110,7 @@ if ($user['usertype_admin'] or
 	$player = "p2";
       }
 
-      $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
+      $maps_ref = dbQuery("SELECT * FROM `maps` " .
 			   "WHERE `id_match` = {$matches_row['id']} ORDER BY `num_map` ASC");
       $comments = false;
       while ($maps_row = dbFetch($maps_ref))

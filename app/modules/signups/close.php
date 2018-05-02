@@ -10,7 +10,7 @@ if ($user['usertype_headadmin'])
 {
   if ($season['status'] == "signups")
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$season['id']}");
+    dbQuery("UPDATE `seasons` SET `status` = '' WHERE `id` = {$season['id']}");
   }
   $content_tpl->parse("H_WARNING_SIGNUPS_CLOSED", "B_WARNING_SIGNUPS_CLOSED");
   $content_tpl->parse("H_WARNING", "B_WARNING");

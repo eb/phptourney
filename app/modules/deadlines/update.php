@@ -38,12 +38,12 @@ if ($user['usertype_headadmin'])
     {
       $id_deadline = intval($_REQUEST['opt']);
       $round = dbEscape($_REQUEST['round']);
-      $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+      $deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 				"WHERE `id_season` = {$season['id']} AND `round` = '$round' AND `id` <> $id_deadline");
       if (dbNumRows($deadlines_ref) == 0)
       {
         $deadline = dbEscape($_REQUEST['deadline']);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}deadlines` SET `round` = '$round', `deadline` = '$deadline' " .
+	dbQuery("UPDATE `deadlines` SET `round` = '$round', `deadline` = '$deadline' " .
 		 "WHERE `id` = $id_deadline");
 	$content_tpl->parse("H_MESSAGE_DEADLINE_EDITED", "B_MESSAGE_DEADLINE_EDITED");
 	$content_tpl->parse("H_MESSAGE", "B_MESSAGE");

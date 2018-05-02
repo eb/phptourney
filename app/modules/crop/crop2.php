@@ -6,26 +6,26 @@ $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_CROP2", "H_CROP2");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 if ($user['usertype_admin']) {
 
   // Match
-  $users_ref = dbQuery("SELECT {$cfg['db_table_prefix']}users.*, {$cfg['db_table_prefix']}countries.`abbreviation` " .
-		       "FROM `{$cfg['db_table_prefix']}users` " .
-		       "LEFT JOIN `{$cfg['db_table_prefix']}countries` " .
-		       "ON {$cfg['db_table_prefix']}users.`id_country` = {$cfg['db_table_prefix']}countries.`id` " .
-		       "WHERE {$cfg['db_table_prefix']}users.`id` = {$matches_row['id_player1']}");
+  $users_ref = dbQuery("SELECT users.*, countries.`abbreviation` " .
+		       "FROM `users` " .
+		       "LEFT JOIN `countries` " .
+		       "ON users.`id_country` = countries.`id` " .
+		       "WHERE users.`id` = {$matches_row['id_player1']}");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
   $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row['abbreviation']));
 
-  $users_ref = dbQuery("SELECT {$cfg['db_table_prefix']}users.*, {$cfg['db_table_prefix']}countries.`abbreviation` " .
-		       "FROM `{$cfg['db_table_prefix']}users` " .
-		       "LEFT JOIN `{$cfg['db_table_prefix']}countries` " .
-		       "ON {$cfg['db_table_prefix']}users.`id_country` = {$cfg['db_table_prefix']}countries.`id` " .
-		       "WHERE {$cfg['db_table_prefix']}users.`id` = {$matches_row['id_player2']}");
+  $users_ref = dbQuery("SELECT users.*, countries.`abbreviation` " .
+		       "FROM `users` " .
+		       "LEFT JOIN `countries` " .
+		       "ON users.`id_country` = countries.`id` " .
+		       "WHERE users.`id` = {$matches_row['id_player2']}");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
   $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER2", htmlspecialchars($users_row['abbreviation']));
@@ -34,7 +34,7 @@ if ($user['usertype_admin']) {
   // Screenshot
   $num_map = intval($_REQUEST['num_map']);
   $maps_ref = dbQuery("SELECT M2.`map` " .
-		      "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
+		      "FROM `maps` M1,`mappool` M2 " .
 		      "WHERE M1.`id_match` = {$matches_row['id']} AND M2.`id` = M1.`id_map` " .
 		      "AND M1.`num_map` = $num_map");
   $maps_row = dbFetch($maps_ref);

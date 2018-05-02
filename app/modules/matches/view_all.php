@@ -5,7 +5,7 @@ $content_tpl->set_block("F_CONTENT", "B_MATCH", "H_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_MATCHES", "H_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_ALL_MATCHES", "H_VIEW_ALL_MATCHES");
 
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+$matches_ref = dbQuery("SELECT * FROM `matches` " .
 			"WHERE `id_season` = {$season['id']} " .
 			"AND `confirmed` <> '0000-00-00 00:00:00' " .
 			"AND `wo` = 0 " .
@@ -28,7 +28,7 @@ else
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     if ($matches_row['id_player1'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
     }
@@ -38,7 +38,7 @@ else
     }
     if ($matches_row['id_player2'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
     }

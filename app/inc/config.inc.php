@@ -6,7 +6,6 @@ $cfg['db_port'] = getenv("PHPTOURNEY_DB_PORT") ?: "3306";
 $cfg['db_username'] = getenv("PHPTOURNEY_DB_USERNAME") ?: "phptourney";
 $cfg['db_password'] = getenv("PHPTOURNEY_DB_PASSWORD") ?: "";
 $cfg['db_name'] = getenv("PHPTOURNEY_DB_DATABASE") ?: "phptourney";
-$cfg['db_table_prefix'] = getenv("PHPTOURNEY_DB_PREFIX") ?: "";
 
 // Mail
 $cfg['mail_from_address'] = "";     // I.e. "user@host"

@@ -20,7 +20,7 @@ if ($_REQUEST['new_password'] == "")
   $content_tpl->parse("H_WARNING_PASSWORD", "B_WARNING_PASSWORD");
 }
 $username = dbEscape($_REQUEST['username']);
-$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+$users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
@@ -40,7 +40,7 @@ else
 if ($is_complete)
 {
   $new_password = dbEscape($users_row['new_password']);
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
+  dbQuery("UPDATE `users` SET " .
 	   "`password` = '$new_password', " .
 	   "`new_password` = '' " .
 	   "WHERE `id` = {$users_row['id']}");

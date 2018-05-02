@@ -7,7 +7,7 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_RULE", "H_EDIT_RULE");
 if ($user['usertype_headadmin'])
 {
   $id_rule = intval($_REQUEST['opt']);
-  $rules_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}rules` WHERE `id` = $id_rule");
+  $rules_ref = dbQuery("SELECT * FROM `rules` WHERE `id` = $id_rule");
   $rules_row = dbFetch($rules_ref);
   $content_tpl->set_var("I_ID_RULE", $id_rule);
   $content_tpl->set_var("I_SUBJECT", htmlspecialchars($rules_row['subject']));

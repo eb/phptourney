@@ -21,7 +21,7 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_BODY", "H_MAIL_APPLIED_BODY
 
 $is_complete = 1;
 $username = dbEscape($_REQUEST['username']);
-$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+$users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
@@ -85,7 +85,7 @@ if ($is_complete)
   $email = dbEscape($_REQUEST['email']);
   $irc_channel = dbEscape($_REQUEST['irc_channel']);
   $notify = intval($_REQUEST['notify']);
-  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}users` " .
+  dbQuery("INSERT INTO `users` " .
 	   "(`username`, `id_country`, `password`, `email`, `irc_channel`, `notify`, `submitted`) " .
 	   "VALUES ('$username', $id_country, " .
 	   "'$password', '$email', '$irc_channel', $notify, NOW())");
@@ -94,11 +94,11 @@ if ($is_complete)
   $signup = false;
   if ($season['status'] == "signups" and $_REQUEST['signup'] == 1)
   {
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+    $users_ref = dbQuery("SELECT * FROM `users` " .
 			  "WHERE `username` = '$username'");
     $users_row = dbFetch($users_ref);
 
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
+    dbQuery("INSERT INTO `season_users` " .
 	     "(`ip`, `submitted`, `usertype_player`, `id_season`, `id_user`) " .
 	     "VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW(), 1, {$season['id']}, {$users_row['id']})");
 

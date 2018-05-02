@@ -5,7 +5,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_EDIT_NEWS", "H_EDIT_NEWS");
 
 $id_news = intval($_REQUEST['opt']);
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
+$news_ref = dbQuery("SELECT * FROM `news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // Access for headadmins [public / private news]

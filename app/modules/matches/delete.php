@@ -10,11 +10,11 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 if ($user['usertype_admin'])
 {
   $id_match = intval($_REQUEST['opt']);
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+  $matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
   $matches_row = dbFetch($matches_ref);
   if (isLastMatch($matches_row))
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+    dbQuery("UPDATE `matches` SET " .
 	     "`submitted` = '0000-00-00 00:00:00', " . 
 	     "`confirmed` = '0000-00-00 00:00:00' " . 
 	     "WHERE `id` = {$matches_row['id']}");

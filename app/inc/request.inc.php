@@ -7,7 +7,7 @@ if (!isset($_REQUEST['sid']) or !isWholePositiveNumber($_REQUEST['sid']))
 }
 
 // Get season data
-$seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
+$seasons_ref = dbQuery("SELECT * FROM `seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
 $season = dbFetch($seasons_ref);
 
 // Check mod

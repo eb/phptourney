@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
 $id_news = intval($_REQUEST['opt']);
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
+$news_ref = dbQuery("SELECT * FROM `news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // Access for headadmins [public / private news]
@@ -32,7 +32,7 @@ if ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user']) {
   {
     $heading = dbEscape($_REQUEST['heading']);
     $body = dbEscape($_REQUEST['body']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}news` " .
+    dbQuery("UPDATE `news` " .
 	     "SET `heading` = '$heading', " .
 	     "`body` = '$body' " .
 	     "WHERE `id` = {$news_row['id']}");

@@ -8,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_SEASON", "H_ADD_SEASON");
 // Access for root only
 if ($user['usertype_root'])
 {
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+  $users_ref = dbQuery("SELECT * FROM `users` " .
 			"ORDER BY `username` ASC");
   while ($users_row = dbFetch($users_ref))
   {

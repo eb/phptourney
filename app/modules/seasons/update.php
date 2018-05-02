@@ -20,7 +20,7 @@ if ($user['usertype_root'])
   }
   $id_season = intval($_REQUEST['opt']);
   $season_name = dbEscape($_REQUEST['season_name']);
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			  "WHERE `name` = '$season_name' AND `id` <> $id_season AND `deleted` = 0");
   if (dbNumRows($seasons_ref) == 1)
   {
@@ -30,7 +30,7 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET " .
+    dbQuery("UPDATE `seasons` SET " .
 	     "`name` = '$season_name' " .
 	     "WHERE `id` = $id_season");
     $content_tpl->parse("H_MESSAGE_SEASON_EDITED", "B_MESSAGE_SEASON_EDITED");

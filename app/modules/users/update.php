@@ -41,7 +41,7 @@ if (!$_REQUEST['opt'] and $user['uid'])
     $email = dbEscape($_REQUEST['email']);
     $irc_channel = dbEscape($_REQUEST['irc_channel']);
     $notify = intval($_REQUEST['notify']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
+    dbQuery("UPDATE `users` SET " .
 	     "`id_country` = $id_country, " .
 	     "`email` = '$email', " .
 	     "`irc_channel` = '$irc_channel', " .
@@ -87,7 +87,7 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
     $id_country = intval($_REQUEST['id_country']);
     $email = dbEscape($_REQUEST['email']);
     $irc_channel = dbEscape($_REQUEST['irc_channel']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET " .
+    dbQuery("UPDATE `users` SET " .
 	     "`id_country` = $id_country, " .
 	     "`email` = '$email', " .
 	     "`irc_channel` = '$irc_channel', " .

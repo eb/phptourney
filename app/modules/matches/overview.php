@@ -23,7 +23,7 @@ if ($user['usertype_admin'])
   $match_counter = 0;
 
   // Reported matches
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` != '0000-00-00 00:00:00' " .
 			  "AND `confirmed` = '0000-00-00 00:00:00' " .
@@ -43,7 +43,7 @@ if ($user['usertype_admin'])
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       if ($matches_row['id_player1'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
       }
@@ -53,7 +53,7 @@ if ($user['usertype_admin'])
       }
       if ($matches_row['id_player2'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
       }
@@ -81,7 +81,7 @@ if ($user['usertype_admin'])
   // Unreported matches
   $unreported_matches = false;
 
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` = '0000-00-00 00:00:00' " .
 			  "AND `confirmed` = '0000-00-00 00:00:00' " .
@@ -95,7 +95,7 @@ if ($user['usertype_admin'])
     $content_tpl->set_var("I_MATCH", $matches_row['match']);
     if ($matches_row['id_player1'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
     }
@@ -105,7 +105,7 @@ if ($user['usertype_admin'])
     }
     if ($matches_row['id_player2'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
     }
@@ -133,7 +133,7 @@ if ($user['usertype_admin'])
   $content_tpl->parse("H_OVERVIEW_UNREPORTED_MATCHES", "B_OVERVIEW_UNREPORTED_MATCHES");
 
   // Confirmed matches
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
@@ -152,7 +152,7 @@ if ($user['usertype_admin'])
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
       if ($matches_row['id_player1'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
       }
@@ -162,7 +162,7 @@ if ($user['usertype_admin'])
       }
       if ($matches_row['id_player2'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
       }

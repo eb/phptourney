@@ -25,14 +25,14 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			    "WHERE `id_season` = {$season['id']}");
     while ($matches_row = dbFetch($matches_ref))
     {
       if (isset($_REQUEST[$matches_row['id']]))
       {
         $num_winmaps = intval($_REQUEST[$matches_row['id']]);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+	dbQuery("UPDATE `matches` SET " .
 		 "`num_winmaps` = $num_winmaps " .
 		 "WHERE `id` = {$matches_row['id']}");
       }

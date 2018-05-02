@@ -12,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_CROP", "H_CROP");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 // Access for admins
@@ -78,9 +78,9 @@ if ($user['usertype_admin'] or
 	  $out = 1;
 	}
 
-	dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` WHERE `id_match` = {$matches_row['id']}");
+	dbQuery("DELETE FROM `maps` WHERE `id_match` = {$matches_row['id']}");
         $comment_admin = dbEscape($_REQUEST['comment_admin']);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+	dbQuery("UPDATE `matches` SET " .
 		 "`wo` = $wo, `bye` = $bye, `out` = $out, " .
 		 "`score_p1` = 0, `score_p2` = 0, " .
 		 "`comment_admin` = '$comment_admin', " .
@@ -214,7 +214,7 @@ if ($user['usertype_admin'] or
 	  }
 
 	  // Match
-	  dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+	  dbQuery("UPDATE `matches` SET " .
 		   "`wo` = 0, " . 
 		   "`out` = 0, " . 
 		   "`score_p1` = $score_p1, " .
@@ -225,7 +225,7 @@ if ($user['usertype_admin'] or
 		   "WHERE `id` = {$matches_row['id']}");
 
 	  // Maps
-	  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` " .
+	  dbQuery("DELETE FROM `maps` " .
 		   "WHERE `id_match` = {$matches_row['id']}");
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
@@ -259,7 +259,7 @@ if ($user['usertype_admin'] or
               $id_map = intval($_REQUEST['id_map' . $i]);
               $score_p1 = intval($_REQUEST['score_m' . $i . '_p1']);
               $score_p2 = intval($_REQUEST['score_m' . $i . '_p2']);
-	      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}maps` " .
+	      dbQuery("INSERT INTO `maps` " .
 		       "(`id_match`,`id_map`,`score_p1`,`score_p2`,`comment_p1`,`comment_p2`,`comment_admin`,`num_map`) " .
 		       "VALUES({$matches_row['id']},$id_map," .
 		       "$score_p1,$score_p2," .
@@ -291,7 +291,7 @@ if ($user['usertype_admin'] or
 	$commentator = "p2";
       }
 
-      $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
+      $maps_ref = dbQuery("SELECT * FROM `maps` " .
 			   "WHERE `id_match` = {$matches_row['id']} " . 
 			   "ORDER BY `num_map`");
       while ($maps_row = dbFetch($maps_ref))
@@ -301,7 +301,7 @@ if ($user['usertype_admin'] or
 	  $_REQUEST['comment_m' . $maps_row['num_map']] = $maps_row['comment_' . $commentator];
 	}
         $comment = dbEscape($_REQUEST['comment_m' . $maps_row['num_map']]);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}maps` SET " .
+	dbQuery("UPDATE `maps` SET " .
 		 "`comment_$commentator` = '$comment' " .
 		 "WHERE `id` = {$maps_row['id']}");
       }

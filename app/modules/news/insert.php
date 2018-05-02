@@ -28,7 +28,7 @@ if ($user['usertype_admin']) {
     $id_news_group = intval($_REQUEST['opt']);
     $heading = dbEscape($_REQUEST['heading']);
     $body = dbEscape($_REQUEST['body']);
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}news` (`heading`, `body`, `id_season`, `id_user`, `id_news_group`, `submitted`) " .
+    dbQuery("INSERT INTO `news` (`heading`, `body`, `id_season`, `id_user`, `id_news_group`, `submitted`) " .
 	     "VALUES ('$heading', " .
 	     "'$body', " .
 	     "{$season['id']}, " .

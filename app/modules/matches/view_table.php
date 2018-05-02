@@ -50,7 +50,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->set_var("H_WB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_WB_DEADLINE", "");
       $wb_round = $i + 1;
-      $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+      $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			      "WHERE `id_season` = {$season['id']} AND `round` = 'wb$wb_round'");
       if ($deadline_row = dbFetch($deadline_ref))
       {
@@ -238,7 +238,7 @@ if (($season['status'] == "bracket" or $season['status'] == "running" or $season
       $content_tpl->set_var("H_LB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_LB_DEADLINE", "");
       $lb_round = $i + 1;
-      $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+      $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			      "WHERE `id_season` = {$season['id']} AND `round` = 'lb$lb_round'");
       if ($deadline_row = dbFetch($deadline_ref))
       {

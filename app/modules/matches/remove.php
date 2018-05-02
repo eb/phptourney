@@ -9,7 +9,7 @@ $content_tpl->set_block("F_CONTENT", "B_REMOVE_MATCH", "H_REMOVE_MATCH");
 if ($user['usertype_admin'])
 {
   $id_match = intval($_REQUEST['opt']);
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+  $matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
   $matches_row = dbFetch($matches_ref);
   if (isLastMatch($matches_row))
   {

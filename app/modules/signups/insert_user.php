@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 if ($user['usertype_headadmin'])
 {
   $id_user = intval($_REQUEST['id_user']);
-  $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref =  dbQuery("SELECT * FROM `season_users` " .
 				"WHERE `id_season` = {$season['id']} AND `id_user` = $id_user AND `usertype_player` = 1");
   if (dbNumRows($season_users_ref) > 0)
   {
@@ -34,7 +34,7 @@ if ($user['usertype_headadmin'])
 
     if ($is_complete)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
       $users_row = dbFetch($users_ref);
 
       if (isset($_REQUEST['invite']))
@@ -68,17 +68,17 @@ if ($user['usertype_headadmin'])
 	$content_tpl->parse("H_MESSAGE_PLAYER_ADDED", "B_MESSAGE_PLAYER_ADDED");
       }
 
-      $season_users_ref =  dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+      $season_users_ref =  dbQuery("SELECT * FROM `season_users` " .
 				    "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
       if ($season_users_row = dbFetch($season_users_ref))
       {
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
+	dbQuery("UPDATE `season_users` SET " .
 		 "`usertype_player` = $player, `invited` = $invited " .
 		 "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
       }
       else
       {
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
+	dbQuery("INSERT INTO `season_users` " .
 		 "(`id_user`, `id_season`, `submitted`, `usertype_player`, `invited`) " .
 		 "VALUES($id_user, {$season['id']}, NOW(), $player, $invited)");
       }

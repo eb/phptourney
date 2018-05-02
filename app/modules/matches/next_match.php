@@ -12,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_VIEW_NEXT_MATCH", "H_VIEW_NEXT_MATCH");
 // Access for players only
 if ($user['usertype_player'])
 {
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `submitted` = '0000-00-00 00:00:00' " .
 			  "AND `id_season` = {$season['id']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']})");
@@ -25,7 +25,7 @@ if ($user['usertype_player'])
       $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
       $season_users_ref = dbQuery("SELECT SU.`seedlevel`, U.`username` " .
-				   "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+				   "FROM `season_users` SU, `users` U " .
 				   "WHERE U.`id` = {$matches_row['id_player1']} " .
 				   "AND U.`id` = SU.`id_user` AND `id_season` = {$season['id']}");
       $season_users_row = dbFetch($season_users_ref);
@@ -33,7 +33,7 @@ if ($user['usertype_player'])
       $seed_p1 = $season_users_row['seedlevel'];
 
       $season_users_ref = dbQuery("SELECT SU.`seedlevel`, U.`username` " .
-				   "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+				   "FROM `season_users` SU, `users` U " .
 				   "WHERE U.`id` = {$matches_row['id_player2']} " .
 				   "AND U.`id` = SU.`id_user` AND `id_season` = {$season['id']}");
       $season_users_row = dbFetch($season_users_ref);
@@ -54,8 +54,8 @@ if ($user['usertype_player'])
       }
 
       $users_ref1 = dbQuery("SELECT U.*, C.`abbreviation` " .
-			     "FROM `{$cfg['db_table_prefix']}users` U " .
-			     "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+			     "FROM `users` U " .
+			     "LEFT JOIN `countries` C " .
 			     "ON U.`id_country` = C.`id` " .
 			     "WHERE U.`id` = {$matches_row['id_player1']}");
       $users_row1 = dbFetch($users_ref1);
@@ -63,8 +63,8 @@ if ($user['usertype_player'])
       $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row1['abbreviation']));
 
       $users_ref2 = dbQuery("SELECT U.*, C.`abbreviation` " .
-			     "FROM `{$cfg['db_table_prefix']}users` U " .
-			     "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+			     "FROM `users` U " .
+			     "LEFT JOIN `countries` C " .
 			     "ON U.`id_country` = C.`id` " .
 			     "WHERE U.`id` = {$matches_row['id_player2']}");
       $users_row2 = dbFetch($users_ref2);
@@ -73,9 +73,9 @@ if ($user['usertype_player'])
 
       $round_pre = $matches_row['round'] - 1;
       $round_post = $matches_row['round'];
-      $deadlines_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']} " .
+      $deadlines_ref1 = dbQuery("SELECT * FROM `deadlines` WHERE `id_season` = {$season['id']} " .
 				 "AND `round` = '{$matches_row['bracket']}$round_pre'");
-      $deadlines_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']} " .
+      $deadlines_ref2 = dbQuery("SELECT * FROM `deadlines` WHERE `id_season` = {$season['id']} " .
 				 "AND `round` = '{$matches_row['bracket']}$round_post'");
       if (dbNumRows($deadlines_ref1) == 1 and dbNumRows($deadlines_ref2) == 1)
       {

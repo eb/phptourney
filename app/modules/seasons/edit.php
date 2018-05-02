@@ -8,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_SEASON", "H_EDIT_SEASON");
 if ($user['usertype_root'])
 {
   $id_season = intval($_REQUEST['opt']);
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			  "WHERE `id` = $id_season AND `deleted`  = 0");
   $seasons_row = dbFetch($seasons_ref);
   $content_tpl->set_var("I_ID_SEASON_OPT", $id_season);

@@ -8,12 +8,12 @@ $content_tpl->set_block("F_CONTENT", "B_PLAYERS_COL2", "H_PLAYERS_COL2");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYERS", "H_OVERVIEW_PLAYERS");
 
 $id_country = intval($_REQUEST['opt']);
-$countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = $id_country");
+$countries_ref = dbQuery("SELECT * FROM `countries` WHERE `id` = $id_country");
 $countries_row = dbFetch($countries_ref);
 $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
 
 $users_ref = dbQuery("SELECT U.* " .
-		      "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}season_users` SU " .
+		      "FROM `users` U, `season_users` SU " .
 		      "WHERE SU.`id_user` = U.`id` AND SU.`id_season` = {$season['id']} AND U.`id_country` = $id_country " .
 		      "AND SU.`usertype_player` = 1 AND SU.`rejected` = 0 ORDER BY SU.`submitted` ASC");
 if (dbNumRows($users_ref) <= 0)

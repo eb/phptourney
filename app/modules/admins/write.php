@@ -8,10 +8,10 @@ $content_tpl->set_block("F_CONTENT", "B_WRITE_MAIL", "H_WRITE_MAIL");
 if ($user['uid'])
 {
   $id_user = intval($_REQUEST['opt']);
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
 
-  $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
       			 "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);
 

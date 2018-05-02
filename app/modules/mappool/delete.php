@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 if ($user['usertype_headadmin'])
 {
   $id_map = intval($_REQUEST['opt']);
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}mappool` SET `deleted` = 1 WHERE `id` = $id_map");
+  dbQuery("UPDATE `mappool` SET `deleted` = 1 WHERE `id` = $id_map");
   $content_tpl->parse("H_MESSAGE_MAP_REMOVED", "B_MESSAGE_MAP_REMOVED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $season['id']);

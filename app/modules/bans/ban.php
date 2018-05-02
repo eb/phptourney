@@ -11,7 +11,7 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 if ($user['usertype_admin'])
 {
   $ip = dbEscape($_REQUEST['opt']);
-  $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
+  $bans_ref = dbQuery("SELECT * FROM `bans` " .
 		       "WHERE `id_season` = {$season['id']} " .
 		       "AND `ip` = '$ip'");
   if (dbNumRows($bans_ref) == 1)
@@ -22,7 +22,7 @@ if ($user['usertype_admin'])
   }
   else
   {
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}bans` (`id_season`, `ip`) " .
+    dbQuery("INSERT INTO `bans` (`id_season`, `ip`) " .
 	     "VALUES ({$season['id']}, '$ip')");
     $content_tpl->parse("H_MESSAGE_IP_BANNED", "B_MESSAGE_IP_BANNED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

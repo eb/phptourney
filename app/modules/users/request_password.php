@@ -8,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_SUBJECT", "H_MAIL_SUBJECT");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
 $username = dbEscape($_REQUEST['username']);
-$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+$users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {
@@ -17,7 +17,7 @@ if ($users_row = dbFetch($users_ref))
   $new_password = crypt($rand_num, createSalt());
   $new_encrypted_password = crypt($new_password, createSalt());
 
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}users` SET `new_password` = '$new_encrypted_password' WHERE `id` = {$users_row['id']}");
+  dbQuery("UPDATE `users` SET `new_password` = '$new_encrypted_password' WHERE `id` = {$users_row['id']}");
 
   // Send a mail
   $to = $users_row['email'];

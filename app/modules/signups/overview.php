@@ -46,13 +46,13 @@ if ($user['usertype_headadmin'])
   if ($season['status'] == "" or $season['status'] == "signups")
   {
     $users_ref = dbQuery("SELECT * " .
-			  "FROM `{$cfg['db_table_prefix']}users` " .
+			  "FROM `users` " .
 			  "ORDER BY `username` ASC");
 
     while ($users_row = dbFetch($users_ref))
     {
       $season_users_ref = dbQuery("SELECT * " .
-				   "FROM `{$cfg['db_table_prefix']}season_users` " .
+				   "FROM `season_users` " .
 				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `id_user` = {$users_row['id']} " .
 				   "AND `usertype_player` = 1");
@@ -71,13 +71,13 @@ if ($user['usertype_headadmin'])
   if ($season['status'] == "" or $season['status'] == "signups")
   {
     $users_ref = dbQuery("SELECT * " .
-			  "FROM `{$cfg['db_table_prefix']}users` " .
+			  "FROM `users` " .
 			  "ORDER BY `username` ASC");
 
     while ($users_row = dbFetch($users_ref))
     {
       $season_users_ref = dbQuery("SELECT * " .
-				   "FROM `{$cfg['db_table_prefix']}season_users` " .
+				   "FROM `season_users` " .
 				   "WHERE `id_season` = {$season['id']} " .
 				   "AND `id_user` = {$users_row['id']} " .
 				   "AND (`usertype_player` = 1 OR `invited` = 1)");
@@ -94,7 +94,7 @@ if ($user['usertype_headadmin'])
 
   // Accepted players
   $users_ref = dbQuery("SELECT U.* " .
-			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			"FROM `season_users` SU, `users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 1 " .
 			"AND SU.`rejected` = 0 " .
@@ -122,7 +122,7 @@ if ($user['usertype_headadmin'])
 
   // Rejected players
   $users_ref = dbQuery("SELECT U.* " .
-			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			"FROM `season_users` SU, `users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 1 " .
 			"AND SU.`rejected` = 1 " .
@@ -149,7 +149,7 @@ if ($user['usertype_headadmin'])
 
   // Invited players
   $users_ref = dbQuery("SELECT U.* " .
-			"FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			"FROM `season_users` SU, `users` U " .
 			"WHERE SU.`id_season` = {$season['id']} " .
 			"AND SU.`usertype_player` = 0 " .
 			"AND SU.`invited` = 1 " .

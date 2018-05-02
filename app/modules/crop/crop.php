@@ -7,15 +7,15 @@ $content_tpl->set_block("F_CONTENT", "B_MAP", "H_MAP");
 $content_tpl->set_block("F_CONTENT", "B_CROP", "H_CROP");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 $matches_row = dbFetch($matches_ref);
 
 if ($user['usertype_admin']) {
 
   // Match
   $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
-		       "FROM `{$cfg['db_table_prefix']}users` U " .
-		       "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+		       "FROM `users` U " .
+		       "LEFT JOIN `countries` C " .
 		       "ON U.`id_country` = C.`id` " .
 		       "WHERE U.`id` = {$matches_row['id_player1']}");
   $users_row = dbFetch($users_ref);
@@ -23,8 +23,8 @@ if ($user['usertype_admin']) {
   $content_tpl->set_var("I_COUNTRY_ABBREVIATION_PLAYER1", htmlspecialchars($users_row['abbreviation']));
 
   $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
-		       "FROM `{$cfg['db_table_prefix']}users` U " .
-		       "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+		       "FROM `users` U " .
+		       "LEFT JOIN `countries` C " .
 		       "ON U.`id_country` = C.`id` " .
 		       "WHERE U.`id` = {$matches_row['id_player2']}");
   $users_row = dbFetch($users_ref);
@@ -34,7 +34,7 @@ if ($user['usertype_admin']) {
 
   // Thumbnails
   $maps_ref = dbQuery("SELECT M1.`num_map`,M2.`map` " .
-		      "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
+		      "FROM `maps` M1,`mappool` M2 " .
 		      "WHERE M1.`id_match` = {$matches_row['id']} AND M2.`id` = M1.`id_map` " .
 		      "ORDER BY M1.`num_map`");
   while ($maps_row = dbFetch($maps_ref))

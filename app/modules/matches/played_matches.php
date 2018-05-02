@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_PLAYED_MATCHES", "H_OVERVIEW_PL
 // Access for players only
 if ($user['usertype_player'])
 {
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
 			  "AND `confirmed` <> '0000-00-00 00:00:00' " .
@@ -28,7 +28,7 @@ if ($user['usertype_player'])
       // Match
       if ($matches_row['id_player1'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
 	$player1 = $users_row['username'];
       }
@@ -40,7 +40,7 @@ if ($user['usertype_player'])
 
       if ($matches_row['id_player2'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$player2 = $users_row['username'];
       }

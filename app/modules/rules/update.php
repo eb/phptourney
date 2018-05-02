@@ -28,7 +28,7 @@ if ($user['usertype_headadmin'])
     $id_rule = intval($_REQUEST['opt']);
     $subject = dbEscape($_REQUEST['subject']);
     $body = dbEscape($_REQUEST['body']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}rules` SET `subject` = '$subject', `body` = '$body' " .
+    dbQuery("UPDATE `rules` SET `subject` = '$subject', `body` = '$body' " .
 	     "WHERE `id` = $id_rule");
     $content_tpl->parse("H_MESSAGE_RULE_EDITED", "B_MESSAGE_RULE_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

@@ -7,18 +7,18 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
 
 $id_news = intval($_REQUEST['opt']);
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = $id_news AND `deleted` = 0");
+$news_ref = dbQuery("SELECT * FROM `news` WHERE `id` = $id_news AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // Access for headadmins
 // Access for admins that wrote the news
 if ($news_row['id_news_group'] == 2 and ($user['usertype_headadmin'] or $user['uid'] == $news_row['id_user']))
 {
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}news` " .
+  dbQuery("UPDATE `news` " .
 	   "SET `id_news_group` = 1, " .
 	   "`submitted` = NOW() " .
 	   "WHERE `id` = {$news_row['id']}");
-  dbQuery("UPDATE `{$cfg['db_table_prefix']}news_comments` " .
+  dbQuery("UPDATE `news_comments` " .
 	  "SET `deleted` = 1 " .
 	  "WHERE `id_news` = {$news_row['id']}");
 

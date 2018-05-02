@@ -17,7 +17,7 @@ if ($user['usertype_admin'])
 }
 
 $season_users_ref = dbQuery("SELECT SU.* " .
-			     "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			     "FROM `season_users` SU, `users` U " .
 			     "WHERE SU.`id_season` = {$season['id']} AND (SU.`usertype_admin` = 1 OR SU.`usertype_headadmin` = 1) " .
 			     "AND U.`id` = SU.`id_user` " .
 			     "ORDER BY U.`username` ASC");
@@ -30,8 +30,8 @@ else
   $admin_counter = 0;
   while ($season_users_row = dbFetch($season_users_ref))
   {
-    $users_ref = dbQuery("SELECT U.*, C.`abbreviation` FROM `{$cfg['db_table_prefix']}users` U " .
-			 "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+    $users_ref = dbQuery("SELECT U.*, C.`abbreviation` FROM `users` U " .
+			 "LEFT JOIN `countries` C " .
 			 "ON U.`id_country` = C.`id` " .
 			 "WHERE U.`id` = {$season_users_row['id_user']} " .
 			 "ORDER BY `username` ASC");

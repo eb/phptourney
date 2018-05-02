@@ -12,13 +12,13 @@ $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACk");
 if ($user['uid'])
 {
   $id_user = intval($_REQUEST['opt']);
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
 
-  $users_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
+  $users_ref2 = dbQuery("SELECT * FROM `users` WHERE `id` = {$user['uid']}");
   $users_row2 = dbFetch($users_ref2);
 
-  $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
       			 "WHERE `id_season` = {$season['id']} AND `id_user` = $id_user");
   $season_users_row = dbFetch($season_users_ref);
 

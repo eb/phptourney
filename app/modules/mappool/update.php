@@ -23,7 +23,7 @@ if ($user['usertype_headadmin'])
   if ($is_complete)
   {
     $map = dbEscape($_REQUEST['map']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}mappool` SET `map` = '$map' " .
+    dbQuery("UPDATE `mappool` SET `map` = '$map' " .
 	     "WHERE `id` = $id_map AND `deleted` = 0");
     $content_tpl->parse("H_MESSAGE_MAP_EDITED", "B_MESSAGE_MAP_EDITED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

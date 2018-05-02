@@ -21,7 +21,6 @@ services:
       - PHPTOURNEY_DB_USERNAME=root
       - PHPTOURNEY_DB_PASSWORD=WMxP7Xd9MVZtvZ1D
       - PHPTOURNEY_DB_DATABASE=phptourney
-      - PHPTOURNEY_DB_PREFIX=
       - PHPTOURNEY_DEBUG=1
     ports:
       - 8080:80

@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_MAPS", "H_OVERVIEW_MAPS");
 // Access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+  $maps_ref = dbQuery("SELECT * FROM `mappool` " .
 		       "WHERE `id_season` = {$season['id']} AND `deleted` = 0 ORDER BY `map` ASC");
   if (dbNumRows($maps_ref) <= 0)
   {

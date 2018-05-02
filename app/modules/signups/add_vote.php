@@ -12,7 +12,7 @@ if ($season['status'] == "signups")
   if ($user['uid'])
   {
     $is_complete = 1;
-    $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+    $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
 				 "WHERE `id_user` = {$user['uid']} AND `id_season` = {$season['id']} AND `usertype_player` = 1");
     if (dbNumRows($season_users_ref) == 1)
     {

@@ -24,7 +24,7 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_REPORT", "H_EDIT_REPORT");
 if ($user['usertype_admin'])
 {
   $id_match = intval($_REQUEST['opt']);
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+  $matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
   $matches_row = dbFetch($matches_ref);
   if (isLastMatch($matches_row))
   {
@@ -36,7 +36,7 @@ if ($user['usertype_admin'])
     // Players
     if ($matches_row['id_player1'] != 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+      $users_ref = dbQuery("SELECT * FROM `users` " .
 			   "WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
@@ -47,7 +47,7 @@ if ($user['usertype_admin'])
     }
     if ($matches_row['id_player2'] != 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+      $users_ref = dbQuery("SELECT * FROM `users` " .
 			   "WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
@@ -99,13 +99,13 @@ if ($user['usertype_admin'])
       $content_tpl->set_var("I_NUM_MAP", $i);
       $content_tpl->set_var("H_SCREENSHOT", "");
 
-      $maps_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}maps` " .
+      $maps_ref = dbQuery("SELECT * FROM `maps` " .
 			  "WHERE `id_match` = {$matches_row['id']} AND `num_map` = $i");
       if ($maps_row = dbFetch($maps_ref))
       {
 	// Map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
-	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+	$mappool_ref = dbQuery("SELECT * FROM `mappool` " .
 			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
@@ -150,7 +150,7 @@ if ($user['usertype_admin'])
       {
 	// Map
 	$content_tpl->set_var("H_OPTION_MAP_SELECTED", "");
-	$mappool_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}mappool` " .
+	$mappool_ref = dbQuery("SELECT * FROM `mappool` " .
 			       "WHERE `id_season` = {$season['id']} AND `deleted` = 0");
 	while ($mappool_row = dbFetch($mappool_ref))
 	{
@@ -181,7 +181,7 @@ if ($user['usertype_admin'])
     if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
     {
       $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['submitter']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['submitter']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_SUBMITTER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
@@ -191,7 +191,7 @@ if ($user['usertype_admin'])
     if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
     {
       $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['confirmer']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['confirmer']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_CONFIRMER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");

@@ -20,7 +20,7 @@ if ($user['usertype_admin'])
 
   $player_counter = 0;
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
-			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			       "FROM `season_users` SU, `users` U " .
 			       "WHERE SU.`id_season` = {$season['id']} " .
 			       "AND SU.`usertype_player` = 1 " .
 			       "AND SU.`rejected` = 0 " .
@@ -42,7 +42,7 @@ if ($user['usertype_admin'])
   }
 
   $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
-			       "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+			       "FROM `season_users` SU, `users` U " .
 			       "WHERE SU.`id_season` = {$season['id']} " .
 			       "AND SU.`usertype_player` = 1 " .
 			       "AND SU.`rejected` = 0 " .

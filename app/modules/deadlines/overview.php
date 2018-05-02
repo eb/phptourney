@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_DEADLINES", "H_OVERVIEW_DEADLIN
 // Access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+  $deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 			    "WHERE `id_season` = {$season['id']} ORDER BY `deadline` ASC");
   if (dbNumRows($deadlines_ref) <= 0)
   {

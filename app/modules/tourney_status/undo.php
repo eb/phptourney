@@ -28,16 +28,16 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			    "WHERE `id_season` = {$season['id']} " .
 			    "AND `confirmed` <> '0000-00-00 00:00:00'");
     if (dbNumRows($matches_ref) == 0)
     {
       // Delete all matches
-      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}matches` WHERE `id_season` = {$season['id']}");
+      dbQuery("DELETE FROM `matches` WHERE `id_season` = {$season['id']}");
 
       // Unset season-status
-      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = '' WHERE `id` = {$season['id']}");
+      dbQuery("UPDATE `seasons` SET `status` = '' WHERE `id` = {$season['id']}");
       $content_tpl->parse("H_MESSAGE_BRACKET_UNDONE", "B_MESSAGE_BRACKET_UNDONE");
       $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
       $content_tpl->set_var("I_ID_SEASON", $season['id']);

@@ -11,14 +11,14 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_LOGIN_TO_COMMENT", "H_LOGIN_TO_COMMENT");
 
 $id_news = intval($_REQUEST['opt']);
-$news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` WHERE `id` = '$id_news' AND `deleted` = 0");
+$news_ref = dbQuery("SELECT * FROM `news` WHERE `id` = '$id_news' AND `deleted` = 0");
 $news_row = dbFetch($news_ref);
 
 // Access for admins [private news]
 // Access for guests [public news]
 if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
 {
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = '{$news_row['id_user']}'");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = '{$news_row['id_user']}'");
   $users_row = dbFetch($users_ref);
 
   $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
@@ -29,8 +29,8 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
 
   $comments_ref = dbQuery("SELECT NC.*, U.`username` " .
-			  "FROM `{$cfg['db_table_prefix']}news_comments` NC " .
-			  "LEFT JOIN `{$cfg['db_table_prefix']}users` U " .
+			  "FROM `news_comments` NC " .
+			  "LEFT JOIN `users` U " .
 			  "ON NC.`id_user` = U.`id` " .
 			  "WHERE `id_news` = {$news_row['id']} " .
 			  "AND `deleted` = 0 " .
@@ -67,7 +67,7 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
       }
 
       $username = dbEscape($comments_row['username']);
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '$username'");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `username` = '$username'");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);

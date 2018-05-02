@@ -24,7 +24,7 @@ if ($user['uid'])
   }
   $minute = (date("i") + 55) % 60;
   $now = date("Y-m-d H:{$minute}:s");
-  $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}match_comments` " .
+  $comments_ref = dbQuery("SELECT * FROM `match_comments` " .
 			   "WHERE `id_match` = $id_match " .
 			   "AND `ip` = '{$_SERVER['REMOTE_ADDR']}' " .
 			   "AND `submitted` > '$now'");
@@ -37,7 +37,7 @@ if ($user['uid'])
   if ($is_complete)
   {
     preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
-    $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
+    $bans_ref = dbQuery("SELECT * FROM `bans` " .
 			 "WHERE `id_season` = {$season['id']} " .
 			 "AND (`ip` = '{$matches[1]}.*.*.*' " .
 			 "OR `ip` = '{$matches[1]}.{$matches[2]}.*.*' " .
@@ -51,7 +51,7 @@ if ($user['uid'])
     else
     {
       $body = dbEscape($_REQUEST['body']);
-      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}match_comments` " .
+      dbQuery("INSERT INTO `match_comments` " .
 	       "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .
 	       "VALUES ('{$user['uid']}', " .
 	       "'$body', " .

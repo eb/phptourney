@@ -18,14 +18,14 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEASONS", "H_OVERVIEW_SEASONS")
 
 // Profile
 $id_user = intval($_REQUEST['opt']);
-$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+$users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `id` = $id_user");
 $users_row = dbFetch($users_ref);
 
 $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
-$countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$users_row['id_country']}");
+$countries_ref = dbQuery("SELECT * FROM `countries` WHERE `id` = {$users_row['id_country']}");
 $countries_row = dbFetch($countries_ref);
 $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
 $content_tpl->set_var("I_COUNTRY", htmlspecialchars($countries_row['name']));
@@ -41,7 +41,7 @@ else if ($_REQUEST['opt'] == $user['uid'])
 }
 else if ($user['usertype_player'])
 {
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
                          "WHERE `submitted` = '0000-00-00 00:00:00' " .
                          "AND `id_season` = {$season['id']} " .
                          "AND (`id_player1` = {$user['uid']} OR `id_player2` = {$user['uid']}) " .
@@ -59,7 +59,7 @@ if ($is_complete)
 
 if ($user['usertype_admin'])
 {
-  $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
 			       "WHERE `id_user` = $id_user");
   while ($season_users_row = dbFetch($season_users_ref))
   {
@@ -74,7 +74,7 @@ if ($user['usertype_admin'])
 $content_tpl->parse("H_SHOW_PROFILE", "B_SHOW_PROFILE");
 
 // Played matches
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+$matches_ref = dbQuery("SELECT * FROM `matches` " .
 			"WHERE `id_season` = {$season['id']} " .
 			"AND (`id_player1` = $id_user OR `id_player2` = $id_user) " .
 			"AND `wo` = 0 " .
@@ -95,7 +95,7 @@ else
     // Match
     if ($matches_row['id_player1'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
       $users_row = dbFetch($users_ref);
       $player1 = $users_row['username'];
     }
@@ -107,7 +107,7 @@ else
 
     if ($matches_row['id_player2'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
       $users_row = dbFetch($users_ref);
       $player2 = $users_row['username'];
     }
@@ -134,7 +134,7 @@ $content_tpl->parse("H_OVERVIEW_PLAYED_MATCHES", "B_OVERVIEW_PLAYED_MATCHES");
 
 // Seasons
 $season_users_ref = dbQuery("SELECT SU.*,S.`name` AS `season_name` " .
-			     "FROM `{$cfg['db_table_prefix']}season_users` SU,`{$cfg['db_table_prefix']}seasons` S " .
+			     "FROM `season_users` SU,`seasons` S " .
 			     "WHERE SU.`id_user` = $id_user " .
 			     "AND SU.`id_season` = S.`id` " .
 			     "ORDER BY `submitted` DESC");

@@ -14,39 +14,39 @@ $total_wos = 0;
 $total_byes = 0;
 $total_outs = 0;
 
-$seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+$seasons_ref = dbQuery("SELECT * FROM `seasons` " .
       		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
 $content_tpl->set_var("H_SEASON_MATCHES", "");
 while ($seasons_row = dbFetch($seasons_ref))
 {
   // Signups
-  $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
       			 "WHERE `usertype_player` = 1 AND `rejected` = 0 AND `id_season` = {$seasons_row['id']}");
   $season_signups = dbNumRows($season_users_ref);
 
   // Matches
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
       		    "WHERE `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_matches = dbNumRows($matches_ref);
 
   // Played matches
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
       		    "WHERE `wo` = 0 AND `bye` = 0 AND `out` = 0 AND `confirmed` <> '0000-00-00 00:00:00' " .
       		    "AND `id_season` = {$seasons_row['id']}");
   $season_played = dbNumRows($matches_ref);
 
   // Walkovers
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
       		    "WHERE `wo` <> 0 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_wos = dbNumRows($matches_ref);
 
   // Byes
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
       		    "WHERE `bye` = 1 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_byes = dbNumRows($matches_ref);
 
   // Outs
-  $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+  $matches_ref = dbQuery("SELECT * FROM `matches` " .
       		    "WHERE `out` = 1 AND `confirmed` <> '0000-00-00 00:00:00' AND `id_season` = {$seasons_row['id']}");
   $season_outs = dbNumRows($matches_ref);
 

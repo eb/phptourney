@@ -8,7 +8,7 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_ADMIN", "H_ADD_ADMIN");
 // Access for headadmins only
 if ($user['usertype_headadmin'])
 {
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` ORDER BY `username` ASC");
+  $users_ref = dbQuery("SELECT * FROM `users` ORDER BY `username` ASC");
 
   while ($users_row = dbFetch($users_ref))
   {

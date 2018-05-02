@@ -25,7 +25,7 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET `seedgroup` = 0 " .
+    dbQuery("UPDATE `season_users` SET `seedgroup` = 0 " .
 	     "WHERE `id_season` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_SEEDGROUPS_RESETTED", "B_MESSAGE_SEEDGROUPS_RESETTED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

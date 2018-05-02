@@ -25,7 +25,7 @@ if ($user['usertype_headadmin'])
   }
   else
   {
-    $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+    $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
 				 "WHERE `id_season` = {$season['id']} " .
 				 "AND `usertype_player` = 1 " .
 				 "AND `rejected` = 0");
@@ -34,7 +34,7 @@ if ($user['usertype_headadmin'])
       if (isset($_REQUEST[$season_users_row['id_user']]))
       {
         $seedgroup = intval($_REQUEST[$season_users_row['id_user']]);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
+	dbQuery("UPDATE `season_users` SET " .
 		 "`seedgroup` = $seedgroup " .
 		 "WHERE `id_user` = {$season_users_row['id_user']} AND `id_season` = {$season['id']}");
       }

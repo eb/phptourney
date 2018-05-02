@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_BANS", "H_OVERVIEW_BANS");
 // Access for headadmins only
 if ($user['usertype_admin'])
 {
-  $bans_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}bans` " .
+  $bans_ref = dbQuery("SELECT * FROM `bans` " .
 		       "WHERE `id_season` = {$season['id']} ORDER BY `ip` ASC");
   if (dbNumRows($bans_ref) <= 0)
   {

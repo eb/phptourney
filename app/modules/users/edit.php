@@ -11,7 +11,7 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_PROFILE", "H_EDIT_PROFILE");
 // Access for the user to edit his own profile
 if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
 {
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$user['uid']}");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$user['uid']}");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_OPT", "");
   $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
@@ -20,7 +20,7 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
   $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
-  $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
+  $countries_ref = dbQuery("SELECT * FROM `countries` " .
 			    "WHERE `active` = 1 " .
 			    "ORDER BY `name` ASC");
   while ($countries_row = dbFetch($countries_ref))
@@ -52,14 +52,14 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
 elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['usertype_root']))
 {
   $id_user = intval($_REQUEST['opt']);
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_OPT", $id_user);
   $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
   $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
   $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
-  $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` " .
+  $countries_ref = dbQuery("SELECT * FROM `countries` " .
 			    "WHERE `active` = 1 " .
 			    "ORDER BY `name` ASC");
   while ($countries_row = dbFetch($countries_ref))

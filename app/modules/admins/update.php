@@ -20,7 +20,7 @@ if ($user['usertype_headadmin'])
   {
     $id_user = intval($_REQUEST['opt']);
     $headadmin = intval($_REQUEST['headadmin']);
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}season_users` SET " .
+    dbQuery("UPDATE `season_users` SET " .
 	     "`usertype_admin` = 1, " .
 	     "`usertype_headadmin` = $headadmin " .
 	     "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");

@@ -11,7 +11,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_USERS", "H_OVERVIEW_USERS");
 if ($user['usertype_root'])
 {
   $users_ref = dbQuery("SELECT * " .
-			"FROM `{$cfg['db_table_prefix']}users` " .
+			"FROM `users` " .
 			"ORDER BY `username` ASC");
   $user_counter = 0;
   if (dbNumRows($users_ref) <= 0)

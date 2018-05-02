@@ -27,7 +27,7 @@ if ($user['usertype_headadmin'])
   {
     $subject = dbEscape($_REQUEST['subject']);
     $body = dbEscape($_REQUEST['body']);
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}rules` (`subject`, `body`, `id_season`) " .
+    dbQuery("INSERT INTO `rules` (`subject`, `body`, `id_season`) " .
 	     "VALUES ('$subject', '$body', {$season['id']})");
     $content_tpl->parse("H_MESSAGE_RULE_ADDED", "B_MESSAGE_RULE_ADDED");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");

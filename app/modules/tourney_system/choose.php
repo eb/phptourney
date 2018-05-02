@@ -68,7 +68,7 @@ if ($user['usertype_headadmin'])
     else
     {
       // Delete deadlines
-      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']}");
+      dbQuery("DELETE FROM `deadlines` WHERE `id_season` = {$season['id']}");
 
       // Choose tourney-system
       $id_season = intval($_REQUEST['opt']);
@@ -76,7 +76,7 @@ if ($user['usertype_headadmin'])
       $single_elimination = intval($_REQUEST['single_elimination']);
       $double_elimination = intval($_REQUEST['double_elimination']);
       $winmaps = intval($_REQUEST['winmaps']);
-      dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `qualification` = $qualification, " .
+      dbQuery("UPDATE `seasons` SET `qualification` = $qualification, " .
 	       "`single_elimination` = '$single_elimination', " .
 	       "`double_elimination` = '$double_elimination', " .
 	       "`winmaps` = $winmaps " .

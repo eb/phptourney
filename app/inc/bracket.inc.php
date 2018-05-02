@@ -6,7 +6,7 @@ if (isset($season))
   $matches = array(); // Matches array
 
   $users_ref = dbQuery("SELECT U.`id`, U.`username`, C.`abbreviation` " .
-		       "FROM `{$cfg['db_table_prefix']}users` U, `{$cfg['db_table_prefix']}countries` C " .
+		       "FROM `users` U, `countries` C " .
 		       "WHERE U.`id_country` = C.`id`");
   while ($users_row = dbFetch($users_ref))
   {
@@ -15,7 +15,7 @@ if (isset($season))
 
   $matches_ref = dbQuery("SELECT `id`, `bracket`, `round`, `match`, `wo`, `out`, `bye`, " .
 			 "`id_player1`, `id_player2`, `score_p1`, `score_p2`, `confirmed` " .
-			 "FROM `{$cfg['db_table_prefix']}matches` " .
+			 "FROM `matches` " .
 			 "WHERE `id_season` = {$season['id']} ");
   while ($matches_row = dbFetch($matches_ref))
   {

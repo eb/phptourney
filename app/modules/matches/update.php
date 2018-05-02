@@ -16,7 +16,7 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_DEADLINE", "H_MAIL_DEADLINE");
 $content_tpl->set_block("F_CONTENT", "B_MAIL_BODY", "H_MAIL_BODY");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
   if ($user['usertype_admin'])
@@ -65,9 +65,9 @@ if ($matches_row = dbFetch($matches_ref))
 	  $out = 1;
 	}
 
-	dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` WHERE `id_match` = {$matches_row['id']}");
+	dbQuery("DELETE FROM `maps` WHERE `id_match` = {$matches_row['id']}");
         $comment_admin = dbEscape($_REQUEST['comment_admin']);
-	dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+	dbQuery("UPDATE `matches` SET " .
 		 "`wo` = $wo, `bye` = $bye, `out` = $out, " .
 		 "`score_p1` = 0, `score_p2` = 0, " .
 		 "`comment_admin` = '$comment_admin', " .
@@ -126,7 +126,7 @@ if ($matches_row = dbFetch($matches_ref))
 	// Tourney finished?
 	if ($new_winner_match == NULL)
 	{
-	  dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
+	  dbQuery("UPDATE `seasons` SET `status` = 'finished' " .
 		   "WHERE `id` = {$season['id']}");
 	}
 
@@ -230,7 +230,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  }
 
 	  // Match
-	  dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+	  dbQuery("UPDATE `matches` SET " .
 		   "`wo` = 0, " . 
 		   "`out` = 0, " . 
 		   "`score_p1` = $score_p1, " .
@@ -241,7 +241,7 @@ if ($matches_row = dbFetch($matches_ref))
 		   "WHERE `id` = {$matches_row['id']}");
 
 	  // Maps
-	  dbQuery("DELETE FROM `{$cfg['db_table_prefix']}maps` " .
+	  dbQuery("DELETE FROM `maps` " .
 		   "WHERE `id_match` = {$matches_row['id']}");
 	  for ($i = 1; $i <= $matches_row['num_winmaps'] * 2 - 1; $i++)
 	  {
@@ -265,7 +265,7 @@ if ($matches_row = dbFetch($matches_ref))
               $comment_p1 = dbEscape($_REQUEST['comment_m' . $i . '_p1']);
               $comment_p2 = dbEscape($_REQUEST['comment_m' . $i . '_p2']);
               $comment_admin = dbEscape($_REQUEST['comment_m' . $i . '_admin']);
-	      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}maps` " .
+	      dbQuery("INSERT INTO `maps` " .
 		       "(`id_match`,`id_map`,`score_p1`,`score_p2`,`comment_p1`,`comment_p2`,`comment_admin`,`num_map`) " .
 		       "VALUES({$matches_row['id']},$id_map," .
 		       "$score_p1,$score_p2," .
@@ -295,7 +295,7 @@ if ($matches_row = dbFetch($matches_ref))
 	  // Tourney finished?
 	  if ($new_winner_match == NULL)
 	  {
-	    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'finished' " .
+	    dbQuery("UPDATE `seasons` SET `status` = 'finished' " .
 		     "WHERE `id` = {$season['id']}");
 	  }
 
@@ -375,10 +375,10 @@ function notifyPlayers($new_match, $old_match) {
     {
       if ($old_match['id_player1'] != $new_match['id_player1'] or
 	  $old_match['id_player2'] != $new_match['id_player2']) {
-	$users_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+	$users_ref1 = dbQuery("SELECT * FROM `users` " .
 			       "WHERE `id` = {$new_match['id_player1']}");
 	$users_row1 = dbFetch($users_ref1);
-	$users_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+	$users_ref2 = dbQuery("SELECT * FROM `users` " .
 			       "WHERE `id` = {$new_match['id_player2']}");
 	$users_row2 = dbFetch($users_ref2);
 
@@ -403,7 +403,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->set_var("I_ROUND", $new_match['round']);
 			$content_tpl->set_var("I_MATCH", $new_match['match']);
 			$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-			$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+			$deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 				"WHERE `id_season` = {$season['id']} " .
 				"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
 			if ($deadlines_row = dbFetch($deadlines_ref))
@@ -436,7 +436,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->set_var("I_ROUND", $new_match['round']);
 			$content_tpl->set_var("I_MATCH", $new_match['match']);
 			$content_tpl->set_var("I_URL", $cfg['host'] . $cfg['path'] . "index.php?sid={$season['id']}");
-			$deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+			$deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 				"WHERE `id_season` = {$season['id']} " .
 				"AND `round` = '{$new_match['bracket']}{$new_match['round']}'");
 			if ($deadlines_row = dbFetch($deadlines_ref))

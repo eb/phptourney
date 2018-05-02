@@ -10,12 +10,12 @@ $content_tpl->set_block("F_CONTENT", "B_EDIT_ADMIN", "H_EDIT_ADMIN");
 if ($user['usertype_headadmin'])
 {
   $id_user = intval($_REQUEST['opt']);
-  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+  $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
   $users_row = dbFetch($users_ref);
   $content_tpl->set_var("I_ID_USER", $id_user);
   $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 
-  $season_users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}season_users` " .
+  $season_users_ref = dbQuery("SELECT * FROM `season_users` " .
 			       "WHERE `id_user` = $id_user AND `id_season` = {$season['id']}");
   $season_users_row = dbFetch($season_users_ref);
   if ($season_users_row['usertype_headadmin'])

@@ -22,7 +22,7 @@ if ($user['usertype_root'])
     $content_tpl->parse("H_WARNING_SEASON_NAME", "B_WARNING_SEASON_NAME");
   }
   $season_name = dbEscape($_REQUEST['season_name']);
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			  "WHERE `name` = '$season_name' AND `deleted` = 0");
   if (dbNumRows($seasons_ref) == 1)
   {
@@ -37,18 +37,18 @@ if ($user['usertype_root'])
 
   if ($is_complete)
   {
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}seasons` (`submitted`, `name`, `status`) " .
+    dbQuery("INSERT INTO `seasons` (`submitted`, `name`, `status`) " .
 	    "VALUES (NOW(), '$season_name', NULL)");
 
-    $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+    $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			    "WHERE `name` = '$season_name' AND `deleted` = 0");
     $seasons_row = dbFetch($seasons_ref);
 
     $id_user = intval($_REQUEST['id_user']);
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = $id_user");
+    $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = $id_user");
     $users_row = dbFetch($users_ref);
 
-    dbQuery("INSERT INTO `{$cfg['db_table_prefix']}season_users` " .
+    dbQuery("INSERT INTO `season_users` " .
 	     "(`submitted`, `usertype_headadmin`, `usertype_admin`, `id_season`, `id_user`) " .
 	     "VALUES (NOW(), 1, 1, {$seasons_row['id']}, {$users_row['id']})");
 

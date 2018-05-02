@@ -65,28 +65,28 @@ if ($user['usertype_headadmin'])
 
     if ($is_complete)
     {
-      dbQuery("DELETE FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id_season` = {$season['id']}");
+      dbQuery("DELETE FROM `deadlines` WHERE `id_season` = {$season['id']}");
 
       $deadline = $_REQUEST['startdate'];
 
       // Q
       if ($season['qualification'])
       {
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('q0', '$deadline', {$season['id']})");
 	$deadline = addDaysToDate($deadline, $_REQUEST['wb_round_length']);
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('q1', '$deadline', {$season['id']})");
       }
 
       // Wb
-      dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+      dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 	       "VALUES ('wb0', '$deadline', {$season['id']})");
 
       for ($i = 1; $i <= getNumWBRounds($season); $i++)
       {
 	$deadline = addDaysToDate($deadline, $_REQUEST['wb_round_length']);
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('wb$i', '$deadline', {$season['id']})");
 	if ($i == getNumWBRounds($season) - getNumLBRounds($season) / 2)
 	{
@@ -98,7 +98,7 @@ if ($user['usertype_headadmin'])
       if ($season['double_elimination'] != "")
       {
 	$deadline = $lb_startdate;
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('lb0', '$deadline', {$season['id']})");
 
 	for ($i = 1; $i <= getNumLBRounds($season); $i++)
@@ -115,14 +115,14 @@ if ($user['usertype_headadmin'])
 	  {
 	    $deadline = addDaysToDate($deadline, $_REQUEST['lb_round_length']);
 	  }
-	  dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	  dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		   "VALUES ('lb$i', '$deadline', {$season['id']})");
 	}
 	// Gf
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('gf0', '$deadline', {$season['id']})");
 	$deadline = addDaysToDate($deadline, $_REQUEST['wb_round_length'] - $_REQUEST['lb_round_length']);
-	dbQuery("INSERT INTO `{$cfg['db_table_prefix']}deadlines` (`round`, `deadline`, `id_season`) " .
+	dbQuery("INSERT INTO `deadlines` (`round`, `deadline`, `id_season`) " .
 		 "VALUES ('gf1', '$deadline', {$season['id']})");
       }
       $content_tpl->parse("H_MESSAGE_DEADLINES_SETUP", "B_MESSAGE_DEADLINES_SETUP");

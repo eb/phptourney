@@ -21,7 +21,7 @@ $main_tpl->set_block("F_INDEX", "B_ADMIN_PANEL", "H_ADMIN_PANEL");
 $main_tpl->set_block("F_INDEX", "B_TOURNAMENT_PANEL", "H_TOURNAMENT_PANEL");
 
 // Season dropdown-list
-$seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+$seasons_ref = dbQuery("SELECT * FROM `seasons` " .
       		  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
 if (dbNumRows($seasons_ref) > 0)
 {

@@ -27,7 +27,7 @@ if ($user['usertype_headadmin'])
   else
   {
     $id_deadline = intval($_REQUEST['opt']);
-    $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` WHERE `id` = $id_deadline");
+    $deadlines_ref = dbQuery("SELECT * FROM `deadlines` WHERE `id` = $id_deadline");
     $deadlines_row = dbFetch($deadlines_ref);
 
     if ($season['qualification'] == 1)

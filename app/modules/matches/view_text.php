@@ -80,7 +80,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     // Deadline
     $content_tpl->set_var("H_Q_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_Q_DEADLINE", "");
-    $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+    $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			    "WHERE `id_season` = {$season['id']} AND `round` = 'q1'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
@@ -149,7 +149,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     // Deadline
     $content_tpl->set_var("H_WB_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_WB_DEADLINE", "");
-    $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+    $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			     "WHERE `id_season` = {$season['id']} AND `round` = 'wb$i'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
@@ -210,7 +210,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
     // Deadline
     $content_tpl->set_var("H_GF_ACTUAL_ROUND", "");
     $content_tpl->set_var("H_GF_DEADLINE", "");
-    $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+    $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			     "WHERE `id_season` = {$season['id']} AND `round` = 'gf1'");
     if ($deadline_row = dbFetch($deadline_ref))
     {
@@ -285,7 +285,7 @@ if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['sta
       // Deadline
       $content_tpl->set_var("H_LB_ACTUAL_ROUND", "");
       $content_tpl->set_var("H_LB_DEADLINE", "");
-      $deadline_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+      $deadline_ref = dbQuery("SELECT * FROM `deadlines` " .
 			      "WHERE `id_season` = {$season['id']} AND `round` = 'lb$i'");
       if ($deadline_row = dbFetch($deadline_ref))
       {

@@ -42,7 +42,7 @@ if ($user['usertype_headadmin'])
   {
     // Send a mail to all player that signed up
     $season_users_ref = dbQuery("SELECT SU.*, U.`username`, U.`email` " .
-      			  "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+      			  "FROM `season_users` SU, `users` U " .
       			  "WHERE SU.`id_season` = {$season['id']} " .
       			  "AND SU.`usertype_player` = 1 " .
       			  "AND SU.`id_user` = U.`id`");
@@ -60,20 +60,20 @@ if ($user['usertype_headadmin'])
       // Message
       if ($season_users_row['rejected'] == 0)
       {
-        $matches_ref1 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+        $matches_ref1 = dbQuery("SELECT * FROM `matches` " .
       			  "WHERE `id_season` = {$season['id']} " .
       			  "AND `id_player1` = {$season_users_row['id_user']}");
-        $matches_ref2 = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+        $matches_ref2 = dbQuery("SELECT * FROM `matches` " .
       			  "WHERE `id_season` = {$season['id']} " .
       			  "AND `id_player2` = {$season_users_row['id_user']}");
         if ($matches_row = dbFetch($matches_ref1))
         {
-          $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+          $users_ref = dbQuery("SELECT * FROM `users` " .
       			 "WHERE `id` = {$matches_row['id_player2']}");
         }
         elseif ($matches_row = dbFetch($matches_ref2))
         {
-          $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+          $users_ref = dbQuery("SELECT * FROM `users` " .
       			 "WHERE `id` = {$matches_row['id_player1']}");
         }
         $users_row = dbFetch($users_ref);
@@ -85,7 +85,7 @@ if ($user['usertype_headadmin'])
         $content_tpl->set_var("I_ROUND", $matches_row['round']);
         $content_tpl->set_var("I_MATCH", $matches_row['match']);
 
-        $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+        $deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
       			   "WHERE `id_season` = {$season['id']} " .
       			   "AND `round` = '{$matches_row['bracket']}{$matches_row['round']}'");
         if ($deadlines_row = dbFetch($deadlines_ref))
@@ -114,7 +114,7 @@ if ($user['usertype_headadmin'])
     }
 
     // Set season-status to running
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}seasons` SET `status` = 'running' WHERE `id` = {$season['id']}");
+    dbQuery("UPDATE `seasons` SET `status` = 'running' WHERE `id` = {$season['id']}");
     $content_tpl->parse("H_MESSAGE_TOURNEY_RUNNING", "B_MESSAGE_TOURNEY_RUNNING");
     $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
     $content_tpl->set_var("I_ID_SEASON", $season['id']);

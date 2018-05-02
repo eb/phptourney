@@ -23,7 +23,7 @@ if ($user['usertype_admin'])
 // Access for guests [public news]
 if ($user['usertype_admin'] or $id_news_group == 1)
 {
-  $news_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news` " .
+  $news_ref = dbQuery("SELECT * FROM `news` " .
 		       "WHERE `id_news_group` = $id_news_group AND `id_season` = {$season['id']} AND `deleted` = 0 " .
 		       "ORDER BY `submitted` DESC LIMIT 0, 5");
   if (dbNumRows($news_ref) <= 0)
@@ -34,7 +34,7 @@ if ($user['usertype_admin'] or $id_news_group == 1)
   {
     while ($news_row = dbFetch($news_ref))
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$news_row['id_user']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$news_row['id_user']}");
       $users_row = dbFetch($users_ref);
 
       $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
@@ -53,7 +53,7 @@ if ($user['usertype_admin'] or $id_news_group == 1)
 	$content_tpl->parse("H_PUBLISH_EDIT_DELETE", "B_PUBLISH_EDIT_DELETE");
       }
 
-      $comments_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}news_comments` WHERE `id_news` = {$news_row['id']} AND `deleted` = 0");
+      $comments_ref = dbQuery("SELECT * FROM `news_comments` WHERE `id_news` = {$news_row['id']} AND `deleted` = 0");
       $content_tpl->set_var("I_NUM_COMMENTS", dbNumRows($comments_ref));
       $content_tpl->set_var("I_ID_SEASON", $season['id']);
       $content_tpl->parse("H_COMMENTS_LINK", "B_COMMENTS_LINK");

@@ -7,7 +7,7 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME", "H_WARNING_USERNAME")
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 
 $username = dbEscape($_REQUEST['username']);
-$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
+$users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `username` = '$username'");
 if ($users_row = dbFetch($users_ref))
 {

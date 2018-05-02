@@ -29,15 +29,15 @@ $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_LOGIN_TO_COMMENT", "H_LOGIN_TO_COMMENT");
 
 $id_match = intval($_REQUEST['opt']);
-$matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` WHERE `id` = $id_match");
+$matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
 if ($matches_row = dbFetch($matches_ref))
 {
   // Player1
   if ($matches_row['id_player1'] > 0)
   {
     $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
-			  "FROM `{$cfg['db_table_prefix']}users` U " .
-			  "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+			  "FROM `users` U " .
+			  "LEFT JOIN `countries` C " .
 			  "ON U.`id_country` = C.`id` " .
 			  "WHERE U.`id` = {$matches_row['id_player1']}");
     $users_row = dbFetch($users_ref);
@@ -56,8 +56,8 @@ if ($matches_row = dbFetch($matches_ref))
   if ($matches_row['id_player2'] > 0)
   {
     $users_ref = dbQuery("SELECT U.*, C.`abbreviation` " .
-			  "FROM `{$cfg['db_table_prefix']}users` U " .
-			  "LEFT JOIN `{$cfg['db_table_prefix']}countries` C " .
+			  "FROM `users` U " .
+			  "LEFT JOIN `countries` C " .
 			  "ON U.`id_country` = C.`id` " .
 			  "WHERE U.`id` = {$matches_row['id_player2']}");
     $users_row = dbFetch($users_ref);
@@ -84,7 +84,7 @@ if ($matches_row = dbFetch($matches_ref))
   {
     if ($matches_row['wo'] > 0)
     {
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['wo']}");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['wo']}");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_PLAYER", htmlspecialchars($users_row['username']));
       $content_tpl->parse("H_WO", "B_WO");
@@ -99,7 +99,7 @@ if ($matches_row = dbFetch($matches_ref))
     {
       if ($matches_row['id_player1'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player1']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player1']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", htmlspecialchars($users_row['username']));
 	$content_tpl->set_var("I_PLAYER2", "-");
@@ -107,7 +107,7 @@ if ($matches_row = dbFetch($matches_ref))
       }
       elseif ($matches_row['id_player2'] > 0)
       {
-	$users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['id_player2']}");
+	$users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['id_player2']}");
 	$users_row = dbFetch($users_ref);
 	$content_tpl->set_var("I_PLAYER1", "-");
 	$content_tpl->set_var("I_PLAYER2", htmlspecialchars($users_row['username']));
@@ -149,7 +149,7 @@ if ($matches_row = dbFetch($matches_ref))
 
       // Maps
       $maps_ref = dbQuery("SELECT M1.*, M2.`map` " .
-			   "FROM `{$cfg['db_table_prefix']}maps` M1,`{$cfg['db_table_prefix']}mappool` M2 " .
+			   "FROM `maps` M1,`mappool` M2 " .
 			   "WHERE M1.`id_match` = {$matches_row['id']} AND M1.`id_map` = M2.`id` " .
 			   "ORDER BY `num_map` ASC");
       while ($maps_row = dbFetch($maps_ref))
@@ -192,7 +192,7 @@ if ($matches_row = dbFetch($matches_ref))
     }
     $content_tpl->set_var("I_COMMENT", "");
 
-    $demos_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}demos` WHERE `id_match` = $id_match");
+    $demos_ref = dbQuery("SELECT * FROM `demos` WHERE `id_match` = $id_match");
     while ($demos_row = dbFetch($demos_ref))
     {
       $content_tpl->set_var("I_URL", htmlspecialchars($demos_row['url']));
@@ -209,7 +209,7 @@ if ($matches_row = dbFetch($matches_ref))
   if ($matches_row['submitted'] != "0000-00-00 00:00:00" and $matches_row['submitter'] != 0)
   {
     $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($matches_row['submitted']));
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['submitter']}");
+    $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['submitter']}");
     $users_row = dbFetch($users_ref);
     $content_tpl->set_var("I_SUBMITTER", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_SUBMIT_TIMESTAMP", "B_SUBMIT_TIMESTAMP");
@@ -219,7 +219,7 @@ if ($matches_row = dbFetch($matches_ref))
   if ($matches_row['confirmed'] != "0000-00-00 00:00:00" and $matches_row['confirmer'] != 0)
   {
     $content_tpl->set_var("I_CONFIRMED", htmlspecialchars($matches_row['confirmed']));
-    $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `id` = {$matches_row['confirmer']}");
+    $users_ref = dbQuery("SELECT * FROM `users` WHERE `id` = {$matches_row['confirmer']}");
     $users_row = dbFetch($users_ref);
     $content_tpl->set_var("I_CONFIRMER", htmlspecialchars($users_row['username']));
     $content_tpl->parse("H_CONFIRM_TIMESTAMP", "B_CONFIRM_TIMESTAMP");
@@ -227,8 +227,8 @@ if ($matches_row = dbFetch($matches_ref))
   $content_tpl->parse("H_VIEW_MATCH", "B_VIEW_MATCH");
 
   $comments_ref = dbQuery("SELECT MC.*, U.`username` " .
-			  "FROM `{$cfg['db_table_prefix']}match_comments` MC " .
-			  "LEFT JOIN `{$cfg['db_table_prefix']}users` U " .
+			  "FROM `match_comments` MC " .
+			  "LEFT JOIN `users` U " .
 			  "ON MC.`id_user` = U.`id` " .
 			  "WHERE `id_match` = $id_match ORDER BY `submitted`");
   if (dbNumRows($comments_ref) <= 0)
@@ -256,7 +256,7 @@ if ($matches_row = dbFetch($matches_ref))
       }
 
       $username = dbEscape($comments_row['username']);
-      $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` WHERE `username` = '$username'");
+      $users_ref = dbQuery("SELECT * FROM `users` WHERE `username` = '$username'");
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);

@@ -10,7 +10,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEASONS", "H_OVERVIEW_SEASONS")
 // Access for root only
 if ($user['usertype_root'])
 {
-  $seasons_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}seasons` " .
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` " .
 			  "WHERE `deleted` = 0 ORDER BY `submitted` DESC");
   if (dbNumRows($seasons_ref) <= 0)
   {

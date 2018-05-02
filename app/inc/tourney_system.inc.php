@@ -12,14 +12,14 @@ function insertWinnerMatch(& $match, $id_winner)
     $winner_match = getNextWinnerMatch($match);
     $winner_player = getNextWinnerPlayer($match);
 
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+    dbQuery("UPDATE `matches` SET " .
 	    "`id_$winner_player` = $id_winner " .
 	    "WHERE `id_season` = {$match['id_season']} " .
 	    "AND `bracket` = '$winner_bracket' " .
 	    "AND `round` = $winner_round " .
 	    "AND `match` = $winner_match");
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$match['id_season']} " .
 			   "AND `bracket` = '$winner_bracket' " .
 			   "AND `round` = $winner_round " .
@@ -29,7 +29,7 @@ function insertWinnerMatch(& $match, $id_winner)
   }
   elseif ($match['bracket'] == "gf" and $match['match'] == 1 and $match['id_player1'] == $id_winner)
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+    dbQuery("UPDATE `matches` SET " .
 	    "`id_player1` = 0 " .
 	    "WHERE `id_season` = {$match['id_season']} " .
 	    "AND `bracket` = 'gf' " .
@@ -51,14 +51,14 @@ function insertLoserMatch(& $match, $id_loser)
     $loser_match = getNextLoserMatch($match);
     $loser_player = getNextLoserPlayer($match);
 
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+    dbQuery("UPDATE `matches` SET " .
 	    "`id_$loser_player` = $id_loser " .
 	    "WHERE `id_season` = {$match['id_season']} " .
 	    "AND `bracket` = '$loser_bracket' " .
 	    "AND `round` = $loser_round " .
 	    "AND `match` = $loser_match");
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$match['id_season']} " .
 			   "AND `bracket` = '$loser_bracket' " .
 			   "AND `round` = $loser_round " .
@@ -68,7 +68,7 @@ function insertLoserMatch(& $match, $id_loser)
   }
   elseif ($match['bracket'] == "gf" and $match['match'] == 1 and $match['id_player2'] == $id_loser)
   {
-    dbQuery("UPDATE `{$cfg['db_table_prefix']}matches` SET " .
+    dbQuery("UPDATE `matches` SET " .
 	    "`id_player2` = 0 " .
 	    "WHERE `id_season` = {$match['id_season']} " .
 	    "AND `bracket` = 'gf' " .
@@ -91,7 +91,7 @@ function getWinnerMatch(& $match)
     $winner_match = getNextWinnerMatch($match);
     $winner_player = getNextWinnerPlayer($match);
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$season['id']} " .
 			   "AND `bracket` = '$winner_bracket' " .
 			   "AND `round` = $winner_round " .
@@ -121,7 +121,7 @@ function getLoserMatch(& $match)
     $loser_match = getNextLoserMatch($match);
     $loser_player = getNextLoserPlayer($match);
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$season['id']} " .
 			   "AND `bracket` = '$loser_bracket' " .
 			   "AND `round` = $loser_round " .
@@ -150,7 +150,7 @@ function isLastMatch(& $match)
     $winner_round = getNextWinnerRound($match);
     $winner_match = getNextWinnerMatch($match);
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$match['id_season']} " .
 			   "AND `bracket` = '$winner_bracket' " .
 			   "AND `round` = $winner_round " .
@@ -169,7 +169,7 @@ function isLastMatch(& $match)
     $loser_round = getNextLoserRound($match);
     $loser_match = getNextLoserMatch($match);
 
-    $matches_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}matches` " .
+    $matches_ref = dbQuery("SELECT * FROM `matches` " .
 			   "WHERE `id_season` = {$match['id_season']} " .
 			   "AND `bracket` = '$loser_bracket' " .
 			   "AND `round` = $loser_round " .
@@ -626,7 +626,7 @@ function isAfterPreDeadline(& $season, $bracket, $round) {
   $day = $today['mday'];
 
   $pre_deadline_round = $round - 1;
-  $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+  $deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 			   "WHERE `id_season` = {$season['id']} " .
 			   "AND `round` = '$bracket$pre_deadline_round'");
   if (dbNumRows($deadlines_ref) == 0)
@@ -668,7 +668,7 @@ function isBeforePostDeadline(& $season, $bracket, $round)
   $day = $today['mday'];
 
   $post_deadline_round = $round;
-  $deadlines_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}deadlines` " .
+  $deadlines_ref = dbQuery("SELECT * FROM `deadlines` " .
 			    "WHERE `id_season` = {$season['id']} " .
 			    "AND `round` = '$bracket$post_deadline_round'");
   if (dbNumRows($deadlines_ref) == 0)

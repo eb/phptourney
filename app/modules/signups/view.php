@@ -22,7 +22,7 @@ else
 }
 
 $users_ref = dbQuery("SELECT U.* " .
-		      "FROM `{$cfg['db_table_prefix']}season_users` SU, `{$cfg['db_table_prefix']}users` U " .
+		      "FROM `season_users` SU, `users` U " .
 		      "WHERE SU.`id_season` = {$season['id']} " .
 		      "AND SU.`usertype_player` = 1 " .
 		      "AND SU.`id_user` = U.`id` " .
@@ -42,7 +42,7 @@ else
     $content_tpl->set_var("I_ID_USER", $users_row['id']);
     $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
 
-    $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = {$users_row['id_country']}");
+    $countries_ref = dbQuery("SELECT * FROM `countries` WHERE `id` = {$users_row['id_country']}");
     $countries_row = dbFetch($countries_ref);
     if (isset($players_per_country[$countries_row['id']]))
     {
@@ -71,7 +71,7 @@ else
   arsort($players_per_country);
   $id_countries = array_keys($players_per_country);
   foreach($id_countries as $id_country) {
-    $countries_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}countries` WHERE `id` = '$id_country'");
+    $countries_ref = dbQuery("SELECT * FROM `countries` WHERE `id` = '$id_country'");
     $countries_row = dbFetch($countries_ref);
     $content_tpl->set_var("I_ID_COUNTRY", $countries_row['id']);
     $content_tpl->set_var("I_COUNTRY_ABBREVIATION", htmlspecialchars($countries_row['abbreviation']));
