@@ -20,9 +20,6 @@ $cfg['host'] = "http://";            // Host where this script is installed
 $cfg['path'] = "/";                  // Path to the script root
 $cfg['convert'] = "convert";         // Path to image magick convert
 
-$cfg['index_template_file'] = "index.tpl.html"; // File name of the template for index.php
-$cfg['full_template_file'] = "full.tpl.html";   // File name of the template for full.php
-
 
 ini_set("error_reporting", NULL);
 

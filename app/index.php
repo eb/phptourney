@@ -9,7 +9,7 @@ header("Content-type: text/html");
 
 // Template files
 $main_tpl = new Template();
-$main_tpl->set_file("F_INDEX", $cfg['index_template_file']);
+$main_tpl->set_file("F_INDEX", "index.tpl.html");
 
 $main_tpl->set_block("F_INDEX", "B_SEASON_SELECTOR_OPTION", "H_SEASON_SELECTOR_OPTION");
 $main_tpl->set_block("F_INDEX", "B_SEASON_SELECTOR_OPTION_SELECTED", "H_SEASON_SELECTOR_OPTION_SELECTED");
