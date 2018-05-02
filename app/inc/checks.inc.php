@@ -18,36 +18,10 @@ if (ini_get("register_globals") == "1")
   exit("'register_globals' has to be set to 'Off'");
 }
 
-// Writable data dir
-if (!is_writable("$this_path/../data"))
-{
-  exit("the directory 'data' has to be writable");
-}
-
 // Writable screenshots dir
-if (file_exists("$this_path/../data/screenshots"))
+if (!is_writable("$this_path/../data/screenshots"))
 {
-  if (!is_writable("$this_path/../data/screenshots"))
-  {
-    exit("the directory 'data/screenshots' has to be writable");
-  }
-}
-else
-{
-  mkdir("$this_path/../data/screenshots");
-}
-
-// Writable serverlists dir
-if (file_exists("$this_path/../data/serverlists"))
-{
-  if (!is_writable("$this_path/../data/serverlists"))
-  {
-    exit("the directory 'data/serverlists' has to be writable");
-  }
-}
-else
-{
-  mkdir("$this_path/../data/serverlists");
+  exit("the directory 'data/screenshots' has to be writable");
 }
 
 ?>
