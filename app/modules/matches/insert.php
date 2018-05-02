@@ -268,54 +268,6 @@ if ($user['usertype_admin'] or
 	    }
 	  }
 
-	  // Send match report to irc
-	  if ($cfg['bot_admin_targets'] != "")
-	  {
-	    $irc_channels = explode(";", $cfg['bot_admin_targets']);
-	    foreach($irc_channels as $irc_channel) {
-	      if ($cfg['bot_enabled'] and $cfg['bot_host'] != "" and $cfg['bot_port'] != "")
-	      {
-		$bot_socket = fsockopen($cfg['bot_host'], $cfg['bot_port']);
-	      }
-	      else
-	      {
-		$bot_socket = NULL;
-	      }
-	      if ($bot_socket and $cfg['bot_admin_targets'] != "")
-	      {
-		// Player1
-		if ($matches_row['id_player1'] > 0)
-		{
-		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-				       "WHERE `id` = {$matches_row['id_player1']}");
-		  $users_row = dbFetch($users_ref);
-		  $player1 = $users_row['username'];
-		}
-		else
-		{
-		  $player1 = "-";
-		}
-		// Player2
-		if ($matches_row['id_player2'] > 0)
-		{
-		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-				       "WHERE `id` = {$matches_row['id_player2']}");
-		  $users_row = dbFetch($users_ref);
-		  $player2 = $users_row['username'];
-		}
-		else
-		{
-		  $player2 = "-";
-		}
-		sleep(2);
-		fwrite($bot_socket,
-		       "{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} [$player1 vs $player2] reported - " .
-		       "{$cfg['host']}{$cfg['path']}?sid={$season['id']}&mod=matches&act=edit&opt={$matches_row['id']}\r\n");
-		fclose($bot_socket);
-	      }
-	    }
-	  }
-
 	  $content_tpl->parse("H_MESSAGE_MATCH_REPORTED", "B_MESSAGE_MATCH_REPORTED");
 	  $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 	}

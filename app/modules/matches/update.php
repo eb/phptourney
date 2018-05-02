@@ -299,56 +299,6 @@ if ($matches_row = dbFetch($matches_ref))
 		     "WHERE `id` = {$season['id']}");
 	  }
 
-	  // Send match report to irc
-	  if ($cfg['bot_public_targets'] != "")
-	  {
-	    $irc_channels = explode(";", $cfg['bot_public_targets']);
-	    foreach($irc_channels as $irc_channel) {
-	      if ($cfg['bot_enabled'] and $cfg['bot_host'] != "" and $cfg['bot_port'] != "")
-	      {
-		$bot_socket = fsockopen($cfg['bot_host'], $cfg['bot_port']);
-	      }
-	      else
-	      {
-		$bot_socket = NULL;
-	      }
-	      if ($bot_socket and
-		  ($score_p1 > $score_p2 and $matches_row['score_p1'] <= $matches_row['score_p2'] or
-		    $score_p1 < $score_p2 and $matches_row['score_p1'] >= $matches_row['score_p2'] or 
-		    $matches_row['confirmed'] == "0000-00-00 00:00:00")) {
-	        // Player1
-                if ($matches_row['id_player1'] > 0)
-                {
-		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-					"WHERE `id` = {$matches_row['id_player1']}");
-		  $users_row = dbFetch($users_ref);
-		  $player1 = $users_row['username'];
-		}
-		else
-		{
-		  $player1 = "-";
-		}
-		// Player2
-		if ($matches_row['id_player2'] > 0)
-		{
-		  $users_ref = dbQuery("SELECT * FROM `{$cfg['db_table_prefix']}users` " .
-					"WHERE `id` = {$matches_row['id_player2']}");
-		  $users_row = dbFetch($users_ref);
-		  $player2 = $users_row['username'];
-		}
-		else
-		{
-		  $player2 = "-";
-		}
-		sleep(2);
-		fwrite($bot_socket,
-			"{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} [$player1 vs $player2] confirmed - " .
-			"{$cfg['host']}{$cfg['path']}?sid={$season['id']}&mod=matches&act=view_match&opt={$matches_row['id']}\r\n");
-		fclose($bot_socket);
-	      }
-	    }
-	  }
-
 	  $content_tpl->parse("H_MESSAGE_MATCH_CONFIRMED", "B_MESSAGE_MATCH_CONFIRMED");
 	  $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
 

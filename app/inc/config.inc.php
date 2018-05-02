@@ -14,14 +14,6 @@ $cfg['mail_reply_to_address'] = ""; // I.e. "user@host"
 $cfg['mail_return_path'] = "";      // I.e. "user@host"
 $cfg['mail_bcc_address'] = "";      // I.e. "user@host"
 
-// Bot
-$cfg['bot_enabled'] = false;     // Enable the eggdrop bot
-$cfg['bot_host'] = "";           // Host where the eggdrop bot is running
-$cfg['bot_port'] = 0;            // Port where the eggdrop bot script is listening
-$cfg['bot_password'] = "";       // Password of the eggdrop bot script
-$cfg['bot_public_targets'] = ""; // Semicolon-separated list of IRC channels/nicknames for public messages
-$cfg['bot_admin_targets'] = "";  // Semicolon-separated list of IRC channels/nicknames for admin messages
-
 // Site
 $cfg['tourney_name'] = "phpTourney"; // Name of the site
 $cfg['host'] = "http://";            // Host where this script is installed

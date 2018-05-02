@@ -22,30 +22,6 @@ if ($news_row['id_news_group'] == 2 and ($user['usertype_headadmin'] or $user['u
 	  "SET `deleted` = 1 " .
 	  "WHERE `id_news` = {$news_row['id']}");
 
-  // Send news to irc
-  if ($cfg['bot_enabled'] and $cfg['bot_public_targets'] != "")
-  {
-    $irc_channels = explode(";", $cfg['bot_public_targets']);
-    foreach($irc_channels as $irc_channel) {
-      if ($cfg['bot_host'] != "" and $cfg['bot_port'] != "")
-      {
-	$bot_socket = fsockopen($cfg['bot_host'], $cfg['bot_port']);
-      }
-      else
-      {
-	$bot_socket = NULL;
-      }
-      if ($bot_socket)
-      {
-	sleep(2);
-	fwrite($bot_socket,
-		"{$cfg['bot_password']} $irc_channel {$cfg['tourney_name']} news updated: '{$news_row['heading']}' - " .
-		"{$cfg['host']}{$cfg['path']}?sid={$season['id']}\r\n");
-	fclose($bot_socket);
-      }
-    }
-  }
-
   $content_tpl->parse("H_MESSAGE_NEWS_PUBLISHED", "B_MESSAGE_NEWS_PUBLISHED");
   $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
