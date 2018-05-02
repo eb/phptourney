@@ -20,6 +20,39 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_SUBJECT", "H_MAIL_APPLIED_S
 $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_BODY", "H_MAIL_APPLIED_BODY");
 
 $is_complete = 1;
+
+# Recaptcha
+if (getenv("PHPTOURNEY_RECAPTCHA_SECRET"))
+{
+  $content_tpl->set_var("I_RECAPTCHA_KEY", getenv("PHPTOURNEY_RECAPTCHA_KEY"));
+  $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+  $recaptcha_data = array(
+    'secret' => getenv("PHPTOURNEY_RECAPTCHA_SECRET"),
+    'response' => $_REQUEST['g-recaptcha-response'],
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+  );
+  $recaptcha_options = array(
+    'http' => array(
+      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+      'method'  => 'POST',
+      'content' => http_build_query($recaptcha_data)
+    )
+  );
+  $recaptcha_context  = stream_context_create($recaptcha_options);
+  $recaptcha_result = file_get_contents($recaptcha_url, false, $recaptcha_context);
+  if ($recaptcha_result === FALSE)
+  {
+    $is_complete = 0;
+    $content_tpl->parse("H_WARNING_RECAPTCHA", "B_WARNING_RECAPTCHA");
+  }
+  $recaptcha_result_obj = json_decode($recaptcha_result);
+  if ($recaptcha_result_obj->{'success'} === FALSE)
+  {
+    $is_complete = 0;
+    $content_tpl->parse("H_WARNING_RECAPTCHA", "B_WARNING_RECAPTCHA");
+  }
+}
+
 $username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `users` " .
 		      "WHERE `username` = '$username'");

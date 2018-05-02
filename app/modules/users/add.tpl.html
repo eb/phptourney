@@ -3,7 +3,7 @@
 <tr><th>Create Account</th></tr>
 <tr>
 	<td>
-	<form action="" method="post">
+	<form id="add-account-form" action="" method="post">
 		<input name="sid" value="{I_ID_SEASON}" type="hidden"/>
 		<input name="mod" value="users" type="hidden"/>
 		<input name="act" value="insert" type="hidden"/>
@@ -61,7 +61,18 @@
 <!-- END B_SIGNUP -->
 		<tr>
 			<td>&nbsp;</td>
+<!-- BEGIN B_REGULAR_SUBMIT -->
 			<td><input class="submit" type="submit" value=" Submit "/></td>
+<!-- END B_REGULAR_SUBMIT -->
+<!-- BEGIN B_RECAPTCHA_SUBMIT -->
+			<td><button class="submit g-recaptcha" data-sitekey="{I_RECAPTCHA_KEY}" data-callback="onSubmit">&nbsp;Submit&nbsp;</button>
+			<script>
+				function onSubmit(token)
+				{
+					document.getElementById("add-account-form").submit();
+				}
+			</script>
+<!-- END B_RECAPTCHA_SUBMIT -->
 			<td>&nbsp;</td>
 		</tr>
 		</table>

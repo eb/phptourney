@@ -260,7 +260,7 @@ input.text {
 	font-size: 10px;
 }
 
-input.submit {
+button.submit, input.submit {
 	background: #ddd;
 	border: 1px #38827f solid;
 	padding: 1px;
