@@ -8,17 +8,13 @@ $cfg['db_password'] = getenv("PHPTOURNEY_DB_PASSWORD") ?: "";
 $cfg['db_name'] = getenv("PHPTOURNEY_DB_DATABASE") ?: "phptourney";
 
 // Mail
-$cfg['mail_from_address'] = "";     // I.e. "user@host"
-$cfg['mail_reply_to_address'] = ""; // I.e. "user@host"
-$cfg['mail_return_path'] = "";      // I.e. "user@host"
-$cfg['mail_bcc_address'] = "";      // I.e. "user@host"
+$cfg['mail_from_address'] = getenv("PHPTOURNEY_MAIL_FROM_ADDRESS") ?: "";
 
 // Site
-$cfg['tourney_name'] = "phpTourney"; // Name of the site
-$cfg['host'] = "http://";            // Host where this script is installed
-$cfg['path'] = "/";                  // Path to the script root
-$cfg['convert'] = "convert";         // Path to image magick convert
-
+$cfg['tourney_name'] = getenv("PHPTOURNEY_TOURNEY_NAME") ?: "phpTourney";
+$cfg['host'] = getenv("PHPTOURNEY_HOST") ?: "http://";
+$cfg['path'] = getenv("PHPTOURNEY_PATH") ?: "/";
+$cfg['convert'] = getenv("PHPTOURNEY_CONVERT") ?: "convert";
 
 ini_set("error_reporting", NULL);
 
@@ -29,3 +25,4 @@ if (getenv("PHPTOURNEY_DEBUG"))
 }
 
 ?>
+

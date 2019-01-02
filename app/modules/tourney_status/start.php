@@ -110,7 +110,7 @@ if ($user['usertype_headadmin'])
         $message = $content_tpl->get("MAIL_BODY_REJECTED");
       }
 
-      sendMail($to, $subject, $message, $cfg['mail_from_address'], $cfg['mail_reply_to_address'], $cfg['mail_return_path'], $cfg['mail_bcc_address']);
+      sendMail($to, $subject, $message, $cfg['mail_from_address']);
     }
 
     // Set season-status to running

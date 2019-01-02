@@ -66,30 +66,20 @@ function isIp($string)
 }
 
 // Sends email
-function sendMail($to, $subject, $message, $from_address, $reply_to_address, $return_path, $bcc_address)
+function sendMail($to, $subject, $message, $from_address)
 {
-  $headers =
-    "From: " . $from_address . "\r\n" .
-    "Reply-To: " . $reply_to_address . "\r\n";
+  $headers = "";
 
-  if (!empty($bcc_address))
+  if (!empty($from_address))
   {
     $headers .=
-      "Bcc: " . $bcc_address . "\r\n";
+      "From: " . $from_address . "\r\n";
   }
 
   $headers .=
     "X-Mailer: PHP/" . phpversion();
 
-  if (ini_get("safe_mode"))
-  {
-    mail($to, $subject, $message, $headers);
-  }
-  else
-  {
-    $parameters = "-f{$return_path}";
-    mail($to, $subject, $message, $headers, $parameters);
-  }
+  mail($to, $subject, $message, $headers);
 }
 
 ?>
