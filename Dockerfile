@@ -1,9 +1,10 @@
 FROM php:5-apache
 
-RUN apt-get update && apt-get install -y \
-        imagemagick \
-	mysql-client \
-    --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends imagemagick ssmtp mysql-client && \
+    apt-get clean && \
+    echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
+    echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
 RUN docker-php-ext-install mysqli
 
 COPY docker/ /phptourney/
