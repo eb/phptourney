@@ -3,12 +3,16 @@
 // Check sid
 if (!isset($_REQUEST['sid']) or !isWholePositiveNumber($_REQUEST['sid']))
 {
-  $_REQUEST['sid'] = 0;
-}
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` WHERE `deleted` = 0 ORDER BY `submitted` DESC");
+  $season = dbFetch($seasons_ref);
 
-// Get season data
-$seasons_ref = dbQuery("SELECT * FROM `seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
-$season = dbFetch($seasons_ref);
+  $_REQUEST['sid'] = $season['id'];
+}
+else
+{
+  $seasons_ref = dbQuery("SELECT * FROM `seasons` WHERE `id` = {$_REQUEST['sid']} AND `deleted` = 0");
+  $season = dbFetch($seasons_ref);
+}
 
 // Check mod
 if (!isset($_REQUEST['mod']) or !isWord($_REQUEST['mod']))
