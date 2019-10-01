@@ -7,6 +7,7 @@ if ($mysqli->connect_error)
 }
 
 $mysqli->set_charset('utf8');
+$mysqli->query("SET SESSION sql_mode = ''");
 
 function dbQuery($sql_query)
 {
