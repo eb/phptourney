@@ -7,7 +7,7 @@ RUN apt-get update && \
     echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
 RUN docker-php-ext-install mysqli
 
-COPY docker/ /phptourney/
+COPY config/ /phptourney/
 COPY --chown=www-data:www-data app/ /var/www/html
 
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

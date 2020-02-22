@@ -19,8 +19,8 @@ services:
     image: phptourney
     restart: always
     volumes:
-      - data:/var/www/html/data
       - ./app:/var/www/html
+      - ./volumes/data:/var/www/html/data
     environment:
       - PHPTOURNEY_DB_HOST=db
       - PHPTOURNEY_DB_PORT=3306
