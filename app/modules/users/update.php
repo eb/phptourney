@@ -7,8 +7,6 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_EMAIL", "H_WARNING_EMAIL");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_IRC_CHANNEL", "H_WARNING_IRC_CHANNEL");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_COUNTRY", "H_WARNING_COUNTRY");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
-$content_tpl->set_block("F_CONTENT", "B_COUNTRY", "H_COUNTRY");
-$content_tpl->set_block("F_CONTENT", "B_COUNTRY_SELECTED", "H_COUNTRY_SELECTED");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 
 // Access for the user
