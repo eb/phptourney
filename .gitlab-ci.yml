@@ -1,0 +1,23 @@
+image:
+  name: docker/compose:latest
+  entrypoint: [""]
+
+build:
+  stage: build
+  script:
+    - docker build -t ${QWNU_REGISTRY_SERVER}/phptourney:${CI_COMMIT_TAG} .
+  only:
+    - tags
+
+publish:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - docker login -u $QWNU_REGISTRY_USERNAME -p $QWNU_REGISTRY_PASSWORD $QWNU_REGISTRY_SERVER
+    - docker push ${QWNU_REGISTRY_SERVER}/phptourney:${CI_COMMIT_TAG}
+  after_script:
+    - docker rmi ${QWNU_REGISTRY_SERVER}/phptourney:${CI_COMMIT_TAG}
+  only:
+    - tags
+
