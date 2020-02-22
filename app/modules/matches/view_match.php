@@ -90,7 +90,7 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->parse("H_WO", "B_WO");
       if ($matches_row['comment_admin'] != "")
       {
-	$content_tpl->set_var("I_COMMENT", Parsedown::instance()->test($matches_row['comment_admin']));
+	$content_tpl->set_var("I_COMMENT", Parsedown::instance()->text($matches_row['comment_admin']));
 	$content_tpl->parse("I_COMMENT", "B_COMMENT_ADMIN");
       }
       $content_tpl->parse("H_OUTCOME", "B_OUTCOME");
