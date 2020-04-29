@@ -20,13 +20,13 @@ services:
     restart: always
     volumes:
       - ./app:/var/www/html
-      - ./volumes/data:/var/www/html/data
+      - ./volumes/app/data:/var/www/html/data
     environment:
       - PHPTOURNEY_DB_HOST=db
       - PHPTOURNEY_DB_PORT=3306
       - PHPTOURNEY_DB_ROOT_PASSWORD=WMxP7Xd9MVZtvZ1D
-      - PHPTOURNEY_DB_USERNAME=phptourney
-      - PHPTOURNEY_DB_PASSWORD=wKKdiJjILUyJ6XmV
+      - PHPTOURNEY_DB_USERNAME=root
+      - PHPTOURNEY_DB_PASSWORD=WMxP7Xd9MVZtvZ1D
       - PHPTOURNEY_DB_DATABASE=phptourney
       - PHPTOURNEY_MAIL_FROM_ADDRESS=
       - PHPTOURNEY_TOURNEY_NAME=phpTourney
