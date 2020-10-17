@@ -51,6 +51,8 @@ if (!$_REQUEST['opt'] and $user['uid'])
 // Access for headadmins
 elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['usertype_root']))
 {
+  $id_user = intval($_REQUEST['opt']);
+
   $is_complete = 1;
   if ($_REQUEST['id_country'] == "")
   {
