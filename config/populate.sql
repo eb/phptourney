@@ -180,7 +180,6 @@ CREATE TABLE `users` (
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `irc_channel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `notify` tinyint(4) NOT NULL DEFAULT 1,
   `submitted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `new_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',

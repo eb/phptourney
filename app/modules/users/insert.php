@@ -10,7 +10,6 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME_TOO_LONG", "H_WARNING_U
 $content_tpl->set_block("F_CONTENT", "B_WARNING_PASSWORD", "H_WARNING_PASSWORD");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_PASSWORD_RETYPED", "H_WARNING_PASSWORD_RETYPED");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_EMAIL", "H_WARNING_EMAIL");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_IRC_CHANNEL", "H_WARNING_IRC_CHANNEL");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_COUNTRY", "H_WARNING_COUNTRY");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
@@ -91,11 +90,6 @@ if (!preg_match("/.+\@.+\..+/", $_REQUEST['email']))
   $is_complete = 0;
   $content_tpl->parse("H_WARNING_EMAIL", "B_WARNING_EMAIL");
 }
-if ($_REQUEST['irc_channel'] == "")
-{
-  $is_complete = 0;
-  $content_tpl->parse("H_WARNING_IRC_CHANNEL", "B_WARNING_IRC_CHANNEL");
-}
 if ($_REQUEST['id_country'] == "")
 {
   $is_complete = 0;
@@ -116,12 +110,11 @@ if ($is_complete)
   // Register an account
   $id_country = intval($_REQUEST['id_country']);
   $email = dbEscape($_REQUEST['email']);
-  $irc_channel = dbEscape($_REQUEST['irc_channel']);
   $notify = intval($_REQUEST['notify']);
   dbQuery("INSERT INTO `users` " .
-	   "(`username`, `id_country`, `password`, `email`, `irc_channel`, `notify`, `submitted`) " .
+	   "(`username`, `id_country`, `password`, `email`, `notify`, `submitted`) " .
 	   "VALUES ('$username', $id_country, " .
-	   "'$password', '$email', '$irc_channel', $notify, NOW())");
+	   "'$password', '$email', $notify, NOW())");
 
   // Sign up
   $signup = false;

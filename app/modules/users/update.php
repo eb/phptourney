@@ -4,7 +4,6 @@ $content_tpl->set_block("F_CONTENT", "B_MESSAGE_PROFILE_EDITED", "H_MESSAGE_PROF
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_EMAIL", "H_WARNING_EMAIL");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_IRC_CHANNEL", "H_WARNING_IRC_CHANNEL");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_COUNTRY", "H_WARNING_COUNTRY");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
@@ -17,11 +16,6 @@ if (!$_REQUEST['opt'] and $user['uid'])
   {
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_EMAIL", "B_WARNING_EMAIL");
-  }
-  if ($_REQUEST['irc_channel'] == "")
-  {
-    $is_complete = 0;
-    $content_tpl->parse("H_WARNING_IRC_CHANNEL", "B_WARNING_IRC_CHANNEL");
   }
   if ($_REQUEST['id_country'] == "")
   {
@@ -37,12 +31,10 @@ if (!$_REQUEST['opt'] and $user['uid'])
   {
     $id_country = intval($_REQUEST['id_country']);
     $email = dbEscape($_REQUEST['email']);
-    $irc_channel = dbEscape($_REQUEST['irc_channel']);
     $notify = intval($_REQUEST['notify']);
     dbQuery("UPDATE `users` SET " .
 	     "`id_country` = $id_country, " .
 	     "`email` = '$email', " .
-	     "`irc_channel` = '$irc_channel', " .
 	     "`notify` = $notify " .
 	     "WHERE `id` = {$user['uid']}");
     $content_tpl->parse("H_MESSAGE_PROFILE_EDITED", "B_MESSAGE_PROFILE_EDITED");
@@ -70,11 +62,6 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
     $is_complete = 0;
     $content_tpl->parse("H_WARNING_EMAIL", "B_WARNING_EMAIL");
   }
-  if ($_REQUEST['irc_channel'] == "")
-  {
-    $is_complete = 0;
-    $content_tpl->parse("H_WARNING_IRC_CHANNEL", "B_WARNING_IRC_CHANNEL");
-  }
   if (!isset($_REQUEST['notify']))
   {
     $_REQUEST['notify'] = 0;
@@ -84,11 +71,9 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
   {
     $id_country = intval($_REQUEST['id_country']);
     $email = dbEscape($_REQUEST['email']);
-    $irc_channel = dbEscape($_REQUEST['irc_channel']);
     dbQuery("UPDATE `users` SET " .
 	     "`id_country` = $id_country, " .
 	     "`email` = '$email', " .
-	     "`irc_channel` = '$irc_channel', " .
 	     "`notify` = 1 " .
 	     "WHERE `id` = $id_user");
     $content_tpl->parse("H_MESSAGE_PROFILE_EDITED", "B_MESSAGE_PROFILE_EDITED");

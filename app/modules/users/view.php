@@ -23,7 +23,6 @@ $users_ref = dbQuery("SELECT * FROM `users` " .
 $users_row = dbFetch($users_ref);
 
 $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
-$content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
 $countries_ref = dbQuery("SELECT * FROM `countries` WHERE `id` = {$users_row['id_country']}");
 $countries_row = dbFetch($countries_ref);

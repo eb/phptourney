@@ -398,7 +398,6 @@ function notifyPlayers($new_match, $old_match) {
 			// Message
 			$content_tpl->set_var("I_PLAYER", $users_row1['username']);
 			$content_tpl->set_var("I_OPPONENT", $users_row2['username']);
-			$content_tpl->set_var("I_IRC_CHANNEL", $users_row2['irc_channel']);
 			$content_tpl->set_var("I_BRACKET", $new_match['bracket']);
 			$content_tpl->set_var("I_ROUND", $new_match['round']);
 			$content_tpl->set_var("I_MATCH", $new_match['match']);
@@ -431,7 +430,6 @@ function notifyPlayers($new_match, $old_match) {
 			// Message
 			$content_tpl->set_var("I_PLAYER", $users_row2['username']);
 			$content_tpl->set_var("I_OPPONENT", $users_row1['username']);
-			$content_tpl->set_var("I_IRC_CHANNEL", $users_row1['irc_channel']);
 			$content_tpl->set_var("I_BRACKET", $new_match['bracket']);
 			$content_tpl->set_var("I_ROUND", $new_match['round']);
 			$content_tpl->set_var("I_MATCH", $new_match['match']);

@@ -18,7 +18,6 @@ if ((!isset($_REQUEST['opt']) or $_REQUEST['opt'] == "") and $user['uid'])
   $content_tpl->set_var("I_PASSWORD", htmlspecialchars($users_row['password']));
   $content_tpl->set_var("I_PASSWORD_RETYPED", htmlspecialchars($users_row['password']));
   $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
-  $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
   $countries_ref = dbQuery("SELECT * FROM `countries` " .
 			    "WHERE `active` = 1 " .
@@ -57,7 +56,6 @@ elseif ($_REQUEST['opt'] != "" and ($user['usertype_headadmin'] or $user['userty
   $content_tpl->set_var("I_OPT", $id_user);
   $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
   $content_tpl->set_var("I_EMAIL", htmlspecialchars($users_row['email']));
-  $content_tpl->set_var("I_IRC_CHANNEL", htmlspecialchars($users_row['irc_channel']));
 
   $countries_ref = dbQuery("SELECT * FROM `countries` " .
 			    "WHERE `active` = 1 " .

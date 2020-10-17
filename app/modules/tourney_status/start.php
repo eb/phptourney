@@ -80,7 +80,6 @@ if ($user['usertype_headadmin'])
 
         // Message accepted
         $content_tpl->set_var("I_OPPONENT", $users_row['username']);
-        $content_tpl->set_var("I_IRC_CHANNEL", $users_row['irc_channel']);
         $content_tpl->set_var("I_BRACKET", $matches_row['bracket']);
         $content_tpl->set_var("I_ROUND", $matches_row['round']);
         $content_tpl->set_var("I_MATCH", $matches_row['match']);
