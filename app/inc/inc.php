@@ -7,7 +7,7 @@ require("$inc_path/checks.inc.php");
 require("$inc_path/config.inc.php");
 require("$inc_path/database.inc.php");
 
-require("$inc_path/phplib/template.inc");
+require("$inc_path/phplib/template.inc.php");
 require("$inc_path/parsedown/Parsedown.php");
 
 require("$inc_path/request.inc.php");

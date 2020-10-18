@@ -1,10 +1,10 @@
-FROM php:5-apache
+FROM php:7-apache
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends imagemagick ssmtp mysql-client && \
+    apt-get install -y --no-install-recommends imagemagick msmtp mariadb-client-core-10.3 && \
     apt-get clean && \
-    echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
-    echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
+    echo "account default\nhost mail" >> /etc/msmtprc && \
+    echo 'sendmail_path = "/usr/bin/msmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
 RUN docker-php-ext-install mysqli
 
 COPY config/ /phptourney/

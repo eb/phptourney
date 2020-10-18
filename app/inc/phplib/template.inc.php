@@ -196,7 +196,7 @@ class Template
   * @access    public
   * @return    void
   */
-  function Template($root = ".", $unknowns = "remove") {
+  function __construct($root = ".", $unknowns = "remove") {
     if ($this->debug & 4) {
       echo "<p><b>Template:</b> root = $root, unknowns = $unknowns</p>\n";
     }
@@ -295,7 +295,7 @@ class Template
       $this->file[$varname] = $this->filename($filename);
     } else {
       reset($varname);
-      while (list($v, $f) = each($varname)) {
+      foreach($varname as $v => $f) {
         if ($this->debug & 4) {
           echo "<p><b>set_file:</b> (with array) varname = $v, filename = $f</p>\n";
         }
@@ -397,7 +397,7 @@ class Template
       }
     } else {
       reset($varname);
-      while (list($k, $v) = each($varname)) {
+      foreach($varname as $k => $v) {
         if (!empty($k)) {
           if ($this->debug & 1) {
             printf("<b>set_var:</b> (with array) <b>%s</b> = '%s'<br>\n", $k, htmlentities($v));
@@ -443,7 +443,7 @@ class Template
       }
     } else {
       reset($varname);
-      while (list($k, $v) = each($varname)) {
+      foreach($varname as $k => $v) {
         if (!empty($v)) {
           if ($this->debug & 1) {
             printf("<b>clear_var:</b> (with array) <b>%s</b><br>\n", $v);
@@ -485,7 +485,7 @@ class Template
       }
     } else {
       reset($varname);
-      while (list($k, $v) = each($varname)) {
+      foreach($varname as $k => $v) {
         if (!empty($v)) {
           if ($this->debug & 1) {
             printf("<b>unset_var:</b> (with array) <b>%s</b><br>\n", $v);
@@ -525,7 +525,7 @@ class Template
 
     // quote the replacement strings to prevent bogus stripping of special chars
     reset($this->varvals);
-    while (list($k, $v) = each($this->varvals)) {
+    foreach($this->varvals as $k => $v) {
       $varvals_quoted[$k] = preg_replace(array('/\\\\/', '/\$/'), array('\\\\\\\\', '\\\\$'), $v);
     }
 
@@ -611,7 +611,7 @@ class Template
       }
     } else {
       reset($varname);
-      while (list($i, $v) = each($varname)) {
+      foreach($varname as $i => $v) {
         if ($this->debug & 4) {
           echo "<p><b>parse:</b> (with array) target = $target, i = $i, varname = $v, append = $append</p>\n";
         }
@@ -677,7 +677,7 @@ class Template
       echo "<p><b>get_vars:</b> constructing array of vars...</p>\n";
     }
     reset($this->varkeys);
-    while (list($k, $v) = each($this->varkeys)) {
+    foreach($this->varkeys as $k => $v) {
       $result[$k] = $this->get_var($k);
     }
     return $result;
@@ -715,7 +715,7 @@ class Template
       return $str;
     } else {
       reset($varname);
-      while (list($k, $v) = each($varname)) {
+      foreach($varname as $k => $v) {
         if (isset($this->varvals[$v])) {
           $str = $this->varvals[$v];
         } else {
@@ -762,7 +762,7 @@ class Template
     }
 
     reset($m);
-    while (list($k, $v) = each($m)) {
+    foreach($vm as $k => $v) {
       if (!isset($this->varkeys[$v])) {
         if ($this->debug & 4) {
          echo "<p><b>get_undefined:</b> undefined: $v</p>\n";
