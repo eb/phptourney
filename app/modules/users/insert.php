@@ -165,7 +165,7 @@ if ($is_complete)
     $message = $content_tpl->get("MAIL_APPLIED_BODY");
   }
 
-  sendMail($to, $subject, $message, $cfg['mail_from_address']);
+  sendMail($to, $subject, $message, $cfg['mail_from']);
 
   if ($signup == false)
   {

@@ -413,7 +413,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
 			$message = $content_tpl->get("MAIL_BODY");
 
-			sendMail($to, $subject, $message, $cfg['mail_from_address']);
+			sendMail($to, $subject, $message, $cfg['mail_from']);
 		}
 
 		// Mail to player2
@@ -445,7 +445,7 @@ function notifyPlayers($new_match, $old_match) {
 			$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
 			$message = $content_tpl->get("MAIL_BODY");
 
-			sendMail($to, $subject, $message, $cfg['mail_from_address']);
+			sendMail($to, $subject, $message, $cfg['mail_from']);
 		}
 	}
       }

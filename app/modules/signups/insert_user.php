@@ -57,7 +57,7 @@ if ($user['usertype_headadmin'])
 	$content_tpl->parse("MAIL_BODY", "B_MAIL_BODY");
 	$message = $content_tpl->get("MAIL_BODY");
 
-	sendMail($to, $subject, $message, $cfg['mail_from_address']);
+	sendMail($to, $subject, $message, $cfg['mail_from']);
 
 	$content_tpl->parse("H_MESSAGE_PLAYER_INVITED", "B_MESSAGE_PLAYER_INVITED");
       }

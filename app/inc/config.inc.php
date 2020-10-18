@@ -8,7 +8,23 @@ $cfg['db_password'] = getenv("PHPTOURNEY_DB_PASSWORD") ?: "";
 $cfg['db_name'] = getenv("PHPTOURNEY_DB_DATABASE") ?: "phptourney";
 
 // Mail
-$cfg['mail_from_address'] = getenv("PHPTOURNEY_MAIL_FROM_ADDRESS") ?: "";
+$mail_from_name = getenv("PHPTOURNEY_MAIL_FROM_NAME");
+$mail_from_address = getenv("PHPTOURNEY_MAIL_FROM_ADDRESS");
+if ($mail_from_address)
+{
+  if ($mail_from_name)
+  {
+    $cfg['mail_from'] = $mail_from_name . "<" . $mail_from_address . ">";
+  }
+  else
+  {
+    $cfg['mail_from'] = $mail_from_address;
+  }
+}
+else
+{
+  $cfg['mail_from'] = "";
+}
 
 // Site
 $cfg['tourney_name'] = getenv("PHPTOURNEY_TOURNEY_NAME") ?: "phpTourney";
@@ -25,4 +41,3 @@ if (getenv("PHPTOURNEY_DEBUG"))
 }
 
 ?>
-
