@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -e
+set -x
+
+echo "$@"
+
 info() {
     echo "INFO: $1"
 }
@@ -19,4 +24,6 @@ host mail
 from $PHPTOURNEY_MAIL_FROM_ADDRESS
 EOT
 
-exec "$@"
+/phptourney/migration/run.sh
+
+docker-php-entrypoint apache2-foreground
