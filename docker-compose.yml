@@ -22,6 +22,7 @@ services:
       - data:/var/www/html/data/
       - ./app/inc/:/var/www/html/inc/
       - ./app/modules/:/var/www/html/modules/
+      - ./docker/manage/:/phptourney/manage/
     environment:
       - PHPTOURNEY_DB_HOST=db
       - PHPTOURNEY_DB_PORT=3306

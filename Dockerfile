@@ -1,12 +1,17 @@
 FROM php:7-apache
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends imagemagick msmtp mariadb-client-core-10.3 && \
+    apt-get install -y --no-install-recommends \
+        imagemagick msmtp mariadb-client-core-10.3 \
+        virtualenv && \
     apt-get clean
 RUN docker-php-ext-install mysqli
+RUN virtualenv -p python3 /phptourney/venv
+RUN /phptourney/venv/bin/pip3 install pymysql
 
 COPY docker/config /phptourney/config
 COPY docker/migration /phptourney/migration
+COPY docker/manage /phptourney/manage
 COPY docker/entrypoint.sh /
 COPY --chown=www-data:www-data app/ /var/www/html
 
