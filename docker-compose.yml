@@ -20,9 +20,7 @@ services:
     restart: always
     volumes:
       - data:/var/www/html/data/
-      - ./app/inc/:/var/www/html/inc/
-      - ./app/modules/:/var/www/html/modules/
-      - ./docker/manage/:/phptourney/manage/
+      - ./app/:/var/www/html/
     environment:
       - PHPTOURNEY_DB_HOST=db
       - PHPTOURNEY_DB_PORT=3306
