@@ -21,10 +21,12 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   $users_row = dbFetch($users_ref);
 
   $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
+  $content_tpl->set_var("I_ID_SEASON", $season['id']);
+  $content_tpl->set_var("I_ID_USER", $users_row['id']);
   $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
   $content_tpl->set_var("I_HEADING", htmlspecialchars($news_row['heading']));
   $content_tpl->set_var("I_BODY", Parsedown::instance()->text($news_row['body']));
-  $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($news_row['submitted']));
+  $content_tpl->set_var("I_DATE", htmlspecialchars(getDateString($news_row['submitted'])));
   $content_tpl->parse("H_VIEW_NEWS", "B_VIEW_NEWS", true);
 
   $comments_ref = dbQuery("SELECT NC.*, U.`username` " .
@@ -45,17 +47,8 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
     {
       $content_tpl->set_var("I_COUNTER", $counter);
       $content_tpl->set_var("I_USERNAME", htmlspecialchars($comments_row['username']));
-      if ($user['usertype_admin'])
-      {
-	$ip = $comments_row['ip'];
-      }
-      else
-      {
-	$ip = preg_replace("/(.*\\.).*/", "$1xxx", $comments_row['ip']);
-      }
-      $content_tpl->set_var("I_IP", htmlspecialchars($ip));
       $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
-      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($comments_row['submitted']));
+      $content_tpl->set_var("I_TIMEDIFF", htmlspecialchars(getTimeDifferenceString($comments_row['submitted'])));
 
       $username = dbEscape($comments_row['username']);
       $users_ref = dbQuery("SELECT * FROM `users` WHERE `username` = '$username'");

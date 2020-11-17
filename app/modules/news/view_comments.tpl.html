@@ -9,7 +9,7 @@
 <tr><th>{I_HEADING}</th></tr>
 <tr>
 	<td>
-	<div class="timestamp">{I_USERNAME} - {I_SUBMITTED}</div>
+	<div class="timestamp"><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> {I_DATE}</div>
 	{I_BODY}
 	</td>
 </tr>
@@ -25,10 +25,7 @@
 <table class="commentbox" cellspacing="0">
 <tr>
 	<td>
-	<span class="timestamp">
-	#{I_COUNTER} <a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> - {I_SUBMITTED}
-	</span>
-	<br/>
+	<div class="timestamp"><a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> {I_TIMEDIFF} ago</div>
 	{I_BODY}
 	</td>
 </tr>

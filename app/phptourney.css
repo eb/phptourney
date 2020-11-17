@@ -210,7 +210,7 @@ legend {
 
 .timestamp {
 	font-size: 8pt;
-	font-weight: bold;
+	font-style: italic;
 }
 
 .heading {
@@ -227,21 +227,10 @@ legend {
 	background-color: #442222;
 }
 
-a:link {
+a {
 	font-weight: bold;
 	text-decoration: none;
-	color: #1f3e73;
-}
-
-a:visited {
-	font-weight: bold;
-	text-decoration: none;
-	color: #1f3e73;
-}
-
-a:hover {
-	font-weight: bold;
-	text-decoration: underline;
+	font-style: normal;
 	color: #1f3e73;
 }
 

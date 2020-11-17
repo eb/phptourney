@@ -27,10 +27,12 @@ if ($user['usertype_admin'] or $_REQUEST['opt'] == 1)
       $users_row = dbFetch($users_ref);
 
       $content_tpl->set_var("I_ID_NEWS", $news_row['id']);
+      $content_tpl->set_var("I_ID_SEASON", $season['id']);
+      $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->set_var("I_USERNAME", htmlspecialchars($users_row['username']));
       $content_tpl->set_var("I_HEADING", htmlspecialchars($news_row['heading']));
       $content_tpl->set_var("I_BODY", Parsedown::instance()->text($news_row['body']));
-      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($news_row['submitted']));
+      $content_tpl->set_var("I_DATE", htmlspecialchars(getDateString($news_row['submitted'])));
 
       $comments_ref = dbQuery("SELECT * FROM `news_comments` WHERE `id_news` = {$news_row['id']}");
       $content_tpl->set_var("I_NUM_COMMENTS", dbNumRows($comments_ref));

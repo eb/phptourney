@@ -244,7 +244,7 @@ if ($matches_row = dbFetch($matches_ref))
       $ip = preg_replace("/(.*\\.).*/", "$1xxx", $comments_row['ip']);
       $content_tpl->set_var("I_IP", htmlspecialchars($ip));
       $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
-      $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($comments_row['submitted']));
+      $content_tpl->set_var("I_TIME_DIFFERENCE", htmlspecialchars(getTimeDifferenceString($comments_row['submitted'])));
 
       $username = dbEscape($comments_row['username']);
       $users_ref = dbQuery("SELECT * FROM `users` WHERE `username` = '$username'");

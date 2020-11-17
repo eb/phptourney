@@ -82,4 +82,66 @@ function sendMail($to, $subject, $message, $from_address)
   mail($to, $subject, $message, $headers);
 }
 
+// Get a human-readable time difference between the given datetime and the current time
+function getTimeDifferenceString($datetime)
+{
+  $dt = new DateTime($datetime);
+  $current_dt = new DateTime();
+  $diff = $current_dt->diff($dt);
+  if ($diff->y > 0)
+  {
+    $years = $diff->y;
+    return $years . ($years == 1 ? " year" : " years");
+  }
+  elseif ($diff->m > 0)
+  {
+    $months = $diff->m;
+    return $months . ($months == 1 ? " month" : " months");
+  }
+  elseif ($diff->d > 0)
+  {
+    $days = $diff->d;
+    if ($days < 7)
+    {
+      return $days . ($days == 1 ? " day" : " days");
+    }
+    else
+    {
+      $weeks = $diff->d % 7;
+      return $weeks . ($weeks == 1 ? " week" : " weeks");
+    }
+  }
+  elseif ($diff->h > 0)
+  {
+    $hours = $diff->h;
+    return $hours . ($hours == 1 ? " hour" : " hours");
+  }
+  elseif ($diff->i > 0)
+  {
+    $minutes = $diff->i;
+    return $minutes . ($minutes == 1 ? " minute" : " minutes");
+  }
+  else
+  {
+    $seconds = $diff->s;
+    return $seconds . ($seconds == 1 ? " second" : " seconds");
+  }
+}
+
+// Get a human-readable date for the given datetime
+function getDateString($datetime)
+{
+  $dt = new DateTime($datetime);
+  $date = $dt->format("M j, Y");
+  return $date;
+}
+
+// Get a human-readable time for the given datetime
+function getTimeString($datetime)
+{
+  $dt = new DateTime($datetime);
+  $time = $dt->format("g:i A");
+  return $time;
+}
+
 ?>
