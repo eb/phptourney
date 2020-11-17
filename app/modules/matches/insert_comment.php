@@ -5,7 +5,6 @@ $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_BODY", "H_WARNING_BODY");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_SPAM", "H_WARNING_SPAM");
-$content_tpl->set_block("F_CONTENT", "B_WARNING_BAN", "H_WARNING_BAN");
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_BACK", "H_BACK");
 $content_tpl->set_block("F_CONTENT", "B_BACK_OVERVIEW", "H_BACK_OVERVIEW");
@@ -36,33 +35,18 @@ if ($user['uid'])
 
   if ($is_complete)
   {
-    preg_match("/(.*)\\.(.*)\\.(.*)\\.(.*)/", $_SERVER['REMOTE_ADDR'], $matches);
-    $bans_ref = dbQuery("SELECT * FROM `bans` " .
-			 "WHERE `id_season` = {$season['id']} " .
-			 "AND (`ip` = '{$matches[1]}.*.*.*' " .
-			 "OR `ip` = '{$matches[1]}.{$matches[2]}.*.*' " .
-			 "OR `ip` = '{$matches[1]}.{$matches[2]}.{$matches[3]}.*' " . 
-			 "OR `ip` = '{$matches[1]}.{$matches[2]}.{$matches[3]}.{$matches[4]}')");
-    if (dbNumRows($bans_ref) > 0)
-    {
-      $is_complete = 0;
-      $content_tpl->parse("H_WARNING_BAN", "B_WARNING_BAN");
-    }
-    else
-    {
-      $body = dbEscape($_REQUEST['body']);
-      dbQuery("INSERT INTO `match_comments` " .
-	       "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .
-	       "VALUES ('{$user['uid']}', " .
-	       "'$body', " .
-	       "$id_match, " .
-	       "'{$_SERVER['REMOTE_ADDR']}', " .
-	       "NOW())");
-      $content_tpl->parse("H_MESSAGE_COMMENT_ADDED", "B_MESSAGE_COMMENT_ADDED");
-      $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
-      $content_tpl->set_var("I_ID_SEASON", $season['id']);
-      $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
-    }
+    $body = dbEscape($_REQUEST['body']);
+    dbQuery("INSERT INTO `match_comments` " .
+	    "(`id_user`, `body`, `id_match`, `ip`, `submitted`) " .
+	    "VALUES ('{$user['uid']}', " .
+	    "'$body', " .
+	    "$id_match, " .
+	    "'{$_SERVER['REMOTE_ADDR']}', " .
+	    "NOW())");
+    $content_tpl->parse("H_MESSAGE_COMMENT_ADDED", "B_MESSAGE_COMMENT_ADDED");
+    $content_tpl->parse("H_MESSAGE", "B_MESSAGE");
+    $content_tpl->set_var("I_ID_SEASON", $season['id']);
+    $content_tpl->parse("H_BACK_OVERVIEW", "B_BACK_OVERVIEW");
   }
 
   if (!$is_complete)

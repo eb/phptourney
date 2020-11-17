@@ -9,7 +9,7 @@
 <tr><th>{I_HEADING}</th></tr>
 <tr>
 	<td>
-	<div class="timestamp">[{I_USERNAME} - {I_SUBMITTED}]</div>
+	<div class="timestamp">{I_USERNAME} - {I_SUBMITTED}</div>
 	{I_BODY}
 	</td>
 </tr>
@@ -25,11 +25,8 @@
 <table class="commentbox" cellspacing="0">
 <tr>
 	<td>
-<!-- BEGIN B_BANS -->
-	[<a href="?sid={I_ID_SEASON}&mod=bans&act=view&opt={I_IP}">ban</a>]
-<!-- END B_BANS -->
 	<span class="timestamp">
-	#{I_COUNTER} <a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> ({I_IP}) {I_SUBMITTED}
+	#{I_COUNTER} <a href="?sid={I_ID_SEASON}&mod=users&act=view&opt={I_ID_USER}">{I_USERNAME}</a> - {I_SUBMITTED}
 	</span>
 	<br/>
 	{I_BODY}

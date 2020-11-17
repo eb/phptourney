@@ -22,7 +22,6 @@ $content_tpl->set_block("F_CONTENT", "B_SUBMIT_TIMESTAMP", "H_SUBMIT_TIMESTAMP")
 $content_tpl->set_block("F_CONTENT", "B_CONFIRM_TIMESTAMP", "H_CONFIRM_TIMESTAMP");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_MATCH", "H_VIEW_MATCH");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_NO_COMMENTS", "H_VIEW_NO_COMMENTS");
-$content_tpl->set_block("F_CONTENT", "B_BANS", "H_BANS");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_COMMENT", "H_VIEW_COMMENT");
 $content_tpl->set_block("F_CONTENT", "B_VIEW_COMMENTS", "H_VIEW_COMMENTS");
 $content_tpl->set_block("F_CONTENT", "B_ADD_COMMENT", "H_ADD_COMMENT");
@@ -246,14 +245,6 @@ if ($matches_row = dbFetch($matches_ref))
       $content_tpl->set_var("I_IP", htmlspecialchars($ip));
       $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
       $content_tpl->set_var("I_SUBMITTED", htmlspecialchars($comments_row['submitted']));
-
-      if ($user['usertype_admin'] == 1)
-      {
-	$ip = $comments_row['ip'];
-	$content_tpl->set_var("I_IP", htmlspecialchars($ip));
-	$content_tpl->set_var("I_ID_SEASON", $season['id']);
-	$content_tpl->parse("H_BANS", "B_BANS");
-      }
 
       $username = dbEscape($comments_row['username']);
       $users_ref = dbQuery("SELECT * FROM `users` WHERE `username` = '$username'");
