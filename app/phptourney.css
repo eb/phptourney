@@ -5,8 +5,9 @@ body, table, th, td {
 	padding: 0px;
 	margin: 0px;
 	color: #000000;
-	font-family: Helvetica, Verdana;
-	font-size: 10pt;
+	font-family: Helvetica, Verdana, sans-serif;
+	font-size: 100%;
+	line-height: 110%;
 	font-weight: normal;
 	text-align: left;
 	vertical-align: top;
@@ -21,25 +22,17 @@ img {
 }
 
 td.header {
-        text-align: right;
-        color: #cfcfcf;
+    text-align: right;
+    color: #cfcfcf;
 }
 
 td.footer {
-        text-align: right;
-        color: #cfcfcf;
+    text-align: right;
+    color: #cfcfcf;
 }
 
-.footer a:link {
-        color: #cfcfcf;
-}
-
-.footer a:visited {
-        color: #cfcfcf;
-}
-
-.footer a:hover {
-        color: #cfcfcf;
+.footer a {
+    color: #cfcfcf;
 }
 
 td.bg {
@@ -87,20 +80,15 @@ table.smallbox {
 }
 
 .smallbox th {
-	font-family: Tahoma;
 	color: #291f0b;
 	height: 20px;
-	padding: 2px;
-	padding-left: 5px;
-	font-size: 10pt;
-	font-weight: bold;
+	padding: 5px 10px;
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .smallbox td {
-	padding: 2px;
-	padding-left: 10px;
-	font-size: 8pt;
+	padding: 5px 10px;
+	font-size: 0.8em;
 }
 
 table.largebox {
@@ -111,20 +99,16 @@ table.largebox {
 }
 
 .largebox th {
-	font-family: Tahoma;
 	color: #291f0b;
 	height: 25px;
-	padding: 2px;
-	padding-left: 40px;
-	font-size: 13pt;
-	font-weight: bold;
+	padding: 5px 10px;
+	font-size: 1.2em;
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .largebox td {
-	padding: 5px;
-	font-size: 10pt;
-	line-height: 12pt;
+	padding: 5px 10px;
+	font-size: 1em;
 }
 
 table.commentbox {
@@ -133,18 +117,16 @@ table.commentbox {
 	border-left: 3px #000000 solid;
 	background-image: url(../gfx/default/lbbg.png);
 	background-repeat: repeat;
-        table-layout: fixed;
+    table-layout: fixed;
 }
 
 .commentbox td {
 	padding: 5px;
-	font-size: 10pt;
-        overflow: hidden;
+    overflow: hidden;
 }
 
 .form td {
-	padding: 1px;
-	font-size: 8pt;
+	padding: 5px;
 }
 
 table.warning {
@@ -181,8 +163,6 @@ table.message {
 
 .caption {
 	color: #ffffff;
-	font-size: 11pt;
-	font-weight: bold;
 }
 
 hr {
@@ -202,17 +182,16 @@ legend {
 
 .notice {
 	font-style: italic;
-        overflow: hidden;
+    overflow: hidden;
 }
 
 .timestamp {
-	font-size: 8pt;
+	font-size: 0.8em;
 	font-style: italic;
 }
 
 .heading {
 	color: #000022;
-	font-size: 11pt;
 	font-weight: bold;
 }
 
@@ -225,7 +204,6 @@ legend {
 }
 
 a {
-	font-weight: bold;
 	text-decoration: none;
 	font-style: normal;
 	color: #1f3e73;
@@ -239,36 +217,27 @@ form {
 }
 
 input.text {
-	background: #ddd;
+	background: #dddddd;
 	border: 1px #38827f solid;
-	padding: 1px;
-	font-family: Helvetica, Verdana;
-	font-size: 10px;
+	padding: 5px;
 }
 
 button.submit, input.submit {
-	background: #ddd;
+	background: #dddddd;
 	border: 1px #38827f solid;
-	padding: 1px;
-	font-family: Helvetica, Verdana;
-	font-size: 10px;
-	font-weight: bold;
+	padding: 5px;
 }
 
 textarea {
-	background: #ddd;
+	background: #dddddd;
 	border: 1px #38827f solid;
-	padding: 1px;
-	font-family: Helvetica, Verdana;
-	font-size: 10px;
+	padding: 5px;
 }
 
 select {
-	background: #ddd;
+	background: #dddddd;
 	border: 1px #38827f solid;
-	padding: 1px;
-	font-family: Helvetica, Verdana;
-	font-size: 10px;
+	padding: 5px;
 }
 
 /* Text bracket */
@@ -276,6 +245,7 @@ select {
 table.text_bracket {
 	border: 1px #000000 solid;
 	padding: 0px;
+	font-size: 0.8em;
 	background-image: url(../gfx/default/sbbg.png);
 	background-repeat: repeat;
 }
@@ -285,7 +255,6 @@ th.text_bracket {
 	padding: 2px;
 	background-color: #000000;
 	color: #FFFFFF;
-	font-size: 8pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -293,7 +262,6 @@ th.text_bracket {
 .text_bracket td {
 	border: 0px;
 	padding: 2px;
-	font-size: 8pt;
 	text-align: left;
 }
 
@@ -305,7 +273,6 @@ table.text_round {
 th.text_round, th.text_actual_round {
 	border: 1px #000000 solid;
 	padding: 2px;
-	font-size: 8pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -320,27 +287,11 @@ th.text_actual_round {
 	padding-right: 2px;
 	padding-left: 2px;
 	text-align: left;
-	line-height: 9pt;
 }
 
-.text_round a:link {
-	font-size: 8pt;
+.text_round a {
 	font-weight: normal;
 	text-decoration: none;
-	color: #000000;
-}
-
-.text_round a:visited {
-	font-size: 8pt;
-	font-weight: normal;
-	text-decoration: none;
-	color: #000000;
-}
-
-.text_round a:hover {
-	font-size: 8pt;
-	font-weight: normal;
-	text-decoration: underline;
 	color: #000000;
 }
 
@@ -368,6 +319,7 @@ th.text_actual_round {
 table.table_bracket {
 	border: 1px #000000 solid;
 	padding: 0px;
+	font-size: 0.8em;
 	background-image: url(../gfx/default/sbbg.png);
 	background-repeat: repeat;
 }
@@ -376,7 +328,6 @@ th.table_bracket {
 	padding: 2px;
 	background-color: #000000;
 	color: #FFFFFF;
-	font-size: 8pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -385,7 +336,6 @@ th.table_bracket {
 	border: 0px;
 	padding: 0px;
 	text-align: center;
-	font-size: 8pt;
 	line-height: 8pt;
 }
 
@@ -397,7 +347,6 @@ table.table_round {
 th.table_round, th.table_actual_round {
 	border: 1px #000000 solid;
 	padding: 2px;
-	font-size: 8pt;
 	font-weight: bold;
 	text-align: center;
 }
@@ -437,24 +386,9 @@ td.v {
 	vertical-align: middle;
 }
 
-.table_round a:link {
-	font-size: 8pt;
+.table_round a {
 	font-weight: normal;
 	text-decoration: none;
-	color: #FFFFFF;
-}
-
-.table_round a:visited {
-	font-size: 8pt;
-	font-weight: normal;
-	text-decoration: none;
-	color: #FFFFFF;
-}
-
-.table_round a:hover {
-	font-size: 8pt;
-	font-weight: normal;
-	text-decoration: underline;
 	color: #FFFFFF;
 }
 
