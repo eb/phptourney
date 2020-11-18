@@ -42,10 +42,8 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
   }
   else
   {
-    $counter = 1;
     while ($comments_row = dbFetch($comments_ref))
     {
-      $content_tpl->set_var("I_COUNTER", $counter);
       $content_tpl->set_var("I_USERNAME", htmlspecialchars($comments_row['username']));
       $content_tpl->set_var("I_BODY", nl2br(htmlspecialchars($comments_row['body'])));
       $content_tpl->set_var("I_TIMEDIFF", htmlspecialchars(getTimeDifferenceString($comments_row['submitted'])));
@@ -55,7 +53,6 @@ if ($user['usertype_admin'] or $news_row['id_news_group'] == 1)
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);
-      $counter++;
     }
   }
   $content_tpl->parse("H_VIEW_COMMENTS", "B_VIEW_COMMENTS");

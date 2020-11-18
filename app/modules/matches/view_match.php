@@ -236,10 +236,8 @@ if ($matches_row = dbFetch($matches_ref))
   }
   else
   {
-    $counter = 1;
     while ($comments_row = dbFetch($comments_ref))
     {
-      $content_tpl->set_var("I_COUNTER", $counter);
       $content_tpl->set_var("I_USERNAME", htmlspecialchars($comments_row['username']));
       $ip = preg_replace("/(.*\\.).*/", "$1xxx", $comments_row['ip']);
       $content_tpl->set_var("I_IP", htmlspecialchars($ip));
@@ -251,7 +249,6 @@ if ($matches_row = dbFetch($matches_ref))
       $users_row = dbFetch($users_ref);
       $content_tpl->set_var("I_ID_USER", $users_row['id']);
       $content_tpl->parse("H_VIEW_COMMENT", "B_VIEW_COMMENT", true);
-      $counter++;
     }
   }
   $content_tpl->parse("H_VIEW_COMMENTS", "B_VIEW_COMMENTS");
