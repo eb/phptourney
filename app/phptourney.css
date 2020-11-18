@@ -52,8 +52,6 @@ td.logo {
 
 td.side {
 	background-color: #000000;
-	background-image: url(../gfx/default/side.png);
-	background-repeat: no-repeat;
 	background-position: left top;
 }
 
