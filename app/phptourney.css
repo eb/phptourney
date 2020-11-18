@@ -94,8 +94,7 @@ table.smallbox {
 	padding-left: 5px;
 	font-size: 10pt;
 	font-weight: bold;
-	background-image: url(../gfx/default/sbth.png);
-	background-repeat: no-repeat;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .smallbox td {
@@ -119,8 +118,7 @@ table.largebox {
 	padding-left: 40px;
 	font-size: 13pt;
 	font-weight: bold;
-	background-image: url(../gfx/default/lbth.png);
-	background-repeat: no-repeat;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .largebox td {
