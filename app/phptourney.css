@@ -42,29 +42,19 @@ td.bg {
 
 td.logo {
 	padding: 5px;
-	text-align: right;
+    text-align: center;
 	vertical-align: middle;
 	height: 50px;
-	background-image: url(../gfx/default/logo.png);
-	background-repeat: no-repeat;
-	background-position: left top;
-}
-
-td.side {
-	background-color: #000000;
-	background-position: left top;
+    background-color: #1f3e73;
 }
 
 table.mainframe {
-	border-left: 1px #2467d7 solid;
-	border-right: 1px #000000 solid;
 	background-image: url(../gfx/default/mfbg.png);
 	background-repeat: repeat;
 }
 
 td.navigation {
 	height: 300px;
-	border-right: 1px #e7a435 dashed;
 	background-image: url(../gfx/default/sbbg.png);
 	background-repeat: repeat;
 }
@@ -90,7 +80,7 @@ table.smallbox {
 }
 
 table.largebox {
-	width: 599px;
+	width: 629px;
 	margin-bottom: 10px;
 	background-image: url(../gfx/default/lbbg.png);
 	background-repeat: repeat;

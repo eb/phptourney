@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
-	<link rel="stylesheet" type="text/css" href="phptourney.css?1">
+	<link rel="stylesheet" type="text/css" href="phptourney.css?2">
 	<script src="phptourney.js" type="text/javascript"></script>
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
@@ -43,7 +43,8 @@
 <!-- BEGIN B_SIGNUP -->
 		<a href="?sid={I_ID_SEASON}&mod=signups&act=add_login&opt="><img src="gfx/signup.png" border="0"/></a>
 <!-- END B_SIGNUP -->
-		<span class="caption">{I_SEASON_NAME}</span>
+        <div class="caption">{I_TOURNEY_NAME}</div>
+        <div class="caption">{I_SEASON_NAME}</div>
 		</td>
 	</tr>
 
@@ -51,9 +52,6 @@
 		<td>
 		<table cellspacing="0">
 		<tr>
-			<!-- side -->
-			<td class="side" width="30">&nbsp;</td>
-
 			<!-- navigation -->
 			<td class="navigation">
 <!-- BEGIN B_ROOT_PANEL -->
