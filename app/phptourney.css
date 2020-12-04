@@ -220,6 +220,7 @@ textarea {
 	background: #dddddd;
 	border: 1px #38827f solid;
 	padding: 5px;
+    resize: none;
 }
 
 select {
