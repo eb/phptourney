@@ -12,7 +12,7 @@ $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_SEEDINGS", "H_OVERVIEW_SEEDINGS
 // Access for headadmins [management] / access for admins [viewing]
 if ($user['usertype_admin'])
 {
-  if ($season['status'] == "" or $season['status'] == "signups")
+  if ($user['usertype_headadmin'] and ($season['status'] == "" or $season['status'] == "signups"))
   {
     $content_tpl->set_var("I_ID_SEASON", $season['id']);
     $content_tpl->parse("H_RESET_SEEDINGS", "B_RESET_SEEDINGS");
@@ -26,7 +26,7 @@ if ($user['usertype_admin'])
 			       "AND SU.`rejected` = 0 " .
 			       "AND SU.`seedgroup` > 0 " .
 			       "AND SU.`id_user` = U.`id` " .
-			       "ORDER BY SU.`seedgroup` ASC, SU.`submitted` ASC");
+			       "ORDER BY SU.`seedgroup` ASC, SU.`seedlevel` ASC, SU.`submitted` ASC");
   while ($season_users_row = dbFetch($season_users_ref))
   {
     $content_tpl->set_var("I_PLAYER_COUNTER", ++$player_counter);
