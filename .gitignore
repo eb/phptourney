@@ -1,2 +1,3 @@
 /docker/volumes
 /.vscode
+.DS_Store
