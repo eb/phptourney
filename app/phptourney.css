@@ -21,9 +21,9 @@ img {
 	vertical-align: top;
 }
 
-td.header {
+td.season-selector {
     text-align: right;
-    color: #cfcfcf;
+	color: #cfcfcf;
 }
 
 td.footer {
@@ -40,12 +40,29 @@ td.bg {
 	background-repeat: repeat;
 }
 
-td.logo {
-	padding: 5px;
-    text-align: center;
-	vertical-align: middle;
+td.header {
+	background-color: #1f3e73;
 	height: 50px;
-    background-color: #1f3e73;
+}
+
+.header-box {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.header-logo {
+	padding: 10px;
+}
+
+.header-title {
+	padding: 10px;
+	flex-grow: 1;
+}
+
+.header-signup {
+	padding: 10px;
 }
 
 table.mainframe {
