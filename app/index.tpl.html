@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
-	<link rel="stylesheet" type="text/css" href="phptourney.css?4">
+	<link rel="stylesheet" type="text/css" href="phptourney.css?5">
 	<script src="phptourney.js" type="text/javascript"></script>
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
@@ -15,10 +15,10 @@
 <body>
 <div align="center">
 
-<table align="center" width="799" cellspacing="0">
+<table width="799" cellspacing="0">
 <!-- BEGIN B_SEASON_SELECTOR -->
 <tr>
-	<td class="season-selector" colspan="2">
+	<td id="season-selector" colspan="2">
 	<form action="">
 		Select Season:
 		<select name="sid" size="1">
@@ -37,17 +37,17 @@
 
 <tr>
 	<td>
-	<table class="mainframe" align="center" width="799" cellspacing="0">
+	<table id="mainframe" align="center" width="799" cellspacing="0">
 	<tr>
-		<td class="header">
-			<div class="header-box">
-				<span class="header-logo">
+		<td id="header">
+			<div id="header-box">
+				<span id="header-logo">
 				</span>
-				<span class="header-title">
-					<div class="caption">{I_TOURNEY_NAME}</div>
-					<div class="caption">{I_SEASON_NAME}</div>
+				<span id="header-title">
+					<div id="header-title-tourney-name" class="caption">{I_TOURNEY_NAME}</div>
+					<div id="header-title-season-name" class="caption">{I_SEASON_NAME}</div>
 				</span>
-				<span class="header-signup">
+				<span id="header-signup">
 <!-- BEGIN B_SIGNUP -->
 					<a href="?sid={I_ID_SEASON}&mod=signups&act=add_login&opt="><img src="gfx/signup.png" border="0"/></a>
 <!-- END B_SIGNUP -->
@@ -61,7 +61,7 @@
 		<table cellspacing="0">
 		<tr>
 			<!-- navigation -->
-			<td class="navigation">
+			<td id="navigation">
 <!-- BEGIN B_ROOT_PANEL -->
 			<table class="smallbox" cellspacing="0">
 			<tr><th>Root</th></tr>
@@ -128,7 +128,7 @@
 			</td>
 
 			<!-- content -->
-			<td class="content">
+			<td id="content">
 {I_CONTENT}
 			</td>
 		</tr>
@@ -140,7 +140,7 @@
 </tr>
 
 <tr>
-	<td class="footer" colspan="2">
+	<td id="footer" colspan="2">
 	<a href="http://github.com/eb/phptourney" target="_blank">Powered by phpTourney</a>
 	</td>
 </tr>

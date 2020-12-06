@@ -21,62 +21,48 @@ img {
 	vertical-align: top;
 }
 
-td.season-selector {
+#season-selector {
     text-align: right;
 	color: #cfcfcf;
 }
 
-td.footer {
-    text-align: right;
-    color: #cfcfcf;
-}
-
-.footer a {
-    color: #cfcfcf;
-}
-
-td.bg {
-	background-image: url(../gfx/default/bg.png);
-	background-repeat: repeat;
-}
-
-td.header {
+#header {
 	background-color: #1f3e73;
 	height: 50px;
 }
 
-.header-box {
+#header-box {
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: flex-start;
 	align-items: center;
 }
 
-.header-logo {
+#header-logo {
 	padding: 10px;
 }
 
-.header-title {
+#header-title {
 	padding: 10px;
 	flex-grow: 1;
 }
 
-.header-signup {
+#header-signup {
 	padding: 10px;
 }
 
-table.mainframe {
+#mainframe {
 	background-image: url(../gfx/default/mfbg.png);
 	background-repeat: repeat;
 }
 
-td.navigation {
+#navigation {
 	height: 300px;
 	background-image: url(../gfx/default/sbbg.png);
 	background-repeat: repeat;
 }
 
-td.content {
+#content {
 	padding: 8px;
 }
 
@@ -162,6 +148,15 @@ table.message {
 	border: 1px dashed #6b4e4f;
 	font-style: italic;
 	text-align: center;
+}
+
+#footer {
+    text-align: right;
+    color: #cfcfcf;
+}
+
+#footer a {
+    color: #cfcfcf;
 }
 
 /* Text elements */
