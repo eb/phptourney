@@ -24,20 +24,24 @@
 		<input name="opt" value="" type="hidden"/>
 
 		<table cellspacing="0">
-<!-- BEGIN B_PLAYER -->
-		<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' );">
-			<td>{I_PLAYER_COUNTER}:</td>
-			<td>{I_USERNAME}</td>
-			<td>&lt;{I_EMAIL}&gt;</td>
-			<td>{I_SEEDGROUP}</td>
-<!-- BEGIN B_NEW_SEEDGROUP -->
-			<td>=></td>
-			<td><input class="text" name="{I_ID_USER}" value="{I_SEEDGROUP}" type="text" size="5"/></td>
-<!-- END B_NEW_SEEDGROUP -->
-		</tr>
-<!-- END B_PLAYER -->
 		<tr>
-			<td colspan="5">&nbsp;</td>
+			<td>
+				<table cellspacing="0">
+<!-- BEGIN B_PLAYER -->
+					<tr id="id_{I_PLAYER_COUNTER}" onmouseover="javascript: setClass( 'id_{I_PLAYER_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_PLAYER_COUNTER}' );">
+						<td>{I_PLAYER_COUNTER}:</td>
+						<td>{I_USERNAME}</td>
+						<td>&lt;{I_EMAIL}&gt;</td>
+						<td>{I_SEEDGROUP}</td>
+<!-- BEGIN B_NEW_SEEDGROUP -->
+						<td><input class="text" name="{I_ID_USER}" value="{I_SEEDGROUP}" type="text" size="3"/></td>
+<!-- END B_NEW_SEEDGROUP -->
+					</tr>
+<!-- END B_PLAYER -->
+				</table>
+			</td>
+		</tr>
+		<tr>
 			<td><input class="submit" type="submit" value="Submit"/></td>
 		</tr>
 		</table>
