@@ -15,7 +15,7 @@
 <!-- BEGIN B_REPORTED_MATCHES -->
 	<table cellspacing="0">
 <!-- BEGIN B_REPORTED_MATCH -->
-	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'colored' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
 		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
 		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
 		<td>
@@ -23,24 +23,8 @@
 		[<a href="?sid={I_ID_SEASON}&mod=matches&act=remove&opt={I_ID_MATCH}">delete</a>]</td>
 	</tr>
 <!-- END B_REPORTED_MATCH -->
-<!-- BEGIN B_REPORTED_MATCH_OUT_OF_TIMEFRAME -->
-	<tr class="timeframe" id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'timeframe' );">
-		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
-		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
-		<td>
-		[<a href="?sid={I_ID_SEASON}&mod=matches&act=edit&opt={I_ID_MATCH}">confirm</a>]
-		[<a href="?sid={I_ID_SEASON}&mod=matches&act=remove&opt={I_ID_MATCH}">delete</a>]</td>
-		</td>
-	</tr>
-<!-- END B_REPORTED_MATCH_OUT_OF_TIMEFRAME -->
 	</table>
 <!-- END B_REPORTED_MATCHES -->
-	</td>
-</tr>
-<tr>
-	<td class="help">
-	Don't confirm matches with a dark background!<br/>
-	They aren't in the proper timeframe yet.<br/>
 	</td>
 </tr>
 </table>
@@ -57,7 +41,7 @@
 <!-- BEGIN B_UNREPORTED_MATCHES -->
 	<table cellspacing="0">
 <!-- BEGIN B_UNREPORTED_MATCH -->
-	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'colored' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
 		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
 		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
 		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=add&opt={I_ID_MATCH}">report</a>]</td>
@@ -81,7 +65,7 @@
 <!-- BEGIN B_CONFIRMED_MATCHES -->
 	<table cellspacing="0">
 <!-- BEGIN B_CONFIRMED_MATCH -->
-	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'coloured' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
+	<tr id="id_{I_MATCH_COUNTER}" onmouseover="javascript: setClass( 'id_{I_MATCH_COUNTER}', 'colored' );" onmouseout="javascript: unsetClass( 'id_{I_MATCH_COUNTER}' );">
 		<td><a href="?sid={I_ID_SEASON}&mod=matches&act=view_match&opt={I_ID_MATCH}">{I_BRACKET}-{I_ROUND}-{I_MATCH}</a>:</td>
 		<td>{I_PLAYER1} vs {I_PLAYER2}</td>
 		<td>[<a href="?sid={I_ID_SEASON}&mod=matches&act=edit&opt={I_ID_MATCH}">edit</a>]</td>

@@ -4,7 +4,6 @@ $content_tpl->set_block("F_CONTENT", "B_WARNING_NO_ACCESS", "H_WARNING_NO_ACCESS
 $content_tpl->set_block("F_CONTENT", "B_WARNING", "H_WARNING");
 $content_tpl->set_block("F_CONTENT", "B_NO_REPORTED_MATCHES", "H_NO_REPORTED_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_REPORTED_MATCH", "H_REPORTED_MATCH");
-$content_tpl->set_block("F_CONTENT", "B_REPORTED_MATCH_OUT_OF_TIMEFRAME", "H_REPORTED_MATCH_OUT_OF_TIMEFRAME");
 $content_tpl->set_block("F_CONTENT", "B_REPORTED_MATCHES", "H_REPORTED_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_OVERVIEW_REPORTED_MATCHES", "H_OVERVIEW_REPORTED_MATCHES");
 $content_tpl->set_block("F_CONTENT", "B_NO_UNREPORTED_MATCHES", "H_NO_UNREPORTED_MATCHES");
@@ -61,18 +60,9 @@ if ($user['usertype_admin'])
       {
 	$content_tpl->set_var("I_PLAYER2", "-");
       }
-      if (isAfterPreDeadline($season, $matches_row['bracket'], $matches_row['round']))
-      {
 	$content_tpl->set_var("I_ID_SEASON", $season['id']);
 	$content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
 	$content_tpl->parse("H_REPORTED_MATCH", "B_REPORTED_MATCH", true);
-      }
-      else
-      {
-	$content_tpl->set_var("I_ID_SEASON", $season['id']);
-	$content_tpl->set_var("I_ID_MATCH", $matches_row['id']);
-	$content_tpl->parse("H_REPORTED_MATCH_OUT_OF_TIMEFRAME", "B_REPORTED_MATCH_OUT_OF_TIMEFRAME", true);
-      }
     }
     $content_tpl->parse("H_REPORTED_MATCHES", "B_REPORTED_MATCHES");
   }

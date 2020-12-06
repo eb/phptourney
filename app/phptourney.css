@@ -195,12 +195,8 @@ legend {
 	font-weight: bold;
 }
 
-.coloured td {
-	background-color: #a7916d;
-}
-
-.timeframe td {
-	background-color: #442222;
+.colored td {
+	background-color: #38827f;
 }
 
 a {
