@@ -58,6 +58,8 @@ def run():
             ''', (users_rows[0]['id'],))
             news_comments_rows = c.fetchall()
             print('%s news comments' % len(news_comments_rows))
+            for news_comments_row in news_comments_rows:
+                print(list(news_comments_row.values()))
 
             c.execute('''
                 SELECT * FROM `matches` WHERE `id_player1` = %s OR `id_player2` = %s
