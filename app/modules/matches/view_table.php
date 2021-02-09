@@ -28,7 +28,7 @@ $content_tpl->set_block("F_CONTENT", "B_LB_PLAYER1", "H_LB_PLAYER1");
 $content_tpl->set_block("F_CONTENT", "B_LB_PLAYER2", "H_LB_PLAYER2");
 $content_tpl->set_block("F_CONTENT", "B_LOSERS_BRACKET", "H_LOSERS_BRACKET");
 
-if (($season['status'] == "bracket" or $season['status'] == "running" or $season['status'] == "finished"))
+if (($season['status'] == "bracket" and $user['usertype_admin']) or $season['status'] == "running" or $season['status'] == "finished")
 {
   if ($_REQUEST['opt'] == "")
   {
