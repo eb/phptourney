@@ -26,12 +26,18 @@ def run():
         users_rows = c.fetchall()
         if not users_rows:
             print('Nothing found')
-        elif len(users_rows) > 1:
+        else:
             print('Users')
             print(list(map(lambda x: x[0], c.description)))
             for users_row in users_rows:
                 print(list(users_row.values()))
-        else:
+
+        c.execute('''
+            SELECT * FROM `users` WHERE `username` = %s
+        ''', (args.searchstring,))
+        users_rows = c.fetchall()
+        if users_rows:
+            print()
             print('User')
             print(list(map(lambda x: x[0], c.description)))
             print(list(users_rows[0].values()))
