@@ -1,12 +1,14 @@
-FROM php:7-apache
+FROM php:7-apache-stretch
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+RUN rm -rf /etc/apt/sources.list.d
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        imagemagick msmtp mariadb-client-core-10.3 \
-        virtualenv && \
+        imagemagick msmtp mariadb-client \
+        python3 python3-venv && \
     apt-get clean
 RUN docker-php-ext-install mysqli
-RUN virtualenv -p python3 /phptourney/venv
+RUN python3 -m venv /phptourney/venv
 RUN /phptourney/venv/bin/pip3 install pymysql
 
 COPY docker/config /phptourney/config

@@ -1,26 +1,47 @@
-version: "3"
-
 services:
 
-  db:
-    image: mariadb:10.3
-    restart: always
+  mariadb:
+    image: mariadb:11
+    restart: unless-stopped
     volumes:
-      - db:/var/lib/mysql
+      - ./tmp/db/data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=WMxP7Xd9MVZtvZ1D
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5
+    restart: unless-stopped
+    environment:
+      - PMA_ABSOLUTE_URI=http://localhost:8081
+      - PMA_USER=root
+      - PMA_PASSWORD=WMxP7Xd9MVZtvZ1D
+      - MYSQL_ROOT_PASSWORD=WMxP7Xd9MVZtvZ1D
+    ports:
+      - 8081:80
+    depends_on:
+      - mariadb
+    links:
+      - mariadb:db
+
   smtp:
-    image: namshi/smtp:latest
-    restart: always
+    image: bytemark/smtp:latest
+    restart: unless-stopped
+    environment:
+      - RELAY_HOST=maildev
+      - RELAY_PORT=1025
+
+  maildev:
+    image: maildev/maildev
+    restart: unless-stopped
+    ports:
+      - 8082:1080
 
   app:
     build: .
-    image: phptourney
-    restart: always
+    restart: unless-stopped
     volumes:
-      - data:/var/www/html/data/
       - ./app/:/var/www/html/
+      - ./tmp/app/data:/var/www/html/data
     environment:
       - PHPTOURNEY_DB_HOST=db
       - PHPTOURNEY_DB_PORT=3306
@@ -28,8 +49,8 @@ services:
       - PHPTOURNEY_DB_USERNAME=root
       - PHPTOURNEY_DB_PASSWORD=WMxP7Xd9MVZtvZ1D
       - PHPTOURNEY_DB_DATABASE=phptourney
-      - PHPTOURNEY_MAIL_FROM_NAME=John Doe
-      - PHPTOURNEY_MAIL_FROM_ADDRESS=johndoe@example.com
+      - PHPTOURNEY_MAIL_FROM_NAME=phpTourney
+      - PHPTOURNEY_MAIL_FROM_ADDRESS=admin@phptourney.local
       - PHPTOURNEY_TOURNEY_NAME=phpTourney
       - PHPTOURNEY_HOST=http://localhost:8080
       - PHPTOURNEY_PATH=/
@@ -40,11 +61,8 @@ services:
     ports:
       - 8080:80
     depends_on:
-      - db
+      - mariadb
       - smtp
     links:
+      - mariadb:db
       - smtp:mail
-
-volumes:
-  db:
-  data:
