@@ -55,8 +55,6 @@ services:
       - PHPTOURNEY_HOST=http://localhost:8080
       - PHPTOURNEY_PATH=/
       - PHPTOURNEY_CONVERT=convert
-      - PHPTOURNEY_RECAPTCHA_KEY=
-      - PHPTOURNEY_RECAPTCHA_SECRET=
       - PHPTOURNEY_DEBUG=1
     ports:
       - 8080:80
