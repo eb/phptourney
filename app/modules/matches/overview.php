@@ -75,6 +75,7 @@ if ($user['usertype_admin'])
 			  "WHERE `id_season` = {$season['id']} " .
 			  "AND `submitted` = '0000-00-00 00:00:00' " .
 			  "AND `confirmed` = '0000-00-00 00:00:00' " .
+			  "AND NOT (`bracket` = 'gf' AND `match` = 2 AND (`id_player1` = 0 OR `id_player2` = 0)) " .
 			  "ORDER BY `bracket` ASC, `round` DESC, `match` ASC");
   while ($matches_row = dbFetch($matches_ref))
   {
