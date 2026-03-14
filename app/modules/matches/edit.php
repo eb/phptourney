@@ -137,7 +137,7 @@ if ($user['usertype_admin'])
 	if (file_exists($sshot))
 	{
 	  $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($sshot));
-	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb));
+	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb) . '?' . filemtime($sshot_thumb));
 	  $content_tpl->parse("H_SCREENSHOT", "B_SCREENSHOT");
 	}
 

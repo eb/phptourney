@@ -48,7 +48,7 @@ if ($user['usertype_admin']) {
     {
       $content_tpl->set_var("I_NUM_MAP", $maps_row['num_map']);
       $content_tpl->set_var("I_MAP_NAME", htmlspecialchars($maps_row['map']));
-      $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb));
+      $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($sshot_thumb) . '?' . filemtime($sshot_thumb));
       $content_tpl->parse("H_MAP", "B_MAP", true);
     }
   }

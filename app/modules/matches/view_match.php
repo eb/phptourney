@@ -159,7 +159,7 @@ if ($matches_row = dbFetch($matches_ref))
 	if (file_exists($screenshot) and file_exists($screenshot_thumb))
 	{
 	  $content_tpl->set_var("I_SCREENSHOT", htmlspecialchars($screenshot));
-	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($screenshot_thumb));
+	  $content_tpl->set_var("I_SCREENSHOT_THUMB", htmlspecialchars($screenshot_thumb) . '?' . filemtime($screenshot_thumb));
 	  $content_tpl->parse("I_MAP_SCREENSHOT", "B_SCREENSHOT");
 	}
 	$content_tpl->set_var("I_MAP", htmlspecialchars($maps_row['map']));
