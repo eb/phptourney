@@ -274,6 +274,10 @@ if ($matches_row = dbFetch($matches_ref))
 	    }
 	  }
 
+	  // Refresh match data
+	  $matches_ref = dbQuery("SELECT * FROM `matches` WHERE `id` = $id_match");
+	  $matches_row = dbFetch($matches_ref);
+
 	  // Insert next matches
 	  if ($score_p1 > $score_p2)
 	  {
