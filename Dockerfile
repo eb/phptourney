@@ -1,7 +1,5 @@
-FROM php:7-apache-stretch
+FROM php:8-apache
 
-RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
-RUN rm -rf /etc/apt/sources.list.d
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         imagemagick msmtp mariadb-client \

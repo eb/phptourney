@@ -66,8 +66,8 @@ if ($user['usertype_admin']) {
   $width = $crop2_x - $crop1_x;
   $height = $crop2_y - $crop1_y;
 
-  `{$cfg['convert']} -crop {$width}x{$height}+{$crop1_x}+{$crop1_y} $sshot $sshot_thumb`;
-  `{$cfg['convert']} -geometry 320 $sshot_thumb $sshot_thumb`;
+  shell_exec("{$cfg['convert']} -crop {$width}x{$height}+{$crop1_x}+{$crop1_y} $sshot $sshot_thumb");
+  shell_exec("{$cfg['convert']} -geometry 320 $sshot_thumb $sshot_thumb");
 
   $content_tpl->set_var("I_ID_SEASON", $season['id']);
   $content_tpl->set_var("I_ID_MATCH", $id_match);

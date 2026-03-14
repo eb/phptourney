@@ -199,8 +199,8 @@ if ($user['usertype_admin'] or
 	      chmod($dst_filename['m' . $i] . "_tmp.{$src_filetype['m' . $i]}", 0646);
 	      if ($cfg['convert'] != "")
 	      {
-		`{$cfg['convert']} {$dst_filename['m' . $i]}_tmp.{$src_filetype['m' . $i]} {$dst_filename['m' . $i]}.jpg`;
-		`{$cfg['convert']} -geometry 320 {$dst_filename['m' . $i]}_tmp.{$src_filetype['m' . $i]} {$dst_filename['m' . $i]}_thumb.jpg`;
+		shell_exec("{$cfg['convert']} {$dst_filename['m' . $i]}_tmp.{$src_filetype['m' . $i]} {$dst_filename['m' . $i]}.jpg");
+		shell_exec("{$cfg['convert']} -geometry 320 {$dst_filename['m' . $i]}_tmp.{$src_filetype['m' . $i]} {$dst_filename['m' . $i]}_thumb.jpg");
 	      }
 	      if (!file_exists("{$dst_filename['m' . $i]}.jpg"))
 	      {
