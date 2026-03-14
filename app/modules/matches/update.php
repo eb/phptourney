@@ -197,7 +197,8 @@ if ($matches_row = dbFetch($matches_ref))
 	    if (is_uploaded_file($tmp_file['m' . $i]))
 	    {
 	      $sshot['m' . $i] = true;
-	      $src_filetype['m' . $i] = array_pop(explode(".", $src_file['m' . $i]));
+	      $src_parts = explode(".", $src_file['m' . $i]);
+	      $src_filetype['m' . $i] = array_pop($src_parts);
 	      if (file_exists($dst_filename['m' . $i] . ".jpg"))
 	      {
 		unlink($dst_filename['m' . $i] . ".jpg");

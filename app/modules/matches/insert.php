@@ -151,7 +151,8 @@ if ($user['usertype_admin'] or
 
 	    // Check screenshots
 	    $src_file['m' . $i] = $_FILES['screenshot_m' . $i]['name'];
-	    $src_filetype['m' . $i] = strtolower(array_pop(explode(".", $src_file['m' . $i])));
+	    $src_parts = explode(".", $src_file['m' . $i]);
+	    $src_filetype['m' . $i] = strtolower(array_pop($src_parts));
 	    $tmp_file['m' . $i] = $_FILES['screenshot_m' . $i]['tmp_name'];
 
 	    if (!$user['usertype_admin'] and $_REQUEST['id_map' . $i] != "" and
