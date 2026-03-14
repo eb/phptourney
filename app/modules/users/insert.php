@@ -3,6 +3,7 @@
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_REGISTERED", "H_MESSAGE_REGISTERED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE_APPLIED", "H_MESSAGE_APPLIED");
 $content_tpl->set_block("F_CONTENT", "B_MESSAGE", "H_MESSAGE");
+$content_tpl->set_block("F_CONTENT", "B_WARNING_CAP", "H_WARNING_CAP");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_UNIQUE_USERNAME", "H_WARNING_UNIQUE_USERNAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME", "H_WARNING_USERNAME");
 $content_tpl->set_block("F_CONTENT", "B_WARNING_USERNAME_INVALID", "H_WARNING_USERNAME_INVALID");
@@ -19,6 +20,21 @@ $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_SUBJECT", "H_MAIL_APPLIED_S
 $content_tpl->set_block("F_CONTENT", "B_MAIL_APPLIED_BODY", "H_MAIL_APPLIED_BODY");
 
 $is_complete = 1;
+
+if ($cfg['cap_backend_url'] != "" and $cfg['cap_site_key'] != "" and $cfg['cap_secret_key'] != "")
+{
+  $ch = curl_init($cfg['cap_backend_url'] . '/' . $cfg['cap_site_key'] . '/siteverify');
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['secret' => $cfg['cap_secret_key'], 'response' => $_REQUEST['cap_token'] ?? '']));
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $cap_response = json_decode(curl_exec($ch), true);
+  if (!($cap_response['success'] ?? false))
+  {
+    $is_complete = 0;
+    $content_tpl->parse("H_WARNING_CAP", "B_WARNING_CAP");
+  }
+}
 
 $username = dbEscape($_REQUEST['username']);
 $users_ref = dbQuery("SELECT * FROM `users` " .

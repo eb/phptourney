@@ -2,6 +2,7 @@
 
 $content_tpl->set_block("F_CONTENT", "B_ADD_COUNTRY", "H_ADD_COUNTRY");
 $content_tpl->set_block("F_CONTENT", "B_SIGNUP", "H_SIGNUP");
+$content_tpl->set_block("F_CONTENT", "B_CAP_SCRIPT", "H_CAP_SCRIPT");
 $content_tpl->set_block("F_CONTENT", "B_SUBMIT", "H_SUBMIT");
 $content_tpl->set_block("F_CONTENT", "B_ADD_ACCOUNT", "H_ADD_ACCOUNT");
 
@@ -20,6 +21,14 @@ while ($countries_row = dbFetch($countries_ref))
 if ($season['status'] == "signups")
 {
   $content_tpl->parse("H_SIGNUP", "B_SIGNUP");
+}
+
+// Cap
+if ($cfg['cap_frontend_url'] != "" and $cfg['cap_site_key'] != "")
+{
+  $content_tpl->set_var("I_CAP_FRONTEND_URL", $cfg['cap_frontend_url']);
+  $content_tpl->set_var("I_CAP_SITE_KEY", $cfg['cap_site_key']);
+  $content_tpl->parse("H_CAP_SCRIPT", "B_CAP_SCRIPT");
 }
 
 // Submit

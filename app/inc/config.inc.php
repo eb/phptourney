@@ -29,6 +29,12 @@ $cfg['host'] = getenv("PHPTOURNEY_HOST") ?: "http://";
 $cfg['path'] = getenv("PHPTOURNEY_PATH") ?: "/";
 $cfg['convert'] = getenv("PHPTOURNEY_CONVERT") ?: "convert";
 
+// Cap
+$cfg['cap_frontend_url'] = getenv("PHPTOURNEY_CAP_FRONTEND_URL") ?: "";
+$cfg['cap_backend_url'] = getenv("PHPTOURNEY_CAP_BACKEND_URL") ?: "";
+$cfg['cap_site_key'] = getenv("PHPTOURNEY_CAP_SITE_KEY") ?: "";
+$cfg['cap_secret_key'] = getenv("PHPTOURNEY_CAP_SECRET_KEY") ?: "";
+
 ini_set("error_reporting", NULL);
 
 if (getenv("PHPTOURNEY_DEBUG"))

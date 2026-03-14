@@ -2,10 +2,10 @@ FROM php:8-apache
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        imagemagick msmtp mariadb-client \
+        imagemagick msmtp mariadb-client libcurl4-openssl-dev \
         python3 python3-venv && \
     apt-get clean
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli curl
 RUN python3 -m venv /phptourney/venv
 RUN /phptourney/venv/bin/pip3 install pymysql
 

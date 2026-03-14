@@ -62,6 +62,25 @@
 			<td>&nbsp;</td>
 		</tr>
 		</table>
+<!-- BEGIN B_CAP_SCRIPT -->
+	<script src="https://cdn.jsdelivr.net/npm/@cap.js/widget"></script>
+	<script>
+		var cap = new Cap({ apiEndpoint: '{I_CAP_FRONTEND_URL}/{I_CAP_SITE_KEY}/' });
+		document.getElementById('add-account-form').addEventListener('submit', async function(e) {
+			e.preventDefault();
+			var btn = this.querySelector('input[type=submit]');
+			btn.disabled = true;
+			btn.value = 'Verifying...';
+			var result = await cap.solve();
+			var input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'cap_token';
+			input.value = result.token;
+			this.appendChild(input);
+			this.submit();
+		});
+	</script>
+<!-- END B_CAP_SCRIPT -->
 	</form>
 	</td>
 </tr>

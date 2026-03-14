@@ -36,6 +36,16 @@ services:
     ports:
       - 8082:1080
 
+  cap:
+    image: tiago2/cap:latest
+    restart: unless-stopped
+    volumes:
+      - ./tmp/cap/data/:/usr/src/app/.data
+    environment:
+      - ADMIN_KEY=lBWxG86zCk1cbSOP
+    ports:
+      - 8083:3000
+
   app:
     build: .
     restart: unless-stopped
@@ -56,6 +66,10 @@ services:
       - PHPTOURNEY_PATH=/
       - PHPTOURNEY_CONVERT=convert
       - PHPTOURNEY_DEBUG=1
+      - PHPTOURNEY_CAP_FRONTEND_URL=http://localhost:8083
+      - PHPTOURNEY_CAP_BACKEND_URL=http://cap:3000
+      - PHPTOURNEY_CAP_SITE_KEY=6d6dbd9870
+      - PHPTOURNEY_CAP_SECRET_KEY=tNmHX870rFYvqsnt3Ka4gtbYxmgQ59bMrj6GufA6AMdxTfD7uJSQ
     ports:
       - 8080:80
     depends_on:
